@@ -30,8 +30,8 @@ public class StudentModel {
 	@Column
 	private String mail = firstname + "." + lastname + "@studymanager.com";
 	
-	@Column(columnDefinition="Decimal(4,1) default '0.0'")
-	private Double ects;
+	@Column/*(columnDefinition="Decimal(4,1) default '0.0'")*/
+	private Double ects = 0.0;
 	
 	@OneToMany(mappedBy="student",fetch=FetchType.LAZY)
     private Set<ExamApplicationModel> applications;
@@ -39,12 +39,10 @@ public class StudentModel {
 	@ManyToOne (cascade = CascadeType.PERSIST)
 	private YearModel year; // e.g. IMA 2016
 
-	public StudentModel(String firstname, String lastname, String mail, Double ects) {
+	public StudentModel(String firstname, String lastname) {
 		super();
 		this.firstname = firstname;
 		this.lastname = lastname;
-		this.mail = mail;
-		this.ects = ects;
 	}
 
 	public String getFirstname() {
