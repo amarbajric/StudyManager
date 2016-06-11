@@ -1,49 +1,48 @@
 package at.fh.swenga.project.model;
 
-import javax.persistence.CascadeType;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "DegreeProgram")
+@Table(name = "DegreePrograms")
 public class DegreeProgramModel {
-	
+
 	@Id
-	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(nullable = false, length = 10) //IMA, AIM
-	String shortcut;
-	
-	@Column(nullable = false, length = 100) 
-	String leader;
-	
-	@Column(nullable = false, length = 100) 
-	String description;
-	
-	@ManyToOne (cascade = CascadeType.PERSIST)
-	DegreeProgramTypeModel type;
 
-	public DegreeProgramModel(String shortcut, String leader, String description, DegreeProgramTypeModel type) {
+	@Column(nullable = false, length = 10) // IMA, AIM
+	private String acronym;
+
+	@Column(nullable = false, length = 100)
+	private String leader;
+
+	@Column(nullable = false, length = 100)
+	private String description;
+
+	@Column(nullable = false, length = 10) // Master or Bachelor
+	private String type;
+
+	@OneToMany(mappedBy = "degreeProgram", fetch = FetchType.LAZY)
+	private Set<YearModel> years;
+
+	@OneToMany(mappedBy = "degreeProgram", fetch = FetchType.LAZY)
+	private Set<CourseModel> courses;
+
+	public DegreeProgramModel(String acronym, String leader, String description, String type) {
 		super();
-		this.shortcut = shortcut;
+		this.acronym = acronym;
 		this.leader = leader;
 		this.description = description;
 		this.type = type;
-	}
-
-	public String getShortcut() {
-		return shortcut;
-	}
-
-	public void setShortcut(String shortcut) {
-		this.shortcut = shortcut;
 	}
 
 	public String getLeader() {
@@ -62,12 +61,36 @@ public class DegreeProgramModel {
 		this.description = description;
 	}
 
-	public DegreeProgramTypeModel getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(DegreeProgramTypeModel type) {
+	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getAcronym() {
+		return acronym;
+	}
+
+	public void setAcronym(String acronym) {
+		this.acronym = acronym;
+	}
+
+	public Set<YearModel> getYears() {
+		return years;
+	}
+
+	public void setYears(Set<YearModel> years) {
+		this.years = years;
+	}
+
+	public Set<CourseModel> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(Set<CourseModel> courses) {
+		this.courses = courses;
 	}
 	
 	
