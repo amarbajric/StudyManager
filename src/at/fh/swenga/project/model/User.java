@@ -8,14 +8,19 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+
 @Entity
-@Table(name = "users")
+@Table(name = "Users")
 public class User implements java.io.Serializable {
 	private static final long serialVersionUID = 8198173157518983615L;
+		
+	private String mail;
 	
-	private String username;
+	private int idStudent;
+		
 	private String password;
 	private boolean enabled;
 	private Set<UserRole> userRole = new HashSet<UserRole>(0);
@@ -23,28 +28,28 @@ public class User implements java.io.Serializable {
 	public User() {
 	}
 
-	public User(String username, String password, boolean enabled) {
-		this.username = username;
+	public User(String mail, String password, boolean enabled) {
+		this.mail = mail;
 		this.password = password;
 		this.enabled = enabled;
 	}
 
-	public User(String username, String password, boolean enabled,
+	public User(String mail, String password, boolean enabled,
 			Set<UserRole> userRole) {
-		this.username = username;
+		this.mail = mail;
 		this.password = password;
 		this.enabled = enabled;
 		this.userRole = userRole;
 	}
 
 	@Id
-	@Column(name = "username", unique = true, nullable = false, length = 45)
-	public String getUsername() {
-		return username;
+	@Column(name = "mail", unique = true, nullable = false, length = 100)
+	public String getMail() {
+		return mail;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 
 	@Column(name = "password", nullable = false, length = 60)

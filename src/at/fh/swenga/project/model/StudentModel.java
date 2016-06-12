@@ -11,39 +11,39 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Students")
 public class StudentModel implements java.io.Serializable {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	
+	private int stud_id;
+
 	@Column(nullable = false)
 	private String firstname;
-	
+
 	@Column(nullable = false)
 	private String lastname;
-	
+
 	@Column
 	private String mail;
-	
-	@Column/*(columnDefinition="Decimal(4,1) default '0.0'")*/
+
+	@Column /* (columnDefinition="Decimal(4,1) default '0.0'") */
 	private Double ects = 0.0;
-	
-	@OneToMany(mappedBy="student",fetch=FetchType.LAZY)
-    private Set<ExamApplicationModel> applications;
-	
-	@ManyToOne (cascade = CascadeType.PERSIST)
+
+	@OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
+	private Set<ExamApplicationModel> applications;
+
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	private YearModel year; // e.g. IMA 2016
 
-	
 	public StudentModel() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public StudentModel(String firstname, String lastname) {
 		super();
 		this.firstname = firstname;
@@ -52,11 +52,11 @@ public class StudentModel implements java.io.Serializable {
 	}
 
 	public int getId() {
-		return id;
+		return stud_id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId(int stud_id) {
+		this.stud_id = stud_id;
 	}
 
 	public String getFirstname() {
@@ -107,7 +107,4 @@ public class StudentModel implements java.io.Serializable {
 		this.applications = applications;
 	}
 
-
-	
-	
 }

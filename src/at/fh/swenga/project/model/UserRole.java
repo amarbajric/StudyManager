@@ -15,19 +15,21 @@ import javax.persistence.GenerationType;
 public class UserRole implements java.io.Serializable {
 	private static final long serialVersionUID = 8098173157518993615L;
 	
-	private Integer userRoleId;
+	
 	private User user;
 	private String role;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "user_role_id", unique = true, nullable = false)
-	public Integer getUserRoleId() {
-		return userRoleId;
+	@Column(unique = true, nullable = false)
+	private Integer id;
+	
+	public Integer getId() {
+		return id;
 	}
 
-	public void setUserRoleId(Integer userRoleId) {
-		this.userRoleId = userRoleId;
+	public void setUserRoleId(Integer id) {
+		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -40,7 +42,7 @@ public class UserRole implements java.io.Serializable {
 		this.user = user;
 	}
 
-	@Column(name = "role", nullable = false, length = 45)
+	@Column(name = "role", nullable = false, length = 100)
 	public String getRole() {
 		return role;
 	}
