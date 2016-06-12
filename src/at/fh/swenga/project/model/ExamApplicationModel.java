@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "ExamApplications")
-public class ExamApplicationModel {
+public class ExamApplicationModel implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +29,10 @@ public class ExamApplicationModel {
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private ExamDateModel examDate;
+	
+	public ExamApplicationModel() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	public ExamApplicationModel(int attempt) {
 		super();
@@ -65,6 +69,14 @@ public class ExamApplicationModel {
 
 	public void setExamDate(ExamDateModel examDate) {
 		this.examDate = examDate;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	

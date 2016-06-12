@@ -40,6 +40,8 @@
 							<th>Mail</th>
 							<th>ECTS</th>
 							<th>Year</th>
+							<th>Action <a href="fill"><button type="button"
+										class="btn btn-success">Fill List</button></a></th>
 						</tr>
 					</thead>
 					<tbody>

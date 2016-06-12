@@ -1,5 +1,7 @@
 package at.fh.swenga.project.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -46,6 +48,34 @@ public class StudentController {
 
 		return "index";
 	}*/
+	
+	@RequestMapping(value = {"/", "list"})
+	public String showIndex(Model model) {
+		List <StudentModel> students = studentRepo.findAll();
+		model.addAttribute("students",students);
+		model.addAttribute("type","Find All");
+		return "index";
+	}
+	
+	@RequestMapping(value = {"fill"})
+	@Transactional
+	public String fillData(Model model){
+		StudentModel clagger = new StudentModel("Christian", "Lagger");
+
+		YearModel IMA2014 = new YearModel("2014");
+
+		DegreeProgramModel IMA = new DegreeProgramModel("IMA", "Werner Fritz", "Informationsmanagement", "Bachelor");
+
+		IMA2014.setDegreeProgram(IMA);
+		clagger.setYear(IMA2014);
+
+		degreeProgramRepo.save(IMA);
+		yearRepo.save(IMA2014);
+		studentRepo.save(clagger);
+
+		
+		return "forward:list";
+	}
 
 	@RequestMapping(value = { "/getPage" })
 	public String getPage(Pageable page, Model model) {

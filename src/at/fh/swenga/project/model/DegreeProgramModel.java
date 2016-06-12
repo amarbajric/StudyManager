@@ -36,7 +36,12 @@ public class DegreeProgramModel {
 
 	@OneToMany(mappedBy = "degreeProgram", fetch = FetchType.LAZY)
 	private Set<CourseModel> courses;
-
+	
+	public DegreeProgramModel() {
+		// TODO Auto-generated constructor stub
+	}
+		
+	
 	public DegreeProgramModel(String acronym, String leader, String description, String type) {
 		super();
 		this.acronym = acronym;
@@ -92,6 +97,17 @@ public class DegreeProgramModel {
 	public void setCourses(Set<CourseModel> courses) {
 		this.courses = courses;
 	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	
 	
 

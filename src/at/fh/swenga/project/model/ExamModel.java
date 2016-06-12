@@ -33,6 +33,10 @@ public class ExamModel {
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private CourseModel course;
+	
+	public ExamModel() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public ExamModel(String description, String type) {
 		super();
@@ -64,4 +68,22 @@ public class ExamModel {
 		this.course = course;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Set<ExamDateModel> getExamDates() {
+		return examDates;
+	}
+
+	public void setExamDates(Set<ExamDateModel> examDates) {
+		this.examDates = examDates;
+	}
+
+	
+	
 }

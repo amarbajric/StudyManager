@@ -27,6 +27,10 @@ public class RoomModel {
 	
 	@OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
 	private Set<ExamDateModel> examDates;
+	
+	public RoomModel() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public RoomModel(String description, int seats) {
 		super();
@@ -48,6 +52,22 @@ public class RoomModel {
 
 	public void setSeats(int seats) {
 		this.seats = seats;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Set<ExamDateModel> getExamDates() {
+		return examDates;
+	}
+
+	public void setExamDates(Set<ExamDateModel> examDates) {
+		this.examDates = examDates;
 	}
 	
 	

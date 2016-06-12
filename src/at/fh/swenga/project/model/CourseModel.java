@@ -19,7 +19,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "Courses")
-public class CourseModel {
+public class CourseModel implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +27,15 @@ public class CourseModel {
 
 	@Column(nullable = false, length = 100)
 	private String description;
+
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	@Column(nullable = false)
 	private Double ectsValue;
@@ -52,6 +61,10 @@ public class CourseModel {
 
 	public void setProfessors(Set<ProfessorModel> professors) {
 		this.professors = professors;
+	}
+	
+	public CourseModel() {
+		
 	}
 
 	public CourseModel(String description, Double ectsValue, String type) {

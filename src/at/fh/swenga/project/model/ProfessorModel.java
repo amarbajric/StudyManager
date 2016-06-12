@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Professors")
-public class ProfessorModel {
+public class ProfessorModel implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,6 +36,10 @@ public class ProfessorModel {
 
 	public void setCourses(Set<CourseModel> courses) {
 		this.courses = courses;
+	}
+	
+	public ProfessorModel() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public ProfessorModel(String firstname, String lastname, String mail) {
@@ -69,4 +73,13 @@ public class ProfessorModel {
 		this.mail = mail;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	
 }

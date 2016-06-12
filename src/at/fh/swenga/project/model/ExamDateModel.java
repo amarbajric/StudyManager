@@ -28,6 +28,10 @@ public class ExamDateModel {
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private ExamModel exam;
 
+	public ExamDateModel() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public ExamDateModel(Date date) {
 		super();
 		this.date = date;
@@ -56,5 +60,15 @@ public class ExamDateModel {
 	public void setExam(ExamModel exam) {
 		this.exam = exam;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	
 
 }

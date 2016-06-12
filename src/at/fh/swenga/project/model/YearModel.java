@@ -30,6 +30,10 @@ public class YearModel {
 	
     @OneToMany(mappedBy="year",fetch=FetchType.LAZY)
     private Set<StudentModel> students;
+    
+    public YearModel() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public YearModel(String year) {
 		super();
@@ -58,6 +62,14 @@ public class YearModel {
 
 	public void setStudents(Set<StudentModel> students) {
 		this.students = students;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	
