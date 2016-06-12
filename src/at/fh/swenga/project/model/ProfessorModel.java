@@ -26,7 +26,7 @@ public class ProfessorModel implements java.io.Serializable {
 	private String lastname;
 
 	@Column
-	private String mail = firstname + "." + lastname + "@studymanager.com";
+	private String mail; 
 
 	@ManyToMany(mappedBy = "professors") // professors collection is mapped wit the course collection
 	private Set<CourseModel> courses = new HashSet<CourseModel>();
@@ -46,7 +46,7 @@ public class ProfessorModel implements java.io.Serializable {
 		super();
 		this.firstname = firstname;
 		this.lastname = lastname;
-		this.mail = mail;
+		this.mail = firstname.toLowerCase() + "." + lastname.toLowerCase() + "@studymanager.com";
 	}
 
 	public String getFirstname() {
