@@ -3,6 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,12 +16,20 @@
 
 </head>
 <body>
+
+	<sec:authorize access="hasRole('STUDENT')">
+    	<c:redirect url="/student/" />
+	</sec:authorize>
+	<sec:authorize access="hasRole('PROFESSOR')">
+    	<c:redirect url="/professor/" />
+	</sec:authorize>
+
 	<div class="container">
 		<center>
 			<h1>${type}</h1>
 			<!--  paging ----------------------------------------------------------- -->
 			<form action="getPage" method="post">
-				 <input type="submit" value="Do it">
+				<input type="submit" value="Do it">
 			</form>
 			<hr>
 		</center>
@@ -59,6 +68,12 @@
 				</table>
 			</div>
 		</div>
+		<c:url value="/logout" var="logoutUrl" />
+		<form action="${logoutUrl }" method="post">
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" /> <input class="btn btn-xs btn-danger"
+				type="submit" value="Logout" />
+		</form>
 		<!--  list all employees ----------------------------------------------------------- -->
 	</div>
 	<!--  end of container -->

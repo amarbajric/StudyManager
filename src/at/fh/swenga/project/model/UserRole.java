@@ -26,6 +26,23 @@ public class UserRole implements java.io.Serializable {
 		return userRoleId;
 	}
 
+	
+	
+	public UserRole() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+	public UserRole(User user, String role) {
+		super();
+		this.user = user;
+		this.role = role;
+	}
+
+
+
 	public void setUserRoleId(Integer userRoleId) {
 		this.userRoleId = userRoleId;
 	}
