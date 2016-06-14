@@ -1,24 +1,32 @@
 package at.fh.swenga.project.controller;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import at.fh.swenga.project.dao.DegreeProgramRepository;
 import at.fh.swenga.project.dao.StudentRepository;
+import at.fh.swenga.project.dao.UserRepository;
 import at.fh.swenga.project.dao.YearRepository;
 import at.fh.swenga.project.model.DegreeProgramModel;
 import at.fh.swenga.project.model.StudentModel;
+import at.fh.swenga.project.model.User;
+import at.fh.swenga.project.model.UserRole;
 import at.fh.swenga.project.model.YearModel;
 
 @Controller
-public class StudentController {
+public class StudyManagerController {
 
 	@Autowired
 	StudentRepository studentRepo;
@@ -28,7 +36,10 @@ public class StudentController {
 
 	@Autowired
 	DegreeProgramRepository degreeProgramRepo;
-
+	
+	@Autowired
+	UserRepository userRepo;
+	
 	/*@RequestMapping("/fill")
 	@Transactional
 	public String fillData(Model model) {
@@ -49,8 +60,10 @@ public class StudentController {
 		return "index";
 	}*/
 	
-	@RequestMapping(value = {"/", "list"})
+	@RequestMapping(value = {"/"})
 	public String showIndex(Model model) {
+		
+		
 		List <StudentModel> students = studentRepo.findAll();
 		model.addAttribute("students",students);
 		model.addAttribute("type","Find All");
@@ -60,6 +73,7 @@ public class StudentController {
 	@RequestMapping(value = {"fill"})
 	@Transactional
 	public String fillData(Model model){
+		
 		StudentModel clagger = new StudentModel("Christian", "Lagger");
 
 		YearModel IMA2014 = new YearModel("2014");
@@ -72,6 +86,10 @@ public class StudentController {
 		degreeProgramRepo.save(IMA);
 		yearRepo.save(IMA2014);
 		studentRepo.save(clagger);
+		
+		User claggerUser = new User(clagger.getMail(), "$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm", true);
+		UserRole userRole = new UserRole(claggerUser, "ROLE_USER");
+		userRepo.save(claggerUser);
 
 		
 		return "forward:list";
@@ -92,12 +110,19 @@ public class StudentController {
 		degreeProgramRepo.save(IMA);
 		yearRepo.save(IMA2014);
 		studentRepo.save(clagger);
-
+		
 		Page<StudentModel> students = studentRepo.findAll(page);
 		model.addAttribute("carsPage", students);
 		model.addAttribute("students", students.getContent());
 		model.addAttribute("type", "findAll");
 		return "index";
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String handleLogin() {
+			
+		
+		return "login";
 	}
 
 }

@@ -8,8 +8,10 @@
 		<csrf />
 		<intercept-url pattern="/login" access="permitAll" />
 		<intercept-url pattern="/delete" access="hasRole('ADMIN')" />
-		<intercept-url pattern="/**" access="hasRole('USER')" />
-		<form-login login-page="/list" /> <!-- just fopr testing!!! -> /login -->
+		<intercept-url pattern="/" access="hasAnyRole('PROFESSOR','STUDENT')" />
+		<intercept-url pattern="/student/**" access="hasRole('STUDENT')"/>
+		<intercept-url pattern="/professor/**" access="hasRole('PROFESSOR')"/>
+		<form-login login-page="/login" />
 		<logout logout-success-url="/login" logout-url="/logout" />
 	</http>
 	

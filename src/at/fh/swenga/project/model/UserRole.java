@@ -15,21 +15,36 @@ import javax.persistence.GenerationType;
 public class UserRole implements java.io.Serializable {
 	private static final long serialVersionUID = 8098173157518993615L;
 	
-	
+	private Integer userRoleId;
 	private User user;
 	private String role;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(unique = true, nullable = false)
-	private Integer id;
-	
-	public Integer getId() {
-		return id;
+	@Column(name = "user_role_id", unique = true, nullable = false)
+	public Integer getUserRoleId() {
+		return userRoleId;
 	}
 
-	public void setUserRoleId(Integer id) {
-		this.id = id;
+	
+	
+	public UserRole() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+	public UserRole(User user, String role) {
+		super();
+		this.user = user;
+		this.role = role;
+	}
+
+
+
+	public void setUserRoleId(Integer userRoleId) {
+		this.userRoleId = userRoleId;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
