@@ -39,9 +39,7 @@ public class StudyManagerController {
 	
 	@Autowired
 	UserRepository userRepo;
-	
-	@Autowired
-	UserRoleRepository userRoleRepo;
+
 	
 	/*@RequestMapping("/fill")
 	@Transactional
@@ -101,53 +99,6 @@ public class StudyManagerController {
 	}
 	
 	
-	@RequestMapping(value = {"fill"})
-	@Transactional
-	public String fillData(Model model){
-		
-		StudentModel clagger = new StudentModel("Christian", "Lagger");
-
-		YearModel IMA2014 = new YearModel("2014");
-
-		DegreeProgramModel IMA = new DegreeProgramModel("IMA", "Werner Fritz", "Informationsmanagement", "Bachelor");
-
-		IMA2014.setDegreeProgram(IMA);
-		clagger.setYear(IMA2014);
-
-		degreeProgramRepo.save(IMA);
-		yearRepo.save(IMA2014);
-		studentRepo.save(clagger);
-		
-		User claggerUser = new User(clagger.getMail(), "$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm", true);
-		UserRole userRole = new UserRole(claggerUser, "ROLE_USER");
-		userRepo.save(claggerUser);
-
-		
-		return "forward:list";
-	}
-
-	@RequestMapping(value = { "/getPage" })
-	public String getPage(Pageable page, Model model) {
-
-		StudentModel clagger = new StudentModel("Christian", "Lagger");
-
-		YearModel IMA2014 = new YearModel("2014");
-
-		DegreeProgramModel IMA = new DegreeProgramModel("IMA", "Werner Fritz", "Informationsmanagement", "Bachelor");
-
-		IMA2014.setDegreeProgram(IMA);
-		clagger.setYear(IMA2014);
-
-		degreeProgramRepo.save(IMA);
-		yearRepo.save(IMA2014);
-		studentRepo.save(clagger);
-		
-		Page<StudentModel> students = studentRepo.findAll(page);
-		model.addAttribute("carsPage", students);
-		model.addAttribute("students", students.getContent());
-		model.addAttribute("type", "findAll");
-		return "index";
-	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String handleLogin() {
