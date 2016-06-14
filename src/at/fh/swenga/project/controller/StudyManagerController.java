@@ -1,13 +1,10 @@
 package at.fh.swenga.project.controller;
 
-import java.util.Collection;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import at.fh.swenga.project.dao.DegreeProgramRepository;
 import at.fh.swenga.project.dao.StudentRepository;
 import at.fh.swenga.project.dao.UserRepository;
+import at.fh.swenga.project.dao.UserRoleRepository;
 import at.fh.swenga.project.dao.YearRepository;
 import at.fh.swenga.project.model.DegreeProgramModel;
 import at.fh.swenga.project.model.StudentModel;
@@ -40,6 +38,9 @@ public class StudyManagerController {
 	@Autowired
 	UserRepository userRepo;
 	
+	@Autowired
+	UserRoleRepository userRoleRepo;
+	
 	/*@RequestMapping("/fill")
 	@Transactional
 	public String fillData(Model model) {
@@ -60,15 +61,41 @@ public class StudyManagerController {
 		return "index";
 	}*/
 	
+	
+	/**
+	 * The default requestMapper only checks if the logged in user is a student, professor or admin.
+	 * Then it checks the given role of the logged in user and forwards the browser to the specific view
+	 **/
 	@RequestMapping(value = {"/"})
 	public String showIndex(Model model) {
 		
+		// Get the role of logged in user
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String role = auth.getAuthorities().toString();
+        System.out.println(role);
+
+        String targetUrl = "";
+        if(role.toLowerCase().contains("professor")) {
+            targetUrl = "/professor/index";
+        } else if(role.toLowerCase().contains("student")) {
+            targetUrl = "/student/index";
+        }
+        else if(role.toLowerCase().contains("admin")){
+        	targetUrl = "admin/index";
+        }      
+        
+        
+        
+        
+
+		System.out.println(userRoleRepo.findAll().get(0).getRole());
+        
+        
+        
 		
-		List <StudentModel> students = studentRepo.findAll();
-		model.addAttribute("students",students);
-		model.addAttribute("type","Find All");
-		return "index";
+		return "forward:" + targetUrl;
 	}
+	
 	
 	@RequestMapping(value = {"fill"})
 	@Transactional
@@ -120,8 +147,6 @@ public class StudyManagerController {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String handleLogin() {
-			
-		
 		return "login";
 	}
 

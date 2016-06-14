@@ -17,12 +17,12 @@
 </head>
 <body>
 
-	<sec:authorize access="hasRole('STUDENT')">
+	<!--<sec:authorize access="hasRole('STUDENT')">
     	<c:redirect url="/student/" />
 	</sec:authorize>
 	<sec:authorize access="hasRole('PROFESSOR')">
     	<c:redirect url="/professor/" />
-	</sec:authorize>
+	</sec:authorize> --!>
 
 	<div class="container">
 		<center>
