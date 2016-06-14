@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -22,6 +23,7 @@ import at.fh.swenga.project.model.StudentModel;
 import at.fh.swenga.project.model.User;
 import at.fh.swenga.project.model.UserRole;
 import at.fh.swenga.project.model.YearModel;
+import at.fh.swenga.project.util.PasswordHasher;
 
 @Controller
 public class StudyManagerController {
@@ -72,7 +74,6 @@ public class StudyManagerController {
 		// Get the role of logged in user
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String role = auth.getAuthorities().toString();
-        System.out.println(role);
 
         String targetUrl = "";
         if(role.toLowerCase().contains("professor")) {
@@ -86,9 +87,12 @@ public class StudyManagerController {
         
         
         
-        
-
-		System.out.println(userRoleRepo.findAll().get(0).getRole());
+        // TEST FOR CREATING USER AND HASHING PASSWORD!!!
+        //LOGIN WORKS WITH HASHED PW IN DB!!
+        //DELETE THIS SNIPPET WHEN NOT NEEDED ANYMORE
+        PasswordHasher pwHasher = new PasswordHasher();
+        User amarUser = new User("amar.baja@gmail.com",pwHasher.hashPassword("amar"),true);
+        userRepo.save(amarUser);
         
         
         

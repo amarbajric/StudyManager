@@ -25,7 +25,7 @@
 						</div>
 					</c:if>
 					<label for="inputEmail" class="sr-only">Email address</label> <input
-						type="text" id="username" class="form-control" placeholder="User"
+						type="text" id="username" class="form-control" placeholder="E-mail address"
 						required autofocus name="username"> <label
 						for="inputPassword" class="sr-only">Password</label> <input
 						type="password" id="password" class="form-control"
