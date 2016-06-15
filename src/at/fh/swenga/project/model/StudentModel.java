@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Students")
+@Table(name = "students")
 public class StudentModel implements java.io.Serializable {
 	
 	@Id
@@ -27,7 +27,7 @@ public class StudentModel implements java.io.Serializable {
 	@Column(nullable = false)
 	private String lastname;
 	
-	@Column
+	@Column(unique = true)
 	private String mail;
 	
 	@Column/*(columnDefinition="Decimal(4,1) default '0.0'")*/

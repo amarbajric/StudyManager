@@ -2,27 +2,21 @@ package at.fh.swenga.project.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import at.fh.swenga.project.dao.DegreeProgramRepository;
+import at.fh.swenga.project.dao.ProfessorRepository;
 import at.fh.swenga.project.dao.StudentRepository;
 import at.fh.swenga.project.dao.UserRepository;
-import at.fh.swenga.project.dao.UserRoleRepository;
 import at.fh.swenga.project.dao.YearRepository;
-import at.fh.swenga.project.model.DegreeProgramModel;
+import at.fh.swenga.project.model.ProfessorModel;
 import at.fh.swenga.project.model.StudentModel;
 import at.fh.swenga.project.model.User;
-import at.fh.swenga.project.model.UserRole;
-import at.fh.swenga.project.model.YearModel;
 import at.fh.swenga.project.util.PasswordHasher;
 
 @Controller
@@ -30,6 +24,9 @@ public class StudyManagerController {
 
 	@Autowired
 	StudentRepository studentRepo;
+	
+	@Autowired
+	ProfessorRepository professorRepo;
 
 	@Autowired
 	YearRepository yearRepo;
@@ -72,30 +69,24 @@ public class StudyManagerController {
 		// Get the role of logged in user
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String role = auth.getAuthorities().toString();
+        String mailOfUser = auth.getName();
 
         String targetUrl = "";
         if(role.toLowerCase().contains("professor")) {
-            targetUrl = "/professor/index";
+        	ProfessorModel profData = professorRepo.findByMail(mailOfUser);
+        	model.addAttribute("professorData",profData);
+            targetUrl = "professor/index";
         } else if(role.toLowerCase().contains("student")) {
-            targetUrl = "/student/index";
+        	StudentModel studentData = studentRepo.findByMail(mailOfUser);
+        	model.addAttribute("studentData",studentData);
+            targetUrl = "student/index";
         }
         else if(role.toLowerCase().contains("admin")){
         	targetUrl = "admin/index";
         }      
         
-        
-        
-        // TEST FOR CREATING USER AND HASHING PASSWORD!!!
-        //LOGIN WORKS WITH HASHED PW IN DB!!
-        //DELETE THIS SNIPPET WHEN NOT NEEDED ANYMORE
-        PasswordHasher pwHasher = new PasswordHasher();
-        User amarUser = new User("amar.baja@gmail.com",pwHasher.hashPassword("amar"),true);
-        userRepo.save(amarUser);
-        
-        
-        
-		
-		return "forward:" + targetUrl;
+		//no forward because then it won't search in views folder!
+		return targetUrl;
 	}
 	
 	

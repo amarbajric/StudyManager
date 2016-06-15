@@ -2,12 +2,6 @@ INSERT INTO users(username,password,enabled)
 VALUES ('admin','$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm', TRUE);
 
 INSERT INTO user_roles (username, ROLE)
-VALUES ('admin', 'ROLE_STUDENT');
-
-INSERT INTO user_roles (username, ROLE)
-VALUES ('admin', 'ROLE_PROFESSOR');
-
-INSERT INTO user_roles (username, ROLE)
 VALUES ('admin', 'ROLE_ADMIN');
 
 INSERT INTO users (username,password,enabled)
@@ -16,11 +10,17 @@ VALUES ('christian.lagger@studymanager.com', '$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vz
 INSERT INTO user_roles(username,ROLE)
 VALUES ('christian.lagger@studymanager.com', 'ROLE_STUDENT');
 
+INSERT INTO students(ects,firstname,lastname,mail)
+VALUES(0.0,'Christian','Lagger','christian.lagger@studymanager.com');
+
 INSERT INTO users (username,password,enabled)
 VALUES ('amar.bajric@studymanager.com', '$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm',TRUE);
 
 INSERT INTO user_roles(username,ROLE)
 VALUES ('amar.bajric@studymanager.com', 'ROLE_STUDENT');
+
+INSERT INTO students(ects,firstname,lastname,mail)
+VALUES(0.0,'Amar','Bajric','amar.bajric@studymanager.com');
 
 INSERT INTO users(username,password,enabled)
 VALUES ('georg.meizenitsch@studymanager.com','$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm', TRUE);
@@ -28,14 +28,23 @@ VALUES ('georg.meizenitsch@studymanager.com','$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vz
 INSERT INTO user_roles (username, ROLE)
 VALUES ('georg.meizenitsch@studymanager.com', 'ROLE_STUDENT');
 
+INSERT INTO students(ects,firstname,lastname,mail)
+VALUES(0.0,'Georg','Meizenitsch','georg.meizenitsch@studymanager.com');
+
 INSERT INTO users(username,password,enabled)
 VALUES ('markus.knaller@studymanager.com','$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm', TRUE);
 
 INSERT INTO user_roles (username, ROLE)
 VALUES ('markus.knaller@studymanager.com', 'ROLE_STUDENT');
 
+INSERT INTO students(ects,firstname,lastname,mail)
+VALUES(0.0,'Markus','Knaller','markus.knaller@studymanager.com');
+
 INSERT INTO users(username,password,enabled)
 VALUES ('johann.blauensteiner@studymanager.com','$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm', TRUE);
 
 INSERT INTO user_roles (username, ROLE)
 VALUES ('johann.blauensteiner@studymanager.com', 'ROLE_PROFESSOR');
+
+INSERT INTO professors(firstname,lastname,mail)
+VALUES('Johann','Blauensteiner','johann.blauensteiner@studymanager.com');
