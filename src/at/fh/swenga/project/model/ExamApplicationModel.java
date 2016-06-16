@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ExamApplications")
+@Table(name = "exam_applications")
 public class ExamApplicationModel implements java.io.Serializable {
 
 	@Id

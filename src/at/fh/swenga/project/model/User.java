@@ -2,25 +2,21 @@ package at.fh.swenga.project.model;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "users")
 public class User implements java.io.Serializable {
 	private static final long serialVersionUID = 8198173157518983615L;
-		
-	private String mail;
 	
-	private int idStudent;
-		
+	private String username;
 	private String password;
 	private boolean enabled;
 	private Set<UserRole> userRole = new HashSet<UserRole>(0);
@@ -28,28 +24,28 @@ public class User implements java.io.Serializable {
 	public User() {
 	}
 
-	public User(String mail, String password, boolean enabled) {
-		this.mail = mail;
+	public User(String username, String password, boolean enabled) {
+		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
 	}
 
-	public User(String mail, String password, boolean enabled,
+	public User(String username, String password, boolean enabled,
 			Set<UserRole> userRole) {
-		this.mail = mail;
+		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
 		this.userRole = userRole;
 	}
 
 	@Id
-	@Column(name = "mail", unique = true, nullable = false, length = 100)
-	public String getMail() {
-		return mail;
+	@Column(name = "username", unique = true, nullable = false, length = 45)
+	public String getUsername() {
+		return username;
 	}
 
-	public void setMail(String mail) {
-		this.mail = mail;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	@Column(name = "password", nullable = false, length = 60)
@@ -78,4 +74,5 @@ public class User implements java.io.Serializable {
 	public void setUserRole(Set<UserRole> userRole) {
 		this.userRole = userRole;
 	}
+	
 }

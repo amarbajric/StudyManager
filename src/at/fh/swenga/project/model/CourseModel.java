@@ -18,7 +18,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "Courses")
+@Table(name = "courses")
 public class CourseModel implements java.io.Serializable {
 
 	@Id

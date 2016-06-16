@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "Years")
+@Table(name = "years")
 public class YearModel {
 	
 	@Id

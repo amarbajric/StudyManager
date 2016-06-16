@@ -12,7 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Professors")
+@Table(name = "professors")
 public class ProfessorModel implements java.io.Serializable {
 
 	@Id
@@ -25,7 +25,7 @@ public class ProfessorModel implements java.io.Serializable {
 	@Column(nullable = false)
 	private String lastname;
 
-	@Column
+	@Column(unique = true)
 	private String mail; 
 
 	@ManyToMany(mappedBy = "professors") // professors collection is mapped wit the course collection
@@ -42,7 +42,7 @@ public class ProfessorModel implements java.io.Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ProfessorModel(String firstname, String lastname, String mail) {
+	public ProfessorModel(String firstname, String lastname) {
 		super();
 		this.firstname = firstname;
 		this.lastname = lastname;
