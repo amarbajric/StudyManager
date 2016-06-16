@@ -1,8 +1,62 @@
+# DegreeProgramms
+
+
+INSERT INTO degree_programs(acronym, description, head, type)
+VALUES('IMA', 'Informationsmanagement', 'Werner Fritz', 'Bachelor');
+
+
+INSERT INTO degree_programs(acronym, description, head, type)
+VALUES('AIM', 'Informationsmanagement', 'Werner Fritz', 'Master');
+
+
+INSERT INTO degree_programs(acronym, description, head, type)
+VALUES('FZT', 'Fahrzeugtechnik', 'Kurt Steiner', 'Bachelor');
+
+
+INSERT INTO degree_programs(acronym, description, head, type)
+VALUES('LAV', 'Luftfahrt', 'Holger Flühr', 'Bachelor');
+
+
+INSERT INTO degree_programs(acronym, description, head, type)
+VALUES('MAV', 'Luftfahrt', 'Holger Flühr', 'Master');
+
+##############################################################
+
+#Years
+
+INSERT INTO years(year, degreeProgram_id)
+VALUES('IMA 2014','1');
+
+INSERT INTO years(year, degreeProgram_id)
+VALUES('IMA 2015','1');
+
+INSERT INTO years(year, degreeProgram_id)
+VALUES('IMA 2013', 1);
+
+INSERT INTO years(year, degreeProgram_id)
+VALUES('AIM 2014', 2);
+
+INSERT INTO years(year, degreeProgram_id)
+VALUES('FZT 2015', 3);
+
+INSERT INTO years(year, degreeProgram_id)
+VALUES('LAV 2014', 4);
+
+INSERT INTO years(year, degreeProgram_id)
+VALUES('MAV 2014', 5);
+
+
+
+#Students, Professors and the according users with their user roles
+###################################################################
+
 INSERT INTO users(username,password,enabled)
 VALUES ('admin','$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm', TRUE);
 
 INSERT INTO user_roles (username, ROLE)
 VALUES ('admin', 'ROLE_ADMIN');
+
+###
 
 INSERT INTO users (username,password,enabled)
 VALUES ('christian.lagger@studymanager.com', '$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm',TRUE);
@@ -10,8 +64,10 @@ VALUES ('christian.lagger@studymanager.com', '$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vz
 INSERT INTO user_roles(username,ROLE)
 VALUES ('christian.lagger@studymanager.com', 'ROLE_STUDENT');
 
-INSERT INTO students(ects,firstname,lastname,mail)
-VALUES(0.0,'Christian','Lagger','christian.lagger@studymanager.com');
+INSERT INTO students(ects,firstname,lastname,mail, year_id)
+VALUES(0.0,'Christian','Lagger','christian.lagger@studymanager.com', 1);
+
+###
 
 INSERT INTO users (username,password,enabled)
 VALUES ('amar.bajric@studymanager.com', '$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm',TRUE);
@@ -19,8 +75,10 @@ VALUES ('amar.bajric@studymanager.com', '$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7Kaq
 INSERT INTO user_roles(username,ROLE)
 VALUES ('amar.bajric@studymanager.com', 'ROLE_STUDENT');
 
-INSERT INTO students(ects,firstname,lastname,mail)
-VALUES(0.0,'Amar','Bajric','amar.bajric@studymanager.com');
+INSERT INTO students(ects,firstname,lastname,mail, year_id)
+VALUES(0.0,'Amar','Bajric','amar.bajric@studymanager.com', 1);
+
+###
 
 INSERT INTO users(username,password,enabled)
 VALUES ('georg.meizenitsch@studymanager.com','$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm', TRUE);
@@ -28,8 +86,10 @@ VALUES ('georg.meizenitsch@studymanager.com','$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vz
 INSERT INTO user_roles (username, ROLE)
 VALUES ('georg.meizenitsch@studymanager.com', 'ROLE_STUDENT');
 
-INSERT INTO students(ects,firstname,lastname,mail)
-VALUES(0.0,'Georg','Meizenitsch','georg.meizenitsch@studymanager.com');
+INSERT INTO students(ects,firstname,lastname,mail, year_id)
+VALUES(0.0,'Georg','Meizenitsch','georg.meizenitsch@studymanager.com', 1);
+
+###
 
 INSERT INTO users(username,password,enabled)
 VALUES ('markus.knaller@studymanager.com','$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm', TRUE);
@@ -37,8 +97,10 @@ VALUES ('markus.knaller@studymanager.com','$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7K
 INSERT INTO user_roles (username, ROLE)
 VALUES ('markus.knaller@studymanager.com', 'ROLE_STUDENT');
 
-INSERT INTO students(ects,firstname,lastname,mail)
-VALUES(0.0,'Markus','Knaller','markus.knaller@studymanager.com');
+INSERT INTO students(ects,firstname,lastname,mail, year_id)
+VALUES(0.0,'Markus','Knaller','markus.knaller@studymanager.com', 1);
+
+###
 
 INSERT INTO users(username,password,enabled)
 VALUES ('johann.blauensteiner@studymanager.com','$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm', TRUE);
@@ -48,3 +110,228 @@ VALUES ('johann.blauensteiner@studymanager.com', 'ROLE_PROFESSOR');
 
 INSERT INTO professors(firstname,lastname,mail)
 VALUES('Johann','Blauensteiner','johann.blauensteiner@studymanager.com');
+
+###
+
+INSERT INTO users(username,password,enabled)
+VALUES ('mario.zupan@studymanager.com','$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm', TRUE);
+
+INSERT INTO user_roles (username, ROLE)
+VALUES ('mario.zupan@studymanager.com', 'ROLE_PROFESSOR');
+
+INSERT INTO professors(firstname,lastname,mail)
+VALUES('Mario','Zupan','mario.zupan@studymanager.com');
+
+###
+
+INSERT INTO users(username,password,enabled)
+VALUES ('alexander.nischelwitzer@studymanager.com','$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm', TRUE);
+
+INSERT INTO user_roles (username, ROLE)
+VALUES ('alexander.nischelwitzer@studymanager.com', 'ROLE_PROFESSOR');
+
+INSERT INTO professors(firstname,lastname,mail)
+VALUES('Alexander','Nischelwitzer','alexander.nischelwitzer@studymanager.com');
+
+###
+
+INSERT INTO users(username,password,enabled)
+VALUES ('robert.strohmaier@studymanager.com','$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm', TRUE);
+
+INSERT INTO user_roles (username, ROLE)
+VALUES ('robert.strohmaier@studymanager.com', 'ROLE_PROFESSOR');
+
+INSERT INTO professors(firstname,lastname,mail)
+VALUES('Robert','Strohmaier','robert.strohmaier@studymanager.com');
+
+###
+
+INSERT INTO users(username,password,enabled)
+VALUES ('christopher.schwarz@studymanager.com','$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm', TRUE);
+
+INSERT INTO user_roles (username, ROLE)
+VALUES ('christopher.schwarz@studymanager.com', 'ROLE_PROFESSOR');
+
+INSERT INTO professors(firstname,lastname,mail)
+VALUES('Christopher','Schwarz','christopher.schwarz@studymanager.com');
+
+###
+
+INSERT INTO users(username,password,enabled)
+VALUES ('ewald.graif@studymanager.com','$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm', TRUE);
+
+INSERT INTO user_roles (username, ROLE)
+VALUES ('ewald.graif@studymanager.com', 'ROLE_PROFESSOR');
+
+INSERT INTO professors(firstname,lastname,mail)
+VALUES('Ewald','Graif','ewald.graif@studymanager.com');
+
+###
+
+INSERT INTO users(username,password,enabled)
+VALUES ('georg.mittenecker@studymanager.com','$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm', TRUE);
+
+INSERT INTO user_roles (username, ROLE)
+VALUES ('georg.mittenecker@studymanager.com', 'ROLE_PROFESSOR');
+
+INSERT INTO professors(firstname,lastname,mail)
+VALUES('Georg','Mittenecker','georg.mittenecker@studymanager.com');
+
+###
+
+INSERT INTO users(username,password,enabled)
+VALUES ('gerhild.janser-munro@studymanager.com','$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm', TRUE);
+
+INSERT INTO user_roles (username, ROLE)
+VALUES ('gerhild.janser-munro@studymanager.com', 'ROLE_PROFESSOR');
+
+INSERT INTO professors(firstname,lastname,mail)
+VALUES('Gerhild','Janser-Munro','gerhild.janser-munro@studymanager.com');
+
+
+#########################################################################
+
+# Courses
+
+INSERT INTO courses(acronym, description, ectsValue, type, degreeProgram_id)
+VALUES('SWENGA', 'Software Engineering Advanced', 5.0,'iL', 1);
+
+INSERT INTO courses(acronym, description, ectsValue, type, degreeProgram_id)
+VALUES('DMT3', 'Digitale Medien Technologien 3', 5.0,'iL', 1);
+
+INSERT INTO courses(acronym, description, ectsValue, type, degreeProgram_id)
+VALUES('COISD', 'Communication Infrastructure Design', 2.5, 'Ue', 1);
+
+INSERT INTO courses(acronym, description, ectsValue, type, degreeProgram_id)
+VALUES('HVSYS', 'Heterogene vernetze Systeme', 5.0,'Se', 1);
+
+INSERT INTO courses(acronym, description, ectsValue, type, degreeProgram_id)
+VALUES('TEAMT', 'Teamtraining', 1,'Se', 1);
+
+#########################################################################
+
+#Courses to Professors mapping
+
+INSERT INTO Courses_Professors(course_id, professor_id)
+VALUES(1, 1);
+
+INSERT INTO Courses_Professors(course_id, professor_id)
+VALUES(1, 2);
+
+INSERT INTO Courses_Professors(course_id, professor_id)
+VALUES(2, 3);
+
+INSERT INTO Courses_Professors(course_id, professor_id)
+VALUES(2, 4);
+
+INSERT INTO Courses_Professors(course_id, professor_id)
+VALUES(3, 5);
+
+INSERT INTO Courses_Professors(course_id, professor_id)
+VALUES(4, 6);
+
+INSERT INTO Courses_Professors(course_id, professor_id)
+VALUES(4, 7);
+
+INSERT INTO Courses_Professors(course_id, professor_id)
+VALUES(5, 8);
+
+######################################################################
+
+# Rooms
+
+INSERT INTO rooms(description, seats)
+VALUES('G.AP147.004', 50);
+
+INSERT INTO rooms(description, seats)
+VALUES('G.AP147.005', 100);
+
+INSERT INTO rooms(description, seats)
+VALUES('G.AP147.006', 50);
+
+INSERT INTO rooms(description, seats)
+VALUES('G.AP147.221', 18);
+
+INSERT INTO rooms(description, seats)
+VALUES('G.AP147.222', 18);
+
+######################################################################
+
+# Exams
+
+INSERT INTO exams(description, type, course_id)
+VALUES('SWENGA', 'midterm', 1);
+
+INSERT INTO exams(description, type, course_id)
+VALUES('SWENGA', 'final', 1);
+
+INSERT INTO exams(description, type, course_id)
+VALUES('COISD', 'final', 1);
+
+INSERT INTO exams(description, type, course_id)
+VALUES('DMT3', 'final', 1);
+
+INSERT INTO exams(description, type, course_id)
+VALUES('HVSYS', 'final', 1);
+
+INSERT INTO exams(description, type, course_id)
+VALUES('TEAMT', 'final', 1);
+
+#######################################################################
+
+# Examdates
+
+INSERT INTO exam_dates(date, exam_id, room_id)
+VALUES('2016-03-23 09:00:00', 1, 4);
+
+INSERT INTO exam_dates(date, exam_id, room_id)
+VALUES('2016-06-23 10:00:00', 2, 2);
+
+INSERT INTO exam_dates(date, exam_id, room_id)
+VALUES('2016-07-5 10:00:00', 2, 2);
+
+INSERT INTO exam_dates(date, exam_id, room_id)
+VALUES('2016-04-18 10:00:00', 3, 1);
+
+INSERT INTO exam_dates(date, exam_id, room_id)
+VALUES('2016-04-27 11:00:00', 4, 3);
+
+INSERT INTO exam_dates(date, exam_id, room_id)
+VALUES('2016-06-18 09:00:00', 5, 2);
+
+INSERT INTO exam_dates(date, exam_id, room_id)
+VALUES('2016-05-05 10:00:00', 6, 1);
+
+#########################################################################
+
+# Exam Applications
+
+INSERT INTO exam_applications(attempt, examDate_id, student_id)
+VALUES(1, 1, 1);
+
+INSERT INTO exam_applications(attempt, examDate_id, student_id)
+VALUES(1, 2, 1);
+
+INSERT INTO exam_applications(attempt, examDate_id, student_id)
+VALUES(1, 4, 1);
+
+INSERT INTO exam_applications(attempt, examDate_id, student_id)
+VALUES(1, 5, 1);
+
+INSERT INTO exam_applications(attempt, examDate_id, student_id)
+VALUES(1, 6, 1);
+
+INSERT INTO exam_applications(attempt, examDate_id, student_id)
+VALUES(1, 7, 1);
+
+INSERT INTO exam_applications(attempt, examDate_id, student_id)
+VALUES(1, 2, 2);
+
+INSERT INTO exam_applications(attempt, examDate_id, student_id)
+VALUES(2, 3, 2);
+
+########################################################################
+
+
+
+

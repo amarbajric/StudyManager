@@ -22,7 +22,7 @@ public class YearModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(nullable = false, length = 4) // e.g. 2016
+	@Column(nullable = false, length = 10) // e.g. IMA 2016
 	private String year;
 	
 	@ManyToOne (cascade = CascadeType.PERSIST)

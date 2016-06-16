@@ -24,6 +24,9 @@ public class CourseModel implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+	@Column(nullable = false, length = 100)
+	private String acronym;
 
 	@Column(nullable = false, length = 100)
 	private String description;
@@ -67,11 +70,29 @@ public class CourseModel implements java.io.Serializable {
 		
 	}
 
-	public CourseModel(String description, Double ectsValue, String type) {
+	public CourseModel(String acronym, String description, Double ectsValue, String type) {
 		super();
+		this.acronym = acronym;
 		this.description = description;
 		this.ectsValue = ectsValue;
 		this.type = type;
+	}
+
+	
+	public String getAcronym() {
+		return acronym;
+	}
+
+	public void setAcronym(String acronym) {
+		this.acronym = acronym;
+	}
+
+	public Set<ExamModel> getExams() {
+		return exams;
+	}
+
+	public void setExams(Set<ExamModel> exams) {
+		this.exams = exams;
 	}
 
 	public String getDescription() {

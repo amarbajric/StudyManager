@@ -23,7 +23,7 @@ public class DegreeProgramModel {
 	private String acronym;
 
 	@Column(nullable = false, length = 100)
-	private String leader;
+	private String head;
 
 	@Column(nullable = false, length = 100)
 	private String description;
@@ -42,20 +42,20 @@ public class DegreeProgramModel {
 	}
 		
 	
-	public DegreeProgramModel(String acronym, String leader, String description, String type) {
+	public DegreeProgramModel(String acronym, String head, String description, String type) {
 		super();
 		this.acronym = acronym;
-		this.leader = leader;
+		this.head = head;
 		this.description = description;
 		this.type = type;
 	}
 
-	public String getLeader() {
-		return leader;
+	public String getHead() {
+		return head;
 	}
 
-	public void setLeader(String leader) {
-		this.leader = leader;
+	public void setHead(String head) {
+		this.head = head;
 	}
 
 	public String getDescription() {
