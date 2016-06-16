@@ -35,7 +35,7 @@
         <![endif]-->
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Login</title>
+<title>StudyManager | Login</title>
 </head>
 <body style="background: #F7F7F7;">
 	<div id="wrapper">
@@ -74,7 +74,8 @@
 					</div>
 				</div>
 			</form>
-			<!-- form --> </section>
+			<!-- form --> 
+			</section>
 		</div>
 	</div>
 </body>
