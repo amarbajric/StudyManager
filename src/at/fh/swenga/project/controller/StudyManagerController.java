@@ -91,6 +91,8 @@ public class StudyManagerController {
 	
 	
 	
+	
+	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String handleLogin() {
 		return "login";

@@ -60,9 +60,9 @@
 					<input type="password" id="password" class="form-control"
 						placeholder="Password" required name="password">
 				</div>
-				<div>
 					<button class="btn btn-default submit" type="submit">Log
 						in</button>
+					</form>
 					<div class="clearfix"></div>
 					<div class="separator">
 						<div class="clearfix"></div>
@@ -73,7 +73,7 @@
 						</div>
 					</div>
 				</div>
-			</form>
+			
 			<!-- form --> 
 			</section>
 		</div>
