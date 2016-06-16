@@ -58,8 +58,26 @@
           <br>
          <input action="action" class="btn btn-round btn-success" type="button" value="Go Back" onclick="history.go(-1);"/>
          <button type="button" id="opener" class="btn btn-round btn-danger">Show error</button>
-          <div id="dialog" hidden=true>
-      		<p>THIS IS DIALOG!!!</p>
+          <div class="x_panel" style="display:none;height:600px" id="dialog">
+          <div class="x_title">
+          <h2>Error Message</h2>
+          <div class="clearfix"></div></div>
+          <br>
+	Exception:    ${requestScope["javax.servlet.error.exception"]}<br>
+	Message:      ${requestScope["javax.servlet.error.message"]}<br>
+	Status Code:  ${requestScope["javax.servlet.error.status_code"]}<br>
+	Request-URI:  ${requestScope["javax.servlet.error.request_uri"]}<br>
+	Servlet Name: ${requestScope["javax.servlet.error.servlet_name"]}<br>
+	<br>
+	Exception:    ${pageContext.exception}<br>
+	Message:      ${pageContext.exception.message}<br>
+	<br>
+	Exception:    ${pageContext.errorData.throwable}<br>
+	Message:      ${pageContext.errorData.throwable.message}<br>
+	Status Code:  ${pageContext.errorData.statusCode}<br>
+	Request-URI:  ${pageContext.errorData.requestURI}<br>
+	Servlet Name: ${pageContext.errorData.servletName}<br>
+	<br>       
     	</div>
     	</div>
           </div>
@@ -69,7 +87,6 @@
 
     </div>
     <!-- footer content -->
-  </div>
 
   <div id="custom_notifications" class="custom-notifications dsp_none">
     <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group">
@@ -92,22 +109,14 @@
   <!-- /footer content -->
 </body>
 <script type="text/javascript">
-$(function() {
-    $( "#dialog" ).dialog({
-      autoOpen: false,
-      show: {
-        effect: "blind",
-        duration: 1000
-      },
-      hide: {
-        effect: "explode",
-        duration: 1000
-      }
-    });
- 
-    $( "#opener" ).click(function() {
-      $( "#dialog" ).dialog( "open" );
-    });
-  });
+$('#opener').click(function() {
+	if(dialog.style.display == 'none')
+	{
+	$('#dialog').slideDown();
+	}
+	else{
+	$('#dialog').slideUp();
+	}
+})
 </script>
 </html>
