@@ -16,8 +16,7 @@ import at.fh.swenga.project.dao.UserRepository;
 import at.fh.swenga.project.dao.YearRepository;
 import at.fh.swenga.project.model.ProfessorModel;
 import at.fh.swenga.project.model.StudentModel;
-import at.fh.swenga.project.model.User;
-import at.fh.swenga.project.util.PasswordHasher;
+
 
 @Controller
 public class StudyManagerController {
