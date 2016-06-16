@@ -28,7 +28,7 @@ public class ExamModel {
 	@Column(nullable = false, length = 20)
 	private String type; // final, mid term
 	
-	@OneToMany(mappedBy = "exam", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "exam", fetch = FetchType.EAGER)
 	private Set<ExamDateModel> examDates;
 
 	@ManyToOne(cascade = CascadeType.PERSIST)

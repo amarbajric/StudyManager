@@ -52,7 +52,7 @@ public class CourseModel implements java.io.Serializable {
 	private String type; // seminar, practical course, etc.
 
 
-	@OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "course", fetch = FetchType.EAGER)
 	private Set<ExamModel> exams;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
