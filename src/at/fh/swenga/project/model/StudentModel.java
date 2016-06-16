@@ -1,5 +1,6 @@
 package at.fh.swenga.project.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -9,6 +10,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -38,7 +42,18 @@ public class StudentModel implements java.io.Serializable {
 	
 	@ManyToOne (cascade = CascadeType.PERSIST)
 	private YearModel year; // e.g. IMA 2016
+	
+	@ManyToMany(cascade = CascadeType.ALL) //
+	@JoinTable(name = "Students_Courses", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
+	private Set<CourseModel> courses = new HashSet<CourseModel>();
+	
+	public Set<CourseModel> getCourses() {
+		return courses;
+	}
 
+	public void setCourses(Set<CourseModel> courses) {
+		this.courses = courses;
+	}
 	
 	public StudentModel() {
 		// TODO Auto-generated constructor stub
