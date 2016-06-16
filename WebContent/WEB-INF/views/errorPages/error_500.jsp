@@ -52,7 +52,13 @@
             <h1 class="error-number">500</h1>
             <h1>Internal Server Error</h1>
             <h3>We track these errors automatically, but if the problem persists feel free to contact us.<br> 
-            In the meantime, try refreshing.</h3>           
+            In the meantime, try refreshing.</h3> 
+            <br>
+         <input action="action" class="btn btn-round btn-success" type="button" value="Go Back" onclick="history.go(-1);"/>
+         <button type="button" id="opener" class="btn btn-round btn-danger">Show error</button>
+          <div id="dialog" hidden=true>
+      		<p>THIS IS DIALOG!!!</p>
+    	</div>          
           </div>
           </div>
         </div>
@@ -83,5 +89,23 @@
   <script src="js/pace/pace.min.js"></script>
   <!-- /footer content -->
 </body>
-
+<script type="text/javascript">
+$(function() {
+    $( "#dialog" ).dialog({
+      autoOpen: false,
+      show: {
+        effect: "blind",
+        duration: 1000
+      },
+      hide: {
+        effect: "explode",
+        duration: 1000
+      }
+    });
+ 
+    $( "#opener" ).click(function() {
+      $( "#dialog" ).dialog( "open" );
+    });
+  });
+</script>
 </html>
