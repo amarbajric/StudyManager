@@ -1,14 +1,17 @@
 package at.fh.swenga.project.model;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,6 +30,9 @@ public class ExamDateModel {
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private ExamModel exam;
+	
+	@OneToMany(mappedBy = "examDate", fetch = FetchType.EAGER)
+	private Set<ExamApplicationModel> examApplications;
 
 	public ExamDateModel() {
 		// TODO Auto-generated constructor stub

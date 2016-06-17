@@ -39,12 +39,15 @@
 </head>
 <body style="background: #F7F7F7;">
 	<div id="wrapper">
+	
 		<div id="login" class="animate form">
+			<img src="images/StudyManager.png" alt="StudyManager Logo">
 			<section class="login_content"> <c:url value="/login"
 				var="loginUrl" />
 			<form action="${loginUrl}" method="post">
 				<input type="hidden" name="${_csrf.parameterName}"
-					value="${_csrf.token}" />
+					value="${_csrf.token}" />	
+					
 				<h1>Login</h1>
 				<c:if test="${SPRING_SECURITY_LAST_EXCEPTION.message != null}">
 					<div class="alert alert-danger" role="alert">
