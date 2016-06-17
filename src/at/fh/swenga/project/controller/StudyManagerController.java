@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import at.fh.swenga.project.dao.DegreeProgramRepository;
 import at.fh.swenga.project.dao.ExamApplicationRepository;
+import at.fh.swenga.project.dao.ExamDateRepository;
 import at.fh.swenga.project.dao.ProfessorRepository;
 import at.fh.swenga.project.dao.StudentRepository;
 import at.fh.swenga.project.dao.UserRepository;
 import at.fh.swenga.project.dao.YearRepository;
 import at.fh.swenga.project.model.ExamApplicationModel;
+import at.fh.swenga.project.model.ExamDateModel;
 import at.fh.swenga.project.model.ProfessorModel;
 import at.fh.swenga.project.model.StudentModel;
 
@@ -42,6 +44,9 @@ public class StudyManagerController {
 	
 	@Autowired
 	ExamApplicationRepository examApplicationRepo;
+	
+	@Autowired
+	ExamDateRepository examDateRepo;
 
 	
 	/*@RequestMapping("/fill")
@@ -84,9 +89,9 @@ public class StudyManagerController {
             targetUrl = "professor/index";
         } else if(role.toLowerCase().contains("student")) {
         	StudentModel studentData = studentRepo.findByMail(mailOfUser);
-        	List<ExamApplicationModel> examApplications = examApplicationRepo.findTop5ByStudentOrderByExamDateDateAsc(studentData);
+        	List<ExamApplicationModel> examApplications = examApplicationRepo.findTop5ByStudentOrderByExamDateDateAsc(studentData);        	
         	model.addAttribute("studentData",studentData);
-        	model.addAttribute("examApplications",examApplications);
+        	model.addAttribute("examApplications",examApplications);        	
             targetUrl = "student/index";
         }
         else if(role.toLowerCase().contains("admin")){

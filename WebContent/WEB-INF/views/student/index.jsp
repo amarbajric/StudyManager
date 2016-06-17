@@ -202,9 +202,29 @@
 
 							</div>
 						</div>
+					</div>				
+				
+					</div>
+					
+				<!-- ECTS COUNTER -->
+				<div class="row">
+				<div class="col-md-2 col-sm-2 col-xs-2">
+					<div class="dashboard-widget-content sidebar-widget">
+						<h4>Degree Completion</h4>
+						<canvas width="150" height="80" id="analog_ects" class=""
+							style="width: 160px; height: 100px;"></canvas>
+						<div class="goal-wrapper">
+							<span class="gauge-value pull-left">ECTS:</span> <span
+								id="current_ects" class="gauge-value pull-left">${studentData.ects}</span> <span
+								id="goal_ects" class="goal-value pull-right">180</span>
+						</div>
 					</div>
 				</div>
-				<!-- /top tiles -->
+				<!-- /ECTS COUNTER -->
+				</div>
+				 
+				<!-- /top tiles -->			
+			
 			</div>
 			<!-- /page content -->
 
@@ -232,7 +252,7 @@
 
 	<!-- gauge js -->
 	<script type="text/javascript" src="js/gauge/gauge.min.js"></script>
-	<script type="text/javascript" src="js/gauge/gauge_demo.js"></script>
+	<script type="text/javascript" src="js/gauge/gauge_ects.js"></script>
 	<!-- bootstrap progress js -->
 	<script src="js/progressbar/bootstrap-progressbar.min.js"></script>
 	<script src="js/nicescroll/jquery.nicescroll.min.js"></script>
