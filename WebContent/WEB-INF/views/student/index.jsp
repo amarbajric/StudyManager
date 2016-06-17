@@ -167,7 +167,7 @@
 						<div class="x_panel">
 							<div class="x_title">
 								<h2>
-									Last Grades<small>basic table subtitle</small>
+									Last Grades<small>Quick overview of last five graded exams</small>
 								</h2>
 
 								<div class="clearfix"></div>
@@ -186,7 +186,7 @@
 									</thead>
 									<tbody>
 
-										<c:forEach items="${studentData.applications}"
+										<c:forEach items="${examApplications}"
 											var="application">
 											<tr>
 												<th scope="row">${application.examDate.exam.description}</th>

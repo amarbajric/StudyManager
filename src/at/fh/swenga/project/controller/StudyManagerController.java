@@ -1,20 +1,23 @@
 package at.fh.swenga.project.controller;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import at.fh.swenga.project.dao.DegreeProgramRepository;
+import at.fh.swenga.project.dao.ExamApplicationRepository;
 import at.fh.swenga.project.dao.ProfessorRepository;
 import at.fh.swenga.project.dao.StudentRepository;
 import at.fh.swenga.project.dao.UserRepository;
 import at.fh.swenga.project.dao.YearRepository;
+import at.fh.swenga.project.model.ExamApplicationModel;
 import at.fh.swenga.project.model.ProfessorModel;
 import at.fh.swenga.project.model.StudentModel;
 
@@ -36,6 +39,9 @@ public class StudyManagerController {
 	
 	@Autowired
 	UserRepository userRepo;
+	
+	@Autowired
+	ExamApplicationRepository examApplicationRepo;
 
 	
 	/*@RequestMapping("/fill")
@@ -78,7 +84,9 @@ public class StudyManagerController {
             targetUrl = "professor/index";
         } else if(role.toLowerCase().contains("student")) {
         	StudentModel studentData = studentRepo.findByMail(mailOfUser);
+        	List<ExamApplicationModel> examApplications = examApplicationRepo.findTop5ByStudentOrderByExamDateDateAsc(studentData);
         	model.addAttribute("studentData",studentData);
+        	model.addAttribute("examApplications",examApplications);
             targetUrl = "student/index";
         }
         else if(role.toLowerCase().contains("admin")){

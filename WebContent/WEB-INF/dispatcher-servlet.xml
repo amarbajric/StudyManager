@@ -33,8 +33,8 @@
 	<!-- looks up Spring Data repositories -->
 	<!-- find repositories for Spring Data -->
 	<jpa:repositories base-package="at.fh.swenga" />
-
-
+	
+	
 	<!-- JSR-303/JSR-349 support will be detected on classpath and enabled automatically -->
 
 
