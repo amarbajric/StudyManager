@@ -84,13 +84,17 @@
 								<li><a
 									href="${requestScope['javax.servlet.forward.request_uri']}"><i
 										class="fa fa-home"></i> Overview</a></li>
-								<li><a><i class="fa fa-edit"></i>Exams</a></li>
+								<li><a href="PLACEHOLDER"><i class="fa fa-edit"></i>Exams</a></li>
 								<li><a><i class="fa fa-desktop"></i>Grades<span
 										class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
-										<li><a href="general_elements.html">Export Grades</a></li>
-									</ul></li>
-								<li><a><i class="fa fa-bar-chart-o"></i>Statistics</a></li>
+										<li><a href="PLACEHOLDER">View Grades</a></li>
+									</ul>
+									<ul class="nav child_menu" style="display: none">
+										<li><a href="PLACEHOLDER">Export Grades</a></li>
+									</ul>
+									</li>
+								<li><a href="PLACEHOLDER"><i class="fa fa-bar-chart-o"></i>Statistics</a></li>
 							</ul>
 						</div>
 					</div>
@@ -160,9 +164,48 @@
 
 			<!-- page content: OVERVIEW -->
 			<div class="right_col" role="main">
+			
+			<!-- TOP TITLES (4) -->
+			<div class="row tile_count">
+          <div class="animated flipInY col-md-3 col-sm-3 col-xs-12 tile_stats_count">
+            <div class="left"></div>
+            <div class="right">
+              <span class="count_top"><i class="fa fa-user"></i>Total Students</span>
+              <div class="count">2500</div>
+              <span class="count_bottom"><i class="red">4% </i> From last Week</span>
+            </div>
+          </div>
+          <div class="animated flipInY col-md-3 col-sm-3 col-xs-12 tile_stats_count">
+            <div class="left"></div>
+            <div class="right">
+              <span class="count_top"><i class="fa fa-user"></i> Total Students</span>
+              <div class="count">2500</div>
+              <span class="count_bottom"><i class="red">4% </i> From last Week</span>
+            </div>
+          </div>
+          <div class="animated flipInY col-md-3 col-sm-3 col-xs-12 tile_stats_count">
+            <div class="left"></div>
+            <div class="right">
+              <span class="count_top"><i class="fa fa-user"></i> Total Collections</span>
+              <div class="count">2,315</div>
+              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+            </div>
+          </div>
+          <div class="animated flipInY col-md-3 col-sm-3 col-xs-12 tile_stats_count">
+            <div class="left"></div>
+            <div class="right">
+              <span class="count_top"><i class="fa fa-user"></i> Total Connections</span>
+              <div class="count">7,325</div>
+              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+            </div>
+          </div>
 
-				<!-- top data -->
+        </div>
+        <!-- /TOP TITLES (4) -->		
+			
+				<!-- START FIRST ROW /w 2 Tables -->
 				<div class="row">
+				<!-- TABLE 1 List of Grades -->
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="x_panel">
 							<div class="x_title">
@@ -194,7 +237,22 @@
 												<td>${application.attempt}</td>
 												<td><fmt:formatDate
 														value="${application.examDate.date}" pattern="dd.MM.yyyy" />
-												<td>${application.grade}</td>
+												<!-- Check grade for showing icon next to it -->
+												<c:choose>
+														<c:when test="${application.grade == 5}">
+															<c:set var="className">label label-danger pull-right</c:set>
+															<c:set var="text">Fail</c:set>
+														</c:when>
+														<c:when test="${application.grade >= 3}">
+														<c:set var="className">label label-warning pull-right</c:set>
+														<c:set var="text">Sufficient</c:set>
+														</c:when>
+														<c:when test="${application.grade < 3}">
+														<c:set var="className">label label-success pull-right</c:set>
+														<c:set var="text">Good Job</c:set>
+														</c:when>
+													</c:choose><td>${application.grade} <span class="${className}">${text}</span></td>
+													<!-- /Check grade for showing icon next to it -->
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -202,25 +260,140 @@
 
 							</div>
 						</div>
-					</div>				
-				
 					</div>
+					<!-- /TABLE 1 List of Grades -->				
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="x_panel">
+							<div class="x_title">
+								<h2>
+									Upcoming Exams<small>Quick overview of the next upcoming exams</small>
+								</h2>
+
+								<div class="clearfix"></div>
+							</div>
+							<div class="x_content">
+
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th>Course</th>
+											<th>Exam Type</th>
+											<th>Attempt</th>
+											<th>Date</th>
+											<th>Grade</th>
+										</tr>
+									</thead>
+									<tbody>
+
+										<!-- HERE FOREACH! -->
+											<tr>
+												<th scope="row">PLACEHOLDER</th>
+												<td>PLACEHOLDER</td>
+												<td>PLACEHOLDER</td>
+												<td><fmt:formatDate
+														value="${application.examDate.date}" pattern="dd.MM.yyyy" />
+												<td>PLACEHOLDER</td>
+											</tr>
+										<!-- END HERE FOREACH -->
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+					</div>
+					</div>
+					<!-- END FIRST ROW /w 2 Tables -->
 					
 				<!-- ECTS COUNTER -->
 				<div class="row">
-				<div class="col-md-2 col-sm-2 col-xs-2">
+				<div class="col-md-3 col-sm-3 col-xs-6">
+					<div class="x_panel tile fixed_height_320 overflow_hidden">
 					<div class="dashboard-widget-content sidebar-widget">
-						<h4>Degree Completion</h4>
-						<canvas width="150" height="80" id="analog_ects" class=""
-							style="width: 160px; height: 100px;"></canvas>
-						<div class="goal-wrapper">
-							<span class="gauge-value pull-left">ECTS:</span> <span
-								id="current_ects" class="gauge-value pull-left">${studentData.ects}</span> <span
+								<div class="x_title">
+									<h2>Degree Completion</h2>
+									<div class="clearfix"></div>
+								</div>
+								<div class="x_content">
+								<canvas width="150" height="80" id="analog_ects" class=""
+									style="width: 160px; height: 100px;"></canvas>
+								<div class="goal-wrapper">
+							<span class="gauge-value pull-left">ECTS: </span> <span
+								id="current_ects" class="gauge-value">${studentData.ects}</span> <span
 								id="goal_ects" class="goal-value pull-right">180</span>
 						</div>
+						</div>
+					</div>
 					</div>
 				</div>
 				<!-- /ECTS COUNTER -->
+				
+				<!-- statistics -->
+				<div class="col-md-3 col-sm-3 col-xs-6">
+				<div class="x_panel tile fixed_height_320 overflow_hidden">
+              <div class="x_title">
+                <h2>Grades gained</h2>
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+
+                <table class="" style="width:100%">
+                  <tbody><tr>
+                    <th style="width:37%;">
+                      <p>Top 5</p>
+                    </th>
+                    <th>
+                      <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                        <p class="">Device</p>
+                      </div>
+	                      <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                        <p class="">Progress</p>
+                      </div>
+                    </th>
+                  </tr>
+                  <tr>
+                    <td><iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;"></iframe>
+                      <canvas id="canvasDataCircle" height="150" width="150" style="margin: 15px 10px 10px 0"></canvas>
+                    </td>
+                    <td>
+                      <table class="tile_info">
+                        <tbody><tr>
+                          <td>
+                            <p><i class="fa fa-square blue"></i>IOS </p>
+                          </td>
+                          <td>30%</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <p><i class="fa fa-square green"></i>Android </p>
+                          </td>
+                          <td>10%</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <p><i class="fa fa-square purple"></i>Blackberry </p>
+                          </td>
+                          <td>20%</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <p><i class="fa fa-square aero"></i>Symbian </p>
+                          </td>
+                          <td>15%</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <p><i class="fa fa-square red"></i>Others </p>
+                          </td>
+                          <td>30%</td>
+                        </tr>
+                      </tbody></table>
+                    </td>
+                  </tr>
+                </tbody></table>
+              </div>
+              </div>
+            </div>
+            <!-- /statistics -->
 				</div>
 				 
 				<!-- /top tiles -->			
@@ -258,11 +431,12 @@
 	<script src="js/nicescroll/jquery.nicescroll.min.js"></script>
 	<!-- icheck -->
 	<script src="js/icheck/icheck.min.js"></script>
-	<!-- daterangepicker -->
-	<script type="text/javascript" src="js/moment/moment.min.js"></script>
-	<script type="text/javascript" src="js/datepicker/daterangepicker.js"></script>
 	<!-- chart js -->
 	<script src="js/chartjs/chart.min.js"></script>
+	<script type="text/javascript" src="js/chartjs/dataCircle.js"></script>
+	<script type="text/javascript" src="js/moment/moment.min.js"></script>
+  	<script type="text/javascript" src="js/datepicker/daterangepicker.js"></script>
+	
 
 	<script src="js/custom.js"></script>
 
