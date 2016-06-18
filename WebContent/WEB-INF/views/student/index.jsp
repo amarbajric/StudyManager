@@ -167,6 +167,14 @@
 			
 			<!-- TOP TITLES (4) -->
 			<div class="row tile_count">
+			<div class="animated flipInY col-md-3 col-sm-3 col-xs-12 tile_stats_count">
+            <div class="left"></div>
+            <div class="right">
+              <span class="count_top"><i class="fa fa-user"></i> Current Rank (based on average grades)</span>
+              <div class="count">2,315</div>
+              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+            </div>
+          </div>
           <div class="animated flipInY col-md-3 col-sm-3 col-xs-12 tile_stats_count">
             <div class="left"></div>
             <div class="right">
@@ -185,16 +193,8 @@
           <div class="animated flipInY col-md-3 col-sm-3 col-xs-12 tile_stats_count">
             <div class="left"></div>
             <div class="right">
-              <span class="count_top"><i class="fa fa-user"></i> Current Rank (based on average grades)</span>
-              <div class="count">2,315</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
-            </div>
-          </div>
-          <div class="animated flipInY col-md-3 col-sm-3 col-xs-12 tile_stats_count">
-            <div class="left"></div>
-            <div class="right">
               <span class="count_top"><i class="fa fa-book"></i> Amount of courses participating</span>
-              <div class="count"></div>
+              <div class="count">${studentData.getCourses().size()}</div>
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
             </div>
           </div>
