@@ -4,27 +4,27 @@ Chart.defaults.global.legend = {
 
     var data = {
       labels: [
-        "Symbian",
-        "Blackberry",
-        "Other",
-        "Android",
-        "IOS"
+        "Excellent",
+        "Good",
+        "Satisfactory",
+        "Sufficient",
+        "Not Sufficient"
       ],
       datasets: [{
-        data: [15, 20, 30, 10, 30],
+        data: [parseInt(document.getElementById("Excellent").innerText), parseInt(document.getElementById("Good").innerText), parseInt(document.getElementById("Satisfactory").innerText), parseInt(document.getElementById("Sufficient").innerText), parseInt(document.getElementById("NotSufficient").innerText)],
         backgroundColor: [
-          "#BDC3C7",
+          "#3498DB",
+          "#1ABB9C",
           "#9B59B6",
-          "#455C73",
-          "#26B99A",
-          "#3498DB"
+          "#9CC2CB",
+          "#E74C3C"
         ],
         hoverBackgroundColor: [
-          "#CFD4D8",
-          "#B370CF",
-          "#34495E",
-          "#36CAAB",
-          "#49A9EA"
+          "#5cace2",
+          "#47c8af",
+          "#af7ac4",
+          "#afced5",
+          "#eb6f62"
         ]
 
       }]

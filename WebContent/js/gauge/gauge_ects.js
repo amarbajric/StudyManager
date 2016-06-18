@@ -19,4 +19,4 @@ var current_ects = parseFloat(document.getElementById("current_ects").innerText)
 gauge.maxValue = 180; // set max gauge value
 gauge.animationSpeed = 64; // set animation speed (32 is default value)
 gauge.set(current_ects); // set actual value
-gauge.setTextField(document.getElementById("current_ects"));
+gauge.setTextField(current_ects);

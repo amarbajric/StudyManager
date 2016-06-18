@@ -1,7 +1,10 @@
 package at.fh.swenga.project.controller;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -102,11 +105,25 @@ public class StudyManagerController {
         	//find all exams of a degreeProgram
         	List<ExamModel> examsOfDegreeProgram = examRepo.findByCourseDegreeProgram(studentData.getYear().getDegreeProgram());
         	//set data in model object
+        	List<Object[]> numberOfGradesByGrade = examApplicationRepo.findNumberOfGradesByGrade(studentData.getId());
+        	//get grades into Map
+        	Map<Integer,Integer> gradesMap = new HashMap<Integer,Integer>();
+        	for (int i = 0; i < numberOfGradesByGrade.size(); i++) {
+        		Object[] arr = numberOfGradesByGrade.get(i);
+        		gradesMap.put(Integer.parseInt(arr[0].toString()), Integer.parseInt(arr[1].toString()));
+        		}
+        	for (int i = 1; i < 6; i++) {
+        		if (!gradesMap.containsKey(i)){
+        			gradesMap.put(i,0);
+        		}
+        	}
+        	List<Integer> grades = new ArrayList(gradesMap.values());
         	model.addAttribute("examsOfDegreeProgram",examsOfDegreeProgram);
         	model.addAttribute("studentColleagues",studentColleagues);
         	model.addAttribute("allStudents",allStudents);
         	model.addAttribute("studentData",studentData);
-        	model.addAttribute("examApplications",examApplications);	
+        	model.addAttribute("examApplications",examApplications);
+        	model.addAttribute("grades",grades);
             
         	targetUrl = "student/index";
         }

@@ -187,16 +187,16 @@
             <div class="left"></div>
             <div class="right">
               <span class="count_top"><i class="fa fa-pencil"></i> Total Exams written</span>
-              <div class="count">${studentData.getApplications().size()}</div>
+              <div class="count">${studentData.applications.size()}</div>
 			<c:choose>
-				<c:when test="${((studentData.getApplications().size())/(examsOfDegreeProgram.size()))*100 > 50}">
+				<c:when test="${((studentData.applications.size())/(examsOfDegreeProgram.size()))*100 > 50}">
 					<c:set var="classCol">green</c:set>
 				</c:when>
-				<c:when test="${((studentData.getApplications().size())/(examsOfDegreeProgram.size()))*100 < 50}">
+				<c:when test="${((studentData.applications.size())/(examsOfDegreeProgram.size()))*100 < 50}">
 					<c:set var="classCol">red</c:set>
 				</c:when>
 			</c:choose>
-			<span class="count_bottom"><i class="${classCol}">${((studentData.getApplications().size())/(examsOfDegreeProgram.size()))*100}%</i> accomplished</span>
+			<span class="count_bottom"><i class="${classCol}">${((studentData.applications.size())/(examsOfDegreeProgram.size()))*100}%</i> accomplished</span>
             </div>
           </div>
           <div class="animated flipInY col-md-3 col-sm-3 col-xs-12 tile_stats_count">
@@ -338,7 +338,7 @@
 				<div class="col-md-3 col-sm-3 col-xs-6">
 				<div class="x_panel tile fixed_height_320 overflow_hidden">
               <div class="x_title">
-                <h2>Grades gained</h2>
+                <h2>Grades overview</h2>
                 <div class="clearfix"></div>
               </div>
               <div class="x_content">
@@ -346,14 +346,14 @@
                 <table class="" style="width:100%">
                   <tbody><tr>
                     <th style="width:37%;">
-                      <p>Top 5</p>
+                      <p></p>
                     </th>
                     <th>
                       <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
-                        <p class="">Device</p>
+                        <p class="">Grade</p>
                       </div>
 	                      <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
-                        <p class="">Progress</p>
+                        <p class="">Number</p>
                       </div>
                     </th>
                   </tr>
@@ -365,33 +365,33 @@
                       <table class="tile_info">
                         <tbody><tr>
                           <td>
-                            <p><i class="fa fa-square blue"></i>IOS </p>
+                            <p><i class="fa fa-square blue"></i>Excellent </p>
                           </td>
-                          <td>30%</td>
+                          <td id="Excellent">${grades[0]}</td>
                         </tr>
                         <tr>
                           <td>
-                            <p><i class="fa fa-square green"></i>Android </p>
+                            <p><i class="fa fa-square green"></i>Good </p>
                           </td>
-                          <td>10%</td>
+                          <td id="Good">${grades[1]}</td>
                         </tr>
                         <tr>
                           <td>
-                            <p><i class="fa fa-square purple"></i>Blackberry </p>
+                            <p><i class="fa fa-square purple"></i>Satisfactory </p>
                           </td>
-                          <td>20%</td>
+                          <td id="Satisfactory">${grades[2]}</td>
                         </tr>
                         <tr>
                           <td>
-                            <p><i class="fa fa-square aero"></i>Symbian </p>
+                            <p><i class="fa fa-square aero"></i>Sufficient </p>
                           </td>
-                          <td>15%</td>
+                          <td id="Sufficient">${grades[3]}</td>
                         </tr>
                         <tr>
                           <td>
-                            <p><i class="fa fa-square red"></i>Others </p>
+                            <p><i class="fa fa-square red"></i>Not Sufficient </p>
                           </td>
-                          <td>30%</td>
+                          <td id="NotSufficient">${grades[4]}</td>
                         </tr>
                       </tbody></table>
                     </td>
