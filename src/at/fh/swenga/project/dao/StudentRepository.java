@@ -16,4 +16,7 @@ public interface StudentRepository extends JpaRepository<StudentModel, Integer> 
 	public List<StudentModel> findAll();
 	
 	public StudentModel findByMail(String mail);
+
+	public List<StudentModel> findByYearYear(String year);//example: IMA2014
+
 }

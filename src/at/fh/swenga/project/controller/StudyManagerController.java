@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import at.fh.swenga.project.dao.DegreeProgramRepository;
 import at.fh.swenga.project.dao.ExamApplicationRepository;
 import at.fh.swenga.project.dao.ExamDateRepository;
+import at.fh.swenga.project.dao.ExamRepository;
 import at.fh.swenga.project.dao.ProfessorRepository;
 import at.fh.swenga.project.dao.StudentRepository;
 import at.fh.swenga.project.dao.UserRepository;
 import at.fh.swenga.project.dao.YearRepository;
 import at.fh.swenga.project.model.ExamApplicationModel;
-import at.fh.swenga.project.model.ExamDateModel;
+import at.fh.swenga.project.model.ExamModel;
 import at.fh.swenga.project.model.ProfessorModel;
 import at.fh.swenga.project.model.StudentModel;
 
@@ -48,6 +49,8 @@ public class StudyManagerController {
 	@Autowired
 	ExamDateRepository examDateRepo;
 
+	@Autowired
+	ExamRepository examRepo;
 	
 	/*@RequestMapping("/fill")
 	@Transactional
@@ -94,8 +97,13 @@ public class StudyManagerController {
         	List<ExamApplicationModel> examApplications = examApplicationRepo.findTop5ByStudentOrderByExamDateDateAsc(studentData);
         	//get the total amount of students
         	List<StudentModel> allStudents = studentRepo.findAll();
-        	
+        	//get all students who are studying with the specific student
+        	List<StudentModel> studentColleagues = studentRepo.findByYearYear(studentData.getYear().getYear());
+        	//find all exams of a degreeProgram
+        	List<ExamModel> examsOfDegreeProgram = examRepo.findByCourseDegreeProgram(studentData.getYear().getDegreeProgram());
         	//set data in model object
+        	model.addAttribute("examsOfDegreeProgram",examsOfDegreeProgram);
+        	model.addAttribute("studentColleagues",studentColleagues);
         	model.addAttribute("allStudents",allStudents);
         	model.addAttribute("studentData",studentData);
         	model.addAttribute("examApplications",examApplications);	

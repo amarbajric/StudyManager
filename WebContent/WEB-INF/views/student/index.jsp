@@ -170,8 +170,8 @@
 			<div class="animated flipInY col-md-3 col-sm-3 col-xs-12 tile_stats_count">
             <div class="left"></div>
             <div class="right">
-              <span class="count_top"><i class="fa fa-user"></i> Current Rank (based on average grades)</span>
-              <div class="count">2,315</div>
+              <span class="count_top"><i class="fa fa-sitemap"></i> Current Rank (based on average grades)</span>
+              <div class="count">PLACEHOLDER</div>
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
             </div>
           </div>
@@ -180,6 +180,7 @@
             <div class="right">
               <span class="count_top"><i class="fa fa-user"></i> Total Students</span>
               <div class="count">${allStudents.size()}</div>
+              <span class="count_bottom"><i class="green">${studentColleagues.size()}</i> are studying with you</span>
             </div>
           </div>
           <div class="animated flipInY col-md-3 col-sm-3 col-xs-12 tile_stats_count">
@@ -187,7 +188,15 @@
             <div class="right">
               <span class="count_top"><i class="fa fa-pencil"></i> Total Exams written</span>
               <div class="count">${studentData.getApplications().size()}</div>
-              <span class="count_bottom"><i class="red">4% </i> From last Week</span>
+			<c:choose>
+				<c:when test="${((studentData.getApplications().size())/(examsOfDegreeProgram.size()))*100 > 50}">
+					<c:set var="classCol">green</c:set>
+				</c:when>
+				<c:when test="${((studentData.getApplications().size())/(examsOfDegreeProgram.size()))*100 < 50}">
+					<c:set var="classCol">red</c:set>
+				</c:when>
+			</c:choose>
+			<span class="count_bottom"><i class="${classCol}">${((studentData.getApplications().size())/(examsOfDegreeProgram.size()))*100}%</i> accomplished</span>
             </div>
           </div>
           <div class="animated flipInY col-md-3 col-sm-3 col-xs-12 tile_stats_count">
@@ -195,7 +204,6 @@
             <div class="right">
               <span class="count_top"><i class="fa fa-book"></i> Amount of courses participating</span>
               <div class="count">${studentData.getCourses().size()}</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
             </div>
           </div>
 
