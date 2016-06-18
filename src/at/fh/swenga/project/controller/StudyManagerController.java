@@ -104,7 +104,7 @@ public class StudyManagerController {
         	List<StudentModel> studentColleagues = studentRepo.findByYearYear(studentData.getYear().getYear());
         	//find all exams of a degreeProgram
         	List<ExamModel> examsOfDegreeProgram = examRepo.findByCourseDegreeProgram(studentData.getYear().getDegreeProgram());
-        	//set data in model object
+        	//set data in model object(grades)
         	List<Object[]> numberOfGradesByGrade = examApplicationRepo.findNumberOfGradesByGrade(studentData.getId());
         	//get grades into Map
         	Map<Integer,Integer> gradesMap = new HashMap<Integer,Integer>();
@@ -112,12 +112,16 @@ public class StudyManagerController {
         		Object[] arr = numberOfGradesByGrade.get(i);
         		gradesMap.put(Integer.parseInt(arr[0].toString()), Integer.parseInt(arr[1].toString()));
         		}
+        	//set grades which don't exist to zero
         	for (int i = 1; i < 6; i++) {
         		if (!gradesMap.containsKey(i)){
         			gradesMap.put(i,0);
         		}
         	}
+        	//setting the number of every grade to a list
         	List<Integer> grades = new ArrayList(gradesMap.values());
+        	
+        	//setting models
         	model.addAttribute("examsOfDegreeProgram",examsOfDegreeProgram);
         	model.addAttribute("studentColleagues",studentColleagues);
         	model.addAttribute("allStudents",allStudents);

@@ -19,7 +19,7 @@ public interface ExamApplicationRepository extends JpaRepository<ExamApplication
 	
 	public List<ExamApplicationModel> findTop5ByStudentOrderByExamDateDateAsc(StudentModel student);
 	
-	@Query(value = "SELECT grade, COUNT(*) as anzahl FROM ima14_lagger_project1.exam_applications where student_id = ?1 group by grade;", nativeQuery=true)
+	@Query(value = "SELECT grade, COUNT(*) as anzahl FROM IMA14_lagger_project1.exam_applications where student_id = ?1 group by grade;", nativeQuery=true)
 	public List<Object[]> findNumberOfGradesByGrade(int student_id);
 
 }
