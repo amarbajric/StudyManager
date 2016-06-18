@@ -92,8 +92,7 @@
 									</ul>
 									<ul class="nav child_menu" style="display: none">
 										<li><a href="PLACEHOLDER">Export Grades</a></li>
-									</ul>
-									</li>
+									</ul></li>
 								<li><a href="PLACEHOLDER"><i class="fa fa-bar-chart-o"></i>Statistics</a></li>
 							</ul>
 						</div>
@@ -164,60 +163,74 @@
 
 			<!-- page content: OVERVIEW -->
 			<div class="right_col" role="main">
-			
-			<!-- TOP TITLES (4) -->
-			<div class="row tile_count">
-			<div class="animated flipInY col-md-3 col-sm-3 col-xs-12 tile_stats_count">
-            <div class="left"></div>
-            <div class="right">
-              <span class="count_top"><i class="fa fa-sitemap"></i> Current Rank (based on average grades)</span>
-              <div class="count">PLACEHOLDER</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
-            </div>
-          </div>
-          <div class="animated flipInY col-md-3 col-sm-3 col-xs-12 tile_stats_count">
-            <div class="left"></div>
-            <div class="right">
-              <span class="count_top"><i class="fa fa-user"></i> Total Students</span>
-              <div class="count">${allStudents.size()}</div>
-              <span class="count_bottom"><i class="green">${studentColleagues.size()}</i> are studying with you</span>
-            </div>
-          </div>
-          <div class="animated flipInY col-md-3 col-sm-3 col-xs-12 tile_stats_count">
-            <div class="left"></div>
-            <div class="right">
-              <span class="count_top"><i class="fa fa-pencil"></i> Total Exams written</span>
-              <div class="count">${studentData.applications.size()}</div>
-			<c:choose>
-				<c:when test="${((studentData.applications.size())/(examsOfDegreeProgram.size()))*100 > 50}">
-					<c:set var="classCol">green</c:set>
-				</c:when>
-				<c:when test="${((studentData.applications.size())/(examsOfDegreeProgram.size()))*100 < 50}">
-					<c:set var="classCol">red</c:set>
-				</c:when>
-			</c:choose>
-			<span class="count_bottom"><i class="${classCol}">${((studentData.applications.size())/(examsOfDegreeProgram.size()))*100}%</i> accomplished</span>
-            </div>
-          </div>
-          <div class="animated flipInY col-md-3 col-sm-3 col-xs-12 tile_stats_count">
-            <div class="left"></div>
-            <div class="right">
-              <span class="count_top"><i class="fa fa-book"></i> Amount of courses participating</span>
-              <div class="count">${studentData.getCourses().size()}</div>
-            </div>
-          </div>
 
-        </div>
-        <!-- /TOP TITLES (4) -->		
-			
+				<!-- TOP TITLES (4) -->
+				<div class="row tile_count">
+					<div
+						class="animated flipInY col-md-3 col-sm-3 col-xs-12 tile_stats_count">
+						<div class="left"></div>
+						<div class="right">
+							<span class="count_top"><i class="fa fa-sitemap"></i>
+								Current Rank (based on average grades)</span>
+							<div class="count">PLACEHOLDER</div>
+							<span class="count_bottom"><i class="green"><i
+									class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+						</div>
+					</div>
+					<div
+						class="animated flipInY col-md-3 col-sm-3 col-xs-12 tile_stats_count">
+						<div class="left"></div>
+						<div class="right">
+							<span class="count_top"><i class="fa fa-user"></i> Total
+								Students</span>
+							<div class="count">${allStudents.size()}</div>
+							<span class="count_bottom"><i class="green">${studentColleagues.size()}</i>
+								are studying with you</span>
+						</div>
+					</div>
+					<div
+						class="animated flipInY col-md-3 col-sm-3 col-xs-12 tile_stats_count">
+						<div class="left"></div>
+						<div class="right">
+							<span class="count_top"><i class="fa fa-pencil"></i> Total
+								Exams written</span>
+							<div class="count">${studentData.applications.size()}</div>
+							<c:choose>
+								<c:when
+									test="${((studentData.applications.size())/(examsOfDegreeProgram.size()))*100 > 50}">
+									<c:set var="classCol">green</c:set>
+								</c:when>
+								<c:when
+									test="${((studentData.applications.size())/(examsOfDegreeProgram.size()))*100 < 50}">
+									<c:set var="classCol">red</c:set>
+								</c:when>
+							</c:choose>
+							<span class="count_bottom"><i class="${classCol}">${((studentData.applications.size())/(examsOfDegreeProgram.size()))*100}%</i>
+								accomplished</span>
+						</div>
+					</div>
+					<div
+						class="animated flipInY col-md-3 col-sm-3 col-xs-12 tile_stats_count">
+						<div class="left"></div>
+						<div class="right">
+							<span class="count_top"><i class="fa fa-book"></i> Amount
+								of courses participating</span>
+							<div class="count">${studentData.getCourses().size()}</div>
+						</div>
+					</div>
+
+				</div>
+				<!-- /TOP TITLES (4) -->
+
 				<!-- START FIRST ROW /w 2 Tables -->
 				<div class="row">
-				<!-- TABLE 1 List of Grades -->
+					<!-- TABLE 1 List of Grades -->
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="x_panel">
 							<div class="x_title">
 								<h2>
-									Last Grades<small>Quick overview of your last graded exams</small>
+									Last Grades<small>Quick overview of your last graded
+										exams</small>
 								</h2>
 
 								<div class="clearfix"></div>
@@ -236,30 +249,29 @@
 									</thead>
 									<tbody>
 
-										<c:forEach items="${examApplications}"
-											var="application">
+										<c:forEach items="${examApplications}" var="application">
 											<tr>
 												<th scope="row">${application.examDate.exam.description}</th>
 												<td>${application.examDate.exam.type}</td>
 												<td>${application.attempt}</td>
 												<td><fmt:formatDate
 														value="${application.examDate.date}" pattern="dd.MM.yyyy" />
-												<!-- Check grade for showing icon next to it -->
-												<c:choose>
+													<!-- Check grade for showing icon next to it --> <c:choose>
 														<c:when test="${application.grade == 5}">
 															<c:set var="className">label label-danger pull-right</c:set>
 															<c:set var="text">Fail</c:set>
 														</c:when>
 														<c:when test="${application.grade >= 3}">
-														<c:set var="className">label label-warning pull-right</c:set>
-														<c:set var="text">Sufficient</c:set>
+															<c:set var="className">label label-warning pull-right</c:set>
+															<c:set var="text">Sufficient</c:set>
 														</c:when>
 														<c:when test="${application.grade < 3}">
-														<c:set var="className">label label-success pull-right</c:set>
-														<c:set var="text">Good Job</c:set>
+															<c:set var="className">label label-success pull-right</c:set>
+															<c:set var="text">Good Job</c:set>
 														</c:when>
-													</c:choose><td>${application.grade} <span class="${className}">${text}</span></td>
-													<!-- /Check grade for showing icon next to it -->
+													</c:choose>
+												<td>${application.grade}<span class="${className}">${text}</span></td>
+												<!-- /Check grade for showing icon next to it -->
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -268,12 +280,13 @@
 							</div>
 						</div>
 					</div>
-					<!-- /TABLE 1 List of Grades -->				
+					<!-- /TABLE 1 List of Grades -->
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="x_panel">
 							<div class="x_title">
 								<h2>
-									Upcoming Exams<small>Quick overview of the next upcoming exams</small>
+									Upcoming Exams<small>Quick overview of the next
+										upcoming exams</small>
 								</h2>
 
 								<div class="clearfix"></div>
@@ -293,14 +306,14 @@
 									<tbody>
 
 										<!-- HERE FOREACH! -->
-											<tr>
-												<th scope="row">PLACEHOLDER</th>
-												<td>PLACEHOLDER</td>
-												<td>PLACEHOLDER</td>
-												<td><fmt:formatDate
-														value="${application.examDate.date}" pattern="dd.MM.yyyy" />
-												<td>PLACEHOLDER</td>
-											</tr>
+										<tr>
+											<th scope="row">PLACEHOLDER</th>
+											<td>PLACEHOLDER</td>
+											<td>PLACEHOLDER</td>
+											<td><fmt:formatDate value="${application.examDate.date}"
+													pattern="dd.MM.yyyy" />
+											<td>PLACEHOLDER</td>
+										</tr>
 										<!-- END HERE FOREACH -->
 									</tbody>
 								</table>
@@ -308,115 +321,159 @@
 							</div>
 						</div>
 					</div>
-					</div>
-					<!-- END FIRST ROW /w 2 Tables -->
-					
+				</div>
+				<!-- END FIRST ROW /w 2 Tables -->
+
 				<!-- ECTS COUNTER -->
 				<div class="row">
-				<div class="col-md-3 col-sm-3 col-xs-6">
-					<div class="x_panel tile fixed_height_320 overflow_hidden">
-					<div class="dashboard-widget-content sidebar-widget">
+					<div class="col-md-4 col-sm-4 col-xs-12">
+						<div class="x_panel tile fixed_height_320 overflow_hidden">
+							<div class="dashboard-widget-content sidebar-widget">
 								<div class="x_title">
 									<h2>Degree Completion</h2>
 									<div class="clearfix"></div>
 								</div>
 								<div class="x_content">
-								<canvas width="150" height="80" id="analog_ects" class=""
-									style="width: 160px; height: 100px;"></canvas>
-								<div class="goal-wrapper">
-							<span class="gauge-value pull-left"><u><i>ECTS</i></u>:</span> <span
-								id="current_ects" class="gauge-value">${studentData.ects}</span> <span
-								id="goal_ects" class="goal-value">/180</span>
+									
+										<canvas width="150" height="80" id="analog_ects" class=""
+											style="width: 160px; height: 100px;"></canvas>
+										<div class="goal-wrapper">
+											<span class="gauge-value pull-left"><u><i>ECTS</i></u>:</span>
+											<span id="current_ects" class="gauge-value">${studentData.ects}</span>
+											<span id="goal_ects" class="goal-value">/180</span>
+									
+								</div>
+							</div>
 						</div>
-						</div>
-					</div>
 					</div>
 				</div>
 				<!-- /ECTS COUNTER -->
-				
-				<!-- statistics -->
-				<div class="col-md-3 col-sm-3 col-xs-6">
-				<div class="x_panel tile fixed_height_320 overflow_hidden">
-              <div class="x_title">
-                <h2>Grades overview</h2>
-                <div class="clearfix"></div>
-              </div>
-              <div class="x_content">
+				<div class="col-md-4 col-sm-4 col-xs-12">
 
-                <table class="" style="width:100%">
-                  <tbody><tr>
-                    <th style="width:37%;">
-                      <p></p>
-                    </th>
-                    <th>
-                      <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
-                        <p class="">Grade</p>
-                      </div>
-	                      <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
-                        <p class="">Number</p>
-                      </div>
-                    </th>
-                  </tr>
-                  <tr>
-                    <td><iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;"></iframe>
-                      <canvas id="canvasDataCircle" height="150" width="150" style="margin: 15px 10px 10px 0"></canvas>
-                    </td>
-                    <td>
-                      <table class="tile_info">
-                        <tbody><tr>
-                          <td>
-                            <p><i class="fa fa-square blue"></i>Excellent </p>
-                          </td>
-                          <td id="Excellent">${grades[0]}</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <p><i class="fa fa-square green"></i>Good </p>
-                          </td>
-                          <td id="Good">${grades[1]}</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <p><i class="fa fa-square purple"></i>Satisfactory </p>
-                          </td>
-                          <td id="Satisfactory">${grades[2]}</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <p><i class="fa fa-square aero"></i>Sufficient </p>
-                          </td>
-                          <td id="Sufficient">${grades[3]}</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <p><i class="fa fa-square red"></i>Not Sufficient </p>
-                          </td>
-                          <td id="NotSufficient">${grades[4]}</td>
-                        </tr>
-                      </tbody></table>
-                    </td>
-                  </tr>
-                </tbody></table>
-              </div>
-              </div>
-            </div>
-            <!-- /statistics -->
+
+
+					<div class="x_panel tile fixed_height_320 overflow_hidden">
+						<div class="x_title">
+							<h2>Degree Completion Percent</h2>
+							<div class="clearfix"></div>
+						</div>
+
+						<div class="x_content">
+							<center>
+								<div class="chart" data-percent="${(studentData.ects/180)*100}"
+									id="easy-pie-chart" style="width: 200px; height: 200px;">
+									<span class="percent" style="line-height: 200px;">${(studentData.ects/180)*100}</span>
+									<canvas height="200" width="200"></canvas>
+								</div>
+						</div>
+						</center>
+
+
+
+
+
+
+					</div>
 				</div>
-				 
-				<!-- /top tiles -->			
-			
-			</div>
-			<!-- /page content -->
 
-			<!-- LOGOUT FORM => USED AT THE LOGOUT HREF in the code above -->
-			<c:url value="/logout" var="logoutUrl" />
-			<form action="${logoutUrl}" id=logout method="post">
-				<input hidden=true name="${_csrf.parameterName}"
-					value="${_csrf.token}" />
-			</form>
-			<!-- LOGOUT FORM  -->
+				<!-- statistics -->
+				<div class="col-md-4 col-sm-4 col-xs-12">
+					<div class="x_panel tile fixed_height_320 overflow_hidden">
+						<div class="x_title">
+							<h2>Grades overview</h2>
+							<div class="clearfix"></div>
+						</div>
+						<div class="x_content">
+
+							<table class="" style="width: 100%">
+								<tbody>
+									<tr>
+										<th style="width: 37%;">
+											<p></p>
+										</th>
+										<th>
+											<div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+												<p class="">Grade</p>
+											</div>
+											<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+												<p class="">Number</p>
+											</div>
+										</th>
+									</tr>
+									<tr>
+										<td><iframe class="chartjs-hidden-iframe"
+												style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;"></iframe>
+											<canvas id="canvasDataCircle" height="150" width="150"
+												style="margin: 15px 10px 10px 0"></canvas></td>
+										<td>
+											<table class="tile_info">
+												<tbody>
+													<tr>
+														<td>
+															<p>
+																<i class="fa fa-square blue"></i>Excellent
+															</p>
+														</td>
+														<td id="Excellent">${grades[0]}</td>
+													</tr>
+													<tr>
+														<td>
+															<p>
+																<i class="fa fa-square green"></i>Good
+															</p>
+														</td>
+														<td id="Good">${grades[1]}</td>
+													</tr>
+													<tr>
+														<td>
+															<p>
+																<i class="fa fa-square purple"></i>Satisfactory
+															</p>
+														</td>
+														<td id="Satisfactory">${grades[2]}</td>
+													</tr>
+													<tr>
+														<td>
+															<p>
+																<i class="fa fa-square aero"></i>Sufficient
+															</p>
+														</td>
+														<td id="Sufficient">${grades[3]}</td>
+													</tr>
+													<tr>
+														<td>
+															<p>
+																<i class="fa fa-square red"></i>Not Sufficient
+															</p>
+														</td>
+														<td id="NotSufficient">${grades[4]}</td>
+													</tr>
+												</tbody>
+											</table>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<!-- /statistics -->
+			</div>
+
+			<!-- /top tiles -->
 
 		</div>
+		<!-- /page content -->
+
+		<!-- LOGOUT FORM => USED AT THE LOGOUT HREF in the code above -->
+		<c:url value="/logout" var="logoutUrl" />
+		<form action="${logoutUrl}" id=logout method="post">
+			<input hidden=true name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
+		</form>
+		<!-- LOGOUT FORM  -->
+
+	</div>
 
 	</div>
 
@@ -442,8 +499,78 @@
 	<script src="js/chartjs/chart.min.js"></script>
 	<script type="text/javascript" src="js/chartjs/dataCircle.js"></script>
 	<script type="text/javascript" src="js/moment/moment.min.js"></script>
-  	<script type="text/javascript" src="js/datepicker/daterangepicker.js"></script>
-	
+	<script type="text/javascript" src="js/datepicker/daterangepicker.js"></script>
+	<!-- Easypiechart -->
+	<script src="js/easypie/jquery.easypiechart.min.js"></script>
+	<script>
+		$(document)
+				.ready(
+						function() {
+							$('.chart').easyPieChart(
+									{
+										easing : 'easeOutBounce',
+										lineWidth : '20',
+										size : '200',
+										barColor : '#75BCDD',
+										lineCap : 'butt',
+										onStep : function(from, to, percent) {
+											$(this.el).find('.percent').text(
+													Math.round(percent));
+										}
+									});
+							var chart = window.chart = $('.chart').data(
+									'easyPieChart');
+							$('.js_update').on('click', function() {
+								chart.update(Math.random() * 200 - 100);
+							});
+
+							//hover and retain popover when on popover content
+							var originalLeave = $.fn.popover.Constructor.prototype.leave;
+							$.fn.popover.Constructor.prototype.leave = function(
+									obj) {
+								var self = obj instanceof this.constructor ? obj
+										: $(obj.currentTarget)[this.type](
+												this.getDelegateOptions())
+												.data('bs.' + this.type);
+								var container, timeout;
+
+								originalLeave.call(this, obj);
+
+								if (obj.currentTarget) {
+									container = $(obj.currentTarget).siblings(
+											'.popover');
+									timeout = self.timeout;
+									container
+											.one(
+													'mouseenter',
+													function() {
+														//We entered the actual popover – call off the dogs
+														clearTimeout(timeout);
+														//Let's monitor popover content instead
+														container
+																.one(
+																		'mouseleave',
+																		function() {
+																			$.fn.popover.Constructor.prototype.leave
+																					.call(
+																							self,
+																							self);
+																		});
+													});
+								}
+							};
+
+							$('body').popover({
+								selector : '[data-popover]',
+								trigger : 'click hover',
+								delay : {
+									show : 50,
+									hide : 400
+								}
+							});
+						});
+	</script>
+
 
 	<script src="js/custom.js"></script>
 
@@ -460,8 +587,8 @@
 	<script type="text/javascript" src="js/flot/jquery.flot.resize.js"></script>
 
 	<script>
-    NProgress.done();
-  </script>
+		NProgress.done();
+	</script>
 	<!-- /datepicker -->
 	<!-- /footer content -->
 
