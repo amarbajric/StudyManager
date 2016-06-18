@@ -493,8 +493,8 @@
 	<script src="js/icheck/icheck.min.js"></script>
 	<!-- chart js -->
 	<script src="js/chartjs/chart.min.js"></script>
-	<script type="text/javascript" src="js/chartjs/dataCircle.js"></script>
 	<script type="text/javascript" src="js/moment/moment.min.js"></script>
+	<script type="text/javascript" src="js/chartjs/dataCircle.js"></script>
 	<script type="text/javascript" src="js/datepicker/daterangepicker.js"></script>
 	<!-- Easypiechart -->
 	<script src="js/easypie/jquery.easypiechart.min.js"></script>

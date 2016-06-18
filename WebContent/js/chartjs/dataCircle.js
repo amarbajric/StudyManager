@@ -1,3 +1,5 @@
+$(document.getElementById('canvasDataCircle')).ready(function() {
+
 Chart.defaults.global.legend = {
       enabled: false
     };
@@ -26,12 +28,14 @@ Chart.defaults.global.legend = {
           "#afced5",
           "#eb6f62"
         ]
-
+      
       }]
-    };
+    }
 
-    var canvasDoughnut = new Chart(document.getElementById("canvasDataCircle"), {
+    var canvasDoughnut = new Chart(document.getElementById('canvasDataCircle'), {
       type: 'doughnut',
       tooltipFillColor: "rgba(51, 51, 51, 0.55)",
-      data: data
-    });
+      data: data,
+      beginAtZero:true,
+      step:5
+    })});
