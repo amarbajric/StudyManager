@@ -88,11 +88,19 @@ public class StudyManagerController {
         	model.addAttribute("professorData",profData);
             targetUrl = "professor/index";
         } else if(role.toLowerCase().contains("student")) {
+        	//find all the data of the specific Student who logged in.
         	StudentModel studentData = studentRepo.findByMail(mailOfUser);
-        	List<ExamApplicationModel> examApplications = examApplicationRepo.findTop5ByStudentOrderByExamDateDateAsc(studentData);        	
+        	//get all his graded exams
+        	List<ExamApplicationModel> examApplications = examApplicationRepo.findTop5ByStudentOrderByExamDateDateAsc(studentData);
+        	//get the total amount of students
+        	List<StudentModel> allStudents = studentRepo.findAll();
+        	
+        	//set data in model object
+        	model.addAttribute("allStudents",allStudents);
         	model.addAttribute("studentData",studentData);
-        	model.addAttribute("examApplications",examApplications);        	
-            targetUrl = "student/index";
+        	model.addAttribute("examApplications",examApplications);	
+            
+        	targetUrl = "student/index";
         }
         else if(role.toLowerCase().contains("admin")){
         	targetUrl = "admin/index";

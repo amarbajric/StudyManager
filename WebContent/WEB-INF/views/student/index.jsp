@@ -170,23 +170,22 @@
           <div class="animated flipInY col-md-3 col-sm-3 col-xs-12 tile_stats_count">
             <div class="left"></div>
             <div class="right">
-              <span class="count_top"><i class="fa fa-user"></i>Total Students</span>
-              <div class="count">2500</div>
-              <span class="count_bottom"><i class="red">4% </i> From last Week</span>
-            </div>
-          </div>
-          <div class="animated flipInY col-md-3 col-sm-3 col-xs-12 tile_stats_count">
-            <div class="left"></div>
-            <div class="right">
               <span class="count_top"><i class="fa fa-user"></i> Total Students</span>
-              <div class="count">2500</div>
+              <div class="count">${allStudents.size()}</div>
+            </div>
+          </div>
+          <div class="animated flipInY col-md-3 col-sm-3 col-xs-12 tile_stats_count">
+            <div class="left"></div>
+            <div class="right">
+              <span class="count_top"><i class="fa fa-pencil"></i> Total Exams written</span>
+              <div class="count">${studentData.getApplications().size()}</div>
               <span class="count_bottom"><i class="red">4% </i> From last Week</span>
             </div>
           </div>
           <div class="animated flipInY col-md-3 col-sm-3 col-xs-12 tile_stats_count">
             <div class="left"></div>
             <div class="right">
-              <span class="count_top"><i class="fa fa-user"></i> Total Collections</span>
+              <span class="count_top"><i class="fa fa-user"></i> Current Rank (based on average grades)</span>
               <div class="count">2,315</div>
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
             </div>
@@ -194,8 +193,8 @@
           <div class="animated flipInY col-md-3 col-sm-3 col-xs-12 tile_stats_count">
             <div class="left"></div>
             <div class="right">
-              <span class="count_top"><i class="fa fa-user"></i> Total Connections</span>
-              <div class="count">7,325</div>
+              <span class="count_top"><i class="fa fa-book"></i> Amount of courses participating</span>
+              <div class="count"></div>
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
             </div>
           </div>
@@ -210,7 +209,7 @@
 						<div class="x_panel">
 							<div class="x_title">
 								<h2>
-									Last Grades<small>Quick overview of last five graded exams</small>
+									Last Grades<small>Quick overview of your last graded exams</small>
 								</h2>
 
 								<div class="clearfix"></div>
@@ -317,9 +316,9 @@
 								<canvas width="150" height="80" id="analog_ects" class=""
 									style="width: 160px; height: 100px;"></canvas>
 								<div class="goal-wrapper">
-							<span class="gauge-value pull-left">ECTS: </span> <span
+							<span class="gauge-value pull-left"><u><i>ECTS</i></u>:</span> <span
 								id="current_ects" class="gauge-value">${studentData.ects}</span> <span
-								id="goal_ects" class="goal-value pull-right">180</span>
+								id="goal_ects" class="goal-value">/180</span>
 						</div>
 						</div>
 					</div>

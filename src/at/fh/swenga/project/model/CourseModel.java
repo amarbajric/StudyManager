@@ -59,7 +59,7 @@ public class CourseModel implements java.io.Serializable {
 	private DegreeProgramModel degreeProgram;
 
 	@ManyToMany(cascade = CascadeType.ALL) // Hibernate will update the associated professors when the course gets updated.
-	@JoinTable(name = "Courses_Professors", joinColumns = @JoinColumn(name = "course_id"), inverseJoinColumns = @JoinColumn(name = "professor_id"))
+	@JoinTable(name = "courses_professors", joinColumns = @JoinColumn(name = "course_id"), inverseJoinColumns = @JoinColumn(name = "professor_id"))
 	
 	private Set<ProfessorModel> professors = new HashSet<ProfessorModel>(); //there the professors of this course get stored
 	
