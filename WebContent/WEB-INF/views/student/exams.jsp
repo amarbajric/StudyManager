@@ -141,7 +141,7 @@
                         <td class=" ">${exam.getCourse()}</td>
                         <td class=" ">${exam.getType()}</td>
                         <td class=" ">${exam.getDescription()}</td>
-                        <td class=" ">${exam.getDate()}</td>
+                        <td class=" "><fmt:formatDate value="${exam.getDate()}" pattern="dd.MM.yyyy" /></td>
                         <td class=" ">${exam.getEcts()}</td>
                         <td class=" "><a href="manageExam?id=${exam.getId()}&action=enroll"><button id="enroll" type="submit" class="btn btn-success" onclick="enroll()">Enroll</button></a> 
                         <a href="manageExam?id=${exam.getId()}&action=signOut"><button id="signOut" type="submit" class="btn btn-info" onclick="signOut()">Sign Out</button></a>
