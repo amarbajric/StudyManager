@@ -154,13 +154,14 @@ public class StudyManagerController {
 	
 	@RequestMapping(value = "/exams", method = RequestMethod.GET)
 	public String showExams(Model model) {
+		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	        String mailOfUser = auth.getName();
     	//find all the data of the specific Student who logged in.
-    	StudentModel studentData = studentRepo.findByMail(SecurityContextHolder.getContext().getAuthentication().getName());
-		
+    	StudentModel studentData = studentRepo.findByMail(mailOfUser);
     	//Implementation of Exam Application view
 
     	model.addAttribute("studentData",studentData);
-		return "student/grades";
+		return "student/exams";
 	}
 	
 
