@@ -24,6 +24,9 @@ public class ExamDateModel {
 
 	@Column(nullable = false)
 	private Date date; // date and time of the exam
+	
+	@Column
+	private String description; // first date or second date
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private RoomModel room;
