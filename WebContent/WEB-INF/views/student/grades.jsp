@@ -17,16 +17,22 @@
 <!-- Bootstrap core CSS -->
 
 <link href="css/bootstrap.min.css" rel="stylesheet">
-
-<link href="fonts/css/font-awesome.min.css" rel="stylesheet">
 <link href="css/animate.min.css" rel="stylesheet">
-
+<link href="fonts/css/font-awesome.min.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom styling plus plugins -->
 <link href="css/custom.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css"
 	href="css/maps/jquery-jvectormap-2.0.3.css" />
 <link href="css/icheck/flat/green.css" rel="stylesheet" />
-<link href="css/floatexamples.css" rel="stylesheet" type="text/css" />
+
+<script src="js/jquery.min.js"></script>
+<script src="js/nprogress.js"></script>
+<!-- Custom styling plus plugins -->
+<link href="css/custom.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="css/maps/jquery-jvectormap-2.0.3.css" />
+<link href="css/icheck/flat/green.css" rel="stylesheet" />
 
 <script src="js/jquery.min.js"></script>
 <script src="js/nprogress.js"></script>
@@ -48,7 +54,6 @@
         <![endif]-->
 
 </head>
-<body>
 <body class="nav-md">
 
 	<div class="container body">
@@ -188,9 +193,10 @@
               
             </div>
           </div>
+       
 		  <!-- /page content -->
-          
-        </div>
+          </div>
+       
 
 			<!-- LOGOUT FORM => USED AT THE LOGOUT HREF in the code above -->
 			<c:url value="/logout" var="logoutUrl" />
@@ -200,23 +206,16 @@
 			</form>
 			<!-- LOGOUT FORM  -->
 
-		</div>
+		  </div>
 
 
-	<div id="custom_notifications" class="custom-notifications dsp_none">
-		<ul class="list-unstyled notifications clearfix"
-			data-tabbed_notifications="notif-group">
-		</ul>
-		<div class="clearfix"></div>
-		<div id="notif-group" class="tabbed_notifications"></div>
-	</div>
 
 	<script src="js/bootstrap.min.js"></script>
-
+	<script src="js/nicescroll/jquery.nicescroll.min.js"></script>
+	<script type="text/javascript" src="js/moment/moment.min.js"></script>
+	<script src="js/custom.js"></script>
     <!-- jQuery -->
     <script src="js/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="js/bootstrap.min.js"></script>
     <!-- NProgress -->
     <script src="js/nprogress.js"></script>
 	<!-- Datatables -->
@@ -231,7 +230,7 @@
     <script src="js/datatables/jszip.min.js"></script>
     <script src="js/datatables/pdfmake.min.js"></script>
     <script src="js/datatables/vfs_fonts.js"></script>
-    
+
     <!-- Custom by Amar -->
     <script src="js/datatables/gradesTable.js"></script>
 
@@ -246,12 +245,13 @@
 	<script type="text/javascript" src="js/flot/jquery.flot.stack.js"></script>
 	<script type="text/javascript" src="js/flot/curvedLines.js"></script>
 	<script type="text/javascript" src="js/flot/jquery.flot.resize.js"></script>
-	<script src="js/bootstrap.min.js"></script>
 	<script>
 		NProgress.done();
 	</script>
 	<!-- /datepicker -->
 	<!-- /footer content -->
+		
+	
 
 </body>
 </html>
