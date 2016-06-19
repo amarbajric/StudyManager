@@ -3458,7 +3458,7 @@ html > body > .ui-pnotify {
   display: inline-block;
   line-height: 96px;
   z-index: 2;
-  font-size: 18px;
+  font-size: 25px;
 }
 .percent:after {
   content: '%';

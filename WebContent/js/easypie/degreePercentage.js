@@ -4,7 +4,7 @@ $(document.getElementById('easy-pie-chart'))
 							$('.chart').easyPieChart(
 									{
 										easing : 'easeOutBounce',
-										lineWidth : '20',
+										lineWidth : '30',
 										size : '200',
 										barColor : '#75BCDD',
 										lineCap : 'butt',
