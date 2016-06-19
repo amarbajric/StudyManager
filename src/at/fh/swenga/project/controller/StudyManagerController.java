@@ -2,6 +2,7 @@ package at.fh.swenga.project.controller;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,7 @@ import at.fh.swenga.project.dao.YearRepository;
 import at.fh.swenga.project.model.ExamApplicationModel;
 import at.fh.swenga.project.model.ExamModel;
 import at.fh.swenga.project.model.ProfessorModel;
+import at.fh.swenga.project.model.Q_studentExam;
 import at.fh.swenga.project.model.StudentModel;
 import at.fh.swenga.project.util.MapSorter;
 
@@ -142,7 +144,9 @@ public class StudyManagerController {
         	int rank = indexes.indexOf(studentData.getId())+1; // +1 because list starts at 0
         	double average = averageMapSorted.get(studentData.getId());
         	
-        	System.out.println(average);
+        	
+
+
         	
         	//setting models
         	model.addAttribute("average",average);
@@ -153,6 +157,7 @@ public class StudyManagerController {
         	model.addAttribute("studentData",studentData);
         	model.addAttribute("examApplications",examApplications);
         	model.addAttribute("grades",grades);
+
             
         	targetUrl = "student/index";
         }
@@ -183,9 +188,24 @@ public class StudyManagerController {
 	        String mailOfUser = auth.getName();
     	//find all the data of the specific Student who logged in.
     	StudentModel studentData = studentRepo.findByMail(mailOfUser);
-    	//Implementation of Exam Application view
+
+
+    	
+    	//getting all the future exams of a student
+    	List<Object[]> futureExamsData = studentRepo.findFutureExams(studentData.getId());
+    	
+    	//Adding the Data of the future exams into a List of Q_studentExams
+    	List<Q_studentExam> futureStudentExams = new ArrayList<Q_studentExam>();
+       	for (int i = 0; i < futureExamsData.size(); i++) {
+    		Object[] arr = futureExamsData.get(i);
+    		Date date = (Date)arr[3];
+    		Q_studentExam exam = new Q_studentExam(arr[0].toString(),arr[1].toString(),arr[2].toString(),date,Double.parseDouble(arr[4].toString()));
+    		futureStudentExams.add(exam);
+    		System.out.println(exam.getCourse() + " " + exam.getDate());
+    		}
 
     	model.addAttribute("studentData",studentData);
+    	model.addAttribute("futureStudentExams",futureStudentExams);
 		return "student/exams";
 	}
 	

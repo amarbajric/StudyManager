@@ -31,7 +31,7 @@ public class CourseModel implements java.io.Serializable {
 	@Column(nullable = false, length = 100)
 	private String description;
 
-	@ManyToMany(mappedBy = "courses") // professors collection is mapped wit the course collection
+	@ManyToMany(mappedBy = "courses") // student collection is mapped wit the course collection
 	private Set<StudentModel> students = new HashSet<StudentModel>();
 	public Set<StudentModel> getStudents() {
 		return students;
