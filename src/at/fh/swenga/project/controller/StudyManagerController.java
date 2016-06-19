@@ -26,6 +26,7 @@ import at.fh.swenga.project.dao.YearRepository;
 import at.fh.swenga.project.model.ExamApplicationModel;
 import at.fh.swenga.project.model.ExamModel;
 import at.fh.swenga.project.model.ProfessorModel;
+import at.fh.swenga.project.model.Q_ProfessorExam;
 import at.fh.swenga.project.model.Q_studentExam;
 import at.fh.swenga.project.model.StudentModel;
 import at.fh.swenga.project.util.MapSorter;
@@ -94,6 +95,21 @@ public class StudyManagerController {
         String targetUrl = "";
         if(role.toLowerCase().contains("professor")) {
         	ProfessorModel profData = professorRepo.findByMail(mailOfUser);
+        	
+        	//getting all the future exams of a student
+        	List<Object[]> professorExamsData = examDateRepo.findProfExams(profData.getId());
+        	
+        	//Adding the Data of the exams into a List of Q_ProfessorExam
+        	List<Q_ProfessorExam> professorExams = new ArrayList<Q_ProfessorExam>();
+           	for (int i = 0; i < professorExamsData.size(); i++) {
+        		Object[] arr = professorExamsData.get(i);
+        		Date date = (Date)arr[1];
+        		Q_ProfessorExam exam = new Q_ProfessorExam(Integer.parseInt(arr[0].toString()) ,date,arr[2].toString(),arr[3].toString(),arr[4].toString(), arr[5].toString(), Integer.parseInt(arr[6].toString()));
+        		professorExams.add(exam);
+        		}
+
+
+        	model.addAttribute("professorExams",professorExams);
         	model.addAttribute("professorData",profData);
             targetUrl = "professor/index";
         } else if(role.toLowerCase().contains("student")) {
