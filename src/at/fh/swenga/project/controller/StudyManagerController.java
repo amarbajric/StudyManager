@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import at.fh.swenga.project.dao.DegreeProgramRepository;
 import at.fh.swenga.project.dao.ExamApplicationRepository;
@@ -57,28 +58,8 @@ public class StudyManagerController {
 	ExamDateRepository examDateRepo;
 
 	@Autowired
-	ExamRepository examRepo;
-	
-	/*@RequestMapping("/fill")
-	@Transactional
-	public String fillData(Model model) {
+	ExamRepository examRepo;	
 
-		StudentModel clagger = new StudentModel("Christian", "Lagger");
-
-		YearModel IMA2014 = new YearModel("2014");
-
-		DegreeProgramModel IMA = new DegreeProgramModel("IMA", "Werner Fritz", "Informationsmanagement", "Bachelor");
-
-		IMA2014.setDegreeProgram(IMA);
-		clagger.setYear(IMA2014);
-
-		degreeProgramRepo.save(IMA);
-		yearRepo.save(IMA2014);
-		studentRepo.save(clagger);
-
-		return "index";
-	}*/
-	
 	
 	/**
 	 * The default requestMapper only checks if the logged in user is a student, professor or admin.
@@ -206,7 +187,6 @@ public class StudyManagerController {
     	StudentModel studentData = studentRepo.findByMail(mailOfUser);
 
 
-    	
     	//getting all the future exams of a student
     	List<Object[]> futureExamsData = studentRepo.findFutureExams(studentData.getId());
     	
@@ -214,10 +194,9 @@ public class StudyManagerController {
     	List<Q_studentExam> futureStudentExams = new ArrayList<Q_studentExam>();
        	for (int i = 0; i < futureExamsData.size(); i++) {
     		Object[] arr = futureExamsData.get(i);
-    		Date date = (Date)arr[3];
-    		Q_studentExam exam = new Q_studentExam(arr[0].toString(),arr[1].toString(),arr[2].toString(),date,Double.parseDouble(arr[4].toString()));
+    		Date date = (Date)arr[4];
+    		Q_studentExam exam = new Q_studentExam(Integer.parseInt(arr[0].toString()),arr[1].toString(),arr[2].toString(),arr[3].toString(),date,Double.parseDouble(arr[5].toString()));
     		futureStudentExams.add(exam);
-    		System.out.println(exam.getCourse() + " " + exam.getDate());
     		}
 
     	model.addAttribute("studentData",studentData);
@@ -226,7 +205,22 @@ public class StudyManagerController {
 	}
 	
 
-	
+	@RequestMapping(value="/manageExam")
+	public String manageExam(@RequestParam String action, @RequestParam String id)
+	{
+		if(action.equals("enroll"))
+		{
+			System.out.println(id);
+			System.out.println("enrolled");
+		}
+		else if(action.equals("signOut"))
+		{
+			System.out.println(id);
+			System.out.println("signed out");
+		}
+		
+		return "forward:student/exams";
+	}
 	
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)

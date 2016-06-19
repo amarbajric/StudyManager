@@ -113,10 +113,9 @@
 			<!-- /page content -->
 			<div class="right_col" role="main">
 
-          <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="x_panel">
+				<div class="x_panel">
                 <div class="x_title">
-                  <h1>Exams <small>Sign on off</small></h1>
+                 <h1>Exams <small>Sign on off</small></h1>
                   <div class="clearfix"></div>
                 </div>
 
@@ -124,43 +123,42 @@
 
                   <p>All exams to sign on or off</p>
 
-                  <table class="table table-striped responsive-utilities jambo_table bulk_action">
+
+                  <table class="table table-bordered">
                     <thead>
-                      <tr class="headings">
-                        <th><input type="checkbox" id="check-all" class="flat"></th>
+                      <tr>
                         <th class="column-title">Course</th>
                         <th class="column-title">Type</th>
                         <th class="column-title">Description </th>
                         <th class="column-title">Date</th>
                         <th class="column-title">ECTS </th>
-                        <th class="column-title"></th>
+                        <th class="column-title">Enroll/Sign Out</th>
                       </tr>
                     </thead>
-
                     <tbody>
-                      <c:forEach items="${futureStudentExams}" var="exam">
-                        <tr class="even pointer">
-                        <td class="a-center ">
-                          <input type="checkbox" class="flat" name="table_records">
-                        </td>
+                    <c:forEach items="${futureStudentExams}" var="exam">                    
+                      <tr>
                         <td class=" ">${exam.getCourse()}</td>
                         <td class=" ">${exam.getType()}</td>
                         <td class=" ">${exam.getDescription()}</td>
                         <td class=" ">${exam.getDate()}</td>
                         <td class=" ">${exam.getEcts()}</td>
-                        <td class=" "><button id="enroll" type="button" class="btn btn-success">Success</button></td>
+                        <td class=" "><form action="manageExam?id=${exam.getId()}&action=enroll"><button id="enroll" type="submit" class="btn btn-success" onclick="enroll()">Enroll</button> 
+                        </form>
+                        <form action="manageExam?id=${exam.getId()}&action=signOut"> 
+                        <button id="signOut" type="submit" class="btn btn-info" onclick="signOut()">Sign Out</button></form>
+                        </td>
+                        
+                     
                       </tr>
-                      </c:forEach>
+                      
                     
-                    </tbody>
-
+                      </c:forEach>
+                  	</tbody>
                   </table>
+
                 </div>
-              </div>
-
-
-        </div>
-
+              </div>   
       </div>
       <!-- /page content -->
     </div>
