@@ -143,10 +143,8 @@
                         <td class=" ">${exam.getDescription()}</td>
                         <td class=" ">${exam.getDate()}</td>
                         <td class=" ">${exam.getEcts()}</td>
-                        <td class=" "><form action="manageExam?id=${exam.getId()}&action=enroll"><button id="enroll" type="submit" class="btn btn-success" onclick="enroll()">Enroll</button> 
-                        </form>
-                        <form action="manageExam?id=${exam.getId()}&action=signOut"> 
-                        <button id="signOut" type="submit" class="btn btn-info" onclick="signOut()">Sign Out</button></form>
+                        <td class=" "><a href="manageExam?id=${exam.getId()}&action=enroll"><button id="enroll" type="submit" class="btn btn-success" onclick="enroll()">Enroll</button></a> 
+                        <a href="manageExam?id=${exam.getId()}&action=signOut"><button id="signOut" type="submit" class="btn btn-info" onclick="signOut()">Sign Out</button></a>
                         </td>
                         
                      
