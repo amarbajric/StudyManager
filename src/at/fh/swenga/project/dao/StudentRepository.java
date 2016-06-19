@@ -20,12 +20,13 @@ public interface StudentRepository extends JpaRepository<StudentModel, Integer> 
 
 	public List<StudentModel> findByYearYear(String year);//example: IMA2014
 	
-	@Query(value = "SELECT ed.id as id, co.acronym as course, ex.type as type, ed.description as description, ed.date as date, co.ectsValue as ects "
+	@Query(value = "SELECT ed.id as id, co.acronym as course, ex.type as type, ed.description as description, ed.date as date, co.ectsValue as ects, ro.description as room "
 			+ "FROM students st "
 			+ "JOIN students_courses sc ON st.id = sc.student_id "
 			+ "JOIN courses co ON sc.course_id = co.id "
 			+ "JOIN exams ex ON co.id = ex.course_id "
 			+ "JOIN exam_dates ed ON ex.id = ed.exam_id "
+			+ "JOIN rooms ro ON ed.room_id = ro.id "
 			+ "WHERE st.id = ?1 and ed.date > NOW()", nativeQuery=true)
 	public List<Object[]> findFutureExams(int student_id);
 

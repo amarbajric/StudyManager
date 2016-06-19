@@ -179,7 +179,7 @@
 						<div class="x_panel">
 							<div class="x_title">
 								<h2>
-									Last Grades<small>Quick overview of your last graded
+									Last Grades<small>Overview of your last graded
 										exams</small>
 								</h2>
 
@@ -235,7 +235,7 @@
 						<div class="x_panel">
 							<div class="x_title">
 								<h2>
-									Upcoming Exams<small>Quick overview of the next
+									Upcoming Exams<small>Overview of the next
 										upcoming exams</small>
 								</h2>
 
@@ -250,21 +250,19 @@
 											<th>Exam Type</th>
 											<th>Attempt</th>
 											<th>Date</th>
-											<th>Grade</th>
+											<th>Room</th>
 										</tr>
 									</thead>
 									<tbody>
-
-										<!-- HERE FOREACH! -->
+										<c:forEach items="${upcomingStudentExams}" var="exam">
 										<tr>
-											<th scope="row">PLACEHOLDER</th>
-											<td>PLACEHOLDER</td>
-											<td>PLACEHOLDER</td>
-											<td><fmt:formatDate value="${application.examDate.date}"
-													pattern="dd.MM.yyyy" />
-											<td>PLACEHOLDER</td>
+											<th scope="row">${exam.getCourse()}</th>
+											<td>${exam.getType()}</td>
+											<td>${exam.getDescription()}</td>
+											<td><fmt:formatDate value="${exam.getDate()}" pattern="dd.MM.yyyy" />
+											<td>${exam.getRoom()}</td>
 										</tr>
-										<!-- END HERE FOREACH -->
+										</c:forEach>
 									</tbody>
 								</table>
 

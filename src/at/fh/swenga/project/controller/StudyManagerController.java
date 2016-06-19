@@ -142,6 +142,17 @@ public class StudyManagerController {
         	double average = averageMapSorted.get(studentData.getId());
         	
         	
+        	//getting the 5 next upcoming exams data of a student
+        	List<Object[]> upcomingExamsData = examDateRepo.findUpcomingExams(studentData.getId());
+        	
+        	//Adding the Data of the 5 upcoming exams into a List of Q_studentExams
+        	List<Q_studentExam> upcomingStudentExams = new ArrayList<Q_studentExam>();
+           	for (int i = 0; i < upcomingExamsData.size(); i++) {
+        		Object[] arr = upcomingExamsData.get(i);
+        		Date date = (Date)arr[4];
+        		Q_studentExam exam = new Q_studentExam(Integer.parseInt(arr[0].toString()),arr[1].toString(),arr[2].toString(),arr[3].toString(),date,Double.parseDouble(arr[5].toString()),arr[6].toString());
+        		upcomingStudentExams.add(exam);
+        		}
 
 
         	
@@ -154,6 +165,7 @@ public class StudyManagerController {
         	model.addAttribute("studentData",studentData);
         	model.addAttribute("examApplications",examApplications);
         	model.addAttribute("grades",grades);
+        	model.addAttribute("upcomingStudentExams", upcomingStudentExams);
 
             
         	targetUrl = "student/index";
@@ -195,7 +207,7 @@ public class StudyManagerController {
        	for (int i = 0; i < futureExamsData.size(); i++) {
     		Object[] arr = futureExamsData.get(i);
     		Date date = (Date)arr[4];
-    		Q_studentExam exam = new Q_studentExam(Integer.parseInt(arr[0].toString()),arr[1].toString(),arr[2].toString(),arr[3].toString(),date,Double.parseDouble(arr[5].toString()));
+    		Q_studentExam exam = new Q_studentExam(Integer.parseInt(arr[0].toString()),arr[1].toString(),arr[2].toString(),arr[3].toString(),date,Double.parseDouble(arr[5].toString()),arr[6].toString());
     		futureStudentExams.add(exam);
     		}
 

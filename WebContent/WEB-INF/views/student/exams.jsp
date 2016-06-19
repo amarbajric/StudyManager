@@ -132,6 +132,7 @@
                         <th class="column-title">Description </th>
                         <th class="column-title">Date</th>
                         <th class="column-title">ECTS </th>
+                        <th class="column-title">Room </th>
                         <th class="column-title">Enroll/Sign Out</th>
                       </tr>
                     </thead>
@@ -143,6 +144,7 @@
                         <td class=" ">${exam.getDescription()}</td>
                         <td class=" "><fmt:formatDate value="${exam.getDate()}" pattern="dd.MM.yyyy" /></td>
                         <td class=" ">${exam.getEcts()}</td>
+                        <td class=" ">${exam.getRoom()}</td>
                         <td class=" "><a href="manageExam?id=${exam.getId()}&action=enroll"><button id="enroll" type="submit" class="btn btn-success" onclick="enroll()">Enroll</button></a> 
                         <a href="manageExam?id=${exam.getId()}&action=signOut"><button id="signOut" type="submit" class="btn btn-info" onclick="signOut()">Sign Out</button></a>
                         </td>
