@@ -25,7 +25,7 @@ public interface ExamApplicationRepository extends JpaRepository<ExamApplication
 	public List<Object[]> findAverageGrades();
 	
 	
-	@Query(value = "SELECT grade, COUNT(*) as anzahl FROM IMA14_lagger_project3.exam_applications where student_id = ?1 group by grade;", nativeQuery=true)
+	@Query(value = "SELECT grade, COUNT(*) as anzahl FROM exam_applications where student_id = ?1 group by grade;", nativeQuery=true)
 	public List<Object[]> findNumberOfGradesByGrade(int student_id);
 
 }

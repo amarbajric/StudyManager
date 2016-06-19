@@ -71,7 +71,6 @@
 								<li><a href="/StudyManager/"><i class="fa fa-home"></i> Overview</a></li>
 								<li><a href="/StudyManager/exams"><i class="fa fa-edit"></i>Exams</a></li>
 								<li><a href="/StudyManager/grades"><i class="fa fa-desktop"></i>Grades</a></li>
-								<li><a href="/StudyManager/statistics"><i class="fa fa-bar-chart-o"></i>Statistics</a></li>
 							</ul>
 						</div>
 					</div>
@@ -102,35 +101,7 @@
 									href="javascript:document.getElementById('logout').submit();"><i
 										class="fa fa-sign-out pull-right"></i>Log Out</a></li>
 							</ul></li>
-						<!-- top navigation -->
-
-
-						<!-- ALERTS -->
-						<li role="presentation" class="dropdown"><a
-							href="javascript:;" class="dropdown-toggle info-number"
-							data-toggle="dropdown" aria-expanded="false"> <i
-								class="fa fa-envelope-o"></i> <span class="badge bg-green">1</span>
-						</a>
-							<ul id="menu1"
-								class="dropdown-menu list-unstyled msg_list animated fadeInDown"
-								role="menu">
-								<li><a> <span class="image"> <img
-											src="images/fh_logo.png" alt="Profile Image" />
-									</span> <span> <span>John Smith</span> <span class="time">3
-												mins ago</span>
-									</span> <span class="message"> Film festivals used to be
-											do-or-die moments for movie makers. They were where... </span>
-								</a></li>
-								<li>
-									<div class="text-center">
-										<a href="inbox.html"> <strong>See All Alerts</strong> <i
-											class="fa fa-angle-right"></i>
-										</a>
-									</div>
-								</li>
-							</ul></li>
-						<!-- ALERTS -->
-
+						<!-- top navigation -->						
 					</ul>
 					</nav>
 				</div>
@@ -140,45 +111,43 @@
 			
 			
 			<!-- /page content -->
-			<div class="right_col" role="main" style="min-height: 3104px;">
-          <div class="">
-            <div class="clearfix"></div>
+			<div class="right_col" role="main">
 
-              <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h1>Exams<small>  All exams of your degree program.</small></h1>
+                  <h1>Exams <small>Sign on off</small></h1>
                   <div class="clearfix"></div>
                 </div>
 
                 <div class="x_content">
 
-                  <p>Sign on or off to all of your exams</p>
+                  <p>All exams to sign on or off</p>
 
-                  <table class="bulk_action table table-striped responsive-utilities jambo_table">
+                  <table class="table table-striped responsive-utilities jambo_table bulk_action">
                     <thead>
                       <tr class="headings">
                         <th>
-                          <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" id="check-all" class="flat" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
+                          <input type="checkbox" id="check-all" class="flat">
                         </th>
-                        <th class="column-title" style="display: table-cell;">Invoice </th>
-                        <th class="column-title" style="display: table-cell;">Invoice Date </th>
-                        <th class="column-title" style="display: table-cell;">Order </th>
-                        <th class="column-title" style="display: table-cell;">Bill to Name </th>
-                        <th class="column-title" style="display: table-cell;">Status </th>
-                        <th class="column-title" style="display: table-cell;">Amount </th>
-                        <th class="column-title no-link last" style="display: table-cell;"><span class="nobr">Action</span>
+                        <th class="column-title">Invoice </th>
+                        <th class="column-title">Invoice Date </th>
+                        <th class="column-title">Order </th>
+                        <th class="column-title">Bill to Name </th>
+                        <th class="column-title">Status </th>
+                        <th class="column-title">Amount </th>
+                        <th class="column-title no-link last"><span class="nobr">Action</span>
                         </th>
-                        <th class="bulk-actions" colspan="7" style="display: none;">
-                          <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt">1 Records Selected</span> ) <i class="fa fa-chevron-down"></i></a>
+                        <th class="bulk-actions" colspan="7">
+                          <a class="antoo" style="color:#fff; font-weight:500;">Exams ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
                         </th>
                       </tr>
                     </thead>
 
                     <tbody>
-                      <tr class="odd pointer">
+                      <tr class="even pointer">
                         <td class="a-center ">
-                          <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
+                          <input type="checkbox" class="flat" name="table_records">
                         </td>
                         <td class=" ">121000040</td>
                         <td class=" ">May 23, 2014 11:47:56 PM </td>
@@ -189,9 +158,9 @@
                         <td class=" last"><a href="#">View</a>
                         </td>
                       </tr>
-                      <tr class="odd pointer">
+                      <tr class="even pointer">
                         <td class="a-center ">
-                          <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
+                          <input type="checkbox" class="flat" name="table_records">
                         </td>
                         <td class=" ">121000039</td>
                         <td class=" ">May 23, 2014 11:30:12 PM</td>
@@ -203,9 +172,9 @@
                         <td class=" last"><a href="#">View</a>
                         </td>
                       </tr>
-                      <tr class="odd pointer selected">
+                      <tr class="even pointer">
                         <td class="a-center ">
-                          <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
+                          <input type="checkbox" class="flat" name="table_records">
                         </td>
                         <td class=" ">121000038</td>
                         <td class=" ">May 24, 2014 10:55:33 PM</td>
@@ -217,9 +186,9 @@
                         <td class=" last"><a href="#">View</a>
                         </td>
                       </tr>
-                      <tr class="odd pointer selected">
+                      <tr class="even pointer">
                         <td class="a-center ">
-                          <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
+                          <input type="checkbox" class="flat" name="table_records">
                         </td>
                         <td class=" ">121000037</td>
                         <td class=" ">May 24, 2014 10:52:44 PM</td>
@@ -232,7 +201,7 @@
                       </tr>
                       <tr class="even pointer">
                         <td class="a-center ">
-                          <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
+                          <input type="checkbox" class="flat" name="table_records">
                         </td>
                         <td class=" ">121000040</td>
                         <td class=" ">May 24, 2014 11:47:56 PM </td>
@@ -243,9 +212,9 @@
                         <td class=" last"><a href="#">View</a>
                         </td>
                       </tr>
-                      <tr class="odd pointer">
+                      <tr class="even pointer">
                         <td class="a-center ">
-                          <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
+                          <input type="checkbox" class="flat" name="table_records">
                         </td>
                         <td class=" ">121000039</td>
                         <td class=" ">May 26, 2014 11:30:12 PM</td>
@@ -259,7 +228,7 @@
                       </tr>
                       <tr class="even pointer">
                         <td class="a-center ">
-                          <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
+                          <input type="checkbox" class="flat" name="table_records">
                         </td>
                         <td class=" ">121000038</td>
                         <td class=" ">May 26, 2014 10:55:33 PM</td>
@@ -270,9 +239,9 @@
                         <td class=" last"><a href="#">View</a>
                         </td>
                       </tr>
-                      <tr class="odd pointer">
+                      <tr class="even pointer">
                         <td class="a-center ">
-                          <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
+                          <input type="checkbox" class="flat" name="table_records">
                         </td>
                         <td class=" ">121000037</td>
                         <td class=" ">May 26, 2014 10:52:44 PM</td>
@@ -286,7 +255,7 @@
 
                       <tr class="even pointer">
                         <td class="a-center ">
-                          <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
+                          <input type="checkbox" class="flat" name="table_records">
                         </td>
                         <td class=" ">121000040</td>
                         <td class=" ">May 27, 2014 11:47:56 PM </td>
@@ -297,9 +266,9 @@
                         <td class=" last"><a href="#">View</a>
                         </td>
                       </tr>
-                      <tr class="odd pointer">
+                      <tr class="even pointer">
                         <td class="a-center ">
-                          <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
+                          <input type="checkbox" class="flat" name="table_records">
                         </td>
                         <td class=" ">121000039</td>
                         <td class=" ">May 28, 2014 11:30:12 PM</td>
@@ -315,16 +284,17 @@
                   </table>
                 </div>
               </div>
-            </div>
 
-              
 
-              
-            </div>
-          </div>
         </div>
 
-			<!-- LOGOUT FORM => USED AT THE LOGOUT HREF in the code above -->
+      </div>
+      <!-- /page content -->
+    </div>
+
+  </div>
+  
+  <!-- LOGOUT FORM => USED AT THE LOGOUT HREF in the code above -->
 			<c:url value="/logout" var="logoutUrl" />
 			<form action="${logoutUrl}" id=logout method="post">
 				<input hidden=true name="${_csrf.parameterName}"
@@ -332,17 +302,12 @@
 			</form>
 			<!-- LOGOUT FORM  -->
 
-		</div>
-
-	</div>
-
-	<div id="custom_notifications" class="custom-notifications dsp_none">
-		<ul class="list-unstyled notifications clearfix"
-			data-tabbed_notifications="notif-group">
-		</ul>
-		<div class="clearfix"></div>
-		<div id="notif-group" class="tabbed_notifications"></div>
-	</div>
+  <div id="custom_notifications" class="custom-notifications dsp_none">
+    <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group">
+    </ul>
+    <div class="clearfix"></div>
+    <div id="notif-group" class="tabbed_notifications"></div>
+  </div>
 
   <script src="js/bootstrap.min.js"></script>
 
@@ -357,4 +322,5 @@
   <!-- pace -->
   <script src="js/pace/pace.min.js"></script>
 </body>
+
 </html>

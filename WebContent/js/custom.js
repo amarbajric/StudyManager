@@ -281,7 +281,7 @@ function countChecked() {
     if (n > 0) {
         $('.column-title').hide();
         $('.bulk-actions').show();
-        $('.action-cnt').html(n + ' Records Selected');
+        $('.action-cnt').html(n + ' Exam(s) Selected');
     } else {
         $('.column-title').show();
         $('.bulk-actions').hide();

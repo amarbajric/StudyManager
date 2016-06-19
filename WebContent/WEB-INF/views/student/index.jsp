@@ -161,16 +161,16 @@
 							<div class="count">${studentData.applications.size()}</div>
 							<c:choose>
 								<c:when
-									test="${((studentData.applications.size())/(examsOfDegreeProgram.size()))*100 > 50}">
+									test="${(fn:length(studentData.applications)/fn:length(examsOfDegreeProgram))*100 > 50}">
 									<c:set var="classCol">green</c:set>
 								</c:when>
 								<c:when
-									test="${((studentData.applications.size())/(examsOfDegreeProgram.size()))*100 < 50}">
+									test="${(fn:length(studentData.applications)/fn:length(examsOfDegreeProgram))*100 < 50}">
 									<c:set var="classCol">red</c:set>
 								</c:when>
 							</c:choose>
 							<span class="count_bottom"><i class="${classCol}"><fmt:formatNumber 
-     						value="${((studentData.applications.size())/(examsOfDegreeProgram.size()))*100}" 
+     						value="${(fn:length(studentData.applications)/fn:length(examsOfDegreeProgram))*100}" 
      						maxFractionDigits="2"/>%</i> accomplished</span>
 						</div>
 					</div>

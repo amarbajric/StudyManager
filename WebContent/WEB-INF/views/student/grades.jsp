@@ -31,6 +31,12 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/nprogress.js"></script>
 
+<!-- Datatables -->
+<link href="css/datatables/dataTables.bootstrap.min.css" rel="stylesheet">
+<link href="js/datatables/buttons.bootstrap.min.css" rel="stylesheet">
+<link href="js/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet">
+<link href="js/datatables/scroller.bootstrap.min.css" rel="stylesheet">
+
 <!--[if lt IE 9]>
         <script src="../assets/js/ie8-responsive-file-warning.js"></script>
         <![endif]-->
@@ -111,37 +117,10 @@
 								class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
 								<li><a href="javascript:;">Profile</a></li>
 								<li><a
-									href="javascript:document.getElementById('logout').submit();"><i
+									href="javascript:document.getElementById('logout').submit()"><i
 										class="fa fa-sign-out pull-right"></i>Log Out</a></li>
 							</ul></li>
 						<!-- top navigation -->
-
-
-						<!-- ALERTS -->
-						<li role="presentation" class="dropdown"><a
-							href="javascript:;" class="dropdown-toggle info-number"
-							data-toggle="dropdown" aria-expanded="false"> <i
-								class="fa fa-envelope-o"></i> <span class="badge bg-green">1</span>
-						</a>
-							<ul id="menu1"
-								class="dropdown-menu list-unstyled msg_list animated fadeInDown"
-								role="menu">
-								<li><a> <span class="image"> <img
-											src="images/fh_logo.png" alt="Profile Image" />
-									</span> <span> <span>John Smith</span> <span class="time">3
-												mins ago</span>
-									</span> <span class="message"> Film festivals used to be
-											do-or-die moments for movie makers. They were where... </span>
-								</a></li>
-								<li>
-									<div class="text-center">
-										<a href="inbox.html"> <strong>See All Alerts</strong> <i
-											class="fa fa-angle-right"></i>
-										</a>
-									</div>
-								</li>
-							</ul></li>
-						<!-- ALERTS -->
 
 					</ul>
 					</nav>
@@ -151,7 +130,7 @@
 			<!-- /top navigation -->
 			
 			
-			<!-- /page content -->
+			<!-- page content -->
 			<div class="right_col" role="main" style="min-height: 3104px;">
           <div class="">
             <div class="page-title">
@@ -173,30 +152,33 @@
                     <p class="text-muted font-13 m-b-30">
                       This is an overview over all the exams you have taken, which have already been graded by the according professor.
                     </p>
-                    <div id="datatable-buttons_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer"><div class="dt-buttons btn-group"><a class="btn btn-default buttons-copy buttons-html5 btn-sm" tabindex="0" aria-controls="datatable-buttons"><span>Copy</span></a><a class="btn btn-default buttons-csv buttons-html5 btn-sm" tabindex="0" aria-controls="datatable-buttons"><span>CSV</span></a><a class="btn btn-default buttons-excel buttons-html5 btn-sm" tabindex="0" aria-controls="datatable-buttons"><span>Excel</span></a><a class="btn btn-default buttons-pdf buttons-html5 btn-sm" tabindex="0" aria-controls="datatable-buttons"><span>PDF</span></a><a class="btn btn-default buttons-print btn-sm" tabindex="0" aria-controls="datatable-buttons"><span>Print</span></a></div><div id="datatable-buttons_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="datatable-buttons"></label></div><table id="datatable-buttons" class="table table-striped table-bordered dataTable no-footer dtr-inline" role="grid" aria-describedby="datatable-buttons_info" style="width: 1585px;">
-                      <thead>
-                        <tr role="row">
-                        <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 270px;" aria-sort="ascending" aria-label="Name of the Course">Course</th>
-                        <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 408px;" aria-label="Type of the Exam (e.g. final or mid-term)">Exam Type</th>
-                        <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 205px;" aria-label="Attempt number of the exam">Attempt</th>
-                        <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 199px;" aria-label="Date of the exam">Date</th>
-                        <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 157px;" aria-label="Grade of the exam">Grade</th>
-                        </tr>
-                      </thead>
-                      
-                      <tbody>
-
-						<c:forEach items="${gradedExams}" var="exam">
-							<tr>
-								<th scope="row">${exam.examDate.exam.description}</th>
-								<td>${exam.examDate.exam.type}</td>
-								<td>${exam.attempt}</td>
-								<td><fmt:formatDate value="${exam.examDate.date}" pattern="dd.MM.yyyy" /></td>
-								<td>${application.grade}<span class="${className}">${exam.grade}</span></td>
-							</tr>
-						</c:forEach>
-                        </tbody>
-                    </table><div class="dataTables_info" id="datatable-buttons_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div><div class="dataTables_paginate paging_simple_numbers" id="datatable-buttons_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="datatable-buttons_previous"><a href="#" aria-controls="datatable-buttons" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="datatable-buttons" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="datatable-buttons" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="datatable-buttons" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="datatable-buttons" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="datatable-buttons" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button "><a href="#" aria-controls="datatable-buttons" data-dt-idx="6" tabindex="0">6</a></li><li class="paginate_button next" id="datatable-buttons_next"><a href="#" aria-controls="datatable-buttons" data-dt-idx="7" tabindex="0">Next</a></li></ul></div></div>
+                    <div id="datatable-buttons_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                      <table id="datatable-buttons" class="table table-striped table-bordered dataTable no-footer dtr-inline" role="grid" aria-describedby="datatable-buttons_info" style="width: 1585px;">
+	                      <thead>
+	                        <tr role="row">
+	                        <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 270px;" aria-sort="ascending" aria-label="Name of the Course">Course</th>
+	                        <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 208px;" aria-label="Type of the Exam (e.g. final or mid-term)">Exam Type</th>
+	                        <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 205px;" aria-label="Attempt number of the exam">Attempt</th>
+	                        <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 199px;" aria-label="Date of the exam">Date</th>
+	                        <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 157px;" aria-label="Grade of the exam">Grade</th>
+	                        <th style="width: 1px;">  </th>
+	                        </tr>
+	                      </thead>
+	                      
+	                      <tbody>
+							<c:forEach items="${gradedExams}" var="exam">
+								<tr>
+									<th scope="row">${exam.examDate.exam.description}</th>
+									<td>${exam.examDate.exam.type}</td>
+									<td>${exam.attempt}</td>
+									<td><fmt:formatDate value="${exam.examDate.date}" pattern="dd.MM.yyyy" /></td>
+									<td>${application.grade}<span class="${className}">${exam.grade}</span></td>
+									<td></td>
+								</tr>
+							</c:forEach>
+	                      </tbody>
+                    	</table>
+                   </div>
                   </div>
                 </div>
               </div>
@@ -206,6 +188,8 @@
               
             </div>
           </div>
+		  <!-- /page content -->
+          
         </div>
 
 			<!-- LOGOUT FORM => USED AT THE LOGOUT HREF in the code above -->
@@ -218,7 +202,6 @@
 
 		</div>
 
-	</div>
 
 	<div id="custom_notifications" class="custom-notifications dsp_none">
 		<ul class="list-unstyled notifications clearfix"
@@ -230,25 +213,27 @@
 
 	<script src="js/bootstrap.min.js"></script>
 
-	<!-- gauge js -->
-	<script type="text/javascript" src="js/gauge/gauge.min.js"></script>
-	<script type="text/javascript" src="js/gauge/gauge_ects.js"></script>
-	<!-- bootstrap progress js -->
-	<script src="js/progressbar/bootstrap-progressbar.min.js"></script>
-	<script src="js/nicescroll/jquery.nicescroll.min.js"></script>
-	<!-- icheck -->
-	<script src="js/icheck/icheck.min.js"></script>
-	<!-- chart js -->
-	<script src="js/chartjs/chart.min.js"></script>
-	<script type="text/javascript" src="js/moment/moment.min.js"></script>
-	<script type="text/javascript" src="js/chartjs/dataCircle.js"></script>
-	<script type="text/javascript" src="js/datepicker/daterangepicker.js"></script>
-	<!-- Easypiechart -->
-	<script src="js/easypie/jquery.easypiechart.min.js"></script>
-	<script src="js/easypie/degreePercentage.js"></script>
-
-
-	<script src="js/custom.js"></script>
+    <!-- jQuery -->
+    <script src="js/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- NProgress -->
+    <script src="js/nprogress.js"></script>
+	<!-- Datatables -->
+    <script src="js/datatables/jquery.dataTables.min.js"></script>
+    <script src="js/datatables/dataTables.buttons.min.js"></script>
+    <script src="js/datatables/buttons.bootstrap.min.js"></script>
+    <script src="js/datatables/buttons.html5.min.js"></script>
+    <script src="js/datatables/buttons.print.min.js"></script>
+    <script src="js/datatables/dataTables.fixedHeader.min.js"></script>
+    <script src="js/datatables/dataTables.keyTable.min.js"></script>
+    <script src="js/datatables/dataTables.responsive.min.js"></script>
+    <script src="js/datatables/jszip.min.js"></script>
+    <script src="js/datatables/pdfmake.min.js"></script>
+    <script src="js/datatables/vfs_fonts.js"></script>
+    
+    <!-- Custom by Amar -->
+    <script src="js/datatables/gradesTable.js"></script>
 
 	<!-- flot js -->
 	<!--[if lte IE 8]><script type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->
@@ -261,7 +246,7 @@
 	<script type="text/javascript" src="js/flot/jquery.flot.stack.js"></script>
 	<script type="text/javascript" src="js/flot/curvedLines.js"></script>
 	<script type="text/javascript" src="js/flot/jquery.flot.resize.js"></script>
-
+	<script src="js/bootstrap.min.js"></script>
 	<script>
 		NProgress.done();
 	</script>
