@@ -133,6 +133,7 @@
                         <th class="column-title">Description </th>
                         <th class="column-title">Date</th>
                         <th class="column-title">ECTS </th>
+                        <th class="column-title"></th>
                       </tr>
                     </thead>
 
@@ -147,6 +148,7 @@
                         <td class=" ">${exam.getDescription()}</td>
                         <td class=" ">${exam.getDate()}</td>
                         <td class=" ">${exam.getEcts()}</td>
+                        <td class=" "><button id="enroll" type="button" class="btn btn-success">Success</button></td>
                       </tr>
                       </c:forEach>
                     
@@ -180,6 +182,8 @@
     <div id="notif-group" class="tabbed_notifications"></div>
   </div>
 
+
+
   <script src="js/bootstrap.min.js"></script>
 
   <!-- bootstrap progress js -->
@@ -189,7 +193,13 @@
   <script src="js/icheck/icheck.min.js"></script>
 
   <script src="js/custom.js"></script>
-
+  <!-- NOTIFICATIONS -->
+  <script src="js/notify/pnotify.button.js"></script>
+  <script src="js/notify/pnotify.core.js"></script>
+  <script src="js/notify/examNotify.js"></script>
+   <!-- /NOTIFICATIONS -->
+   
+  
   <!-- pace -->
   <script src="js/pace/pace.min.js"></script>
 </body>
