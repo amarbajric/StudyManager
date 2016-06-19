@@ -71,7 +71,6 @@
 								<li><a href="/StudyManager/"><i class="fa fa-home"></i> Overview</a></li>
 								<li><a href="/StudyManager/exams"><i class="fa fa-edit"></i>Exams</a></li>
 								<li><a href="/StudyManager/grades"><i class="fa fa-desktop"></i>Grades</a></li>
-								<li><a href="/StudyManager/statistics"><i class="fa fa-bar-chart-o"></i>Statistics</a></li>
 							</ul>
 						</div>
 					</div>
