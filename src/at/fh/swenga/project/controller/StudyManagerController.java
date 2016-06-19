@@ -96,8 +96,8 @@ public class StudyManagerController {
         } else if(role.toLowerCase().contains("student")) {
         	//find all the data of the specific Student who logged in.
         	StudentModel studentData = studentRepo.findByMail(mailOfUser);
-        	//get all his graded exams
-        	List<ExamApplicationModel> examApplications = examApplicationRepo.findTop5ByStudentOrderByExamDateDateAsc(studentData);
+        	//get top 5 latest graded exams
+        	List<ExamApplicationModel> examApplications = examApplicationRepo.findTop5ByStudentAndGradeIsNotNullOrderByExamDateDateDesc(studentData);
         	//get the total amount of students
         	List<StudentModel> allStudents = studentRepo.findAll();
         	//get all students who are studying with the specific student
@@ -139,7 +139,31 @@ public class StudyManagerController {
 		return targetUrl;
 	}
 	
+	@RequestMapping(value = "/grades", method = RequestMethod.GET)
+	public String showGrades(Model model) {
+    	//find all the data of the specific Student who logged in.
+    	StudentModel studentData = studentRepo.findByMail(SecurityContextHolder.getContext().getAuthentication().getName());
+		
+    	//get all graded exams
+    	List<ExamApplicationModel> gradedExams = examApplicationRepo.findByStudentAndGradeIsNotNullOrderByExamDateDateDesc(studentData);
+    	model.addAttribute("studentData",studentData);
+    	model.addAttribute("gradedExams",gradedExams);
+		return "student/grades";
+	}
 	
+	
+	@RequestMapping(value = "/exams", method = RequestMethod.GET)
+	public String showExams(Model model) {
+    	//find all the data of the specific Student who logged in.
+    	StudentModel studentData = studentRepo.findByMail(SecurityContextHolder.getContext().getAuthentication().getName());
+		
+    	//Implementation of Exam Application view
+
+    	model.addAttribute("studentData",studentData);
+		return "student/grades";
+	}
+	
+
 	
 	
 	

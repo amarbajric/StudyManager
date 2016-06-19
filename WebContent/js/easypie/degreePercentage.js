@@ -8,6 +8,7 @@ $(document.getElementById('easy-pie-chart'))
 										size : '200',
 										barColor : '#75BCDD',
 										lineCap : 'butt',
+										trackColor: '#D1D1D1',
 										onStep : function(from, to, percent) {
 											$(this.el).find('.percent').text(
 													Math.round(percent));
