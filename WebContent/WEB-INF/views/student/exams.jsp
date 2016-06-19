@@ -12,34 +12,21 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Student | Overview</title>
+<title>Student | Exams</title>
 
 <!-- Bootstrap core CSS -->
 
-<link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
 
-<link href="fonts/css/font-awesome.min.css" rel="stylesheet">
-<link href="css/animate.min.css" rel="stylesheet">
+  <link href="fonts/css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/animate.min.css" rel="stylesheet">
 
-<!-- Custom styling plus plugins -->
-<link href="css/custom.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css"
-	href="css/maps/jquery-jvectormap-2.0.3.css" />
-<link href="css/icheck/flat/green.css" rel="stylesheet" />
-<link href="css/floatexamples.css" rel="stylesheet" type="text/css" />
+  <!-- Custom styling plus plugins -->
+  <link href="css/custom.css" rel="stylesheet">
+  <link href="css/icheck/flat/green.css" rel="stylesheet">
 
-<script src="js/jquery.min.js"></script>
-<script src="js/nprogress.js"></script>
 
-<!--[if lt IE 9]>
-        <script src="../assets/js/ie8-responsive-file-warning.js"></script>
-        <![endif]-->
-
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
+  <script src="js/jquery.min.js"></script>
 
 </head>
 <body>
@@ -81,19 +68,10 @@
 						<div class="menu_section">
 							<h3>General</h3>
 							<ul class="nav side-menu">
-								<li><a
-									href="/StudyManager/"><i
-										class="fa fa-home"></i> Overview</a></li>
+								<li><a href="/StudyManager/"><i class="fa fa-home"></i> Overview</a></li>
 								<li><a href="/StudyManager/exams"><i class="fa fa-edit"></i>Exams</a></li>
-								<li><a><i class="fa fa-desktop"></i>Grades<span
-										class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu" style="display: none">
-										<li><a href="PLACEHOLDER">View Grades</a></li>
-									</ul>
-									<ul class="nav child_menu" style="display: none">
-										<li><a href="PLACEHOLDER">Export Grades</a></li>
-									</ul></li>
-								<li><a href="PLACEHOLDER"><i class="fa fa-bar-chart-o"></i>Statistics</a></li>
+								<li><a href="/StudyManager/grades"><i class="fa fa-desktop"></i>Grades</a></li>
+								<li><a href="/StudyManager/statistics"><i class="fa fa-bar-chart-o"></i>Statistics</a></li>
 							</ul>
 						</div>
 					</div>
@@ -159,26 +137,202 @@
 
 			</div>
 			<!-- /top navigation -->
+			
+			
+			<!-- /page content -->
+			<div class="right_col" role="main" style="min-height: 3104px;">
+          <div class="">
+            <div class="clearfix"></div>
 
+              <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h1>Exams<small>  All exams of your degree program.</small></h1>
+                  <div class="clearfix"></div>
+                </div>
 
-			<!-- page content: OVERVIEW -->
-			<div class="row">
-			</div>
+                <div class="x_content">
 
-			<!-- /top tiles -->
+                  <p>Sign on or off to all of your exams</p>
+
+                  <table class="bulk_action table table-striped responsive-utilities jambo_table">
+                    <thead>
+                      <tr class="headings">
+                        <th>
+                          <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" id="check-all" class="flat" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
+                        </th>
+                        <th class="column-title" style="display: table-cell;">Invoice </th>
+                        <th class="column-title" style="display: table-cell;">Invoice Date </th>
+                        <th class="column-title" style="display: table-cell;">Order </th>
+                        <th class="column-title" style="display: table-cell;">Bill to Name </th>
+                        <th class="column-title" style="display: table-cell;">Status </th>
+                        <th class="column-title" style="display: table-cell;">Amount </th>
+                        <th class="column-title no-link last" style="display: table-cell;"><span class="nobr">Action</span>
+                        </th>
+                        <th class="bulk-actions" colspan="7" style="display: none;">
+                          <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt">1 Records Selected</span> ) <i class="fa fa-chevron-down"></i></a>
+                        </th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr class="odd pointer">
+                        <td class="a-center ">
+                          <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
+                        </td>
+                        <td class=" ">121000040</td>
+                        <td class=" ">May 23, 2014 11:47:56 PM </td>
+                        <td class=" ">121000210 <i class="success fa fa-long-arrow-up"></i></td>
+                        <td class=" ">John Blank L</td>
+                        <td class=" ">Paid</td>
+                        <td class="a-right a-right ">$7.45</td>
+                        <td class=" last"><a href="#">View</a>
+                        </td>
+                      </tr>
+                      <tr class="odd pointer">
+                        <td class="a-center ">
+                          <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
+                        </td>
+                        <td class=" ">121000039</td>
+                        <td class=" ">May 23, 2014 11:30:12 PM</td>
+                        <td class=" ">121000208 <i class="success fa fa-long-arrow-up"></i>
+                        </td>
+                        <td class=" ">John Blank L</td>
+                        <td class=" ">Paid</td>
+                        <td class="a-right a-right ">$741.20</td>
+                        <td class=" last"><a href="#">View</a>
+                        </td>
+                      </tr>
+                      <tr class="odd pointer selected">
+                        <td class="a-center ">
+                          <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
+                        </td>
+                        <td class=" ">121000038</td>
+                        <td class=" ">May 24, 2014 10:55:33 PM</td>
+                        <td class=" ">121000203 <i class="success fa fa-long-arrow-up"></i>
+                        </td>
+                        <td class=" ">Mike Smith</td>
+                        <td class=" ">Paid</td>
+                        <td class="a-right a-right ">$432.26</td>
+                        <td class=" last"><a href="#">View</a>
+                        </td>
+                      </tr>
+                      <tr class="odd pointer selected">
+                        <td class="a-center ">
+                          <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
+                        </td>
+                        <td class=" ">121000037</td>
+                        <td class=" ">May 24, 2014 10:52:44 PM</td>
+                        <td class=" ">121000204</td>
+                        <td class=" ">Mike Smith</td>
+                        <td class=" ">Paid</td>
+                        <td class="a-right a-right ">$333.21</td>
+                        <td class=" last"><a href="#">View</a>
+                        </td>
+                      </tr>
+                      <tr class="even pointer">
+                        <td class="a-center ">
+                          <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
+                        </td>
+                        <td class=" ">121000040</td>
+                        <td class=" ">May 24, 2014 11:47:56 PM </td>
+                        <td class=" ">121000210</td>
+                        <td class=" ">John Blank L</td>
+                        <td class=" ">Paid</td>
+                        <td class="a-right a-right ">$7.45</td>
+                        <td class=" last"><a href="#">View</a>
+                        </td>
+                      </tr>
+                      <tr class="odd pointer">
+                        <td class="a-center ">
+                          <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
+                        </td>
+                        <td class=" ">121000039</td>
+                        <td class=" ">May 26, 2014 11:30:12 PM</td>
+                        <td class=" ">121000208 <i class="error fa fa-long-arrow-down"></i>
+                        </td>
+                        <td class=" ">John Blank L</td>
+                        <td class=" ">Paid</td>
+                        <td class="a-right a-right ">$741.20</td>
+                        <td class=" last"><a href="#">View</a>
+                        </td>
+                      </tr>
+                      <tr class="even pointer">
+                        <td class="a-center ">
+                          <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
+                        </td>
+                        <td class=" ">121000038</td>
+                        <td class=" ">May 26, 2014 10:55:33 PM</td>
+                        <td class=" ">121000203</td>
+                        <td class=" ">Mike Smith</td>
+                        <td class=" ">Paid</td>
+                        <td class="a-right a-right ">$432.26</td>
+                        <td class=" last"><a href="#">View</a>
+                        </td>
+                      </tr>
+                      <tr class="odd pointer">
+                        <td class="a-center ">
+                          <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
+                        </td>
+                        <td class=" ">121000037</td>
+                        <td class=" ">May 26, 2014 10:52:44 PM</td>
+                        <td class=" ">121000204</td>
+                        <td class=" ">Mike Smith</td>
+                        <td class=" ">Paid</td>
+                        <td class="a-right a-right ">$333.21</td>
+                        <td class=" last"><a href="#">View</a>
+                        </td>
+                      </tr>
+
+                      <tr class="even pointer">
+                        <td class="a-center ">
+                          <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
+                        </td>
+                        <td class=" ">121000040</td>
+                        <td class=" ">May 27, 2014 11:47:56 PM </td>
+                        <td class=" ">121000210</td>
+                        <td class=" ">John Blank L</td>
+                        <td class=" ">Paid</td>
+                        <td class="a-right a-right ">$7.45</td>
+                        <td class=" last"><a href="#">View</a>
+                        </td>
+                      </tr>
+                      <tr class="odd pointer">
+                        <td class="a-center ">
+                          <div class="icheckbox_flat-green" style="position: relative;"><input type="checkbox" class="flat" name="table_records" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
+                        </td>
+                        <td class=" ">121000039</td>
+                        <td class=" ">May 28, 2014 11:30:12 PM</td>
+                        <td class=" ">121000208</td>
+                        <td class=" ">John Blank L</td>
+                        <td class=" ">Paid</td>
+                        <td class="a-right a-right ">$741.20</td>
+                        <td class=" last"><a href="#">View</a>
+                        </td>
+                      </tr>
+                    </tbody>
+
+                  </table>
+                </div>
+              </div>
+            </div>
+
+              
+
+              
+            </div>
+          </div>
+        </div>
+
+			<!-- LOGOUT FORM => USED AT THE LOGOUT HREF in the code above -->
+			<c:url value="/logout" var="logoutUrl" />
+			<form action="${logoutUrl}" id=logout method="post">
+				<input hidden=true name="${_csrf.parameterName}"
+					value="${_csrf.token}" />
+			</form>
+			<!-- LOGOUT FORM  -->
 
 		</div>
-		<!-- /page content -->
-
-		<!-- LOGOUT FORM => USED AT THE LOGOUT HREF in the code above -->
-		<c:url value="/logout" var="logoutUrl" />
-		<form action="${logoutUrl}" id=logout method="post">
-			<input hidden=true name="${_csrf.parameterName}"
-				value="${_csrf.token}" />
-		</form>
-		<!-- LOGOUT FORM  -->
-
-	</div>
 
 	</div>
 
@@ -190,45 +344,17 @@
 		<div id="notif-group" class="tabbed_notifications"></div>
 	</div>
 
-	<script src="js/bootstrap.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
 
-	<!-- gauge js -->
-	<script type="text/javascript" src="js/gauge/gauge.min.js"></script>
-	<script type="text/javascript" src="js/gauge/gauge_ects.js"></script>
-	<!-- bootstrap progress js -->
-	<script src="js/progressbar/bootstrap-progressbar.min.js"></script>
-	<script src="js/nicescroll/jquery.nicescroll.min.js"></script>
-	<!-- icheck -->
-	<script src="js/icheck/icheck.min.js"></script>
-	<!-- chart js -->
-	<script src="js/chartjs/chart.min.js"></script>
-	<script type="text/javascript" src="js/moment/moment.min.js"></script>
-	<script type="text/javascript" src="js/chartjs/dataCircle.js"></script>
-	<script type="text/javascript" src="js/datepicker/daterangepicker.js"></script>
-	<!-- Easypiechart -->
-	<script src="js/easypie/jquery.easypiechart.min.js"></script>
-	<script src="js/easypie/degreePercentage.js"></script>
+  <!-- bootstrap progress js -->
+  <script src="js/progressbar/bootstrap-progressbar.min.js"></script>
+  <script src="js/nicescroll/jquery.nicescroll.min.js"></script>
+  <!-- icheck -->
+  <script src="js/icheck/icheck.min.js"></script>
 
+  <script src="js/custom.js"></script>
 
-	<script src="js/custom.js"></script>
-
-	<!-- flot js -->
-	<!--[if lte IE 8]><script type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->
-	<script type="text/javascript" src="js/flot/jquery.flot.js"></script>
-	<script type="text/javascript" src="js/flot/jquery.flot.pie.js"></script>
-	<script type="text/javascript" src="js/flot/jquery.flot.orderBars.js"></script>
-	<script type="text/javascript" src="js/flot/jquery.flot.time.min.js"></script>
-	<script type="text/javascript" src="js/flot/date.js"></script>
-	<script type="text/javascript" src="js/flot/jquery.flot.spline.js"></script>
-	<script type="text/javascript" src="js/flot/jquery.flot.stack.js"></script>
-	<script type="text/javascript" src="js/flot/curvedLines.js"></script>
-	<script type="text/javascript" src="js/flot/jquery.flot.resize.js"></script>
-
-	<script>
-		NProgress.done();
-	</script>
-	<!-- /datepicker -->
-	<!-- /footer content -->
-
+  <!-- pace -->
+  <script src="js/pace/pace.min.js"></script>
 </body>
 </html>
