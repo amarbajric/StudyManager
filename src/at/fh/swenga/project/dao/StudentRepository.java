@@ -20,7 +20,7 @@ public interface StudentRepository extends JpaRepository<StudentModel, Integer> 
 
 	public List<StudentModel> findByYearYear(String year);//example: IMA2014
 	
-	@Query(value = "SELECT co.acronym as course, ex.type as type, ed.description as description, ed.date as date, co.ectsValue as ects "
+	@Query(value = "SELECT ed.id as id, co.acronym as course, ex.type as type, ed.description as description, ed.date as date, co.ectsValue as ects "
 			+ "FROM students st "
 			+ "JOIN students_courses sc ON st.id = sc.student_id "
 			+ "JOIN courses co ON sc.course_id = co.id "

@@ -4,20 +4,36 @@ import java.util.Date;
 
 public class Q_studentExam {
 	
+	private Integer id;
 	private String course;
 	private String type;
 	private String description;
 	private Date date;
 	private double ects;
 	
-	public Q_studentExam(String course, String type, String description, Date date, double ects) {
+	public Q_studentExam(Integer id,String course, String type, String description, Date date, double ects) {
 		super();
+		this.id = id;
 		this.course = course;
 		this.type = type;
 		this.description = description;
 		this.date = date;
 		this.ects = ects;
 	}
+	
+	
+
+	public Integer getId() {
+		return id;
+	}
+
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
 
 	public String getCourse() {
 		return course;
