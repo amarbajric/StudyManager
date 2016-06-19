@@ -117,7 +117,7 @@
 								class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
 								<li><a href="javascript:;">Profile</a></li>
 								<li><a
-									href="javascript:document.getElementById('logout').submit();"><i
+									href="javascript:document.getElementById('logout').submit()"><i
 										class="fa fa-sign-out pull-right"></i>Log Out</a></li>
 							</ul></li>
 						<!-- top navigation -->
@@ -202,7 +202,6 @@
 
 		</div>
 
-	</div>
 
 	<div id="custom_notifications" class="custom-notifications dsp_none">
 		<ul class="list-unstyled notifications clearfix"
@@ -232,74 +231,9 @@
     <script src="js/datatables/jszip.min.js"></script>
     <script src="js/datatables/pdfmake.min.js"></script>
     <script src="js/datatables/vfs_fonts.js"></script>
-
-    <!-- Datatables -->
-    <script>
-      $(document).ready(function() {
-        var handleDataTableButtons = function() {
-          if ($("#datatable-buttons").length) {
-            $("#datatable-buttons").DataTable({
-              dom: "Bfrtip",
-              buttons: [
-                {
-                  extend: "copy",
-                  className: "btn-sm"
-                },
-                {
-                  extend: "csv",
-                  className: "btn-sm"
-                },
-                {
-                  extend: "excel",
-                  className: "btn-sm"
-                },
-                {
-                  extend: "pdfHtml5",
-                  className: "btn-sm"
-                },
-                {
-                  extend: "print",
-                  className: "btn-sm"
-                },
-              ],
-              responsive: true
-            });
-          }
-        };
-
-        TableManageButtons = function() {
-          "use strict";
-          return {
-            init: function() {
-              handleDataTableButtons();
-            }
-          };
-        }();
-
-        $('#datatable').dataTable();
-        $('#datatable-keytable').DataTable({
-          keys: true
-        });
-
-        $('#datatable-responsive').DataTable();
-
-        $('#datatable-scroller').DataTable({
-          ajax: "js/datatables/json/scroller-demo.json",
-          deferRender: true,
-          scrollY: 380,
-          scrollCollapse: true,
-          scroller: true
-        });
-
-        var table = $('#datatable-fixed-header').DataTable({
-          fixedHeader: true
-        });
-
-        TableManageButtons.init();
-      });
-    </script>
-    <!-- /Datatables -->
-
+    
+    <!-- Custom by Amar -->
+    <script src="js/datatables/gradesTable.js"></script>
 
 	<!-- flot js -->
 	<!--[if lte IE 8]><script type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->
@@ -312,7 +246,7 @@
 	<script type="text/javascript" src="js/flot/jquery.flot.stack.js"></script>
 	<script type="text/javascript" src="js/flot/curvedLines.js"></script>
 	<script type="text/javascript" src="js/flot/jquery.flot.resize.js"></script>
-
+	<script src="js/bootstrap.min.js"></script>
 	<script>
 		NProgress.done();
 	</script>
