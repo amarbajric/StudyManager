@@ -26,6 +26,7 @@ import at.fh.swenga.project.model.ExamApplicationModel;
 import at.fh.swenga.project.model.ExamModel;
 import at.fh.swenga.project.model.ProfessorModel;
 import at.fh.swenga.project.model.StudentModel;
+import at.fh.swenga.project.util.MapSorter;
 
 
 @Controller
@@ -121,7 +122,31 @@ public class StudyManagerController {
         	//setting the number of every grade to a list
         	List<Integer> grades = new ArrayList(gradesMap.values());
         	
+        	
+        	//get the average grade from all students
+        	List<Object[]> averageGrades = examApplicationRepo.findAverageGrades();
+        	
+        	//get average grades into map
+        	Map<Integer,Double> averageMap = new HashMap<Integer,Double>();
+        	for (int i = 0; i < averageGrades.size(); i++) {
+        		Object[] arr = averageGrades.get(i);
+        		averageMap.put(Integer.parseInt(arr[0].toString()), Double.parseDouble(arr[1].toString()));
+        		}
+        	
+        	//sort the map
+        	Map<Integer, Double> averageMapSorted = MapSorter.sortByValue(averageMap);
+        	
+        	// get index of the map
+        	List<Integer> indexes = new ArrayList<Integer>(averageMapSorted.keySet());
+        	
+        	int rank = indexes.indexOf(studentData.getId())+1; // +1 because list starts at 0
+        	double average = averageMapSorted.get(studentData.getId());
+        	
+        	System.out.println(average);
+        	
         	//setting models
+        	model.addAttribute("average",average);
+        	model.addAttribute("rank",rank);
         	model.addAttribute("examsOfDegreeProgram",examsOfDegreeProgram);
         	model.addAttribute("studentColleagues",studentColleagues);
         	model.addAttribute("allStudents",allStudents);

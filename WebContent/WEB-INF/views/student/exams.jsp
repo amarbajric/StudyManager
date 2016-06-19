@@ -81,9 +81,19 @@
 						<div class="menu_section">
 							<h3>General</h3>
 							<ul class="nav side-menu">
-								<li><a href="/StudyManager/"><i class="fa fa-home"></i> Overview</a></li>
+								<li><a
+									href="/StudyManager/"><i
+										class="fa fa-home"></i> Overview</a></li>
 								<li><a href="/StudyManager/exams"><i class="fa fa-edit"></i>Exams</a></li>
-								<li><a href="/StudyManager/grades"><i class="fa fa-desktop"></i>Grades</a></li>
+								<li><a><i class="fa fa-desktop"></i>Grades<span
+										class="fa fa-chevron-down"></span></a>
+									<ul class="nav child_menu" style="display: none">
+										<li><a href="PLACEHOLDER">View Grades</a></li>
+									</ul>
+									<ul class="nav child_menu" style="display: none">
+										<li><a href="PLACEHOLDER">Export Grades</a></li>
+									</ul></li>
+								<li><a href="PLACEHOLDER"><i class="fa fa-bar-chart-o"></i>Statistics</a></li>
 							</ul>
 						</div>
 					</div>
@@ -149,99 +159,26 @@
 
 			</div>
 			<!-- /top navigation -->
-			
-			
-			<!-- /page content -->
-			<div class="right_col" role="main" style="min-height: 3104px;">
-          <div class="">
-            <div class="page-title">
-              <div class="title_left">
-                <h3>Your Grades <small>All the grades of the exams you have taken</small></h3>
-              </div>
 
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            <div class="clearfix"></div>
+			<!-- page content: OVERVIEW -->
+			<div class="row">
+			</div>
 
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Grade List</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                    <p class="text-muted font-13 m-b-30">
-                      This is an overview over all the exams you have taken, which have already been graded by the according professor.
-                    </p>
-                    <div id="datatable-buttons_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer"><div class="dt-buttons btn-group"><a class="btn btn-default buttons-copy buttons-html5 btn-sm" tabindex="0" aria-controls="datatable-buttons"><span>Copy</span></a><a class="btn btn-default buttons-csv buttons-html5 btn-sm" tabindex="0" aria-controls="datatable-buttons"><span>CSV</span></a><a class="btn btn-default buttons-excel buttons-html5 btn-sm" tabindex="0" aria-controls="datatable-buttons"><span>Excel</span></a><a class="btn btn-default buttons-pdf buttons-html5 btn-sm" tabindex="0" aria-controls="datatable-buttons"><span>PDF</span></a><a class="btn btn-default buttons-print btn-sm" tabindex="0" aria-controls="datatable-buttons"><span>Print</span></a></div><div id="datatable-buttons_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="datatable-buttons"></label></div><table id="datatable-buttons" class="table table-striped table-bordered dataTable no-footer dtr-inline" role="grid" aria-describedby="datatable-buttons_info" style="width: 1585px;">
-                      <thead>
-                        <tr role="row">
-                        <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 270px;" aria-sort="ascending" aria-label="Name of the Course">Course</th>
-                        <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 408px;" aria-label="Type of the Exam (e.g. final or mid-term)">Exam Type</th>
-                        <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 205px;" aria-label="Attempt number of the exam">Attempt</th>
-                        <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 199px;" aria-label="Date of the exam">Date</th>
-                        <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 157px;" aria-label="Grade of the exam">Grade</th>
-                        </tr>
-                      </thead>
-                      
-                      <tbody>
-
-						<c:forEach items="${gradedExams}" var="exam">
-							<tr>
-								<th scope="row">${exam.examDate.exam.description}</th>
-								<td>${exam.examDate.exam.type}</td>
-								<td>${exam.attempt}</td>
-								<td><fmt:formatDate value="${exam.examDate.date}" pattern="dd.MM.yyyy" /></td>
-								<td>${application.grade}<span class="${className}">${exam.grade}</span></td>
-							</tr>
-						</c:forEach>
-                        </tbody>
-                    </table><div class="dataTables_info" id="datatable-buttons_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div><div class="dataTables_paginate paging_simple_numbers" id="datatable-buttons_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="datatable-buttons_previous"><a href="#" aria-controls="datatable-buttons" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="datatable-buttons" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="datatable-buttons" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="datatable-buttons" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="datatable-buttons" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="datatable-buttons" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button "><a href="#" aria-controls="datatable-buttons" data-dt-idx="6" tabindex="0">6</a></li><li class="paginate_button next" id="datatable-buttons_next"><a href="#" aria-controls="datatable-buttons" data-dt-idx="7" tabindex="0">Next</a></li></ul></div></div>
-                  </div>
-                </div>
-              </div>
-
-              
-
-              
-            </div>
-          </div>
-        </div>
-
-			<!-- LOGOUT FORM => USED AT THE LOGOUT HREF in the code above -->
-			<c:url value="/logout" var="logoutUrl" />
-			<form action="${logoutUrl}" id=logout method="post">
-				<input hidden=true name="${_csrf.parameterName}"
-					value="${_csrf.token}" />
-			</form>
-			<!-- LOGOUT FORM  -->
+			<!-- /top tiles -->
 
 		</div>
+		<!-- /page content -->
+
+		<!-- LOGOUT FORM => USED AT THE LOGOUT HREF in the code above -->
+		<c:url value="/logout" var="logoutUrl" />
+		<form action="${logoutUrl}" id=logout method="post">
+			<input hidden=true name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
+		</form>
+		<!-- LOGOUT FORM  -->
+
+	</div>
 
 	</div>
 

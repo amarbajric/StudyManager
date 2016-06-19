@@ -84,7 +84,6 @@
 								<li><a href="/StudyManager/"><i class="fa fa-home"></i> Overview</a></li>
 								<li><a href="/StudyManager/exams"><i class="fa fa-edit"></i>Exams</a></li>
 								<li><a href="/StudyManager/grades"><i class="fa fa-desktop"></i>Grades</a></li>
-								<li><a href="/StudyManager/statistics"><i class="fa fa-bar-chart-o"></i>Statistics</a></li>
 							</ul>
 						</div>
 					</div>
@@ -117,33 +116,6 @@
 							</ul></li>
 						<!-- top navigation -->
 
-
-						<!-- ALERTS -->
-						<li role="presentation" class="dropdown"><a
-							href="javascript:;" class="dropdown-toggle info-number"
-							data-toggle="dropdown" aria-expanded="false"> <i
-								class="fa fa-envelope-o"></i> <span class="badge bg-green">1</span>
-						</a>
-							<ul id="menu1"
-								class="dropdown-menu list-unstyled msg_list animated fadeInDown"
-								role="menu">
-								<li><a> <span class="image"> <img
-											src="images/fh_logo.png" alt="Profile Image" />
-									</span> <span> <span>John Smith</span> <span class="time">3
-												mins ago</span>
-									</span> <span class="message"> Film festivals used to be
-											do-or-die moments for movie makers. They were where... </span>
-								</a></li>
-								<li>
-									<div class="text-center">
-										<a href="inbox.html"> <strong>See All Alerts</strong> <i
-											class="fa fa-angle-right"></i>
-										</a>
-									</div>
-								</li>
-							</ul></li>
-						<!-- ALERTS -->
-
 					</ul>
 					</nav>
 				</div>
@@ -162,10 +134,11 @@
 						<div class="left"></div>
 						<div class="right">
 							<span class="count_top"><i class="fa fa-sitemap"></i>
-								Current Rank (based on average grades)</span>
-							<div class="count">PLACEHOLDER</div>
-							<span class="count_bottom"><i class="green"><i
-									class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+								Current Rank of University</span>
+							<div class="count">${rank} </div>
+							<span class="count_bottom"> Your average grade: <i class="green"> <fmt:formatNumber 
+     						value="${average}" 
+     						maxFractionDigits="2"/> </i></span>
 						</div>
 					</div>
 					<div
