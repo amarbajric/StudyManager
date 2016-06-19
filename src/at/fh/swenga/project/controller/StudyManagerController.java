@@ -206,7 +206,7 @@ public class StudyManagerController {
 	
 
 	@RequestMapping(value="/manageExam")
-	public String manageExam(@RequestParam String action, @RequestParam String id)
+	public String manageExam(@RequestParam String action, @RequestParam int id)
 	{
 		if(action.equals("enroll"))
 		{
@@ -219,7 +219,7 @@ public class StudyManagerController {
 			System.out.println("signed out");
 		}
 		
-		return "forward:student/exams";
+		return "forward:/exams";
 	}
 	
 	
