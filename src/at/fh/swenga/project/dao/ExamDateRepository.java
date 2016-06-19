@@ -16,14 +16,6 @@ public interface ExamDateRepository extends JpaRepository<ExamDateModel, Integer
 	
 	public List<ExamDateModel> findAll();
 	
-	/*
-	@Query
-	("select ed from ExamDateModel ed "
-		      + "join ExamModel ex "
-		      + "join courses co "
-		      + "join co.students_courses sc "
-		      + "where sc.student_id = :student_id")
-		  public List<ExamDateModel> findExamsByStudent(@Param("student_id") int student_id);
-	*/
+
 	
 }
