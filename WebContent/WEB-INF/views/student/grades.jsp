@@ -73,7 +73,7 @@
 					<!-- menu prile quick info -->
 					<div class="profile">
 						<div class="profile_pic">
-							<img src="images/fh_logo.png" alt="..."
+							<img src="images/icon_student.png" alt="..."
 								class="img-circle profile_img">
 						</div>
 						<div class="profile_info">
@@ -115,7 +115,7 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li class=""><a href="javascript:;"
 							class="user-profile dropdown-toggle" data-toggle="dropdown"
-							aria-expanded="false"> <img src="images/fh_logo.png" alt="">${studentData.firstname}
+							aria-expanded="false"> <img src="images/icon_student.png" alt="">${studentData.firstname}
 								${studentData.lastname} <span class=" fa fa-angle-down"></span>
 						</a>
 							<ul
@@ -161,22 +161,22 @@
                       <table id="datatable-buttons" class="table table-striped table-bordered dataTable no-footer dtr-inline" role="grid" aria-describedby="datatable-buttons_info" style="width: 1585px;">
 	                      <thead>
 	                        <tr role="row">
-	                        <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 270px;" aria-sort="ascending" aria-label="Name of the Course">Course</th>
+	                        <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 270px;" aria-label="Name of the Course">Course</th>
 	                        <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 208px;" aria-label="Type of the Exam (e.g. final or mid-term)">Exam Type</th>
 	                        <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 205px;" aria-label="Attempt number of the exam">Attempt</th>
-	                        <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 199px;" aria-label="Date of the exam">Date</th>
+	                        <th class="sorting_desc" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 199px;" aria-sort="descending" aria-label="Date of the exam">Date</th>
 	                        <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 157px;" aria-label="Grade of the exam">Grade</th>
-	                        <th style="width: 1px;">  </th>
+	                        <th style="width: 0px;">  </th>
 	                        </tr>
 	                      </thead>
 	                      
 	                      <tbody>
 							<c:forEach items="${gradedExams}" var="exam">
 								<tr>
-									<th scope="row">${exam.examDate.exam.description}</th>
+									<th>${exam.examDate.exam.description}</th>
 									<td>${exam.examDate.exam.type}</td>
 									<td>${exam.attempt}</td>
-									<td><fmt:formatDate value="${exam.examDate.date}" pattern="dd.MM.yyyy" /></td>
+									<td scope="row"><fmt:formatDate value="${exam.examDate.date}" pattern="dd.MM.yyyy" /></td>
 									<td>${application.grade}<span class="${className}">${exam.grade}</span></td>
 									<td></td>
 								</tr>
@@ -220,15 +220,15 @@
     <script src="js/nprogress.js"></script>
 	<!-- Datatables -->
     <script src="js/datatables/jquery.dataTables.min.js"></script>
-    <script src="js/datatables/dataTables.buttons.min.js"></script>
-    <script src="js/datatables/buttons.bootstrap.min.js"></script>
-    <script src="js/datatables/buttons.html5.min.js"></script>
-    <script src="js/datatables/buttons.print.min.js"></script>
+   <script src="js/datatables/dataTables.buttons.min.js"></script>
+ <script src="js/datatables/buttons.bootstrap.min.js"></script>
+   <script src="js/datatables/buttons.html5.min.js"></script>
+   <script src="js/datatables/buttons.print.min.js"></script>
     <script src="js/datatables/dataTables.fixedHeader.min.js"></script>
     <script src="js/datatables/dataTables.keyTable.min.js"></script>
     <script src="js/datatables/dataTables.responsive.min.js"></script>
-    <script src="js/datatables/jszip.min.js"></script>
-    <script src="js/datatables/pdfmake.min.js"></script>
+   <script src="js/datatables/jszip.min.js"></script>
+   <script src="js/datatables/pdfmake.min.js"></script>
     <script src="js/datatables/vfs_fonts.js"></script>
 
     <!-- Custom by Amar -->

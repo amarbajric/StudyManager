@@ -12,7 +12,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Student | Exams</title>
+<title>Professor | Exams</title>
 
 <!-- Bootstrap core CSS -->
 
@@ -24,7 +24,7 @@
   <!-- Custom styling plus plugins -->
   <link href="css/custom.css" rel="stylesheet">
   <link href="css/icheck/flat/green.css" rel="stylesheet">
-
+  
 
   <script src="js/jquery.min.js"></script>
 
@@ -41,7 +41,7 @@
 				<div class="left_col scroll-view">
 
 					<div class="navbar nav_title" style="border: 0;">
-						<a href="${requestScope['javax.servlet.forward.request_uri']}"
+						<a href="/StudyManager/"
 							class="site_title"><span>StudyManager</span></a>
 					</div>
 					<div class="clearfix"></div>
@@ -49,12 +49,12 @@
 					<!-- menu prile quick info -->
 					<div class="profile">
 						<div class="profile_pic">
-							<img src="images/icon_student.png" alt="..."
+							<img src="images/icon_prof.png" alt="..."
 								class="img-circle profile_img">
 						</div>
 						<div class="profile_info">
 							<span>Welcome,</span>
-							<h2>${studentData.firstname}</h2>
+							<h2>${professorData.firstname}</h2>
 						</div>
 					</div>
 					<!-- /menu prile quick info -->
@@ -69,8 +69,7 @@
 							<h3>General</h3>
 							<ul class="nav side-menu">
 								<li><a href="/StudyManager/"><i class="fa fa-home"></i> Overview</a></li>
-								<li><a href="/StudyManager/exams"><i class="fa fa-edit"></i>Exams</a></li>
-								<li><a href="/StudyManager/grades"><i class="fa fa-desktop"></i>Grades</a></li>
+								<li><a href="/StudyManager/addExam"><i class="fa fa-edit"></i>Exams</a></li>
 							</ul>
 						</div>
 					</div>
@@ -91,8 +90,8 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li class=""><a href="javascript:;"
 							class="user-profile dropdown-toggle" data-toggle="dropdown"
-							aria-expanded="false"> <img src="images/icon_student.png" alt="">${studentData.firstname}
-								${studentData.lastname} <span class=" fa fa-angle-down"></span>
+							aria-expanded="false"> <img src="images/icon_prof.png" alt="">${professorData.firstname}
+								${professorData.lastname} <span class=" fa fa-angle-down"></span>
 						</a>
 							<ul
 								class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
@@ -101,7 +100,9 @@
 									href="javascript:document.getElementById('logout').submit();"><i
 										class="fa fa-sign-out pull-right"></i>Log Out</a></li>
 							</ul></li>
-						<!-- top navigation -->						
+						<!-- top navigation -->
+
+
 					</ul>
 					</nav>
 				</div>
@@ -111,67 +112,97 @@
 			
 			
 			<!-- /page content -->
-			<div class="right_col" role="main">
-
-				<div class="x_panel">
+			<div class="right_col" role="main" style="min-height: 3104px;">
+            <div class="clearfix"></div>
+            
+            <div class="col-md-3 col-sm-3 col-xs-12">
+             <div class="x_panel">
                 <div class="x_title">
-                 <h1>Exams <small>Sign on off</small></h1>
+                  <h1>Exams</h1>
                   <div class="clearfix"></div>
                 </div>
 
                 <div class="x_content">
 
-                  <p>All exams to sign on or off</p>
-
+                  <p>Exams</p>
 
                   <table class="table table-striped">
                     <thead>
-                      <tr>
+                      <tr class="headings">
                         <th class="column-title">Course</th>
                         <th class="column-title">Type</th>
-                        <th class="column-title">Description </th>
-                        <th class="column-title">Date</th>
-                        <th class="column-title">ECTS </th>
-                        <th class="column-title">Room </th>
-                        <th class="column-title">Enroll/Sign Out</th>
+
                       </tr>
                     </thead>
+
                     <tbody>
-                    <c:forEach items="${futureStudentExams}" var="exam">                    
-                      <tr>
-                        <td class=" ">${exam.getCourse()}</td>
-                        <td class=" ">${exam.getType()}</td>
+                      <c:forEach items="${professorExams}" var="exam">
+                        <tr class="even pointer">
                         <td class=" ">${exam.getDescription()}</td>
-                        <td class=" "><fmt:formatDate value="${exam.getDate()}" pattern="dd.MM.yyyy" /></td>
-                        <td class=" ">${exam.getEcts()}</td>
-                        <td class=" ">${exam.getRoom()}</td>
-                        <td class=" ">
-                        <c:choose>
-                        <c:when test="${exam.getEnrolled() eq 0}">
-                        <a href="manageExam?id=${exam.getId()}&action=enroll"><button id="enroll" type="submit" class="btn btn-success" onClick="enroll()">Enroll</button></a> 
-                        </c:when>
-                        <c:otherwise>
-                        <a href="manageExam?id=${exam.getId()}&action=signOut"><button id="signOut" type="submit" class="btn btn-info" onClick="signOut()">Sign Out</button></a>
-                        </c:otherwise>
-                        </c:choose>
-                        </td>
-                        
-                     
+                        <td class=" ">${exam.getType()}</td>
                       </tr>
-                      
-                    
                       </c:forEach>
-                  	</tbody>
+                    
+                    </tbody>
+
                   </table>
                 </div>
-              </div>   
-      </div>
-      <!-- /page content -->
-    </div>
+              </div>
+            </div>
 
-  </div>
-  
-  <!-- LOGOUT FORM => USED AT THE LOGOUT HREF in the code above -->
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Create a new exam</h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <br>
+                    <form class="form-horizontal form-label-left" action = "addExamModel?course=${courseSelected}&type=${typeSelected}">
+
+             
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Select</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <select class="form-control" id = "courseSelected" name="courseSelected">
+                           <c:forEach items="${professorData.courses}" var="course">
+                           		<option>${course.acronym}</option>
+                           </c:forEach>
+                          </select>
+                        </div>
+                      </div>
+                      
+                       <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Type</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <select class="form-control" id="typeSelected" name="typeSelected">
+                           		<option>final</option>
+                           		<option>midterm</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">               
+                          	<button type="submit" class="btn btn-success">Submit</button>
+
+                        </div>
+                      </div>
+
+                    </form>
+                  </div>
+                </div>
+
+
+        </div>
+
+              
+            </div>
+          </div>
+        </div>
+
+			<!-- LOGOUT FORM => USED AT THE LOGOUT HREF in the code above -->
 			<c:url value="/logout" var="logoutUrl" />
 			<form action="${logoutUrl}" id=logout method="post">
 				<input hidden=true name="${_csrf.parameterName}"
@@ -179,14 +210,17 @@
 			</form>
 			<!-- LOGOUT FORM  -->
 
-  <div id="custom_notifications" class="custom-notifications dsp_none">
-    <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group">
-    </ul>
-    <div class="clearfix"></div>
-    <div id="notif-group" class="tabbed_notifications"></div>
-  </div>
+		</div>
 
+	</div>
 
+	<div id="custom_notifications" class="custom-notifications dsp_none">
+		<ul class="list-unstyled notifications clearfix"
+			data-tabbed_notifications="notif-group">
+		</ul>
+		<div class="clearfix"></div>
+		<div id="notif-group" class="tabbed_notifications"></div>
+	</div>
 
   <script src="js/bootstrap.min.js"></script>
 
@@ -196,16 +230,7 @@
   <!-- icheck -->
   <script src="js/icheck/icheck.min.js"></script>
 
-  <script src="js/custom.js"></script>
-  <!-- NOTIFICATIONS -->
-  <script src="js/notify/pnotify.button.js"></script>
-  <script src="js/notify/pnotify.core.js"></script>
-  <script src="js/notify/examNotify.js"></script>
-   <!-- /NOTIFICATIONS -->
-   
-  
   <!-- pace -->
   <script src="js/pace/pace.min.js"></script>
 </body>
-
 </html>

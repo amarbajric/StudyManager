@@ -282,6 +282,40 @@ public class StudyManagerController {
 		return "login";
 	}
 	
+	@RequestMapping(value = "/addExam", method = RequestMethod.GET)
+	public String addExam(Model model) {
+		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	        String mailOfUser = auth.getName();
+    	//find all the data of the specific Student who logged in.
+    	ProfessorModel profData = professorRepo.findByMail(mailOfUser);
+    	
+    	//getting all the future exams of a student
+    	List<Object[]> professorExamsData = examDateRepo.findProfExams(profData.getId());
+    	
+    	//Adding the Data of the exams into a List of Q_ProfessorExam
+    	List<Q_ProfessorExam> professorExams = new ArrayList<Q_ProfessorExam>();
+       	for (int i = 0; i < professorExamsData.size(); i++) {
+    		Object[] arr = professorExamsData.get(i);
+    		Date date = (Date)arr[1];
+    		Q_ProfessorExam exam = new Q_ProfessorExam(Integer.parseInt(arr[0].toString()) ,date,arr[2].toString(),arr[3].toString(),arr[4].toString(), arr[5].toString(), Integer.parseInt(arr[6].toString()));
+    		professorExams.add(exam);
+    		}
+       	
+    	model.addAttribute("professorExams",professorExams);
+    	model.addAttribute("professorData",profData);
+
+		return "professor/addExam";
+	}
+	
+	@RequestMapping(value="/addExamModel", method=RequestMethod.GET)
+	public String modelAdd(@RequestParam String courseSelected, @RequestParam String typeSelected)
+	{
+		System.out.println(courseSelected);
+		System.out.println(typeSelected);
+		
+		return "forward:/addExam";
+	}
+	
 	
 	
 

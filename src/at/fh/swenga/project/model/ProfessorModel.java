@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,7 +29,7 @@ public class ProfessorModel implements java.io.Serializable {
 	@Column(unique = true)
 	private String mail; 
 
-	@ManyToMany(mappedBy = "professors") // professors collection is mapped wit the course collection
+	@ManyToMany(mappedBy = "professors", fetch = FetchType.EAGER) // professors collection is mapped wit the course collection
 	private Set<CourseModel> courses = new HashSet<CourseModel>();
 	public Set<CourseModel> getCourses() {
 		return courses;

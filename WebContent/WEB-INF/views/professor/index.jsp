@@ -24,7 +24,7 @@
   <!-- Custom styling plus plugins -->
   <link href="css/custom.css" rel="stylesheet">
   <link href="css/icheck/flat/green.css" rel="stylesheet">
-
+  
 
   <script src="js/jquery.min.js"></script>
 
@@ -49,7 +49,7 @@
 					<!-- menu prile quick info -->
 					<div class="profile">
 						<div class="profile_pic">
-							<img src="images/fh_logo.png" alt="..."
+							<img src="images/icon_prof.png" alt="..."
 								class="img-circle profile_img">
 						</div>
 						<div class="profile_info">
@@ -90,7 +90,7 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li class=""><a href="javascript:;"
 							class="user-profile dropdown-toggle" data-toggle="dropdown"
-							aria-expanded="false"> <img src="images/fh_logo.png" alt="">${professorData.firstname}
+							aria-expanded="false"> <img src="images/icon_prof.png" alt="">${professorData.firstname}
 								${professorData.lastname} <span class=" fa fa-angle-down"></span>
 						</a>
 							<ul
@@ -116,6 +116,8 @@
             <div class="clearfix"></div>
 
               <div class="col-md-12 col-sm-12 col-xs-12">
+                
+              
               <div class="x_panel">
                 <div class="x_title">
                   <h1>Exams</h1>
@@ -126,10 +128,9 @@
 
                   <p>All your exams</p>
 
-                  <table class="table table-striped responsive-utilities jambo_table bulk_action">
+                  <table class="table table-striped">
                     <thead>
                       <tr class="headings">
-                        <th><input type="checkbox" id="check-all" class="flat"></th>
                         <th class="column-title">Course</th>
                         <th class="column-title">Type</th>
                         <th class="column-title">Date Number</th>
@@ -143,9 +144,6 @@
                     <tbody>
                       <c:forEach items="${professorExams}" var="exam">
                         <tr class="even pointer">
-                        <td class="a-center ">
-                          <input type="checkbox" class="flat" name="table_records">
-                        </td>
                         <td class=" ">${exam.getDescription()}</td>
                         <td class=" ">${exam.getType()}</td>
                         <td class=" ">${exam.getDateNumber()}</td>
@@ -197,8 +195,6 @@
   <script src="js/nicescroll/jquery.nicescroll.min.js"></script>
   <!-- icheck -->
   <script src="js/icheck/icheck.min.js"></script>
-
-  <script src="js/custom.js"></script>
 
   <!-- pace -->
   <script src="js/pace/pace.min.js"></script>

@@ -47,7 +47,7 @@
 					<!-- menu prile quick info -->
 					<div class="profile">
 						<div class="profile_pic">
-							<img src="images/fh_logo.png" alt="..."
+							<img src="images/icon_student.png" alt="..."
 								class="img-circle profile_img">
 						</div>
 						<div class="profile_info">
@@ -89,7 +89,7 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li class=""><a href="javascript:;"
 							class="user-profile dropdown-toggle" data-toggle="dropdown"
-							aria-expanded="false"> <img src="images/fh_logo.png" alt="">${studentData.firstname}
+							aria-expanded="false"> <img src="images/icon_student.png" alt="">${studentData.firstname}
 								${studentData.lastname} <span class=" fa fa-angle-down"></span>
 						</a>
 							<ul

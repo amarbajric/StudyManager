@@ -18,5 +18,6 @@ public interface ExamRepository extends JpaRepository<ExamModel, Integer> {
 	
 	public List<ExamModel> findByCourseDegreeProgram(DegreeProgramModel degreeProgram);
 	
+	
 
 }
