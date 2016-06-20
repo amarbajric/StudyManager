@@ -37,7 +37,7 @@ public class StudentModel implements java.io.Serializable {
 	@Column/*(columnDefinition="Decimal(4,1) default '0.0'")*/
 	private Double ects = 0.0;
 	
-	@OneToMany(mappedBy="student",fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="student",fetch=FetchType.EAGER , cascade = CascadeType.PERSIST)
     private Set<ExamApplicationModel> applications;
 	
 	@ManyToOne (cascade = CascadeType.PERSIST)

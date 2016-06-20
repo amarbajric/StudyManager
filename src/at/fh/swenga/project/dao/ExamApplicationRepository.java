@@ -3,6 +3,7 @@ package at.fh.swenga.project.dao;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,5 +45,10 @@ public interface ExamApplicationRepository extends JpaRepository<ExamApplication
 			+ "WHERE student_id = ?1 AND examDate_id = ?2", nativeQuery=true)
 	public Integer attemptOfExam(int student_id, int examDate_id);
 
+	
+	@Modifying
+	@Query(value= "DELETE FROM exam_applications "
+	+ "where student_id = ?1 and examDate_id = ?2",nativeQuery=true)
+	public int removeByStudentIdAndExamDateId(int studentId,int examDateId); 
 }
 

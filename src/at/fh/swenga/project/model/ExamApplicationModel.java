@@ -20,13 +20,13 @@ public class ExamApplicationModel implements java.io.Serializable {
 	@Column(nullable = false)
 	private Integer attempt; // 1st, 2nd, 3rd --> with automated method later on
 
-	@Column
+	@Column(nullable = true)
 	private Integer grade;
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private StudentModel student;
 	
-	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REFRESH})
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private ExamDateModel examDate;
 	
 	public ExamApplicationModel() {

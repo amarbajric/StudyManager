@@ -232,7 +232,6 @@ public class StudyManagerController {
     		Q_studentExam exam = new Q_studentExam(Integer.parseInt(arr[0].toString()),arr[1].toString(),arr[2].toString(),arr[3].toString(),date,Double.parseDouble(arr[5].toString()),arr[6].toString());
     		exam.setEnrolled(Integer.parseInt(arr[7].toString()));
     		futureStudentExams.add(exam);
-    		System.out.println(exam.getEnrolled());
     		}
        	
     	model.addAttribute("studentData",studentData);
@@ -241,6 +240,12 @@ public class StudyManagerController {
 	}
 	
 
+	/**
+	 * Enroll/SingOut manager
+	 * @param action
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value="/manageExam", method=RequestMethod.GET)
 	public String manageExam(@RequestParam String action, @RequestParam int id)
 	{
@@ -250,18 +255,20 @@ public class StudyManagerController {
         
 		if(action.equals("enroll"))
 		{
-		
+			
 		Integer newAttemptOfExam = examApplicationRepo.attemptOfExam(studentData.getId(),id) + 1;
 		ExamDateModel examDate = examDateRepo.findById(id);
 		ExamApplicationModel examToEnroll = new ExamApplicationModel(newAttemptOfExam, studentData, examDate);
 		examApplicationRepo.save(examToEnroll);
+		
 
 		}
 		else if(action.equals("signOut"))
 		{			
 			
-		//DELETE EXAM APPLICATION
-					
+		int delete = examApplicationRepo.removeByStudentIdAndExamDateId(studentData.getId(), id);
+		System.out.println(delete);
+		System.out.println("ID:" + id);
 				
 		}			
 		
