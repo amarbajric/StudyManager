@@ -37,13 +37,13 @@ public class StudentModel implements java.io.Serializable {
 	@Column/*(columnDefinition="Decimal(4,1) default '0.0'")*/
 	private Double ects = 0.0;
 	
-	@OneToMany(mappedBy="student",fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="student",fetch=FetchType.EAGER , cascade = CascadeType.PERSIST)
     private Set<ExamApplicationModel> applications;
 	
 	@ManyToOne (cascade = CascadeType.PERSIST)
 	private YearModel year; // e.g. IMA 2016
 	
-	@ManyToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER) //
+	@ManyToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinTable(name = "students_courses", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
 	private Set<CourseModel> courses = new HashSet<CourseModel>();
 	

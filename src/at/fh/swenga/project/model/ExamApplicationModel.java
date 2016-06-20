@@ -18,40 +18,43 @@ public class ExamApplicationModel implements java.io.Serializable {
 	private int id;
 
 	@Column(nullable = false)
-	private int attempt; // 1st, 2nd, 3rd --> with automated method later on
+	private Integer attempt; // 1st, 2nd, 3rd --> with automated method later on
 
-	@Column
-	private int grade = 0; // at application grade is 0 because teacher overwrites it
-					// later on when the exam is corrected
+	@Column(nullable = true)
+	private Integer grade;
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private StudentModel student;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private ExamDateModel examDate;
 	
 	public ExamApplicationModel() {
 		// TODO Auto-generated constructor stub
-	}
+	}	
 	
-	public ExamApplicationModel(int attempt) {
+	
+	public ExamApplicationModel(Integer attempt, StudentModel student, ExamDateModel examDate) {
 		super();
 		this.attempt = attempt;
+		this.student = student;
+		this.examDate = examDate;
 	}
 
-	public int getAttempt() {
+
+	public Integer getAttempt() {
 		return attempt;
 	}
 
-	public void setAttempt(int attempt) {
+	public void setAttempt(Integer attempt) {
 		this.attempt = attempt;
 	}
 
-	public int getGrade() {
+	public Integer getGrade() {
 		return grade;
 	}
 
-	public void setGrade(int grade) {
+	public void setGrade(Integer grade) {
 		this.grade = grade;
 	}
 

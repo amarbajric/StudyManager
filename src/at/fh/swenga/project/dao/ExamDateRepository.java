@@ -16,6 +16,8 @@ public interface ExamDateRepository extends JpaRepository<ExamDateModel, Integer
 	
 	public List<ExamDateModel> findAll();
 	
+	public ExamDateModel findById(int id);
+	
 	@Query(value = "SELECT exd.id, exd.date, exd.description as datenumber, ex.description as course, ex.type, r.description as room, count(exa.id) as applicants "
 			+ "FROM exam_dates exd "
 			+ "JOIN exams ex ON exd.exam_id = ex.id "

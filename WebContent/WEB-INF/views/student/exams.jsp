@@ -124,7 +124,7 @@
                   <p>All exams to sign on or off</p>
 
 
-                  <table class="table table-bordered">
+                  <table class="table table-striped">
                     <thead>
                       <tr>
                         <th class="column-title">Course</th>
@@ -145,8 +145,15 @@
                         <td class=" "><fmt:formatDate value="${exam.getDate()}" pattern="dd.MM.yyyy" /></td>
                         <td class=" ">${exam.getEcts()}</td>
                         <td class=" ">${exam.getRoom()}</td>
-                        <td class=" "><a href="manageExam?id=${exam.getId()}&action=enroll"><button id="enroll" type="submit" class="btn btn-success" onclick="enroll()">Enroll</button></a> 
-                        <a href="manageExam?id=${exam.getId()}&action=signOut"><button id="signOut" type="submit" class="btn btn-info" onclick="signOut()">Sign Out</button></a>
+                        <td class=" ">
+                        <c:choose>
+                        <c:when test="${exam.getEnrolled() eq 0}">
+                        <a href="manageExam?id=${exam.getId()}&action=enroll"><button id="enroll" type="submit" class="btn btn-success" onClick="enroll()">Enroll</button></a> 
+                        </c:when>
+                        <c:otherwise>
+                        <a href="manageExam?id=${exam.getId()}&action=signOut"><button id="signOut" type="submit" class="btn btn-info" onClick="signOut()">Sign Out</button></a>
+                        </c:otherwise>
+                        </c:choose>
                         </td>
                         
                      
@@ -156,7 +163,6 @@
                       </c:forEach>
                   	</tbody>
                   </table>
-
                 </div>
               </div>   
       </div>
