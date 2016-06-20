@@ -21,8 +21,7 @@ public class ExamApplicationModel implements java.io.Serializable {
 	private Integer attempt; // 1st, 2nd, 3rd --> with automated method later on
 
 	@Column
-	private int grade = 0; // at application grade is 0 because teacher overwrites it
-					// later on when the exam is corrected
+	private Integer grade;
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private StudentModel student;
@@ -51,11 +50,11 @@ public class ExamApplicationModel implements java.io.Serializable {
 		this.attempt = attempt;
 	}
 
-	public int getGrade() {
+	public Integer getGrade() {
 		return grade;
 	}
 
-	public void setGrade(int grade) {
+	public void setGrade(Integer grade) {
 		this.grade = grade;
 	}
 
