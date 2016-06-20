@@ -23,8 +23,8 @@
 
   <!-- Custom styling plus plugins -->
   <link href="css/custom.css" rel="stylesheet">
-  <link href="css/icheck/flat/green.css" rel="stylesheet">
-  
+  <link href="css/icheck/flat/green.css" rel="stylesheet"> 
+   
 
   <script src="js/jquery.min.js"></script>
 
@@ -95,7 +95,7 @@
 						</a>
 							<ul
 								class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
-								<li><a href="javascript:;">Profile</a></li>
+								<li><a href="profile">Profile</a></li>
 								<li><a
 									href="javascript:document.getElementById('logout').submit();"><i
 										class="fa fa-sign-out pull-right"></i>Log Out</a></li>
@@ -184,7 +184,7 @@
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">               
-                          	<button id="submitExam" type="submit" class="btn btn-success" onClick="newExam()">Submit</button>
+                          	<button id="submitExam" type="submit" class="btn btn-success">Submit</button>
                         </div>
                       </div>
 
@@ -207,11 +207,10 @@
 					value="${_csrf.token}" />
 			</form>
 			<!-- LOGOUT FORM  -->
+					
+			<!--Check if exam already exist or not -->
 
-		</div>
-
-	</div>
-
+	
 	<div id="custom_notifications" class="custom-notifications dsp_none">
 		<ul class="list-unstyled notifications clearfix"
 			data-tabbed_notifications="notif-group">
@@ -230,11 +229,21 @@
 
   <!-- pace -->
   <script src="js/pace/pace.min.js"></script>
-  
   <!-- examNotify -->
   <script src="js/notify/pnotify.button.js"></script>
   <script src="js/notify/pnotify.core.js"></script>
   <script src="js/notify/examNotify.js"></script>
+  
+  <!--Check if exam already exist or not -->
+	<c:choose>
+	<c:when test="${alreadyExists eq true}">
+	<script type="text/javascript">newExamFailed()</script>
+	</c:when>
+	<c:when test="${alreadyExists eq false}">
+	<script type="text/javascript">newExamSuccess()</script>
+	</c:when>
+	</c:choose>
+  <!--Check if exam already exist or not -->
   
 </body>
 </html>

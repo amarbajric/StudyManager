@@ -320,6 +320,8 @@ public class StudyManagerController {
 	public String handleLogin() {
 		return "login";
 	}
+
+	
 	
 	@RequestMapping(value = "/addExam", method = RequestMethod.GET)
 	public String addExam(Model model) {
@@ -336,17 +338,29 @@ public class StudyManagerController {
 		return "professor/addExam";
 	}
 	
+	
+	
 	@RequestMapping(value="/addExamModel", method=RequestMethod.GET)
-	public String modelAdd(@RequestParam String courseSelected, @RequestParam String typeSelected)
+	public String modelAdd(Model model,@RequestParam String courseSelected, @RequestParam String typeSelected)
 	{
-		System.out.println(courseSelected);
-		System.out.println(typeSelected);
-		
 		CourseModel course = courseRepo.findByAcronym(courseSelected);
+		ExamModel existsExam = examRepo.findByDescriptionAndTypeAndCourse(courseSelected,typeSelected, course);
 		
-		ExamModel exam = new ExamModel(courseSelected,typeSelected, course);
+		if(existsExam == null)
+		{
+			ExamModel exam = new ExamModel(courseSelected,typeSelected, course);		
+			examRepo.save(exam);
+			model.addAttribute("alreadyExists",false);
+		}
+		else
+		{
+			model.addAttribute("alreadyExists",true);
+		}
 		
-		examRepo.save(exam);
+		
+				
+		
+		
 		
 		return "forward:/addExam";
 	}

@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import at.fh.swenga.project.model.CourseModel;
 import at.fh.swenga.project.model.DegreeProgramModel;
 import at.fh.swenga.project.model.ExamModel;
 
@@ -17,6 +18,8 @@ public interface ExamRepository extends JpaRepository<ExamModel, Integer> {
 	
 	
 	public List<ExamModel> findAll();
+	
+	public ExamModel findByDescriptionAndTypeAndCourse(String description,String type,CourseModel course);
 	
 	public List<ExamModel> findByCourseDegreeProgram(DegreeProgramModel degreeProgram);
 	

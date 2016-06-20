@@ -25,11 +25,22 @@ new PNotify({
 
 };
 
-function newExam() {
+
+function newExamSuccess() {
 	
 	new PNotify({
         title: 'Exam created',
         text: 'You successfully created a new exam!',
         type: 'success'})
+		
+};
+
+
+function newExamFailed() {
+	
+	new PNotify({
+        title: 'Error!',
+        text: 'The exam you were trying to create, failed!',
+        type: 'error'})	
 	
 };
