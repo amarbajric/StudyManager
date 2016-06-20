@@ -157,7 +157,7 @@
                   </div>
                   <div class="x_content">
                     <br>
-                    <form class="form-horizontal form-label-left" action = "addExamModel?course=${courseSelected}&type=${typeSelected}">
+                    <form class="form-horizontal form-label-left" action="addExamModel?course=${courseSelected}&type=${typeSelected}">
 
              
                       <div class="form-group">
@@ -184,8 +184,7 @@
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">               
-                          	<button type="submit" class="btn btn-success">Submit</button>
-
+                          	<button id="submitExam" type="submit" class="btn btn-success" onClick="newExam()">Submit</button>
                         </div>
                       </div>
 
@@ -231,5 +230,11 @@
 
   <!-- pace -->
   <script src="js/pace/pace.min.js"></script>
+  
+  <!-- examNotify -->
+  <script src="js/notify/pnotify.button.js"></script>
+  <script src="js/notify/pnotify.core.js"></script>
+  <script src="js/notify/examNotify.js"></script>
+  
 </body>
 </html>
