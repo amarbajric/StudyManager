@@ -43,7 +43,7 @@ public class StudentModel implements java.io.Serializable {
 	@ManyToOne (cascade = CascadeType.PERSIST)
 	private YearModel year; // e.g. IMA 2016
 	
-	@ManyToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER) //
+	@ManyToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinTable(name = "students_courses", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
 	private Set<CourseModel> courses = new HashSet<CourseModel>();
 	

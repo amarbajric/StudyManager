@@ -12,9 +12,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import at.fh.swenga.project.dao.DegreeProgramRepository;
 import at.fh.swenga.project.dao.ExamApplicationRepository;
@@ -25,6 +27,7 @@ import at.fh.swenga.project.dao.StudentRepository;
 import at.fh.swenga.project.dao.UserRepository;
 import at.fh.swenga.project.dao.YearRepository;
 import at.fh.swenga.project.model.ExamApplicationModel;
+import at.fh.swenga.project.model.ExamDateModel;
 import at.fh.swenga.project.model.ExamModel;
 import at.fh.swenga.project.model.ProfessorModel;
 import at.fh.swenga.project.model.Q_ProfessorExam;
@@ -34,6 +37,7 @@ import at.fh.swenga.project.util.MapSorter;
 
 
 @Controller
+@SessionAttributes("student")
 public class StudyManagerController {
 
 	@Autowired
@@ -72,8 +76,11 @@ public class StudyManagerController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String role = auth.getAuthorities().toString();
         String mailOfUser = auth.getName();
-
         String targetUrl = "";
+        
+        /**
+         * PROFESSOR
+         */
         if(role.toLowerCase().contains("professor")) {
         	ProfessorModel profData = professorRepo.findByMail(mailOfUser);
         	
@@ -93,6 +100,12 @@ public class StudyManagerController {
         	model.addAttribute("professorExams",professorExams);
         	model.addAttribute("professorData",profData);
             targetUrl = "professor/index";
+            
+            
+            
+           /**
+            * STUDENT 
+            */
         } else if(role.toLowerCase().contains("student")) {
         	//find all the data of the specific Student who logged in.
         	StudentModel studentData = studentRepo.findByMail(mailOfUser);
@@ -154,7 +167,6 @@ public class StudyManagerController {
         		upcomingStudentExams.add(exam);
         		}
 
-
         	
         	//setting models
         	model.addAttribute("average",average);
@@ -170,14 +182,18 @@ public class StudyManagerController {
             
         	targetUrl = "student/index";
         }
-        else if(role.toLowerCase().contains("admin")){
-        	targetUrl = "admin/index";
-        }      
-        
+      
 		//no forward because then it won't search in views folder!
 		return targetUrl;
 	}
 	
+	
+	
+	/**
+	 * Showing the grades in the student view
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/grades", method = RequestMethod.GET)
 	public String showGrades(Model model) {
     	//find all the data of the specific Student who logged in.
@@ -191,6 +207,12 @@ public class StudyManagerController {
 	}
 	
 	
+	
+	/**
+	 * Showing the exams in the student view
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/exams", method = RequestMethod.GET)
 	public String showExams(Model model) {
 		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -208,28 +230,41 @@ public class StudyManagerController {
     		Object[] arr = futureExamsData.get(i);
     		Date date = (Date)arr[4];
     		Q_studentExam exam = new Q_studentExam(Integer.parseInt(arr[0].toString()),arr[1].toString(),arr[2].toString(),arr[3].toString(),date,Double.parseDouble(arr[5].toString()),arr[6].toString());
+    		exam.setEnrolled(Integer.parseInt(arr[7].toString()));
     		futureStudentExams.add(exam);
+    		System.out.println(exam.getEnrolled());
     		}
-
+       	
     	model.addAttribute("studentData",studentData);
     	model.addAttribute("futureStudentExams",futureStudentExams);
 		return "student/exams";
 	}
 	
 
-	@RequestMapping(value="/manageExam")
+	@RequestMapping(value="/manageExam", method=RequestMethod.GET)
 	public String manageExam(@RequestParam String action, @RequestParam int id)
 	{
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String mailOfUser = auth.getName();
+        StudentModel studentData = studentRepo.findByMail(mailOfUser);
+        
 		if(action.equals("enroll"))
 		{
-			System.out.println(id);
-			System.out.println("enrolled");
+		
+		Integer newAttemptOfExam = examApplicationRepo.attemptOfExam(studentData.getId(),id) + 1;
+		ExamDateModel examDate = examDateRepo.findById(id);
+		ExamApplicationModel examToEnroll = new ExamApplicationModel(newAttemptOfExam, studentData, examDate);
+		examApplicationRepo.save(examToEnroll);
+
 		}
 		else if(action.equals("signOut"))
-		{
-			System.out.println(id);
-			System.out.println("signed out");
-		}
+		{			
+			
+		//DELETE EXAM APPLICATION
+					
+				
+		}			
+		
 		
 		return "forward:/exams";
 	}

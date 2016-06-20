@@ -27,6 +27,11 @@ public interface ExamApplicationRepository extends JpaRepository<ExamApplication
 	
 	@Query(value = "SELECT grade, COUNT(*) as anzahl FROM exam_applications where student_id = ?1 group by grade;", nativeQuery=true)
 	public List<Object[]> findNumberOfGradesByGrade(int student_id);
+	
+	@Query(value = "SELECT ifnull(max(attempt),0) as attempt "
+			+ "FROM exam_applications "
+			+ "WHERE student_id = ?1 AND examDate_id = ?2", nativeQuery=true)
+	public Integer attemptOfExam(int student_id, int examDate_id);
 
 }
 

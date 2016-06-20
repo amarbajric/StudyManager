@@ -11,6 +11,7 @@ public class Q_studentExam {
 	private Date date;
 	private double ects;
 	private String room;
+	private Integer enrolled;
 	
 	
 	public Q_studentExam(Integer id, String course, String type, String description, Date date, double ects,
@@ -93,6 +94,16 @@ public class Q_studentExam {
 
 	public void setRoom(String room) {
 		this.room = room;
+	}
+
+
+	public Integer getEnrolled() {
+		return enrolled;
+	}
+
+
+	public void setEnrolled(Integer enrolled) {
+		this.enrolled = enrolled;
 	}
 	
 	

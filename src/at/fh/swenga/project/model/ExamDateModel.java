@@ -31,7 +31,7 @@ public class ExamDateModel {
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private RoomModel room;
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REFRESH})
 	private ExamModel exam;
 	
 	@OneToMany(mappedBy = "examDate", fetch = FetchType.EAGER)
