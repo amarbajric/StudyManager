@@ -112,7 +112,7 @@
 			
 			
 			<!-- /page content -->
-			<div class="right_col" role="main" style="min-height: 3104px;">
+			<div class="right_col" role="main" style="min-height: 950px;">
             <div class="clearfix"></div>
             
             <div class="col-md-4 col-sm-4 col-xs-12">
