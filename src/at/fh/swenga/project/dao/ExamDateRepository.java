@@ -27,7 +27,8 @@ public interface ExamDateRepository extends JpaRepository<ExamDateModel, Integer
 			+ "JOIN rooms r ON exd.room_id = r.id "
 			+ "RIGHT JOIN exam_applications exa ON exa.examDate_id = exd.id "
 			+ "where p.id = ?1 "
-			+ "group by exd.id", nativeQuery=true)
+			+ "group by exd.id "
+			+ "order by exd.date desc", nativeQuery=true)
 	public List<Object[]> findProfExams(int professor_id);
 	
 	

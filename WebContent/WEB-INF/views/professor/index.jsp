@@ -144,10 +144,10 @@
                     <tbody>
                       <c:forEach items="${professorExams}" var="exam">
                         <tr class="even pointer">
-                        <td class=" ">${exam.getDescription()}</td>
+                        <th class=" ">${exam.getDescription()}</th>
                         <td class=" ">${exam.getType()}</td>
                         <td class=" ">${exam.getDateNumber()}</td>
-                        <td class=" ">${exam.getDate()}</td>
+                        <td class=" "><fmt:formatDate value="${exam.getDate()}" pattern="dd.MM.yyyy hh:mm" /></td>
                         <td class=" ">${exam.getRoom()}</td>
                         <td class=" ">${exam.getApplicants()}</td>
                         <td class=" "><button id="enroll" type="button" class="btn btn-success">Success</button></td>

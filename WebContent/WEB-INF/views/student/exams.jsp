@@ -115,13 +115,13 @@
 
 				<div class="x_panel">
                 <div class="x_title">
-                 <h1>Exams <small>Sign on off</small></h1>
+                 <h1>Exams </h1>
                   <div class="clearfix"></div>
                 </div>
 
                 <div class="x_content">
 
-                  <p>All exams to sign on or off</p>
+                  <p>All future exams</p>
 
 
                   <table class="table table-striped">
@@ -133,13 +133,13 @@
                         <th class="column-title">Date</th>
                         <th class="column-title">ECTS </th>
                         <th class="column-title">Room </th>
-                        <th class="column-title">Enroll/Sign Out</th>
+                        <th class="column-title">Action</th>
                       </tr>
                     </thead>
                     <tbody>
                     <c:forEach items="${futureStudentExams}" var="exam">                    
                       <tr>
-                        <td class=" ">${exam.getCourse()}</td>
+                        <th class=" ">${exam.getCourse()}</th>
                         <td class=" ">${exam.getType()}</td>
                         <td class=" ">${exam.getDescription()}</td>
                         <td class=" "><fmt:formatDate value="${exam.getDate()}" pattern="dd.MM.yyyy" /></td>

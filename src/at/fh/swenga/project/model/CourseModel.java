@@ -25,7 +25,7 @@ public class CourseModel implements java.io.Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(nullable = false, length = 100)
+	@Column(nullable = false, unique = true, length = 100)
 	private String acronym;
 
 	@Column(nullable = false, length = 100)
@@ -52,7 +52,7 @@ public class CourseModel implements java.io.Serializable {
 	private String type; // seminar, practical course, etc.
 
 
-	@OneToMany(mappedBy = "course", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "course", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private Set<ExamModel> exams;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)

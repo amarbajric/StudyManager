@@ -12,12 +12,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import at.fh.swenga.project.dao.CourseRepository;
 import at.fh.swenga.project.dao.DegreeProgramRepository;
 import at.fh.swenga.project.dao.ExamApplicationRepository;
 import at.fh.swenga.project.dao.ExamDateRepository;
@@ -26,6 +26,7 @@ import at.fh.swenga.project.dao.ProfessorRepository;
 import at.fh.swenga.project.dao.StudentRepository;
 import at.fh.swenga.project.dao.UserRepository;
 import at.fh.swenga.project.dao.YearRepository;
+import at.fh.swenga.project.model.CourseModel;
 import at.fh.swenga.project.model.ExamApplicationModel;
 import at.fh.swenga.project.model.ExamDateModel;
 import at.fh.swenga.project.model.ExamModel;
@@ -62,7 +63,10 @@ public class StudyManagerController {
 	ExamDateRepository examDateRepo;
 
 	@Autowired
-	ExamRepository examRepo;	
+	ExamRepository examRepo;
+	
+	@Autowired
+	CourseRepository courseRepo;
 
 	
 	/**
@@ -109,8 +113,8 @@ public class StudyManagerController {
         } else if(role.toLowerCase().contains("student")) {
         	//find all the data of the specific Student who logged in.
         	StudentModel studentData = studentRepo.findByMail(mailOfUser);
-        	//get top 5 latest graded exams
-        	List<ExamApplicationModel> examApplications = examApplicationRepo.findTop5ByStudentAndGradeIsNotNullOrderByExamDateDateDesc(studentData);
+        	//get all graded exams
+        	List<ExamApplicationModel> gradedExams = examApplicationRepo.findByStudentAndGradeIsNotNullOrderByExamDateDateDesc(studentData);
         	//get the total amount of students
         	List<StudentModel> allStudents = studentRepo.findAll();
         	//get all students who are studying with the specific student
@@ -132,7 +136,7 @@ public class StudyManagerController {
         		}
         	}
         	//setting the number of every grade to a list
-        	List<Integer> grades = new ArrayList(gradesMap.values());
+        	List<Integer> grades = new ArrayList<Integer>(gradesMap.values());
         	
         	
         	//get the average grade from all students
@@ -175,7 +179,7 @@ public class StudyManagerController {
         	model.addAttribute("studentColleagues",studentColleagues);
         	model.addAttribute("allStudents",allStudents);
         	model.addAttribute("studentData",studentData);
-        	model.addAttribute("examApplications",examApplications);
+        	model.addAttribute("gradedExams",gradedExams);
         	model.addAttribute("grades",grades);
         	model.addAttribute("upcomingStudentExams", upcomingStudentExams);
 
@@ -323,20 +327,10 @@ public class StudyManagerController {
 	        String mailOfUser = auth.getName();
     	//find all the data of the specific Student who logged in.
     	ProfessorModel profData = professorRepo.findByMail(mailOfUser);
-    	
-    	//getting all the future exams of a student
-    	List<Object[]> professorExamsData = examDateRepo.findProfExams(profData.getId());
-    	
-    	//Adding the Data of the exams into a List of Q_ProfessorExam
-    	List<Q_ProfessorExam> professorExams = new ArrayList<Q_ProfessorExam>();
-       	for (int i = 0; i < professorExamsData.size(); i++) {
-    		Object[] arr = professorExamsData.get(i);
-    		Date date = (Date)arr[1];
-    		Q_ProfessorExam exam = new Q_ProfessorExam(Integer.parseInt(arr[0].toString()) ,date,arr[2].toString(),arr[3].toString(),arr[4].toString(), arr[5].toString(), Integer.parseInt(arr[6].toString()));
-    		professorExams.add(exam);
-    		}
        	
-    	model.addAttribute("professorExams",professorExams);
+       	List<ExamModel> exams = examRepo.findByCourseProfessor(profData.getId());
+       	
+    	model.addAttribute("professorExams",exams);
     	model.addAttribute("professorData",profData);
 
 		return "professor/addExam";
@@ -347,6 +341,12 @@ public class StudyManagerController {
 	{
 		System.out.println(courseSelected);
 		System.out.println(typeSelected);
+		
+		CourseModel course = courseRepo.findByAcronym(courseSelected);
+		
+		ExamModel exam = new ExamModel(courseSelected,typeSelected, course);
+		
+		examRepo.save(exam);
 		
 		return "forward:/addExam";
 	}

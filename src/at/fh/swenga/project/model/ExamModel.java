@@ -31,17 +31,19 @@ public class ExamModel {
 	@OneToMany(mappedBy = "exam", fetch = FetchType.EAGER)
 	private Set<ExamDateModel> examDates;
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private CourseModel course;
 	
 	public ExamModel() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ExamModel(String description, String type) {
+
+	public ExamModel(String description, String type, CourseModel course) {
 		super();
 		this.description = description;
 		this.type = type;
+		this.course = course;
 	}
 
 	public String getDescription() {

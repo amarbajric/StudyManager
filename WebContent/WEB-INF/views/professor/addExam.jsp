@@ -115,7 +115,7 @@
 			<div class="right_col" role="main" style="min-height: 3104px;">
             <div class="clearfix"></div>
             
-            <div class="col-md-3 col-sm-3 col-xs-12">
+            <div class="col-md-4 col-sm-4 col-xs-12">
              <div class="x_panel">
                 <div class="x_title">
                   <h1>Exams</h1>
@@ -124,21 +124,20 @@
 
                 <div class="x_content">
 
-                  <p>Exams</p>
+                  <p>A List of all your Exams</p>
 
                   <table class="table table-striped">
                     <thead>
                       <tr class="headings">
                         <th class="column-title">Course</th>
                         <th class="column-title">Type</th>
-
                       </tr>
                     </thead>
 
                     <tbody>
                       <c:forEach items="${professorExams}" var="exam">
                         <tr class="even pointer">
-                        <td class=" ">${exam.getDescription()}</td>
+                        <td class=" ">${exam.getCourse().getDescription()}</td>
                         <td class=" ">${exam.getType()}</td>
                       </tr>
                       </c:forEach>
@@ -150,7 +149,7 @@
               </div>
             </div>
 
-              <div class="col-md-9 col-sm-9 col-xs-12">
+              <div class="col-md-8 col-sm-8 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Create a new exam</h2>

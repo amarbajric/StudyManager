@@ -25,14 +25,6 @@ public interface ExamApplicationRepository extends JpaRepository<ExamApplication
 			+ "order by ed.date desc", nativeQuery=true)
 	public List<ExamApplicationModel> findByStudentAndGradeIsNotNullOrderByExamDateDateDesc(StudentModel student);
 	
-	@Query(value = "select ea.* "
-			+ "from exam_applications ea "
-			+ "join exam_dates ed on ea.examDate_id = ed.id "
-			+ "where student_id = ?1 and grade is not null "
-			+ "order by ed.date desc "
-			+ "limit 5", nativeQuery=true)
-	public List<ExamApplicationModel> findTop5ByStudentAndGradeIsNotNullOrderByExamDateDateDesc(StudentModel student);
-	
 	@Query(value= "SELECT s.id,AVG(e.grade) as average FROM students s join exam_applications e ON s.id = e.student_id GROUP BY s.id  ORDER BY average ASC ;  ", nativeQuery=true)
 	public List<Object[]> findAverageGrades();
 	

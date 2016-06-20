@@ -173,7 +173,7 @@
 	                      <tbody>
 							<c:forEach items="${gradedExams}" var="exam">
 								<tr>
-									<th>${exam.examDate.exam.description}</th>
+									<th>${exam.examDate.exam.course.description}</th>
 									<td>${exam.examDate.exam.type}</td>
 									<td>${exam.attempt}</td>
 									<td scope="row"><fmt:formatDate value="${exam.examDate.date}" pattern="dd.MM.yyyy" /></td>

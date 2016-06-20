@@ -134,7 +134,7 @@
 								Students</span>
 							<div class="count">${allStudents.size()}</div>
 							<span class="count_bottom"><i class="green">${studentColleagues.size()}</i>
-								are studying with you</span>
+								of them are studying with you</span>
 						</div>
 					</div>
 					<div
@@ -142,8 +142,8 @@
 						<div class="left"></div>
 						<div class="right">
 							<span class="count_top"><i class="fa fa-pencil"></i> Total
-								Exams written</span>
-							<div class="count">${studentData.applications.size()}</div>
+								Exams taken</span>
+							<div class="count">${gradedExams.size()}</div>
 							<c:choose>
 								<c:when
 									test="${(fn:length(studentData.applications)/fn:length(examsOfDegreeProgram))*100 > 50}">
@@ -164,7 +164,7 @@
 						<div class="left"></div>
 						<div class="right">
 							<span class="count_top"><i class="fa fa-book"></i> Amount
-								of courses participating</span>
+								of courses taken</span>
 							<div class="count">${studentData.getCourses().size()}</div>
 						</div>
 					</div>
@@ -199,28 +199,28 @@
 									</thead>
 									<tbody>
 
-										<c:forEach items="${examApplications}" var="application">
+										<c:forEach items="${gradedExams}" end="4" var="exam">
 											<tr>
-												<th scope="row">${application.examDate.exam.description}</th>
-												<td>${application.examDate.exam.type}</td>
-												<td>${application.attempt}</td>
+												<th scope="row">${exam.examDate.exam.description}</th>
+												<td>${exam.examDate.exam.type}</td>
+												<td>${exam.attempt}</td>
 												<td><fmt:formatDate
-														value="${application.examDate.date}" pattern="dd.MM.yyyy" />
+														value="${exam.examDate.date}" pattern="dd.MM.yyyy" />
 													<!-- Check grade for showing icon next to it --> <c:choose>
-														<c:when test="${application.grade == 5}">
+														<c:when test="${exam.grade == 5}">
 															<c:set var="className">label label-danger pull-right</c:set>
-															<c:set var="text">Fail</c:set>
+															<c:set var="text">Failed</c:set>
 														</c:when>
-														<c:when test="${application.grade >= 3}">
+														<c:when test="${exam.grade >= 3}">
 															<c:set var="className">label label-warning pull-right</c:set>
-															<c:set var="text">Sufficient</c:set>
+															<c:set var="text">All right</c:set>
 														</c:when>
-														<c:when test="${application.grade < 3}">
+														<c:when test="${exam.grade < 3}">
 															<c:set var="className">label label-success pull-right</c:set>
 															<c:set var="text">Good Job</c:set>
 														</c:when>
 													</c:choose>
-												<td>${application.grade}<span class="${className}">${text}</span></td>
+												<td>${exam.grade}<span class="${className}">${text}</span></td>
 												<!-- /Check grade for showing icon next to it -->
 											</tr>
 										</c:forEach>
@@ -236,7 +236,7 @@
 							<div class="x_title">
 								<h2>
 									Upcoming Exams<small>Overview of the next
-										upcoming exams</small>
+										upcoming exams you applied for</small>
 								</h2>
 
 								<div class="clearfix"></div>
@@ -278,7 +278,7 @@
 						<div class="x_panel tile fixed_height_320 overflow_hidden">
 							<div class="dashboard-widget-content sidebar-widget">
 								<div class="x_title">
-									<h2>Degree Completion</h2>
+									<h2>ECTS gained</h2>
 									<div class="clearfix"></div>
 								</div>
 								<div class="x_content">
@@ -286,9 +286,9 @@
 										<canvas width="150" height="80" id="analog_ects" class=""
 											style="width: 160px; height: 100px;"></canvas>
 										<div class="goal-wrapper">
-											<span class="gauge-value pull-left"><u><i>ECTS</i></u>:</span>
+											<span class="gauge-value pull-left"><b>ECTS:&emsp;</b></span>
 											<span id="current_ects" class="gauge-value">${studentData.ects}</span>
-											<span id="goal_ects" class="goal-value">/180</span>
+											<span id="goal_ects" class="goal-value">out of 180.0</span>
 									
 								</div>
 							</div>

@@ -9,5 +9,7 @@ import at.fh.swenga.project.model.CourseModel;
 
 @Repository
 public interface CourseRepository extends JpaRepository<CourseModel, Integer> {
+	
+	public CourseModel findByAcronym(String acronym);
 
 }
