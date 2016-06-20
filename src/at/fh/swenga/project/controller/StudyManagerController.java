@@ -277,6 +277,41 @@ public class StudyManagerController {
 	}
 	
 	
+	
+	
+	@RequestMapping(value = "/profile")
+	public String showProfile(Model model){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String role = auth.getAuthorities().toString();
+        String mailOfUser = auth.getName();
+        
+        String UrlAsString = "";
+        boolean isStudent;
+        
+        if(role.toLowerCase().contains("professor"))
+        {
+        	ProfessorModel profileData = professorRepo.findByMail(mailOfUser);
+        	UrlAsString = "profile";
+        	isStudent = false;
+        	model.addAttribute("profileData",profileData);
+        	model.addAttribute("isStudent",isStudent);
+        	return UrlAsString;
+        }
+        else if(role.toLowerCase().contains("student"))
+        {
+        	StudentModel profileData = studentRepo.findByMail(mailOfUser);
+        	UrlAsString = "profile";
+        	isStudent = true;
+        	model.addAttribute("profileData",profileData);
+        	model.addAttribute("isStudent",isStudent);
+        	return UrlAsString;
+        }
+        
+        
+		return UrlAsString;
+	}
+	
+	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String handleLogin() {
 		return "login";

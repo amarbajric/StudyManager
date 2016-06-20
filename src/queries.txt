@@ -1,53 +1,86 @@
-# DegreeProgramms
-
-
+###################################################################
+## DegreeProgramms
+###################################################################
 INSERT INTO degree_programs(acronym, description, head, type)
 VALUES('IMA', 'Informationsmanagement', 'Werner Fritz', 'Bachelor');
-
 
 INSERT INTO degree_programs(acronym, description, head, type)
 VALUES('AIM', 'Informationsmanagement', 'Werner Fritz', 'Master');
 
-
 INSERT INTO degree_programs(acronym, description, head, type)
 VALUES('FZT', 'Fahrzeugtechnik', 'Kurt Steiner', 'Bachelor');
-
 
 INSERT INTO degree_programs(acronym, description, head, type)
 VALUES('LAV', 'Luftfahrt', 'Holger Flühr', 'Bachelor');
 
-
 INSERT INTO degree_programs(acronym, description, head, type)
 VALUES('MAV', 'Luftfahrt', 'Holger Flühr', 'Master');
 
-##############################################################
+INSERT INTO degree_programs(acronym, description, head, type)
+VALUES('SAB', 'Soziale Arbeit', 'Gertraud Pantucek', 'Bachelor');
 
-#Years
+INSERT INTO degree_programs(acronym, description, head, type)
+VALUES('MIG', 'Management internationaler Geschäftsprozesse', 'Doris Kiendl-Wendner', 'Bachelor');
 
-INSERT INTO years(year, degreeProgram_id)
+
+###################################################################
+## Years
+###################################################################
+
+### Informationsmanagement Bachelor
+INSERT INTO years(year, degreeProgram_id)	#ID 1
+VALUES('IMA 2013','1');
+
+INSERT INTO years(year, degreeProgram_id)	#ID 2
 VALUES('IMA 2014','1');
 
-INSERT INTO years(year, degreeProgram_id)
-VALUES('IMA 2015','1');
+INSERT INTO years(year, degreeProgram_id)	#ID 3
+VALUES('IMA 2015', 1);
 
-INSERT INTO years(year, degreeProgram_id)
-VALUES('IMA 2013', 1);
-
-INSERT INTO years(year, degreeProgram_id)
+### Informationsmanagement Master
+INSERT INTO years(year, degreeProgram_id)	#ID 4
 VALUES('AIM 2014', 2);
 
-INSERT INTO years(year, degreeProgram_id)
+INSERT INTO years(year, degreeProgram_id)	#ID 5
+VALUES('AIM 2015', 2);
+
+### Fahrzeugtechnik Bachelor
+INSERT INTO years(year, degreeProgram_id)	#ID 6
+VALUES('FZT 2014', 3);
+
+INSERT INTO years(year, degreeProgram_id)	#ID 7
 VALUES('FZT 2015', 3);
 
-INSERT INTO years(year, degreeProgram_id)
+### Luftfahrt Bachelor
+INSERT INTO years(year, degreeProgram_id)	#ID 8
 VALUES('LAV 2014', 4);
 
-INSERT INTO years(year, degreeProgram_id)
+INSERT INTO years(year, degreeProgram_id)	#ID 9
+VALUES('LAV 2015', 4);
+
+### Luftfahrt Master
+INSERT INTO years(year, degreeProgram_id)	#ID 10
 VALUES('MAV 2014', 5);
 
+INSERT INTO years(year, degreeProgram_id)	#ID 11
+VALUES('MAV 2015', 5);
 
+### Soziale Arbeit Bachelor
+INSERT INTO years(year, degreeProgram_id)	#ID 12
+VALUES('SAB 2014', 6);
 
-#Students, Professors and the according users with their user roles
+INSERT INTO years(year, degreeProgram_id)	#ID 13
+VALUES('SAB 2015', 6);
+
+### Management internationaler Geschäftsprozesse Bachelor
+INSERT INTO years(year, degreeProgram_id)	#ID 14
+VALUES('MIG 2014', 6);
+
+INSERT INTO years(year, degreeProgram_id)	#ID 15
+VALUES('MIG 2015', 7);
+
+###################################################################
+## Admin
 ###################################################################
 
 INSERT INTO users(username,password,enabled)
@@ -56,8 +89,38 @@ VALUES ('admin','$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm', 
 INSERT INTO user_roles (username, ROLE)
 VALUES ('admin', 'ROLE_ADMIN');
 
-###
+###################################################################
+## Students
+###################################################################
 
+
+### IMA 2013
+##########################
+INSERT INTO users (username,password,enabled)
+VALUES ('max.mustermann@studymanager.com', '$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm',TRUE);
+
+INSERT INTO user_roles(username,ROLE)
+VALUES ('max.mustermann@studymanager.com', 'ROLE_STUDENT');
+
+INSERT INTO students(ects,firstname,lastname,mail, year_id)
+VALUES(10.0,'Max','Mustermann','max.mustermann@studymanager.com', 1);
+
+
+INSERT INTO users (username,password,enabled)
+VALUES ('martina.musterfrau@studymanager.com', '$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm',TRUE);
+
+INSERT INTO user_roles(username,ROLE)
+VALUES ('martina.musterfrau@studymanager.com', 'ROLE_STUDENT');
+
+INSERT INTO students(ects,firstname,lastname,mail, year_id)
+VALUES(10.0,'Max','Musterfrau','martina.musterfrau@studymanager.com', 1);
+
+
+
+
+
+### IMA 2014
+##########################
 INSERT INTO users (username,password,enabled)
 VALUES ('christian.lagger@studymanager.com', '$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm',TRUE);
 
@@ -65,9 +128,8 @@ INSERT INTO user_roles(username,ROLE)
 VALUES ('christian.lagger@studymanager.com', 'ROLE_STUDENT');
 
 INSERT INTO students(ects,firstname,lastname,mail, year_id)
-VALUES(0.0,'Christian','Lagger','christian.lagger@studymanager.com', 1);
+VALUES(14.0,'Christian','Lagger','christian.lagger@studymanager.com', 2);
 
-###
 
 INSERT INTO users (username,password,enabled)
 VALUES ('amar.bajric@studymanager.com', '$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm',TRUE);
@@ -76,9 +138,8 @@ INSERT INTO user_roles(username,ROLE)
 VALUES ('amar.bajric@studymanager.com', 'ROLE_STUDENT');
 
 INSERT INTO students(ects,firstname,lastname,mail, year_id)
-VALUES(0.0,'Amar','Bajric','amar.bajric@studymanager.com', 1);
+VALUES(14.0,'Amar','Bajric','amar.bajric@studymanager.com', 2);
 
-###
 
 INSERT INTO users(username,password,enabled)
 VALUES ('georg.meizenitsch@studymanager.com','$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm', TRUE);
@@ -87,9 +148,8 @@ INSERT INTO user_roles (username, ROLE)
 VALUES ('georg.meizenitsch@studymanager.com', 'ROLE_STUDENT');
 
 INSERT INTO students(ects,firstname,lastname,mail, year_id)
-VALUES(0.0,'Georg','Meizenitsch','georg.meizenitsch@studymanager.com', 1);
+VALUES(14.0,'Georg','Meizenitsch','georg.meizenitsch@studymanager.com', 2);
 
-###
 
 INSERT INTO users(username,password,enabled)
 VALUES ('markus.knaller@studymanager.com','$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm', TRUE);
@@ -98,10 +158,14 @@ INSERT INTO user_roles (username, ROLE)
 VALUES ('markus.knaller@studymanager.com', 'ROLE_STUDENT');
 
 INSERT INTO students(ects,firstname,lastname,mail, year_id)
-VALUES(0.0,'Markus','Knaller','markus.knaller@studymanager.com', 1);
+VALUES(14.0,'Markus','Knaller','markus.knaller@studymanager.com', 2);
 
-###
 
+###################################################################
+## Professors
+###################################################################
+
+## Blauensteiner ID 1
 INSERT INTO users(username,password,enabled)
 VALUES ('johann.blauensteiner@studymanager.com','$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm', TRUE);
 
@@ -111,8 +175,7 @@ VALUES ('johann.blauensteiner@studymanager.com', 'ROLE_PROFESSOR');
 INSERT INTO professors(firstname,lastname,mail)
 VALUES('Johann','Blauensteiner','johann.blauensteiner@studymanager.com');
 
-###
-
+## Zupan ID 2
 INSERT INTO users(username,password,enabled)
 VALUES ('mario.zupan@studymanager.com','$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm', TRUE);
 
@@ -122,8 +185,17 @@ VALUES ('mario.zupan@studymanager.com', 'ROLE_PROFESSOR');
 INSERT INTO professors(firstname,lastname,mail)
 VALUES('Mario','Zupan','mario.zupan@studymanager.com');
 
-###
+## Ladstätter ID 3
+INSERT INTO users(username,password,enabled)
+VALUES ('robert.ladstätter@studymanager.com','$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm', TRUE);
 
+INSERT INTO user_roles (username, ROLE)
+VALUES ('robert.ladstätter@studymanager.com', 'ROLE_PROFESSOR');
+
+INSERT INTO professors(firstname,lastname,mail)
+VALUES('Robert','Ladstätter','robert.ladstätter@studymanager.com');
+
+## Nischelwitzer ID 4
 INSERT INTO users(username,password,enabled)
 VALUES ('alexander.nischelwitzer@studymanager.com','$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm', TRUE);
 
@@ -133,8 +205,7 @@ VALUES ('alexander.nischelwitzer@studymanager.com', 'ROLE_PROFESSOR');
 INSERT INTO professors(firstname,lastname,mail)
 VALUES('Alexander','Nischelwitzer','alexander.nischelwitzer@studymanager.com');
 
-###
-
+## Strohmaier ID 5
 INSERT INTO users(username,password,enabled)
 VALUES ('robert.strohmaier@studymanager.com','$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm', TRUE);
 
@@ -144,8 +215,7 @@ VALUES ('robert.strohmaier@studymanager.com', 'ROLE_PROFESSOR');
 INSERT INTO professors(firstname,lastname,mail)
 VALUES('Robert','Strohmaier','robert.strohmaier@studymanager.com');
 
-###
-
+## Schwarz ID 6
 INSERT INTO users(username,password,enabled)
 VALUES ('christopher.schwarz@studymanager.com','$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm', TRUE);
 
@@ -155,8 +225,7 @@ VALUES ('christopher.schwarz@studymanager.com', 'ROLE_PROFESSOR');
 INSERT INTO professors(firstname,lastname,mail)
 VALUES('Christopher','Schwarz','christopher.schwarz@studymanager.com');
 
-###
-
+## Graif ID 7
 INSERT INTO users(username,password,enabled)
 VALUES ('ewald.graif@studymanager.com','$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm', TRUE);
 
@@ -166,8 +235,7 @@ VALUES ('ewald.graif@studymanager.com', 'ROLE_PROFESSOR');
 INSERT INTO professors(firstname,lastname,mail)
 VALUES('Ewald','Graif','ewald.graif@studymanager.com');
 
-###
-
+## Mittenecker ID 8
 INSERT INTO users(username,password,enabled)
 VALUES ('georg.mittenecker@studymanager.com','$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm', TRUE);
 
@@ -177,8 +245,7 @@ VALUES ('georg.mittenecker@studymanager.com', 'ROLE_PROFESSOR');
 INSERT INTO professors(firstname,lastname,mail)
 VALUES('Georg','Mittenecker','georg.mittenecker@studymanager.com');
 
-###
-
+## Janser-Munro ID 9
 INSERT INTO users(username,password,enabled)
 VALUES ('gerhild.janser-munro@studymanager.com','$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm', TRUE);
 
@@ -189,74 +256,133 @@ INSERT INTO professors(firstname,lastname,mail)
 VALUES('Gerhild','Janser-Munro','gerhild.janser-munro@studymanager.com');
 
 
-#########################################################################
+###################################################################
+## Courses
+###################################################################
 
-# Courses
+INSERT INTO courses(acronym, description, ectsValue, type, degreeProgram_id)	#ID 1
+VALUES('SWENGB', 'Software Engineering Basics', 5.0,'iL', 1);
 
-INSERT INTO courses(acronym, description, ectsValue, type, degreeProgram_id)
+INSERT INTO courses(acronym, description, ectsValue, type, degreeProgram_id)	#ID 2
 VALUES('SWENGA', 'Software Engineering Advanced', 5.0,'iL', 1);
 
-INSERT INTO courses(acronym, description, ectsValue, type, degreeProgram_id)
+INSERT INTO courses(acronym, description, ectsValue, type, degreeProgram_id)	#ID 3
 VALUES('DMT3', 'Digitale Medien Technologien 3', 5.0,'iL', 1);
 
-INSERT INTO courses(acronym, description, ectsValue, type, degreeProgram_id)
+INSERT INTO courses(acronym, description, ectsValue, type, degreeProgram_id)	#ID 4
 VALUES('COISD', 'Communication Infrastructure Design', 2.5, 'Ue', 1);
 
-INSERT INTO courses(acronym, description, ectsValue, type, degreeProgram_id)
+INSERT INTO courses(acronym, description, ectsValue, type, degreeProgram_id)	#ID 5
 VALUES('HVSYS', 'Heterogene vernetze Systeme', 5.0,'Se', 1);
 
-INSERT INTO courses(acronym, description, ectsValue, type, degreeProgram_id)
-VALUES('TEAMT', 'Teamtraining', 1,'Se', 1);
+INSERT INTO courses(acronym, description, ectsValue, type, degreeProgram_id)	#ID 6
+VALUES('TEAMT', 'Teamtraining', 1.5,'Se', 1);
 
-#########################################################################
+###################################################################
+## Courses to Professors MAPPING
+###################################################################
 
-#Courses to Professors mapping
-
+## SWENGB
 INSERT INTO courses_professors(course_id, professor_id)
 VALUES(1, 1);
 
 INSERT INTO courses_professors(course_id, professor_id)
-VALUES(1, 2);
+VALUES(1, 3);
+
+## SWENGA
+INSERT INTO courses_professors(course_id, professor_id)
+VALUES(2, 1);
 
 INSERT INTO courses_professors(course_id, professor_id)
-VALUES(2, 3);
+VALUES(2, 2);
 
+## DMT3
 INSERT INTO courses_professors(course_id, professor_id)
-VALUES(2, 4);
+VALUES(3, 4);
 
 INSERT INTO courses_professors(course_id, professor_id)
 VALUES(3, 5);
 
+## COISD
 INSERT INTO courses_professors(course_id, professor_id)
 VALUES(4, 6);
 
+## HVSYS
 INSERT INTO courses_professors(course_id, professor_id)
-VALUES(4, 7);
+VALUES(5, 7);
 
 INSERT INTO courses_professors(course_id, professor_id)
 VALUES(5, 8);
 
-######################################################################
+## TEAMT
+INSERT INTO courses_professors(course_id, professor_id)
+VALUES(6, 9);
 
-# Courses to Students Mapping
 
+###################################################################
+## Courses to Students MAPPING
+###################################################################
+
+## SWENGB
 INSERT INTO students_courses(student_id, course_id)
 VALUES(1,1);
 
 INSERT INTO students_courses(student_id, course_id)
+VALUES(2,1);
+
+INSERT INTO students_courses(student_id, course_id)
+VALUES(3,1);
+
+INSERT INTO students_courses(student_id, course_id)
+VALUES(4,1);
+
+INSERT INTO students_courses(student_id, course_id)
+VALUES(5,1);
+
+INSERT INTO students_courses(student_id, course_id)
+VALUES(6,1);
+
+## SWENGA
+INSERT INTO students_courses(student_id, course_id)
 VALUES(1,2);
 
+INSERT INTO students_courses(student_id, course_id)
+VALUES(2,2);
+
+INSERT INTO students_courses(student_id, course_id)
+VALUES(3,2);
+
+INSERT INTO students_courses(student_id, course_id)
+VALUES(4,2);
+
+INSERT INTO students_courses(student_id, course_id)
+VALUES(5,2);
+
+INSERT INTO students_courses(student_id, course_id)
+VALUES(6,2);
+
+## DMT 3
 INSERT INTO students_courses(student_id, course_id)
 VALUES(1,3);
 
 INSERT INTO students_courses(student_id, course_id)
-VALUES(1,4);
-
-INSERT INTO students_courses(student_id, course_id)
-VALUES(1,5);
-
-INSERT INTO students_courses(student_id, course_id)
 VALUES(2,3);
+
+INSERT INTO students_courses(student_id, course_id)
+VALUES(3,3);
+
+INSERT INTO students_courses(student_id, course_id)
+VALUES(4,3);
+
+INSERT INTO students_courses(student_id, course_id)
+VALUES(5,3);
+
+INSERT INTO students_courses(student_id, course_id)
+VALUES(6,3);
+
+## COISD
+INSERT INTO students_courses(student_id, course_id)
+VALUES(1,4);
 
 INSERT INTO students_courses(student_id, course_id)
 VALUES(2,4);
@@ -265,104 +391,408 @@ INSERT INTO students_courses(student_id, course_id)
 VALUES(3,4);
 
 INSERT INTO students_courses(student_id, course_id)
+VALUES(4,4);
+
+INSERT INTO students_courses(student_id, course_id)
+VALUES(5,4);
+
+INSERT INTO students_courses(student_id, course_id)
+VALUES(6,4);
+
+## HVSYS
+INSERT INTO students_courses(student_id, course_id)
+VALUES(1,5);
+
+INSERT INTO students_courses(student_id, course_id)
+VALUES(2,5);
+
+INSERT INTO students_courses(student_id, course_id)
 VALUES(3,5);
 
+INSERT INTO students_courses(student_id, course_id)
+VALUES(4,5);
+
+INSERT INTO students_courses(student_id, course_id)
+VALUES(5,5);
+
+INSERT INTO students_courses(student_id, course_id)
+VALUES(6,5);
+
+## TEAMT
+INSERT INTO students_courses(student_id, course_id)
+VALUES(1,6);
+
+INSERT INTO students_courses(student_id, course_id)
+VALUES(2,6);
+
+INSERT INTO students_courses(student_id, course_id)
+VALUES(3,6);
+
+INSERT INTO students_courses(student_id, course_id)
+VALUES(4,6);
+
+INSERT INTO students_courses(student_id, course_id)
+VALUES(5,6);
+
+INSERT INTO students_courses(student_id, course_id)
+VALUES(6,6);
 
 
-#########################################################################
+###################################################################
+## Rooms
+###################################################################
 
-# Rooms
-
-INSERT INTO rooms(description, seats)
+INSERT INTO rooms(description, seats)	#ID 1
 VALUES('G.AP147.004', 50);
 
-INSERT INTO rooms(description, seats)
+INSERT INTO rooms(description, seats)	#ID 2
 VALUES('G.AP147.005', 100);
 
-INSERT INTO rooms(description, seats)
+INSERT INTO rooms(description, seats)	#ID 3
 VALUES('G.AP147.006', 50);
 
-INSERT INTO rooms(description, seats)
+INSERT INTO rooms(description, seats)	#ID 4
 VALUES('G.AP147.221', 18);
 
-INSERT INTO rooms(description, seats)
+INSERT INTO rooms(description, seats)	#ID 5
 VALUES('G.AP147.222', 18);
 
-######################################################################
+INSERT INTO rooms(description, seats)	#ID 6
+VALUES('G.AP147.224', 18);
 
-# Exams
-
-INSERT INTO exams(description, type, course_id)
-VALUES('SWENGA', 'midterm', 1);
-
-INSERT INTO exams(description, type, course_id)
-VALUES('SWENGA', 'final', 1);
-
-INSERT INTO exams(description, type, course_id)
-VALUES('COISD', 'final', 3);
-
-INSERT INTO exams(description, type, course_id)
-VALUES('DMT3', 'final', 2);
-
-INSERT INTO exams(description, type, course_id)
-VALUES('HVSYS', 'final', 4);
-
-INSERT INTO exams(description, type, course_id)
-VALUES('TEAMT', 'final', 5);
-
-#######################################################################
-
-# Examdates
-
-INSERT INTO exam_dates(date, exam_id, room_id, description)
-VALUES('2016-03-23 09:00:00', 1, 4, '1. date');
-
-INSERT INTO exam_dates(date, exam_id, room_id, description)
-VALUES('2016-06-23 10:00:00', 2, 2, '1. date');
-
-INSERT INTO exam_dates(date, exam_id, room_id, description)
-VALUES('2016-07-5 10:00:00', 2, 2, '2. date');
-
-INSERT INTO exam_dates(date, exam_id, room_id, description)
-VALUES('2016-04-18 10:00:00', 3, 1, '1. date');
-
-INSERT INTO exam_dates(date, exam_id, room_id, description)
-VALUES('2016-04-27 11:00:00', 4, 3, '1. date');
-
-INSERT INTO exam_dates(date, exam_id, room_id, description)
-VALUES('2016-06-18 09:00:00', 5, 2, '1. date');
-
-INSERT INTO exam_dates(date, exam_id, room_id, description)
-VALUES('2016-05-05 10:00:00', 6, 1, '1. date');
-
-#########################################################################
+INSERT INTO rooms(description, seats)	#ID 7
+VALUES('G.AP147.123', 18);
 
 
-# Exam Applications
+###################################################################
+## Exams
+###################################################################
+
+INSERT INTO exams(description, type, course_id)	#ID 1
+VALUES('SWENGB', 'midterm', 1);
+
+INSERT INTO exams(description, type, course_id)	#ID 2
+VALUES('SWENGB', 'final', 1);
+
+
+INSERT INTO exams(description, type, course_id)	#ID 3
+VALUES('SWENGA', 'midterm', 2);
+
+INSERT INTO exams(description, type, course_id)	#ID 4
+VALUES('SWENGA', 'final', 2);
+
+
+INSERT INTO exams(description, type, course_id)	#ID 5
+VALUES('DMT3', 'final', 3);
+
+
+INSERT INTO exams(description, type, course_id)	#ID 6
+VALUES('COISD', 'final', 4);
+
+
+INSERT INTO exams(description, type, course_id)	#ID 7
+VALUES('HVSYS', 'midterm', 5);
+
+INSERT INTO exams(description, type, course_id)	#ID 8
+VALUES('HVSYS', 'final', 5);
+
+
+INSERT INTO exams(description, type, course_id)	#ID 9
+VALUES('TEAMT', 'final', 6);
+
+###################################################################
+## Examdates
+###################################################################
+
+######################	IMA 2014 ######################
+
+## SWENGB midterm IMA 2014
+INSERT INTO exam_dates(date, exam_id, room_id, description)		# ID 1
+VALUES('2015-11-11 09:00:00', 1, 4, 'midterm');
+###
+
+## SWENGB final IMA 2014
+INSERT INTO exam_dates(date, exam_id, room_id, description)		# ID 2
+VALUES('2016-01-15 10:00:00', 2, 2, '1. date');
+
+INSERT INTO exam_dates(date, exam_id, room_id, description)		# ID 3
+VALUES('2016-02-29 10:00:00', 2, 2, '2. date');
+###
+
+## SWENGA midterm IMA 2014
+INSERT INTO exam_dates(date, exam_id, room_id, description)		# ID 4
+VALUES('2016-04-04 10:00:00', 3, 2, 'midterm');
+###
+
+## SWENGA final IMA 2014
+INSERT INTO exam_dates(date, exam_id, room_id, description)		# ID 5
+VALUES('2016-05-03 11:00:00', 4, 1, '1. date');
+
+INSERT INTO exam_dates(date, exam_id, room_id, description)		# ID 6
+VALUES('2016-05-27 11:00:00', 4, 1, '2. date');
+###
+
+## DMT 3 final IMA 2014
+INSERT INTO exam_dates(date, exam_id, room_id, description)		# ID 7
+VALUES('2016-07-03 09:00:00', 5, 2, '1. date');
+
+INSERT INTO exam_dates(date, exam_id, room_id, description)		# ID 8
+VALUES('2016-10-03 09:00:00', 5, 2, '2. date');
+###
+
+## COISD final IMA 2014
+INSERT INTO exam_dates(date, exam_id, room_id, description)		# ID 9
+VALUES('2016-04-15 10:00:00', 6, 1, '1. date');
+
+INSERT INTO exam_dates(date, exam_id, room_id, description)		# ID 10
+VALUES('2016-05-26 10:00:00', 6, 1, '2. date');
+###
+
+##HVSYS midterm IMA 2014
+INSERT INTO exam_dates(date, exam_id, room_id, description)		# ID 11
+VALUES('2016-05-15 10:00:00', 7, 1, 'midterm');
+###
+
+##HVSYS final IMA 2014
+INSERT INTO exam_dates(date, exam_id, room_id, description)		# ID 12
+VALUES('2016-06-17 10:00:00', 8, 2, '1. date');
+
+INSERT INTO exam_dates(date, exam_id, room_id, description)		# ID 13
+VALUES('2016-07-05 10:00:00', 8, 2, '2. date');
+###
+
+##TEAMT final IMA 2014
+INSERT INTO exam_dates(date, exam_id, room_id, description)		# ID 14
+VALUES('2016-05-17 10:00:00', 9, 2, '1. date');
+
+INSERT INTO exam_dates(date, exam_id, room_id, description)		# ID 15
+VALUES('2016-06-13 10:00:00', 9, 2, '2. date');
+###
+
+######################	IMA 2013 ######################
+
+
+## SWENGB midterm IMA 2013
+INSERT INTO exam_dates(date, exam_id, room_id, description)		# ID 16
+VALUES('2014-11-11 09:00:00', 1, 4, 'midterm');
+###
+
+## SWENGB final IMA 2013
+INSERT INTO exam_dates(date, exam_id, room_id, description)		# ID 17
+VALUES('2015-01-15 10:00:00', 2, 2, '1. date');
+
+INSERT INTO exam_dates(date, exam_id, room_id, description)		# ID 18
+VALUES('2015-02-28 10:00:00', 2, 2, '2. date');
+###
+
+## SWENGA midterm IMA 2013
+INSERT INTO exam_dates(date, exam_id, room_id, description)		# ID 19
+VALUES('2015-04-04 10:00:00', 3, 2, 'midterm');
+###
+
+## SWENGA final IMA 2013
+INSERT INTO exam_dates(date, exam_id, room_id, description)		# ID 20
+VALUES('2015-05-03 11:00:00', 4, 1, '1. date');
+
+INSERT INTO exam_dates(date, exam_id, room_id, description)		# ID 21
+VALUES('2015-05-27 11:00:00', 4, 1, '2. date');
+###
+
+###################################################################
+## ExamApplications
+###################################################################
+
+######################	IMA 2014 ######################
+
+
+## SWENGB midterm IMA 2014
+INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
+VALUES(1, 3, 1, 3);
 
 INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
-VALUES(1,1, 1, 1);
+VALUES(1, 2, 1, 4);
 
 INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
-VALUES(1,3, 2, 1);
+VALUES(1, 2, 1, 5);
 
 INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
-VALUES(1,2, 4, 1);
+VALUES(1, 1, 1, 6);
+###
+
+## SWENGB final 1.date IMA 2014
+INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
+VALUES(1, 3, 2, 3);
 
 INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
-VALUES(1,4, 5, 1);
+VALUES(1, 5, 2, 4);
+###
+
+## SWENGB final 2.date IMA 2014
+INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
+VALUES(2, 2, 3, 4);
 
 INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
-VALUES(1,3, 6, 1);
+VALUES(1, 2, 3, 5);
 
 INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
-VALUES(1,1, 7, 1);
+VALUES(1, 1, 3, 6);
+###
+
+## SWENGA midterm IMA 2014
+INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
+VALUES(1, 3, 4, 3);
 
 INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
-VALUES(1,3, 2, 2);
+VALUES(1, 2, 4, 4);
 
 INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
-VALUES(2,5, 3, 2);
+VALUES(1, 2, 4, 5);
+
+INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
+VALUES(1, 1, 4, 6);
+###
+
+## SWENGA final 1.date IMA 2014
+INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
+VALUES(1, 3, 5, 4);
+
+INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
+VALUES(1, 5, 5, 3);
+###
+
+## SWENGA final 2.date IMA 2014
+INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
+VALUES(2, 3, 6, 3);
+
+INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
+VALUES(1, 1, 6, 5);
+
+INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
+VALUES(1, 3, 6, 6);
+###
+
+## DMT3 final 1.date IMA 2014
+INSERT INTO exam_applications(attempt, examDate_id, student_id)
+VALUES(1, 7, 3);
+
+INSERT INTO exam_applications(attempt, examDate_id, student_id)
+VALUES(1, 7, 4);
+###
+
+## DMT3 final 2.date IMA 2014
+INSERT INTO exam_applications(attempt, examDate_id, student_id)
+VALUES(1, 8, 5);
+
+INSERT INTO exam_applications(attempt, examDate_id, student_id)
+VALUES(1, 8, 6);
+###
+
+## COISD final 1.date IMA 2014
+INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
+VALUES(1, 3, 9, 3);
+
+INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
+VALUES(1, 2, 9, 4);
+###
+
+## COISD final 2.date IMA 2014
+INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
+VALUES(2, 1, 10, 3);
+
+INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
+VALUES(1, 1, 10, 5);
+
+INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
+VALUES(1, 2, 10, 6);
+###
+
+## HVSYS midterm IMA 2014
+INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
+VALUES(1, 3, 11, 3);
+
+INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
+VALUES(1, 2, 11, 4);
+
+INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
+VALUES(1, 1, 11, 5);
+
+INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
+VALUES(1, 2, 11, 6);
+###
+
+## HVSYS final 1.date IMA 2014
+INSERT INTO exam_applications(attempt, examDate_id, student_id)
+VALUES(1, 12, 5);
+
+INSERT INTO exam_applications(attempt, examDate_id, student_id)
+VALUES(1, 12, 6);
+###
+
+## HVSYS final 2.date IMA 2014
+INSERT INTO exam_applications(attempt, examDate_id, student_id)
+VALUES(1, 13, 3);
+
+INSERT INTO exam_applications(attempt, examDate_id, student_id)
+VALUES(1, 13, 4);
+###
+
+## TEAMT final 1.date IMA 2014
+INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
+VALUES(1, 1, 14, 3);
+
+INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
+VALUES(1, 1, 14, 4);
+
+INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
+VALUES(1, 1, 14, 5);
+###
+
+## TEAMT final 1.date IMA 2014
+INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
+VALUES(1, 1, 15, 6);
+###
+
+
+######################	IMA 2013 ######################
+
+
+## SWENGB midterm IMA 2013
+INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
+VALUES(1, 1, 16, 1);
+
+INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
+VALUES(1, 2, 16, 2);
+
+###
+
+## SWENGB final 1.date IMA 2013
+INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
+VALUES(1, 3, 17, 1);
+###
+
+## SWENGB final 2.date IMA 2013
+INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
+VALUES(1, 2, 18, 2);
+###
+
+## SWENGA midterm IMA 2013
+INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
+VALUES(1, 3, 19, 1);
+
+INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
+VALUES(1, 2, 19, 2);
+###
+
+## SWENGA final 1.date IMA 2013
+INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
+VALUES(1, 3, 20, 2);
+###
+
+## SWENGA final 2.date IMA 2013
+INSERT INTO exam_applications(attempt,grade, examDate_id, student_id)
+VALUES(2, 3, 21, 1);
+
+###
 
 ########################################################################
 
