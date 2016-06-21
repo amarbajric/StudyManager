@@ -5395,3 +5395,6 @@ ul.notifications {
 .copyright-info {
   padding: 8px 0;
 }
+.hiddenRow {
+    padding: 0 !important;
+}

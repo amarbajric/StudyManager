@@ -136,14 +136,42 @@
 
                     <tbody>
                       <c:forEach items="${professorExams}" var="exam">
-                        <tr class="even pointer">
+                      <tr class="even pointer" data-toggle="collapse" data-target="#demo${exam.id}">
                         <td class=" ">${exam.getCourse().getDescription()}</td>
                         <td class=" ">${exam.getType()}</td>
                       </tr>
+                      
+                      <!-- Collapsed Table -->
+                      <tr >
+            			<td colspan="6" class="hiddenRow"><div class="accordian-body collapse" id="demo${exam.id}">         			
+            			<table class="table table-striped">
+	                      	<thead>
+	                        	<tr>
+	                        		<th>Access Key</th>
+	                        		<th>Secret Key</th>
+	                        		<th>Status </th>
+	                        		<th> Created</th>
+	                        		<th> Expires</th>
+	                        		<th>Actions</th>
+	                        	</tr>
+	                      	</thead>
+	                      	<tbody>
+	                        	<tr>
+	                        		<td>access-key-1</td>
+	                        		<td>secretKey-1</td>
+	                        		<td>Status</td>
+	                        		<td>some date</td>
+	                        		<td>some date</td>
+	                        		<td><a href="#" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-cog"></i></a></td>
+	                  			</tr>	                    
+	                      	</tbody>
+               			</table>
+            			</div> </td>
+        			  </tr>
+        			  <!-- /Collapsed Table -->
+        			  
                       </c:forEach>
-                    
                     </tbody>
-
                   </table>
                 </div>
               </div>
