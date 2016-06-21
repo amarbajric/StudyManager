@@ -121,9 +121,9 @@
 							<span class="count_top"><i class="fa fa-sitemap"></i>
 								Current Rank of University</span>
 							<div class="count">${rank} </div>
-							<span class="count_bottom"> Your average grade: <i class="green"> <fmt:formatNumber 
+							<span class="count_bottom"> Your average grade: <b><i class="green"> <fmt:formatNumber 
      						value="${average}" 
-     						maxFractionDigits="2"/> </i></span>
+     						maxFractionDigits="2"/> </i></b></span>
 						</div>
 					</div>
 					<div
@@ -133,7 +133,7 @@
 							<span class="count_top"><i class="fa fa-user"></i> Total
 								Students</span>
 							<div class="count">${numberOfAllStudents}</div>
-							<span class="count_bottom"><i class="green">${numberOfStudentColleagues}</i>
+							<span class="count_bottom"><b><i class="green">${numberOfStudentColleagues}</i></b>
 								of them are studying with you</span>
 						</div>
 					</div>
@@ -144,18 +144,20 @@
 							<span class="count_top"><i class="fa fa-pencil"></i> Total
 								Exams taken</span>
 							<div class="count">${gradedExams.size()}</div>
-							<c:set var="percentagePositive"><fmt:formatNumber value="25" maxFractionDigits="2"/></c:set>
+							<c:set var="percentagePositive" val="${percentageOfPassedExams}"></c:set>
 							<c:choose>
-								<c:when	test="${percentagePositive>80}">
+								<c:when	test="${percentagePositive>90}">
 									<c:set var="classCol">green</c:set>
 								</c:when>
-								<c:when	test="${percentagePositive<80}">
+								<c:when	test="${percentagePositive>75}">
+									<c:set var="classCol">orange</c:set>
+								</c:when>
+								<c:when	test="${percentagePositive<75}">
 									<c:set var="classCol">red</c:set>
 								</c:when>
 							</c:choose>
-							<span class="count_bottom"><i class="${classCol}"><fmt:formatNumber 
-     						value="${percentagePositive}" 
-     						maxFractionDigits="2"/>%</i> passed</span>
+							<c:set var="classCol">red</c:set>
+							<span class="count_bottom"><b><i class="${classCol}">${percentagePositive}%</i></b> passed</span>
 						</div>
 					</div>
 					<div

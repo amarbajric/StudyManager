@@ -261,6 +261,7 @@
   <script src="js/notify/pnotify.button.js"></script>
   <script src="js/notify/pnotify.core.js"></script>
   <script src="js/notify/examNotify.js"></script>
+  <script src="js/custom.js"></script>
   
   <!--Check if exam already exist or not -->
 	<c:choose>

@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -70,7 +71,7 @@ public class StudyManagerController {
 	@Autowired
 	CourseRepository courseRepo;
 
-	
+	/********************************************INDEX VIEW***********************************************************/
 	/**
 	 * The default requestMapper only checks if the logged in user is a student, professor or admin.
 	 * Then it checks the given role of the logged in user and forwards the browser to the specific view
@@ -84,9 +85,8 @@ public class StudyManagerController {
         String mailOfUser = auth.getName();
         String targetUrl = "";
         
-        /**
-         * PROFESSOR
-         */
+
+         /***************************PROFESSOR INDEX PAGE*******************************************/
         if(role.toLowerCase().contains("professor")) {
         	ProfessorModel profData = professorRepo.findByMail(mailOfUser);
         	
@@ -109,38 +109,50 @@ public class StudyManagerController {
             
             
             
-           /**
-            * STUDENT 
-            */
+        /***************************STUDENT INDEX PAGE*******************************************/
         } else if(role.toLowerCase().contains("student")) {
         	//find all the data of the specific Student who logged in.
         	StudentModel studentData = studentRepo.findByMail(mailOfUser);
+        	
+        	/*************************GET THE GRADED EXAMS***************************/
         	//get all graded exams
         	List<ExamApplicationModel> gradedExams = examApplicationRepo.findByStudentAndGradeIsNotNullOrderByExamDateDateDesc(studentData);
+        	
+        	//get the amount of passed exams
+        	int amountOfPassedExams = gradedExams.stream().filter(e -> e.getGrade() < 5).collect(Collectors.toList()).size();
+        	int amountOfGradedExams = gradedExams.size();
+        	double percentageOfPassedExams = (double)amountOfPassedExams / ((double)amountOfGradedExams) * 100;
+        	System.out.println(amountOfGradedExams);
+        	System.out.println(amountOfPassedExams);
+        	System.out.println(percentageOfPassedExams);
+        	
+        	
+        	/*************************GET THE AMOUNT OF STUDENTS***************************/
         	//get the total amount of students
         	int numberOfAllStudents = studentRepo.countAll();
         	//get all students who are studying with the specific student
         	int numberOfStudentColleagues = studentRepo.countByYearYear(studentData.getYear().getYear());
         	
-        	//set data in model object(grades)
+        	/*************************GET THE AMOUNT OF EVERY GRADE FOR THE STUDENT***************************/
+        	//get the amount for every grade data
         	List<Object[]> numberOfGradesByGrade = examApplicationRepo.findNumberOfGradesByGrade(studentData.getId());
-        	//get grades into Map
+        	//get the data into a Map with the grade as the key and the amount as the value
         	Map<Integer,Integer> gradesMap = new HashMap<Integer,Integer>();
         	for (int i = 0; i < numberOfGradesByGrade.size(); i++) {
         		Object[] arr = numberOfGradesByGrade.get(i);
         		gradesMap.put(Integer.parseInt(arr[0].toString()), Integer.parseInt(arr[1].toString()));
         		}
-        	//set grades which don't exist to zero
+        	//set the amount of grades which don't exist to zero
         	for (int i = 1; i < 6; i++) {
         		if (!gradesMap.containsKey(i)){
         			gradesMap.put(i,0);
         		}
         	}
-        	//setting the number of every grade to a list
+        	//setting the amount of every grade to a list
         	List<Integer> grades = new ArrayList<Integer>(gradesMap.values());
         	
-        	
-        	//get the average grade from all students
+        	/*************************GET THE AVERAGE GRADE FROM ALL STUDENTS***************************/
+        	//get the average grade data from all students
         	List<Object[]> averageGrades = examApplicationRepo.findAverageGrades();
         	
         	//get average grades into map
@@ -159,7 +171,7 @@ public class StudyManagerController {
         	int rank = indexes.indexOf(studentData.getId())+1; // +1 because list starts at 0
         	double average = averageMapSorted.get(studentData.getId());
         	
-        	
+        	/*************************GET 5 NEXT UPCOMING EXAMS***************************/
         	//getting the 5 next upcoming exams data of a student
         	List<Object[]> upcomingExamsData = examDateRepo.findUpcomingExams(studentData.getId());
         	
@@ -172,14 +184,14 @@ public class StudyManagerController {
         		upcomingStudentExams.add(exam);
         		}
 
-        	
-        	//setting models
+           	/*************************SETTING THE MODELS***************************/
         	model.addAttribute("average",average);
         	model.addAttribute("rank",rank);
         	model.addAttribute("numberOfStudentColleagues",numberOfStudentColleagues);
         	model.addAttribute("numberOfAllStudents",numberOfAllStudents);
         	model.addAttribute("studentData",studentData);
         	model.addAttribute("gradedExams",gradedExams);
+        	model.addAttribute("percentageOfPassedExams",percentageOfPassedExams);
         	model.addAttribute("grades",grades);
         	model.addAttribute("upcomingStudentExams", upcomingStudentExams);
 
@@ -193,38 +205,31 @@ public class StudyManagerController {
 	
 	
 	
-	/**
-	 * Showing the grades in the student view
-	 * @param model
-	 * @return
-	 */
+/********************************************GRADES STUDENT PAGE***********************************************************/
 	@RequestMapping(value = "/grades", method = RequestMethod.GET)
 	public String showGrades(Model model,@ModelAttribute("studentData") StudentModel studentData) {
     	
     	//get all graded exams
     	List<ExamApplicationModel> gradedExams = examApplicationRepo.findByStudentAndGradeIsNotNullOrderByExamDateDateDesc(studentData);
+    	
+    	
+    	/*************************SETTING THE MODELS***************************/
     	model.addAttribute("studentData",studentData);
     	model.addAttribute("gradedExams",gradedExams);
-    	
 		return "student/grades";
 	}
 	
 	
 	
-	/**
-	 * Showing the exams in the student view
-	 * @param model
-	 * @return
-	 */
+/********************************************EXAM STUDENT PAGE***********************************************************/
 	@RequestMapping(value = "/exams", method = RequestMethod.GET)
 	public String showExams(Model model) {
-		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String mailOfUser = auth.getName();
-        //find all the data of the specific Student who logged in.
-        StudentModel studentData = studentRepo.findByMail(mailOfUser);
+		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	        String mailOfUser = auth.getName();
+    	//find all the data of the specific Student who logged in.
+    	StudentModel studentData = studentRepo.findByMail(mailOfUser);
 
-
+    	/*************************GET ALL FUTURE EXAMS***************************/
     	//getting all the future exams of a student
     	List<Object[]> futureExamsData = studentRepo.findFutureExams(studentData.getId());
     	
@@ -244,21 +249,17 @@ public class StudyManagerController {
 	}
 	
 
-	/**
-	 * Enroll/SingOut manager
-	 * @param action
-	 * @param id
-	 * @return
-	 */
+
+/********************************************MANAGE EXAMS PAGE (STUDENT)***********************************************************/
 	@RequestMapping(value="/manageExam", method=RequestMethod.GET)
 	public String manageExam(Model model,@RequestParam String action, @RequestParam int id)
 	{
-		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String mailOfUser = auth.getName();
         //find all the data of the specific Student who logged in.
         StudentModel studentData = studentRepo.findByMail(mailOfUser);
-	
+        
+        /*************************ENROLLING AND SIGNING OUT OF EXAMS***************************/
 		if(action.equals("enroll"))
 		{
 			
@@ -282,7 +283,7 @@ public class StudyManagerController {
 	
 	
 	
-	
+/********************************************PROFILE***********************************************************/
 	@RequestMapping(value = "/profile")
 	public String showProfile(Model model){
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -316,13 +317,14 @@ public class StudyManagerController {
 	}
 	
 	
+/********************************************LOGIN***********************************************************/
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String handleLogin() {
 		return "login";
 	}
 
 	
-	
+/********************************************ADD EXAM PAGE***********************************************************/
 	@RequestMapping(value = "/addExam", method = RequestMethod.GET)
 	public String addExam(Model model,@ModelAttribute("professorData")ProfessorModel professorData) {
 		 
@@ -336,7 +338,7 @@ public class StudyManagerController {
 	}
 	
 	
-	
+/********************************************ADDING EXAM***********************************************************/	
 	@RequestMapping(value="/addExamModel", method=RequestMethod.GET)
 	public String modelAdd(Model model,@RequestParam String courseSelected, @RequestParam String typeSelected)
 	{
@@ -351,7 +353,7 @@ public class StudyManagerController {
 		}
 		else
 		{
-			model.addAttribute("alreadyExists",true);		
+			model.addAttribute("alreadyExists",true);
 		}
 		
 		return "forward:/addExam";
