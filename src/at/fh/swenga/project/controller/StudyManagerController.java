@@ -8,10 +8,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,7 +40,7 @@ import at.fh.swenga.project.util.MapSorter;
 
 
 @Controller
-@SessionAttributes("student")
+@SessionAttributes({"studentData","professorData"})
 public class StudyManagerController {
 
 	@Autowired
@@ -197,14 +199,13 @@ public class StudyManagerController {
 	 * @return
 	 */
 	@RequestMapping(value = "/grades", method = RequestMethod.GET)
-	public String showGrades(Model model) {
-    	//find all the data of the specific Student who logged in.
-    	StudentModel studentData = studentRepo.findByMail(SecurityContextHolder.getContext().getAuthentication().getName());
-		
+	public String showGrades(Model model,@ModelAttribute("studentData") StudentModel studentData) {
+    	
     	//get all graded exams
     	List<ExamApplicationModel> gradedExams = examApplicationRepo.findByStudentAndGradeIsNotNullOrderByExamDateDateDesc(studentData);
     	model.addAttribute("studentData",studentData);
     	model.addAttribute("gradedExams",gradedExams);
+    	
 		return "student/grades";
 	}
 	
@@ -217,10 +218,11 @@ public class StudyManagerController {
 	 */
 	@RequestMapping(value = "/exams", method = RequestMethod.GET)
 	public String showExams(Model model) {
-		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	        String mailOfUser = auth.getName();
-    	//find all the data of the specific Student who logged in.
-    	StudentModel studentData = studentRepo.findByMail(mailOfUser);
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String mailOfUser = auth.getName();
+        //find all the data of the specific Student who logged in.
+        StudentModel studentData = studentRepo.findByMail(mailOfUser);
 
 
     	//getting all the future exams of a student
@@ -236,7 +238,7 @@ public class StudyManagerController {
     		futureStudentExams.add(exam);
     		}
        	
-    	model.addAttribute("studentData",studentData);
+       	
     	model.addAttribute("futureStudentExams",futureStudentExams);
 		return "student/exams";
 	}
@@ -249,12 +251,14 @@ public class StudyManagerController {
 	 * @return
 	 */
 	@RequestMapping(value="/manageExam", method=RequestMethod.GET)
-	public String manageExam(@RequestParam String action, @RequestParam int id)
+	public String manageExam(Model model,@RequestParam String action, @RequestParam int id)
 	{
+		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String mailOfUser = auth.getName();
+        //find all the data of the specific Student who logged in.
         StudentModel studentData = studentRepo.findByMail(mailOfUser);
-        
+	
 		if(action.equals("enroll"))
 		{
 			
@@ -268,9 +272,7 @@ public class StudyManagerController {
 		else if(action.equals("signOut"))
 		{			
 			
-		int delete = examApplicationRepo.removeByStudentIdAndExamDateId(studentData.getId(), id);
-		System.out.println(delete);
-		System.out.println("ID:" + id);
+		examApplicationRepo.removeByStudentIdAndExamDateId(studentData.getId(), id);
 				
 		}			
 		
@@ -322,16 +324,13 @@ public class StudyManagerController {
 	
 	
 	@RequestMapping(value = "/addExam", method = RequestMethod.GET)
-	public String addExam(Model model) {
-		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	        String mailOfUser = auth.getName();
-    	//find all the data of the specific Student who logged in.
-    	ProfessorModel profData = professorRepo.findByMail(mailOfUser);
+	public String addExam(Model model,@ModelAttribute("professorData")ProfessorModel professorData) {
+		 
        	
-       	List<ExamModel> exams = examRepo.findByCourseProfessor(profData.getId());
+       	List<ExamModel> exams = examRepo.findByCourseProfessor(professorData.getId());
        	
     	model.addAttribute("professorExams",exams);
-    	model.addAttribute("professorData",profData);
+    	model.addAttribute("professorData",professorData);
 
 		return "professor/addExam";
 	}
@@ -352,13 +351,8 @@ public class StudyManagerController {
 		}
 		else
 		{
-			model.addAttribute("alreadyExists",true);
+			model.addAttribute("alreadyExists",true);		
 		}
-		
-		
-				
-		
-		
 		
 		return "forward:/addExam";
 	}
