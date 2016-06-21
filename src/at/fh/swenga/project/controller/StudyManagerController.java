@@ -334,6 +334,8 @@ public class StudyManagerController {
        	
        	System.out.println(test);
        	
+       	
+       	
     	model.addAttribute("professorExams",exams);
     	model.addAttribute("professorData",professorData);
 
@@ -347,7 +349,7 @@ public class StudyManagerController {
 	{
 		CourseModel course = courseRepo.findByAcronym(courseSelected);
 		ExamModel existsExam = examRepo.findByDescriptionAndTypeAndCourse(courseSelected,typeSelected, course);
-		
+
 		if(existsExam == null)
 		{
 			ExamModel exam = new ExamModel(courseSelected,typeSelected, course);		

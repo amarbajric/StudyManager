@@ -183,7 +183,7 @@
                   </div>
                   <div class="x_content">
                     <br>
-                    <form class="form-horizontal form-label-left" action="addExamModel?course=${courseSelected}&type=${typeSelected}">
+                    <form id="examForm" class="form-horizontal form-label-left" action="addExamModel?course=${courseSelected}&type=${typeSelected}&time=examTime">
 
              
                       <div class="form-group">
@@ -208,6 +208,26 @@
                       </div>
 
                       <div class="ln_solid"></div>
+                      <fieldset>
+                        <div class="control-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Date</label>
+                          <div class="controls">
+                            <div id="datePicker" class="col-md-5 xdisplay_inputx form-group has-feedback">
+                              <input name="examDate" id="examDate" type="text" class="form-control has-feedback-left" placeholder="Date" aria-describedby="inputSuccess2Status4">
+                              <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                              <span id="inputSuccess2Status4" class="sr-only">(success)</span>                                                      
+                            </div>                            
+                          </div>
+                           <div id="timePicker" class="col-md-4 xdisplay_inputx form-group has-feedback">
+                           <input name="examTime" id="examTime" type="text" class="form-control" placeholder="Time (hh:mm)"/>
+                        </div>
+                        </div>
+                      </fieldset>
+                      
+                      
+                      
+                      <div class="ln_solid"></div>
+                      
                       <div class="form-group">
                         <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">               
                           	<button id="submitExam" type="submit" class="btn btn-success">Submit</button>
@@ -252,7 +272,10 @@
   <script src="js/nicescroll/jquery.nicescroll.min.js"></script>
   <!-- icheck -->
   <script src="js/icheck/icheck.min.js"></script>
-
+  <!-- daterangepicker -->
+  <script type="text/javascript" src="js/moment/moment.min.js"></script>
+  <script type="text/javascript" src="js/datepicker/daterangepicker.js"></script>
+  <script type="text/javascript" src="js/datepicker/datePickerExam.js"></script>
   <!-- pace -->
   <script src="js/pace/pace.min.js"></script>
   <!-- examNotify -->
@@ -270,7 +293,6 @@
 	<script type="text/javascript">newExamSuccess()</script>
 	</c:when>
 	</c:choose>
-  <!--Check if exam already exist or not -->
-  
+  <!--Check if exam already exist or not -->    
 </body>
 </html>
