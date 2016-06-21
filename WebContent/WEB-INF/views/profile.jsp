@@ -27,6 +27,17 @@
 
 
   <script src="js/jquery.min.js"></script>
+  
+  <!-- Check for images -->
+	<c:choose>
+		<c:when test="${isStudent eq true}">
+			<c:set var="logoVal" value="icon_student.png"></c:set>
+		</c:when>
+		<c:when test="${isStudent eq false}">
+			<c:set var="logoVal" value="icon_prof.png"></c:set>
+		</c:when>
+	</c:choose>
+  <!-- /Check for images -->
 
 </head>
 <body>
@@ -49,7 +60,7 @@
 					<!-- menu prile quick info -->
 					<div class="profile">
 						<div class="profile_pic">
-							<img src="images/fh_logo.png" alt="..."
+							<img src="images/${logoVal}" alt="..."
 								class="img-circle profile_img">
 						</div>
 						<div class="profile_info">
@@ -97,11 +108,11 @@
 					<div class="nav toggle">
 						<a id="menu_toggle"><i class="fa fa-bars"></i></a>
 					</div>
-
+					
 					<ul class="nav navbar-nav navbar-right">
 						<li class=""><a href="javascript:;"
 							class="user-profile dropdown-toggle" data-toggle="dropdown"
-							aria-expanded="false"> <img src="images/fh_logo.png" alt="">${profileData.firstname}
+							aria-expanded="false"> <img src="images/${logoVal}" alt="">${profileData.firstname}
 								${profileData.lastname} <span class=" fa fa-angle-down"></span>
 						</a>
 							<ul
@@ -134,7 +145,7 @@
                 <div class="x_content">
                   <div class="col-md-6 col-sm-6 col-xs-12 profile_left">
                     <div class="profile_img">
-						<div class="avatar-view" title="Change the avatar">
+						<div class="avatar-view" title="Change the avatar">						  
                           <img src="images/fh_logo.png" alt="Avatar">
                         </div>
                       </div>
