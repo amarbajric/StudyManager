@@ -1,10 +1,10 @@
 package at.fh.swenga.project.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +17,10 @@ public interface ExamDateRepository extends JpaRepository<ExamDateModel, Integer
 	public List<ExamDateModel> findAll();
 	
 	public ExamDateModel findById(int id);
+	
+	@Query(value = "SELECT COUNT(*) FROM exam_dates ed "
+			+ "WHERE ed.exam_id = ?1 AND ed.date = ?2", nativeQuery=true)
+	public Integer findByExamAndDate(int exam_id, Date date);
 	
 	@Query(value = "SELECT exd.id, exd.date, exd.description as datenumber, ex.description as course, ex.type, r.description as room, count(exa.id) as applicants "
 			+ "FROM exam_dates exd "

@@ -24,7 +24,8 @@
   <!-- Custom styling plus plugins -->
   <link href="css/custom.css" rel="stylesheet">
   <link href="css/icheck/flat/green.css" rel="stylesheet"> 
-   
+  <link href="css/datetimepicker/bootstrap-datetimepicker.css" rel="stylesheet">
+  <link href="css/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
 
   <script src="js/jquery.min.js"></script>
 
@@ -150,6 +151,7 @@
 	                        	<tr>
 	                        		<th><small>#</small></th>
 	                        		<th><small>Date</small></th>
+	                        		<th><small>Description</small></th>
 	                        		<th><small>Room</small></th>
 	                        	</tr>
 	                      	</thead>
@@ -160,6 +162,7 @@
 	                        	<tr>
 	                        		<td><small>${count.count}</small></td>
 	                        		<td><small><fmt:formatDate value="${examDate.getDate()}" pattern="dd.MM.yyyy - hh:mm" /></small></td>
+	                        		<td><small>${examDate.getDescription()}</small></td>
 	                        		<td><small>${examDate.getRoom().getDescription()}</small></td>
 	                  			</tr>
 	                  		</c:forEach>
@@ -184,7 +187,7 @@
                   </div>
                   <div class="x_content">
                     <br>
-                    <form class="form-horizontal form-label-left" action="addExamModel?course=${courseSelected}&type=${typeSelected}">
+                    <form id="examForm" class="form-horizontal form-label-left" action="addExamModel?course=${courseSelected}&type=${typeSelected}&description=examDescription&room=${roomSelected}">
 
              
                       <div class="form-group">
@@ -207,8 +210,46 @@
                           </select>
                         </div>
                       </div>
-
+                      
                       <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Description</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input id="examDescription" name="examDescription" type="text" class="form-control" placeholder="Description">
+                        </div>
+                      </div>
+
+                     
+                      <fieldset>
+                        <div class="control-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Date</label>
+                          <div class="controls">
+                            <div id="datePicker" class="col-md-9 xdisplay_inputx form-group has-feedback">
+                              <input name="examDate" id="examDate" type="text" class="form-control has-feedback-left" placeholder="Date" aria-describedby="inputSuccess2Status4">
+                              <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                              <span id="inputSuccess2Status4" class="sr-only">(success)</span>                                                      
+                            </div>                            
+                          </div>                        
+                          </div>
+                      </fieldset>                      
+                      
+			        
+                      
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Room</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <select class="form-control" id ="roomSelected" name="roomSelected">
+                           <c:forEach items="${rooms}" var="room">
+                             <option>${room.description}</option>
+                           </c:forEach>
+                          </select>
+                        </div>
+                      </div>
+                      
+                      
+                      
+                      <div class="ln_solid"></div>
+                      
                       <div class="form-group">
                         <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">               
                           	<button id="submitExam" type="submit" class="btn btn-success">Submit</button>
@@ -253,7 +294,13 @@
   <script src="js/nicescroll/jquery.nicescroll.min.js"></script>
   <!-- icheck -->
   <script src="js/icheck/icheck.min.js"></script>
-
+  <!-- daterangepicker -->
+  <script type="text/javascript" src="js/moment/moment.min.js"></script>
+  <script type="text/javascript" src="js/moment/moment-with-locales.js"></script>
+  <script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+  <script type="text/javascript" src="js/datepicker/bootstrap-datetimepicker.js"></script>
+  <script type="text/javascript" src="js/datepicker/bootstrap-datetimepicker.min.js"></script>    
+  <script type="text/javascript" src="js/datepicker/datePickerExam.js"></script>
   <!-- pace -->
   <script src="js/pace/pace.min.js"></script>
   <!-- examNotify -->
@@ -271,7 +318,6 @@
 	<script type="text/javascript">newExamSuccess()</script>
 	</c:when>
 	</c:choose>
-  <!--Check if exam already exist or not -->
-  
+  <!--Check if exam already exist or not -->    
 </body>
 </html>

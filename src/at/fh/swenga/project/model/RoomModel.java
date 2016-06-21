@@ -2,6 +2,7 @@ package at.fh.swenga.project.model;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,13 +20,13 @@ public class RoomModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(nullable = false, length = 100)
-	private String description; // e.g. EDV224 
+	@Column(nullable = false, length = 100, unique = true)
+	private String description; // e.g. G.AP147.005
 	
 	@Column(nullable = false)
 	private int seats;
 	
-	@OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "room", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private Set<ExamDateModel> examDates;
 	
 	public RoomModel() {

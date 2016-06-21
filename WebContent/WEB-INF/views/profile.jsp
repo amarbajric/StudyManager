@@ -83,15 +83,17 @@
 								<c:choose>
 								<c:when test="${isStudent eq false}">
 								<c:set var="examVal" scope="session" value="addExam"></c:set>
-								<c:set var="gradeVal" scope="session" value="PLACEHOLDER"></c:set>								
+								<c:set var="gradeVal" scope="session" value="PLACEHOLDER"></c:set>
+								<c:set var="linkName" scope="session" value="PLACEHOLDER"></c:set>						
 								</c:when>
 								<c:otherwise>
 								<c:set var="examVal" scope="session" value="exams"></c:set>
-								<c:set var="gradeVal" scope="session" value="grades"></c:set>		
+								<c:set var="gradeVal" scope="session" value="grades"></c:set>								
+								<c:set var="linkName" scope="session" value="Grades"></c:set>		
 								</c:otherwise>
 								</c:choose>
 								<li><a href="/StudyManager/${examVal}"><i class="fa fa-edit"></i>Exams</a></li>
-								<li><a href="/StudyManager/${gradeVal}"><i class="fa fa-desktop"></i>Grades</a></li>
+								<li><a href="/StudyManager/${gradeVal}"><i class="fa fa-desktop"></i>${linkName}</a></li>
 							</ul>
 						</div>
 					</div>

@@ -28,7 +28,7 @@ public class ExamDateModel {
 	@Column
 	private String description; // first date or second date
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private RoomModel room;
 
 	@ManyToOne(cascade = CascadeType.MERGE)
@@ -41,6 +41,16 @@ public class ExamDateModel {
 		// TODO Auto-generated constructor stub
 	}
 	
+	
+	public ExamDateModel(Date date, String description, RoomModel room, ExamModel exam) {
+		super();
+		this.date = date;
+		this.description = description;
+		this.room = room;
+		this.exam = exam;
+	}
+	
+
 	public ExamDateModel(Date date) {
 		super();
 		this.date = date;
@@ -76,6 +86,26 @@ public class ExamDateModel {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+	public Set<ExamApplicationModel> getExamApplications() {
+		return examApplications;
+	}
+
+
+	public void setExamApplications(Set<ExamApplicationModel> examApplications) {
+		this.examApplications = examApplications;
 	}
 	
 	
