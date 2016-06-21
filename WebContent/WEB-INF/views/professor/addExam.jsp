@@ -126,44 +126,42 @@
 
                   <p>A List of all your Exams</p>
 
-                  <table class="table table-striped">
+                  <table class="table table-hover">
                     <thead>
                       <tr class="headings">
-                        <th class="column-title">Course</th>
-                        <th class="column-title">Type</th>
+                        <th class="column-title"><h4>Course</h4></th>
+                        <th class="column-title"><h4>Type</h4></th>
                       </tr>
                     </thead>
 
                     <tbody>
-                      <c:forEach items="${professorExams}" var="exam">
-                      <tr class="even pointer" data-toggle="collapse" data-target="#demo${exam.id}">
-                        <td class=" ">${exam.getCourse().getDescription()}</td>
-                        <td class=" ">${exam.getType()}</td>
+                      <c:forEach items="${professorExams}" var="exam" varStatus="loop">
+                      <tr class="even pointer" data-toggle="collapse" data-target="#demo${loop.index}">
+                        <td class="mousePointer" ><b>${exam.getCourse().getDescription()}</b></td>
+                        <td class="mousePointer" ><b>${exam.getType()}</b></td>
                       </tr>
                       
                       <!-- Collapsed Table -->
                       <tr >
-            			<td colspan="6" class="hiddenRow"><div class="accordian-body collapse" id="demo${exam.id}">         			
+            			<td colspan="6" class="hiddenRow"><div class="accordian-body collapse" id="demo${loop.index}">         			
             			<table class="table table-striped">
 	                      	<thead>
 	                        	<tr>
-	                        		<th>Access Key</th>
-	                        		<th>Secret Key</th>
-	                        		<th>Status </th>
-	                        		<th> Created</th>
-	                        		<th> Expires</th>
-	                        		<th>Actions</th>
+	                        		<th><small>#</small></th>
+	                        		<th><small>Date</small></th>
+	                        		<th><small>Room</small></th>
 	                        	</tr>
 	                      	</thead>
 	                      	<tbody>
+	                      	<tr>
+	                      	</tr>
+	                      	<c:forEach items="${exam.getExamDates()}" var="examDate" varStatus="count">
 	                        	<tr>
-	                        		<td>access-key-1</td>
-	                        		<td>secretKey-1</td>
-	                        		<td>Status</td>
-	                        		<td>some date</td>
-	                        		<td>some date</td>
-	                        		<td><a href="#" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-cog"></i></a></td>
-	                  			</tr>	                    
+	                        		<td><small>${count.count}</small></td>
+	                        		<td><small><fmt:formatDate value="${examDate.getDate()}" pattern="dd.MM.yyyy - hh:mm" /></small></td>
+	                        		<td><small>${examDate.getRoom().getDescription()}</small></td>
+	                  			</tr>
+	                  		</c:forEach>
 	                      	</tbody>
                			</table>
             			</div> </td>

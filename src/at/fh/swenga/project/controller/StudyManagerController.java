@@ -330,6 +330,9 @@ public class StudyManagerController {
 		 
        	
        	List<ExamModel> exams = examRepo.findByCourseProfessor(professorData.getId());
+       	String test = exams.get(0).getExamDates().iterator().next().getDate().toString();
+       	
+       	System.out.println(test);
        	
     	model.addAttribute("professorExams",exams);
     	model.addAttribute("professorData",professorData);
