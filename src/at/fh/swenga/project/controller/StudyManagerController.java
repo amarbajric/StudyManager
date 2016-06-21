@@ -68,7 +68,7 @@ public class StudyManagerController {
 	@Autowired
 	CourseRepository courseRepo;
 
-	
+	/********************************************INDEX VIEW***********************************************************/
 	/**
 	 * The default requestMapper only checks if the logged in user is a student, professor or admin.
 	 * Then it checks the given role of the logged in user and forwards the browser to the specific view
@@ -82,9 +82,8 @@ public class StudyManagerController {
         String mailOfUser = auth.getName();
         String targetUrl = "";
         
-        /**
-         * PROFESSOR
-         */
+
+         /***************************PROFESSOR INDEX PAGE*******************************************/
         if(role.toLowerCase().contains("professor")) {
         	ProfessorModel profData = professorRepo.findByMail(mailOfUser);
         	
@@ -107,38 +106,40 @@ public class StudyManagerController {
             
             
             
-           /**
-            * STUDENT 
-            */
+        /***************************STUDENT INDEX PAGE*******************************************/
         } else if(role.toLowerCase().contains("student")) {
         	//find all the data of the specific Student who logged in.
         	StudentModel studentData = studentRepo.findByMail(mailOfUser);
         	//get all graded exams
         	List<ExamApplicationModel> gradedExams = examApplicationRepo.findByStudentAndGradeIsNotNullOrderByExamDateDateDesc(studentData);
+        	
+        	/*************************GET THE AMOUNT OF STUDENTS***************************/
         	//get the total amount of students
         	int numberOfAllStudents = studentRepo.countAll();
+        	
         	//get all students who are studying with the specific student
         	int numberOfStudentColleagues = studentRepo.countByYearYear(studentData.getYear().getYear());
         	
-        	//set data in model object(grades)
+        	/*************************GET THE AMOUNT OF EVERY GRADE FOR THE STUDENT***************************/
+        	//get the amount for every grade data
         	List<Object[]> numberOfGradesByGrade = examApplicationRepo.findNumberOfGradesByGrade(studentData.getId());
-        	//get grades into Map
+        	//get the data into a Map with the grade as the key and the amount as the value
         	Map<Integer,Integer> gradesMap = new HashMap<Integer,Integer>();
         	for (int i = 0; i < numberOfGradesByGrade.size(); i++) {
         		Object[] arr = numberOfGradesByGrade.get(i);
         		gradesMap.put(Integer.parseInt(arr[0].toString()), Integer.parseInt(arr[1].toString()));
         		}
-        	//set grades which don't exist to zero
+        	//set the amount of grades which don't exist to zero
         	for (int i = 1; i < 6; i++) {
         		if (!gradesMap.containsKey(i)){
         			gradesMap.put(i,0);
         		}
         	}
-        	//setting the number of every grade to a list
+        	//setting the amount of every grade to a list
         	List<Integer> grades = new ArrayList<Integer>(gradesMap.values());
         	
-        	
-        	//get the average grade from all students
+        	/*************************GET THE AVERAGE GRADE FROM ALL STUDENTS***************************/
+        	//get the average grade data from all students
         	List<Object[]> averageGrades = examApplicationRepo.findAverageGrades();
         	
         	//get average grades into map
@@ -157,7 +158,7 @@ public class StudyManagerController {
         	int rank = indexes.indexOf(studentData.getId())+1; // +1 because list starts at 0
         	double average = averageMapSorted.get(studentData.getId());
         	
-        	
+        	/*************************GET 5 NEXT UPCOMING EXAMS***************************/
         	//getting the 5 next upcoming exams data of a student
         	List<Object[]> upcomingExamsData = examDateRepo.findUpcomingExams(studentData.getId());
         	
@@ -170,8 +171,7 @@ public class StudyManagerController {
         		upcomingStudentExams.add(exam);
         		}
 
-        	
-        	//setting models
+           	/*************************SETTING THE MODELS***************************/
         	model.addAttribute("average",average);
         	model.addAttribute("rank",rank);
         	model.addAttribute("numberOfStudentColleagues",numberOfStudentColleagues);
@@ -191,11 +191,7 @@ public class StudyManagerController {
 	
 	
 	
-	/**
-	 * Showing the grades in the student view
-	 * @param model
-	 * @return
-	 */
+/********************************************GRADES STUDENT PAGE***********************************************************/
 	@RequestMapping(value = "/grades", method = RequestMethod.GET)
 	public String showGrades(Model model) {
     	//find all the data of the specific Student who logged in.
@@ -203,18 +199,18 @@ public class StudyManagerController {
 		
     	//get all graded exams
     	List<ExamApplicationModel> gradedExams = examApplicationRepo.findByStudentAndGradeIsNotNullOrderByExamDateDateDesc(studentData);
+    	
+    	
+    	/*************************SETTING THE MODELS***************************/
     	model.addAttribute("studentData",studentData);
     	model.addAttribute("gradedExams",gradedExams);
+    	
 		return "student/grades";
 	}
 	
 	
 	
-	/**
-	 * Showing the exams in the student view
-	 * @param model
-	 * @return
-	 */
+/********************************************EXAM STUDENT PAGE***********************************************************/
 	@RequestMapping(value = "/exams", method = RequestMethod.GET)
 	public String showExams(Model model) {
 		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -222,7 +218,7 @@ public class StudyManagerController {
     	//find all the data of the specific Student who logged in.
     	StudentModel studentData = studentRepo.findByMail(mailOfUser);
 
-
+    	/*************************GET ALL FUTURE EXAMS***************************/
     	//getting all the future exams of a student
     	List<Object[]> futureExamsData = studentRepo.findFutureExams(studentData.getId());
     	
@@ -236,18 +232,16 @@ public class StudyManagerController {
     		futureStudentExams.add(exam);
     		}
        	
+       	
+       	/*************************SETTING THE MODELS***************************/
     	model.addAttribute("studentData",studentData);
     	model.addAttribute("futureStudentExams",futureStudentExams);
 		return "student/exams";
 	}
 	
 
-	/**
-	 * Enroll/SingOut manager
-	 * @param action
-	 * @param id
-	 * @return
-	 */
+
+/********************************************MANAGE EXAMS PAGE (STUDENT)***********************************************************/
 	@RequestMapping(value="/manageExam", method=RequestMethod.GET)
 	public String manageExam(@RequestParam String action, @RequestParam int id)
 	{
@@ -255,23 +249,17 @@ public class StudyManagerController {
         String mailOfUser = auth.getName();
         StudentModel studentData = studentRepo.findByMail(mailOfUser);
         
+        /*************************ENROLLING AND SIGNING OUT OF EXAMS***************************/
 		if(action.equals("enroll"))
 		{
-			
-		Integer newAttemptOfExam = examApplicationRepo.attemptOfExam(studentData.getId(),id) + 1;
-		ExamDateModel examDate = examDateRepo.findById(id);
-		ExamApplicationModel examToEnroll = new ExamApplicationModel(newAttemptOfExam, studentData, examDate);
-		examApplicationRepo.save(examToEnroll);
-		
-
+			Integer newAttemptOfExam = examApplicationRepo.attemptOfExam(studentData.getId(),id) + 1;
+			ExamDateModel examDate = examDateRepo.findById(id);
+			ExamApplicationModel examToEnroll = new ExamApplicationModel(newAttemptOfExam, studentData, examDate);
+			examApplicationRepo.save(examToEnroll);
 		}
 		else if(action.equals("signOut"))
 		{			
-			
-		int delete = examApplicationRepo.removeByStudentIdAndExamDateId(studentData.getId(), id);
-		System.out.println(delete);
-		System.out.println("ID:" + id);
-				
+			int delete = examApplicationRepo.removeByStudentIdAndExamDateId(studentData.getId(), id);
 		}			
 		
 		
@@ -280,7 +268,7 @@ public class StudyManagerController {
 	
 	
 	
-	
+/********************************************PROFILE***********************************************************/
 	@RequestMapping(value = "/profile")
 	public String showProfile(Model model){
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -309,18 +297,18 @@ public class StudyManagerController {
         	return UrlAsString;
         }
         
-        
 		return UrlAsString;
 	}
 	
 	
+/********************************************LOGIN***********************************************************/
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String handleLogin() {
 		return "login";
 	}
 
 	
-	
+/********************************************ADD EXAM PAGE***********************************************************/
 	@RequestMapping(value = "/addExam", method = RequestMethod.GET)
 	public String addExam(Model model) {
 		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -330,6 +318,7 @@ public class StudyManagerController {
        	
        	List<ExamModel> exams = examRepo.findByCourseProfessor(profData.getId());
        	
+       	/*************************SETTING THE MODELS***************************/
     	model.addAttribute("professorExams",exams);
     	model.addAttribute("professorData",profData);
 
@@ -337,7 +326,7 @@ public class StudyManagerController {
 	}
 	
 	
-	
+/********************************************ADDING EXAM***********************************************************/	
 	@RequestMapping(value="/addExamModel", method=RequestMethod.GET)
 	public String modelAdd(Model model,@RequestParam String courseSelected, @RequestParam String typeSelected)
 	{
@@ -354,11 +343,6 @@ public class StudyManagerController {
 		{
 			model.addAttribute("alreadyExists",true);
 		}
-		
-		
-				
-		
-		
 		
 		return "forward:/addExam";
 	}
