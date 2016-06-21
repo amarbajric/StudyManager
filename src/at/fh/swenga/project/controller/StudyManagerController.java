@@ -116,11 +116,10 @@ public class StudyManagerController {
         	//get all graded exams
         	List<ExamApplicationModel> gradedExams = examApplicationRepo.findByStudentAndGradeIsNotNullOrderByExamDateDateDesc(studentData);
         	//get the total amount of students
-        	List<StudentModel> allStudents = studentRepo.findAll();
+        	int numberOfAllStudents = studentRepo.countAll();
         	//get all students who are studying with the specific student
-        	List<StudentModel> studentColleagues = studentRepo.findByYearYear(studentData.getYear().getYear());
-        	//find all exams of a degreeProgram
-        	List<ExamModel> examsOfDegreeProgram = examRepo.findByCourseDegreeProgram(studentData.getYear().getDegreeProgram());
+        	int numberOfStudentColleagues = studentRepo.countByYearYear(studentData.getYear().getYear());
+        	
         	//set data in model object(grades)
         	List<Object[]> numberOfGradesByGrade = examApplicationRepo.findNumberOfGradesByGrade(studentData.getId());
         	//get grades into Map
@@ -175,9 +174,8 @@ public class StudyManagerController {
         	//setting models
         	model.addAttribute("average",average);
         	model.addAttribute("rank",rank);
-        	model.addAttribute("examsOfDegreeProgram",examsOfDegreeProgram);
-        	model.addAttribute("studentColleagues",studentColleagues);
-        	model.addAttribute("allStudents",allStudents);
+        	model.addAttribute("numberOfStudentColleagues",numberOfStudentColleagues);
+        	model.addAttribute("numberOfAllStudents",numberOfAllStudents);
         	model.addAttribute("studentData",studentData);
         	model.addAttribute("gradedExams",gradedExams);
         	model.addAttribute("grades",grades);
