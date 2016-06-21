@@ -116,75 +116,55 @@
 			<div class="right_col" role="main" style="min-height: 950px;">
             <div class="clearfix"></div>
             
-            <div class="col-md-4 col-sm-4 col-xs-12">
-             <div class="x_panel">
-                <div class="x_title">
-                  <h1>Exams</h1>
-                  <div class="clearfix"></div>
-                </div>
-
-                <div class="x_content">
-
-                  <p>A List of all your Exams</p>
-
-                  <table class="table table-hover">
-                    <thead>
-                      <tr class="headings">
-                        <th class="column-title"><h4>Course</h4></th>
-                        <th class="column-title"><h4>Type</h4></th>
-                      </tr>
-                    </thead>
-
-                    <tbody>
-                      <c:forEach items="${professorExams}" var="exam" varStatus="loop">
-                      <tr class="even pointer" data-toggle="collapse" data-target="#demo${loop.index}">
-                        <td class="mousePointer" ><b>${exam.getCourse().getDescription()}</b></td>
-                        <td class="mousePointer" ><b>${exam.getType()}</b></td>
-                      </tr>
-                      
-                      <!-- Collapsed Table -->
-                      <tr >
-            			<td colspan="6" class="hiddenRow"><div class="accordian-body collapse" id="demo${loop.index}">         			
-            			<table class="table table-striped">
-	                      	<thead>
-	                        	<tr>
-	                        		<th><small>#</small></th>
-	                        		<th><small>Date</small></th>
-	                        		<th><small>Room</small></th>
-	                        	</tr>
-	                      	</thead>
-	                      	<tbody>
-	                      	<tr>
-	                      	</tr>
-	                      	<c:forEach items="${exam.getExamDates()}" var="examDate" varStatus="count">
-	                        	<tr>
-	                        		<td><small>${count.count}</small></td>
-	                        		<td><small><fmt:formatDate value="${examDate.getDate()}" pattern="dd.MM.yyyy - hh:mm" /></small></td>
-	                        		<td><small>${examDate.getRoom().getDescription()}</small></td>
-	                  			</tr>
-	                  		</c:forEach>
-	                      	</tbody>
-               			</table>
-            			</div> </td>
-        			  </tr>
-        			  <!-- /Collapsed Table -->
-        			  
-                      </c:forEach>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-
-              <div class="col-md-8 col-sm-8 col-xs-12">
+              <div class="row">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Create a new exam</h2>
+                    <h2>Grade all applicants for exam date: <b>${course}</b> - ${type} - ${dateNumber} - ${date}</h2>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
                     <br>
-                    <form class="form-horizontal form-label-left" action="addExamModel?course=${courseSelected}&type=${typeSelected}">
+                    <form method="post" action="gradeExam?${_csrf.parameterName}=${_csrf.token}">
+                    <table class="table table-striped">
+                    <thead>
+                      <tr class="headings">
+                        <th class="column-title">Student ID</th>
+                        <th class="column-title">Firstname</th>
+                        <th class="column-title">Lastname</th>
+                        <th class="column-title">Attempt</th>
+                        <th style="max-width: 50px;" class="column-title"><b>Grade</b></th>
+                      </tr>
+                    </thead>
+					
+
+                    <tbody>
+                      <c:forEach items="${applicantsList}" var="applicant">
+                   
+                        <tr class="even pointer">
+                        <th class=" " >${applicant.student.id}</th>
+                        <td class=" ">${applicant.student.firstname}</td>
+                        <td class=" ">${applicant.student.lastname}</td>
+                        <td class=" ">${applicant.attempt}</td>
+                        <td style="max-width: 50px;"><select class="form-control">
+							  <option value="1" <c:if test="${applicant.grade eq 1}">selected</c:if>>1</option>
+							  <option value="2" <c:if test="${applicant.grade eq 2}">selected</c:if>>2</option>
+							  <option value="3" <c:if test="${applicant.grade eq 3}">selected</c:if>>3</option>
+							  <option value="4" <c:if test="${applicant.grade eq 4}">selected</c:if>>4</option>
+							  <option value="5" <c:if test="${applicant.grade eq 5}">selected</c:if>>5</option>
+							  <option value="null" <c:if test="${applicant.grade eq null}">selected</c:if>>not graded</option>
+							</select>
+						</td>
+                      </tr>
+                      </c:forEach>
+                    
+                    </tbody>
+
+                  </table>
+                  <input type="Submit" value="Save grades" />
+                  </form>
+                    
+                    
+                    <!--  <form class="form-horizontal form-label-left" action="addExamModel?course=${courseSelected}&type=${typeSelected}">
 
              
                       <div class="form-group">
@@ -215,7 +195,7 @@
                         </div>
                       </div>
 
-                    </form>
+                    </form>-->
                   </div>
                 </div>
 
@@ -245,6 +225,7 @@
 		<div class="clearfix"></div>
 		<div id="notif-group" class="tabbed_notifications"></div>
 	</div>
+	
 
   <script src="js/bootstrap.min.js"></script>
 

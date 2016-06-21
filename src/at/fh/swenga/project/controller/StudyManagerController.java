@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.Authentication;
@@ -90,7 +92,7 @@ public class StudyManagerController {
         if(role.toLowerCase().contains("professor")) {
         	ProfessorModel profData = professorRepo.findByMail(mailOfUser);
         	
-        	//getting all the future exams of a student
+        	//getting all the exams of a professor
         	List<Object[]> professorExamsData = examDateRepo.findProfExams(profData.getId());
         	
         	//Adding the Data of the exams into a List of Q_ProfessorExam
@@ -362,7 +364,54 @@ public class StudyManagerController {
 		return "forward:/addExam";
 	}
 	
+	/******************************************** SHOW EXAMS TO GRADE VIEW ***********************************************************/
 	
-	
+	@RequestMapping(value = "/gradeExams", method = RequestMethod.GET)
+	public String gradeExams(Model model,@ModelAttribute("professorData")ProfessorModel professorData) {
+		 
+       	
+		//getting all the exams to grade of a professor
+    	List<Object[]> professorExamsData = examDateRepo.findProfExamsToGrade(professorData.getId());
+    	
+    	//Adding the Data of the exams into a List of Q_ProfessorExam
+    	List<Q_ProfessorExam> professorExams = new ArrayList<Q_ProfessorExam>();
+       	for (int i = 0; i < professorExamsData.size(); i++) {
+    		Object[] arr = professorExamsData.get(i);
+    		Date date = (Date)arr[1];
+    		Q_ProfessorExam exam = new Q_ProfessorExam(Integer.parseInt(arr[0].toString()) ,date,arr[2].toString(),arr[3].toString(),arr[4].toString(), arr[5].toString(), Integer.parseInt(arr[6].toString()));
+    		professorExams.add(exam);
+    		}
+       	model.addAttribute("professorExams", professorExams);
+    	model.addAttribute("professorData",professorData);
 
+		return "professor/gradeExams";
+	}
+	
+	/******************************************** GRADE EXAM ***********************************************************/
+	
+	@RequestMapping(value="/gradeExam", method=RequestMethod.GET)
+	public String gradeExam(Model model,@RequestParam int examDateId, @RequestParam String course, @RequestParam String type, @RequestParam String dateNumber,@RequestParam String date)
+	{
+		List<ExamApplicationModel> applicantsList = examApplicationRepo.findByExamDate_id(examDateId);
+		
+		model.addAttribute("course", course);
+		model.addAttribute("type", type);
+		model.addAttribute("dateNumber", dateNumber);
+		model.addAttribute("date", date);
+		model.addAttribute("applicantsList", applicantsList);
+	System.out.println(applicantsList.get(0).getGrade());
+		
+		return "professor/gradeExam";
+	}
+	
+	@RequestMapping(value="/gradeExam", method=RequestMethod.POST)
+	public String gradeExam(@Valid @ModelAttribute("applicantsList") List<ExamApplicationModel> applicantsList, Model model)
+	{
+		System.out.println("success");
+		System.out.println(applicantsList.get(0).getGrade());
+		
+		
+		
+		return "professor/gradeExam";
+	}
 }

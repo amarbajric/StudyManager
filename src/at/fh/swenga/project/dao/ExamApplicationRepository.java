@@ -41,6 +41,8 @@ public interface ExamApplicationRepository extends JpaRepository<ExamApplication
 	@Modifying
 	@Query(value= "DELETE FROM exam_applications "
 	+ "where student_id = ?1 and examDate_id = ?2",nativeQuery=true)
-	public int removeByStudentIdAndExamDateId(int studentId,int examDateId); 
+	public int removeByStudentIdAndExamDateId(int studentId,int examDateId);
+	
+	public List<ExamApplicationModel> findByExamDate_id(int examDate_id);
 }
 

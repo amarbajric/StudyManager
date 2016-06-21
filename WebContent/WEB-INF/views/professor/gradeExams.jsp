@@ -121,13 +121,11 @@
               
               <div class="x_panel">
                 <div class="x_title">
-                  <h1>Exams</h1>
+                  <h1>Exams to grade</h1>
                   <div class="clearfix"></div>
                 </div>
 
                 <div class="x_content">
-
-                  <p>All your exams</p>
 
                   <table class="table table-striped">
                     <thead>
@@ -138,7 +136,7 @@
                         <th class="column-title">Date</th>
                         <th class="column-title">Room</th>
                         <th class="column-title">Applicants</th>
-                        <th class="column-title">Actions</th>
+                        <th class="column-title">Grade Exam</th>
                       </tr>
                     </thead>
 
@@ -151,7 +149,11 @@
                         <td class=" "><fmt:formatDate value="${exam.getDate()}" pattern="dd.MM.yyyy hh:mm" /></td>
                         <td class=" ">${exam.getRoom()}</td>
                         <td class=" ">${exam.getApplicants()}</td>
-                        <td class=" "><button id="enroll" type="button" class="btn btn-success">Success</button></td>
+                        <td class=" ">
+                        	<a href="/StudyManager/gradeExam?examDateId=${exam.getId()}&course=${exam.getDescription()}&type=${exam.getType()}&dateNumber=${exam.getDateNumber()}&date=${exam.getDate()}">
+                        															   <button type="button" class="btn btn-success">Grade</button>
+                        	</a></td>
+                        
                       </tr>
                       </c:forEach>
                     

@@ -31,6 +31,18 @@ public interface ExamDateRepository extends JpaRepository<ExamDateModel, Integer
 			+ "order by exd.date desc", nativeQuery=true)
 	public List<Object[]> findProfExams(int professor_id);
 	
+	@Query(value = "SELECT exd.id, exd.date, exd.description as datenumber, ex.description as course, ex.type, r.description as room, count(exa.id) as applicants "
+			+ "FROM exam_dates exd "
+			+ "JOIN exams ex ON exd.exam_id = ex.id "
+			+ "JOIN courses c ON ex.course_id = c.id "
+			+ "JOIN courses_professors cp ON c.id = cp.course_id "
+			+ "JOIN professors p ON cp.professor_id = p.id "
+			+ "JOIN rooms r ON exd.room_id = r.id "
+			+ "RIGHT JOIN exam_applications exa ON exa.examDate_id = exd.id "
+			+ "where p.id = ?1 AND exd.date < NOW() "
+			+ "group by exd.id "
+			+ "order by exd.date desc", nativeQuery=true)
+	public List<Object[]> findProfExamsToGrade(int professor_id);
 	
 	@Query(value = "SELECT ed.id as id, co.acronym as course, ex.type as type, ea.attempt as attempt, ed.date as date, co.ectsValue as ects, ro.description as room "
 			+ "FROM exam_dates ed "

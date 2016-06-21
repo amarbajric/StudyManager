@@ -18,7 +18,7 @@ public class ExamApplicationModel implements java.io.Serializable {
 	private int id;
 
 	@Column(nullable = false)
-	private Integer attempt; // 1st, 2nd, 3rd --> with automated method later on
+	private Integer attempt; // 1st, 2nd, 3rd 
 
 	@Column(nullable = true)
 	private Integer grade;
