@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -26,6 +25,7 @@ import at.fh.swenga.project.dao.ExamApplicationRepository;
 import at.fh.swenga.project.dao.ExamDateRepository;
 import at.fh.swenga.project.dao.ExamRepository;
 import at.fh.swenga.project.dao.ProfessorRepository;
+import at.fh.swenga.project.dao.RoomRepository;
 import at.fh.swenga.project.dao.StudentRepository;
 import at.fh.swenga.project.dao.UserRepository;
 import at.fh.swenga.project.dao.YearRepository;
@@ -36,6 +36,7 @@ import at.fh.swenga.project.model.ExamModel;
 import at.fh.swenga.project.model.ProfessorModel;
 import at.fh.swenga.project.model.Q_ProfessorExam;
 import at.fh.swenga.project.model.Q_studentExam;
+import at.fh.swenga.project.model.RoomModel;
 import at.fh.swenga.project.model.StudentModel;
 import at.fh.swenga.project.util.MapSorter;
 
@@ -70,6 +71,9 @@ public class StudyManagerController {
 	
 	@Autowired
 	CourseRepository courseRepo;
+	
+	@Autowired
+	RoomRepository roomRepo;
 
 	/********************************************INDEX VIEW***********************************************************/
 	/**
@@ -328,13 +332,14 @@ public class StudyManagerController {
 	@RequestMapping(value = "/addExam", method = RequestMethod.GET)
 	public String addExam(Model model,@ModelAttribute("professorData")ProfessorModel professorData) {
 		 
-       	
+		//Getting All Exams of the professor
        	List<ExamModel> exams = examRepo.findByCourseProfessor(professorData.getId());
-       	String test = exams.get(0).getExamDates().iterator().next().getDate().toString();
-       	
-       	System.out.println(test);
+
+       	//Getting all rooms
+       	List<RoomModel> rooms = roomRepo.findAll();
        	
     	model.addAttribute("professorExams",exams);
+    	model.addAttribute("rooms",rooms);
     	model.addAttribute("professorData",professorData);
 
 		return "professor/addExam";
@@ -343,21 +348,39 @@ public class StudyManagerController {
 	
 /********************************************ADDING EXAM***********************************************************/	
 	@RequestMapping(value="/addExamModel", method=RequestMethod.GET)
-	public String modelAdd(Model model,@RequestParam String courseSelected, @RequestParam String typeSelected)
+	public String modelAdd(Model model,@RequestParam String courseSelected, @RequestParam String typeSelected, @RequestParam Date date, @RequestParam String description, @RequestParam Integer room_id)
 	{
 		CourseModel course = courseRepo.findByAcronym(courseSelected);
 		ExamModel existsExam = examRepo.findByDescriptionAndTypeAndCourse(courseSelected,typeSelected, course);
 		
+		ExamModel exam;
+		
 		if(existsExam == null)
 		{
-			ExamModel exam = new ExamModel(courseSelected,typeSelected, course);		
+			exam = new ExamModel(courseSelected,typeSelected, course);		
 			examRepo.save(exam);
 			model.addAttribute("alreadyExists",false);
+			
 		}
 		else
 		{
+			exam = existsExam;
+		}
+		
+		// Check if examDate already exists
+		Integer existsExamDate = examDateRepo.findByExamAndDate(exam.getId(), date);
+		
+		
+		if(existsExamDate < 1){
+			RoomModel room = roomRepo.findById(room_id);
+			
+			ExamDateModel examDate = new ExamDateModel(date, description, room, exam);
+			examDateRepo.save(examDate);
+		}
+		else{
 			model.addAttribute("alreadyExists",true);
 		}
+		
 		
 		return "forward:/addExam";
 	}

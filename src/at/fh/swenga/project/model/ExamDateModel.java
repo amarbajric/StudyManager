@@ -41,6 +41,16 @@ public class ExamDateModel {
 		// TODO Auto-generated constructor stub
 	}
 	
+	
+	public ExamDateModel(Date date, String description, RoomModel room, ExamModel exam) {
+		super();
+		this.date = date;
+		this.description = description;
+		this.room = room;
+		this.exam = exam;
+	}
+	
+
 	public ExamDateModel(Date date) {
 		super();
 		this.date = date;

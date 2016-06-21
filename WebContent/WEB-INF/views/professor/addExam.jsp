@@ -206,6 +206,33 @@
                           </select>
                         </div>
                       </div>
+                      <div class="ln_solid"></div>
+                      
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Description</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input type="text" class="form-control" placeholder="Description">
+                        </div>
+                      </div>
+                      
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Date & Time</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input type="text" class="form-control" placeholder="DD.MM.YYYY hh:mm">
+                        </div>
+                      </div>
+                      
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Room</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <select class="form-control" id = "courseSelected" name="courseSelected">
+                           <c:forEach items="${rooms}" var="room">
+                           		<option>${room.description}</option>
+                           </c:forEach>
+                          </select>
+                        </div>
+                      </div>
+                      
 
                       <div class="ln_solid"></div>
                       <div class="form-group">
