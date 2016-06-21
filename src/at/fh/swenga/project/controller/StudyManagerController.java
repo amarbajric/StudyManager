@@ -1,6 +1,7 @@
 package at.fh.swenga.project.controller;
 
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -352,7 +354,7 @@ public class StudyManagerController {
 	
 /********************************************ADDING EXAM***********************************************************/	
 	@RequestMapping(value="/addExamModel", method=RequestMethod.GET)
-	public String modelAdd(Model model,@RequestParam String courseSelected, @RequestParam String typeSelected, @RequestParam String examDescription, @RequestParam String examDate, @RequestParam String examTime, @RequestParam String roomSelected)
+	public String modelAdd(Model model,@RequestParam String courseSelected, @RequestParam String typeSelected, @RequestParam String examDescription, @RequestParam String examDate, @RequestParam String roomSelected)
 	{
 		CourseModel course = courseRepo.findByAcronym(courseSelected);
 		ExamModel existsExam = examRepo.findByDescriptionAndTypeAndCourse(courseSelected,typeSelected, course);
@@ -361,8 +363,10 @@ public class StudyManagerController {
 		
 		System.out.println(examDescription);
 		System.out.println(examDate);
-		System.out.println(examTime);
 		System.out.println(roomSelected);
+
+		Date date = new Date(examDate);
+		System.out.println(date);
 		
 		/*
 		if(existsExam == null)

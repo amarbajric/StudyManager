@@ -1,20 +1,7 @@
-    $(document.getElementById('examForm')).ready(function() {
-    
-      $('#examDate').daterangepicker({
-    	dateFormat: "dd-mm-yyyy",
-        singleDatePicker: true,
-        calender_style: "picker_2"
-      }, function(start, end, label) {
-       
-       examDate = start.toISOString();
-       $('#examForm').append("<input type='hidden' name='examDate' value='"+
-               submitVal+"' />");
-
-   
-      });
-      
-      
-      
-
-
-});   
+$(document.getElementById('examForm')).ready(function datePick() {
+    	examDate = $('#examDate').datetimepicker({ format : 'yyyy-mm-dd hh:ii:00' });
+    	console.log(examDate.toISOString());
+    	$('#examForm').append("<input type='hidden' name='examDate' value='"+
+                submitVal+"' />");
+    	
+    });
