@@ -132,9 +132,6 @@ public class StudyManagerController {
         	int amountOfPassedExams = gradedExams.stream().filter(e -> e.getGrade() < 5).collect(Collectors.toList()).size();
         	int amountOfGradedExams = gradedExams.size();
         	double percentageOfPassedExams = (double)amountOfPassedExams / ((double)amountOfGradedExams) * 100;
-        	System.out.println(amountOfGradedExams);
-        	System.out.println(amountOfPassedExams);
-        	System.out.println(percentageOfPassedExams);
         	
         	
         	/*************************GET THE AMOUNT OF STUDENTS***************************/
@@ -384,6 +381,7 @@ public class StudyManagerController {
 			exam = existsExam;
 		}
 		
+		/***********************CHECK, wheter for a new Exam or existing Exam, if one of the dates exist, otherwise create a date(attempt) *****/
 		// Check if examDate already exists
 		Integer existsExamDate = examDateRepo.findByExamAndDate(exam.getId(), formatDate);
 		
@@ -408,9 +406,11 @@ public class StudyManagerController {
 	/******************************************** SHOW EXAMS TO GRADE VIEW ***********************************************************/
 	
 	@RequestMapping(value = "/gradeExams", method = RequestMethod.GET)
-	public String gradeExams(Model model,@ModelAttribute("professorData")ProfessorModel professorData) {
-		 
-       	
+	public String gradeExams(Model model) {
+		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	        String mailOfUser = auth.getName();
+	        ProfessorModel professorData = professorRepo.findByMail(mailOfUser);
+	        
 		//getting all the exams to grade of a professor
     	List<Object[]> professorExamsData = examDateRepo.findProfExamsToGrade(professorData.getId());
     	
@@ -440,13 +440,15 @@ public class StudyManagerController {
 		model.addAttribute("dateNumber", dateNumber);
 		model.addAttribute("date", date);
 		model.addAttribute("applicantsList", applicantsList);
-	System.out.println(applicantsList.get(0).getGrade());
 		
 		return "professor/gradeExam";
 	}
 	
+	
+	
+	
 	@RequestMapping(value="/gradeExam", method=RequestMethod.POST)
-	public String gradeExam(@Valid @ModelAttribute("applicantsList") List<ExamApplicationModel> applicantsList, Model model)
+	public String gradeExam(@Valid @ModelAttribute ArrayList<ExamApplicationModel> applicantsList, Model model)
 	{
 		System.out.println("success");
 		System.out.println(applicantsList.get(0).getGrade());

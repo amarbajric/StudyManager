@@ -82,18 +82,14 @@
 								<li><a href="/StudyManager/"><i class="fa fa-home"></i> Overview</a></li>
 								<c:choose>
 								<c:when test="${isStudent eq false}">
-								<c:set var="examVal" scope="session" value="addExam"></c:set>
-								<c:set var="gradeVal" scope="session" value="PLACEHOLDER"></c:set>
-								<c:set var="linkName" scope="session" value="PLACEHOLDER"></c:set>						
+								<li><a href="/StudyManager/addExam"><i class="fa fa-desktop"></i>Exams</a></li>
+								<li><a href="/StudyManager/gradeExams"><i class="fa fa-edit"></i>Grade Exams</a></li>					
 								</c:when>
 								<c:otherwise>
-								<c:set var="examVal" scope="session" value="exams"></c:set>
-								<c:set var="gradeVal" scope="session" value="grades"></c:set>								
-								<c:set var="linkName" scope="session" value="Grades"></c:set>		
+								<li><a href="/StudyManager/exams"><i class="fa fa-edit"></i>Exams</a></li>
+								<li><a href="/StudyManager/grades"><i class="fa fa-desktop"></i>Grades</a></li>
 								</c:otherwise>
-								</c:choose>
-								<li><a href="/StudyManager/${examVal}"><i class="fa fa-edit"></i>Exams</a></li>
-								<li><a href="/StudyManager/${gradeVal}"><i class="fa fa-desktop"></i>${linkName}</a></li>
+								</c:choose>								
 							</ul>
 						</div>
 					</div>

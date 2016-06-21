@@ -69,8 +69,8 @@
 							<h3>General</h3>
 							<ul class="nav side-menu">
 								<li><a href="/StudyManager/"><i class="fa fa-home"></i> Overview</a></li>
-								<li><a href="/StudyManager/addExam"><i class="fa fa-edit"></i>Exams</a></li>
-								<li><a href="/StudyManager/gradeExams"><i class="fa fa-edit"></i>Grade Exams</a></li>
+								<li><a href="/StudyManager/addExam"><i class="fa fa-desktop"></i>Exams</a></li>
+								<li><a href="/StudyManager/gradeExams"><i class="fa fa-edit"></i>Grade Exams</a></li>	
 							</ul>
 						</div>
 					</div>
