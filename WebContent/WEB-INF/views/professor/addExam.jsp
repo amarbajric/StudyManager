@@ -206,7 +206,6 @@
                           </select>
                         </div>
                       </div>
-                      <div class="ln_solid"></div>
                       
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Description</label>
@@ -214,7 +213,7 @@
                           <input type="text" class="form-control" placeholder="Description">
                         </div>
                       </div>
-                      
+
                       <div class="ln_solid"></div>
                       <fieldset>
                         <div class="control-group">
@@ -237,14 +236,11 @@
                         <div class="col-md-9 col-sm-9 col-xs-12">
                           <select class="form-control" id = "courseSelected" name="courseSelected">
                            <c:forEach items="${rooms}" var="room">
-                           		<option>${room.description}</option>
+                             <option>${room.description}</option>
                            </c:forEach>
                           </select>
                         </div>
                       </div>
-                      
-
-
                       
                       
                       
