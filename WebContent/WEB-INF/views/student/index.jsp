@@ -132,8 +132,8 @@
 						<div class="right">
 							<span class="count_top"><i class="fa fa-user"></i> Total
 								Students</span>
-							<div class="count">${allStudents.size()}</div>
-							<span class="count_bottom"><i class="green">${studentColleagues.size()}</i>
+							<div class="count">${numberOfAllStudents}</div>
+							<span class="count_bottom"><i class="green">${numberOfStudentColleagues}</i>
 								of them are studying with you</span>
 						</div>
 					</div>
@@ -144,19 +144,18 @@
 							<span class="count_top"><i class="fa fa-pencil"></i> Total
 								Exams taken</span>
 							<div class="count">${gradedExams.size()}</div>
+							<c:set var="percentagePositive"><fmt:formatNumber value="25" maxFractionDigits="2"/></c:set>
 							<c:choose>
-								<c:when
-									test="${(fn:length(studentData.applications)/fn:length(examsOfDegreeProgram))*100 > 50}">
+								<c:when	test="${percentagePositive>80}">
 									<c:set var="classCol">green</c:set>
 								</c:when>
-								<c:when
-									test="${(fn:length(studentData.applications)/fn:length(examsOfDegreeProgram))*100 < 50}">
+								<c:when	test="${percentagePositive<80}">
 									<c:set var="classCol">red</c:set>
 								</c:when>
 							</c:choose>
 							<span class="count_bottom"><i class="${classCol}"><fmt:formatNumber 
-     						value="${(fn:length(studentData.applications)/fn:length(examsOfDegreeProgram))*100}" 
-     						maxFractionDigits="2"/>%</i> accomplished</span>
+     						value="${percentagePositive}" 
+     						maxFractionDigits="2"/>%</i> passed</span>
 						</div>
 					</div>
 					<div
