@@ -19,8 +19,8 @@ public class RoomModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(nullable = false, length = 100)
-	private String description; // e.g. EDV224 
+	@Column(nullable = false, length = 100, unique = true)
+	private String description; // e.g. G.AP147.005
 	
 	@Column(nullable = false)
 	private int seats;

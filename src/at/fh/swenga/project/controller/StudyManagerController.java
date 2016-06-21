@@ -1,6 +1,8 @@
 package at.fh.swenga.project.controller;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -350,13 +352,19 @@ public class StudyManagerController {
 	
 /********************************************ADDING EXAM***********************************************************/	
 	@RequestMapping(value="/addExamModel", method=RequestMethod.GET)
-	public String modelAdd(Model model,@RequestParam String courseSelected, @RequestParam String typeSelected, @RequestParam Date date, @RequestParam String description, @RequestParam Integer room_id)
+	public String modelAdd(Model model,@RequestParam String courseSelected, @RequestParam String typeSelected, @RequestParam String examDescription, @RequestParam String examDate, @RequestParam String examTime, @RequestParam String roomSelected)
 	{
 		CourseModel course = courseRepo.findByAcronym(courseSelected);
 		ExamModel existsExam = examRepo.findByDescriptionAndTypeAndCourse(courseSelected,typeSelected, course);
 		
 		ExamModel exam;
 		
+		System.out.println(examDescription);
+		System.out.println(examDate);
+		System.out.println(examTime);
+		System.out.println(roomSelected);
+		
+		/*
 		if(existsExam == null)
 		{
 			exam = new ExamModel(courseSelected,typeSelected, course);		
@@ -374,7 +382,7 @@ public class StudyManagerController {
 		
 		
 		if(existsExamDate < 1){
-			RoomModel room = roomRepo.findById(room_id);
+			RoomModel room = roomRepo.findByDescription(roomSelected);
 			
 			ExamDateModel examDate = new ExamDateModel(date, description, room, exam);
 			examDateRepo.save(examDate);
@@ -382,7 +390,7 @@ public class StudyManagerController {
 		else{
 			model.addAttribute("alreadyExists",true);
 		}
-		
+		*/
 		
 		return "forward:/addExam";
 	}
