@@ -150,6 +150,7 @@
 	                        	<tr>
 	                        		<th><small>#</small></th>
 	                        		<th><small>Date</small></th>
+	                        		<th><small>Description</small></th>
 	                        		<th><small>Room</small></th>
 	                        	</tr>
 	                      	</thead>
@@ -160,6 +161,7 @@
 	                        	<tr>
 	                        		<td><small>${count.count}</small></td>
 	                        		<td><small><fmt:formatDate value="${examDate.getDate()}" pattern="dd.MM.yyyy - hh:mm" /></small></td>
+	                        		<td><small>${examDate.getDescription()}</small></td>
 	                        		<td><small>${examDate.getRoom().getDescription()}</small></td>
 	                  			</tr>
 	                  		</c:forEach>

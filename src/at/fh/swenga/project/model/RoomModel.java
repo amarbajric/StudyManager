@@ -2,6 +2,7 @@ package at.fh.swenga.project.model;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,7 +26,7 @@ public class RoomModel {
 	@Column(nullable = false)
 	private int seats;
 	
-	@OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "room", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private Set<ExamDateModel> examDates;
 	
 	public RoomModel() {
