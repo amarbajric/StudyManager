@@ -113,7 +113,7 @@ INSERT INTO user_roles(username,ROLE)
 VALUES ('martina.musterfrau@studymanager.com', 'ROLE_STUDENT');
 
 INSERT INTO students(ects,firstname,lastname,mail, year_id)
-VALUES(10.0,'Max','Musterfrau','martina.musterfrau@studymanager.com', 1);
+VALUES(10.0,'Martina','Musterfrau','martina.musterfrau@studymanager.com', 1);
 
 
 

@@ -5,16 +5,17 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -40,6 +41,8 @@ import at.fh.swenga.project.model.ExamApplicationModel;
 import at.fh.swenga.project.model.ExamDateModel;
 import at.fh.swenga.project.model.ExamModel;
 import at.fh.swenga.project.model.ProfessorModel;
+import at.fh.swenga.project.model.Q_ExamDateModelWithRoom;
+import at.fh.swenga.project.model.Q_ExamModelWithDates;
 import at.fh.swenga.project.model.Q_ProfessorExam;
 import at.fh.swenga.project.model.Q_studentExam;
 import at.fh.swenga.project.model.RoomModel;
@@ -335,15 +338,52 @@ public class StudyManagerController {
 	@RequestMapping(value = "/addExam", method = RequestMethod.GET)
 	public String addExam(Model model,@ModelAttribute("professorData")ProfessorModel professorData) {
 		 
-		//Getting All Exams of the professor
+		/*************************GETTING ALL EXAMS OF THE PROFESSOR***************************/
+		//Getting All Exams of the professor with its according dates ordered by date asc
        	List<ExamModel> exams = examRepo.findByCourseProfessor(professorData.getId());
+       	
+       	//create an arraylist in which all exams with the needed data will get stored
+       	ArrayList<Q_ExamModelWithDates> examList = new ArrayList();
+       	
+       	//store the arraylist with the right data
+       	for (ExamModel exam : exams){
+       		
+       		//Getting all Dates for the exam in an unordered set
+       		Set<ExamDateModel> examDates = exam.getExamDates();
+       		
+       		//create an arraylist in which all the dates of the set will get stored
+       		ArrayList<Q_ExamDateModelWithRoom> examDateList = new ArrayList();
+       		
+       		//store the examDates into the arraylist
+       		for (ExamDateModel examDate : examDates){
+       			Date date = examDate.getDate();
+       			String description = examDate.getDescription();
+       			String room = examDate.getRoom().getDescription();
+       			
+       			Q_ExamDateModelWithRoom newExamDate = new Q_ExamDateModelWithRoom(date,description,room);
+       			examDateList.add(newExamDate);
+       		}
+       		
+       		//sort the list of examDates by date asc
+       		Collections.sort(examDateList);
+       		
+       		//Get the missing data for the exam
+       		String courseDescription = exam.getCourse().getDescription();
+       		String examDescription = exam.getDescription();
+       		
+       		//save the exam with its dates into the arraylist
+       		Q_ExamModelWithDates newExam = new Q_ExamModelWithDates(courseDescription,examDescription,examDateList);
+       		examList.add(newExam);
+       	}
 
+       	
+       	/*************************GETTING ALL ROOMS***************************/
        	//Getting all rooms
        	List<RoomModel> rooms = roomRepo.findAll();
        	
        	
-       	
-    	model.addAttribute("professorExams",exams);
+       	/*************************SETTING THE MODELS***************************/
+       	model.addAttribute("examList",examList);
     	model.addAttribute("rooms",rooms);
     	model.addAttribute("professorData",professorData);
 

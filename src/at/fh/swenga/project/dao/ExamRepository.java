@@ -27,7 +27,8 @@ public interface ExamRepository extends JpaRepository<ExamModel, Integer> {
 			+ "FROM exams ex "
 			+ "JOIN courses co ON ex.course_id = co.id "
 			+ "JOIN courses_professors cp ON co.id = cp.course_id "
-			+ "WHERE cp.professor_id = ?1", nativeQuery=true)
+			+ "WHERE cp.professor_id = ?1 "
+			+ "ORDER BY ex.description asc", nativeQuery=true)
 	public List<ExamModel> findByCourseProfessor(int professor_id);
 	
 	@Modifying
