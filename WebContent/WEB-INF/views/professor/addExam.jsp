@@ -137,10 +137,10 @@
                     </thead>
 
                     <tbody>
-                      <c:forEach items="${professorExams}" var="exam" varStatus="loop">
+                      <c:forEach items="${examList}" var="exam" varStatus="loop">
                       <tr class="even pointer" data-toggle="collapse" data-target="#demo${loop.index}">
-                        <td class="mousePointer" ><b>${exam.getCourse().getDescription()}</b></td>
-                        <td class="mousePointer" ><b>${exam.getType()}</b></td>
+                        <td class="mousePointer" ><b>${exam.courseDescription}</b></td>
+                        <td class="mousePointer" ><b>${exam.examDescription}</b></td>
                       </tr>
                       
                       <!-- Collapsed Table -->
@@ -163,7 +163,7 @@
 	                        		<td><small>${count.count}</small></td>
 	                        		<td><small><fmt:formatDate value="${examDate.getDate()}" pattern="dd.MM.yyyy - hh:mm" /></small></td>
 	                        		<td><small>${examDate.getDescription()}</small></td>
-	                        		<td><small>${examDate.getRoom().getDescription()}</small></td>
+	                        		<td><small>${examDate.getRoom()}</small></td>
 	                  			</tr>
 	                  		</c:forEach>
 	                      	</tbody>

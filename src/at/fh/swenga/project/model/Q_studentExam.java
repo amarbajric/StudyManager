@@ -2,6 +2,7 @@ package at.fh.swenga.project.model;
 
 import java.util.Date;
 
+//Objects of this class hold data of a specific query
 public class Q_studentExam {
 	
 	private Integer id;
