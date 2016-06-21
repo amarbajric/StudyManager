@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -110,8 +111,19 @@ public class StudyManagerController {
         } else if(role.toLowerCase().contains("student")) {
         	//find all the data of the specific Student who logged in.
         	StudentModel studentData = studentRepo.findByMail(mailOfUser);
+        	
+        	/*************************GET THE GRADED EXAMS***************************/
         	//get all graded exams
         	List<ExamApplicationModel> gradedExams = examApplicationRepo.findByStudentAndGradeIsNotNullOrderByExamDateDateDesc(studentData);
+        	
+        	//get the amount of passed exams
+        	int amountOfPassedExams = gradedExams.stream().filter(e -> e.getGrade() < 5).collect(Collectors.toList()).size();
+        	int amountOfGradedExams = gradedExams.size();
+        	double percentageOfPassedExams = (double)amountOfPassedExams / ((double)amountOfGradedExams) * 100;
+        	System.out.println(amountOfGradedExams);
+        	System.out.println(amountOfPassedExams);
+        	System.out.println(percentageOfPassedExams);
+        	
         	
         	/*************************GET THE AMOUNT OF STUDENTS***************************/
         	//get the total amount of students
@@ -178,6 +190,7 @@ public class StudyManagerController {
         	model.addAttribute("numberOfAllStudents",numberOfAllStudents);
         	model.addAttribute("studentData",studentData);
         	model.addAttribute("gradedExams",gradedExams);
+        	model.addAttribute("percentageOfPassedExams",percentageOfPassedExams);
         	model.addAttribute("grades",grades);
         	model.addAttribute("upcomingStudentExams", upcomingStudentExams);
 
