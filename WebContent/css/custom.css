@@ -5401,3 +5401,6 @@ ul.notifications {
 .hiddenRow {
     padding: 0 !important;
 }
+.mousePointer {
+  cursor: pointer;
+}
