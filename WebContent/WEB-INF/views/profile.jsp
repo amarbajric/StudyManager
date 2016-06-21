@@ -82,8 +82,8 @@
 								<li><a href="/StudyManager/"><i class="fa fa-home"></i> Overview</a></li>
 								<c:choose>
 								<c:when test="${isStudent eq false}">
-								<li><a href="/StudyManager/addExam"><i class="fa fa-desktop"></i>Exams</a></li>
-								<li><a href="/StudyManager/gradeExams"><i class="fa fa-edit"></i>Grade Exams</a></li>					
+								<li><a href="/StudyManager/manageExams"><i class="fa fa-desktop"></i>Manage Exams</a></li>
+								<li><a href="/StudyManager/writtenExams"><i class="fa fa-edit"></i>Grade Exams</a></li>					
 								</c:when>
 								<c:otherwise>
 								<li><a href="/StudyManager/exams"><i class="fa fa-edit"></i>Exams</a></li>

@@ -335,8 +335,8 @@ public class StudyManagerController {
 
 	
 /********************************************ADD EXAM PAGE***********************************************************/
-	@RequestMapping(value = "/addExam", method = RequestMethod.GET)
-	public String addExam(Model model,@ModelAttribute("professorData")ProfessorModel professorData) {
+	@RequestMapping(value = "/manageExams", method = RequestMethod.GET)
+	public String manageExam(Model model,@ModelAttribute("professorData")ProfessorModel professorData) {
 		 
 		/*************************GETTING ALL EXAMS OF THE PROFESSOR***************************/
 		//Getting All Exams of the professor with its according dates ordered by date asc
@@ -387,7 +387,7 @@ public class StudyManagerController {
     	model.addAttribute("rooms",rooms);
     	model.addAttribute("professorData",professorData);
 
-		return "professor/addExam";
+		return "professor/manageExams";
 	}
 	
 	
@@ -440,13 +440,13 @@ public class StudyManagerController {
 		}
 		
 		
-		return "forward:/addExam";
+		return "forward:/manageExams";
 	}
 	
 	/******************************************** SHOW EXAMS TO GRADE VIEW ***********************************************************/
 	
-	@RequestMapping(value = "/gradeExams", method = RequestMethod.GET)
-	public String gradeExams(Model model) {
+	@RequestMapping(value = "/writtenExams", method = RequestMethod.GET)
+	public String writtenExam(Model model) {
 		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	        String mailOfUser = auth.getName();
 	        ProfessorModel professorData = professorRepo.findByMail(mailOfUser);
@@ -465,10 +465,10 @@ public class StudyManagerController {
        	model.addAttribute("professorExams", professorExams);
     	model.addAttribute("professorData",professorData);
 
-		return "professor/gradeExams";
+		return "professor/writtenExams";
 	}
 	
-	/******************************************** GRADE EXAM ***********************************************************/
+	/******************************************** GRADE EXAM - GET Method ***********************************************************/
 	
 	@RequestMapping(value="/gradeExam", method=RequestMethod.GET)
 	public String gradeExam(Model model,@RequestParam int examDateId, @RequestParam String course, @RequestParam String type, @RequestParam String dateNumber,@RequestParam String date)
@@ -486,7 +486,7 @@ public class StudyManagerController {
 	
 	
 	
-	
+	/******************************************** GRADE EXAM - POST Method ***********************************************************/
 	@RequestMapping(value="/gradeExam", method=RequestMethod.POST)
 	public String gradeExam(@Valid @ModelAttribute ArrayList<ExamApplicationModel> applicantsList, Model model)
 	{
