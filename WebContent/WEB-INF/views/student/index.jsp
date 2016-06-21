@@ -144,20 +144,19 @@
 							<span class="count_top"><i class="fa fa-pencil"></i> Total
 								Exams taken</span>
 							<div class="count">${gradedExams.size()}</div>
-							<c:set var="percentagePositive" val="${percentageOfPassedExams}"></c:set>
+							<c:set var="percentagePositive" value="${percentageOfPassedExams}"></c:set>
 							<c:choose>
-								<c:when	test="${percentagePositive>90}">
-									<c:set var="classCol">green</c:set>
-								</c:when>
-								<c:when	test="${percentagePositive>75}">
-									<c:set var="classCol">orange</c:set>
-								</c:when>
-								<c:when	test="${percentagePositive<75}">
+								<c:when	test="${percentagePositive < 75}">
 									<c:set var="classCol">red</c:set>
 								</c:when>
+								<c:when	test="${percentagePositive > 75}">
+									<c:set var="classCol">orange</c:set>
+								</c:when>
+								<c:when	test="${percentagePositive > 90}">
+									<c:set var="classCol">green</c:set>
+								</c:when>
 							</c:choose>
-							<c:set var="classCol">red</c:set>
-							<span class="count_bottom"><b><i class="${classCol}">${percentagePositive}%</i></b> passed</span>
+							<span class="count_bottom"><b><i class="${classCol}"><fmt:formatNumber value="${percentagePositive}" maxFractionDigits="2"/>%</i></b> passed</span>
 						</div>
 					</div>
 					<div
