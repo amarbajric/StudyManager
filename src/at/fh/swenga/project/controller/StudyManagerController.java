@@ -338,6 +338,8 @@ public class StudyManagerController {
        	//Getting all rooms
        	List<RoomModel> rooms = roomRepo.findAll();
        	
+       	
+       	
     	model.addAttribute("professorExams",exams);
     	model.addAttribute("rooms",rooms);
     	model.addAttribute("professorData",professorData);
