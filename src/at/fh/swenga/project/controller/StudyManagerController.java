@@ -381,11 +381,12 @@ public class StudyManagerController {
        		
        		//store the examDates into the arraylist
        		for (ExamDateModel examDate : examDates){
+       			Integer id = examDate.getId();
        			Date date = examDate.getDate();
        			String description = examDate.getDescription();
        			String room = examDate.getRoom().getDescription();
        			
-       			Q_ExamDateModelWithRoom newExamDate = new Q_ExamDateModelWithRoom(date,description,room);
+       			Q_ExamDateModelWithRoom newExamDate = new Q_ExamDateModelWithRoom(id,date,description,room);
        			examDateList.add(newExamDate);
        		}
        		
@@ -393,11 +394,12 @@ public class StudyManagerController {
        		Collections.sort(examDateList);
        		
        		//Get the missing data for the exam
+       		Integer id = exam.getId();
        		String courseDescription = exam.getCourse().getDescription();
        		String examDescription = exam.getType();
        		
        		//save the exam with its dates into the arraylist
-       		Q_ExamModelWithDates newExam = new Q_ExamModelWithDates(courseDescription,examDescription,examDateList);
+       		Q_ExamModelWithDates newExam = new Q_ExamModelWithDates(id,courseDescription,examDescription,examDateList);
        		examList.add(newExam);
        	}
 
