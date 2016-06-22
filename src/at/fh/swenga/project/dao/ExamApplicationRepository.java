@@ -26,9 +26,11 @@ public interface ExamApplicationRepository extends JpaRepository<ExamApplication
 			+ "order by ed.date desc", nativeQuery=true)
 	public List<ExamApplicationModel> findByStudentAndGradeIsNotNullOrderByExamDateDateDesc(StudentModel student);
 	
-	@Query(value = "select ea.*, (SELECT  COUNT(*) FROM exam_applications where examDate_id = ed.id and grade = 1) as amountExcellent, (SELECT  COUNT(*) FROM exam_applications where examDate_id = ed.id and grade = 2) as amountGood, (SELECT  COUNT(*) FROM exam_applications where examDate_id = ed.id and grade = 3) as amountSatisfactory, (SELECT  COUNT(*) FROM exam_applications where examDate_id = ed.id and grade = 4) as amountSufficient, (SELECT  COUNT(*) FROM exam_applications where examDate_id = ed.id and grade = 5) as amountNotSufficient, (SELECT AVG(grade) FROM exam_applications where examDate_id = ed.id) as averageGrade "
+	@Query(value = "select ea.id, co.description, ex.type, ea.attempt, ed.date, ea.grade, (SELECT  COUNT(*) FROM exam_applications where examDate_id = ed.id and grade = 1) as amountExcellent, (SELECT  COUNT(*) FROM exam_applications where examDate_id = ed.id and grade = 2) as amountGood, (SELECT  COUNT(*) FROM exam_applications where examDate_id = ed.id and grade = 3) as amountSatisfactory, (SELECT  COUNT(*) FROM exam_applications where examDate_id = ed.id and grade = 4) as amountSufficient, (SELECT  COUNT(*) FROM exam_applications where examDate_id = ed.id and grade = 5) as amountNotSufficient, (SELECT AVG(grade) FROM exam_applications where examDate_id = ed.id) as averageGrade "
 			+ "from exam_applications ea "
 			+ "join exam_dates ed on ea.examDate_id = ed.id "
+			+ "join exams ex on ed.exam_id = ex.id "
+			+ "join courses co on ex.course_id = co.id "
 			+ "where student_id = ?1 and grade is not null "
 			+ "order by ed.date desc", nativeQuery=true)
 	public List<Object[]> findByStudentAndGradeIsNotNullWithOutcomeOrderByExamDateDateDesc(StudentModel student);

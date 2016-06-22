@@ -260,20 +260,17 @@ public class StudyManagerController {
     		Object[] arr = gradedExamsWithOutcomeData.get(i);
     		
     		Integer id = Integer.parseInt(arr[0].toString());
-    		Integer attempt = Integer.parseInt(arr[1].toString());
-    		Integer grade = Integer.parseInt(arr[2].toString());
-    		Integer examDate_id = Integer.parseInt(arr[3].toString());
-    		Integer student_id = Integer.parseInt(arr[4].toString());
+    		String courseName = arr[1].toString();
+    		String examType = arr[2].toString();
+    		Integer attempt = Integer.parseInt(arr[3].toString());
+    		Date date = (Date)arr[4];
+    		Integer grade = Integer.parseInt(arr[5].toString());
     		
-    		ExamDateModel examDate = examDateRepo.findById(examDate_id);
-    		StudentModel student = studentRepo.findById(student_id);
-    		ExamApplicationModel examApplication = new ExamApplicationModel(id, attempt, grade, student, examDate);
+    		List<Integer> gradesOverview = new ArrayList<Integer>(Arrays.asList(Integer.parseInt(arr[6].toString()),Integer.parseInt(arr[7].toString()),Integer.parseInt(arr[8].toString()),Integer.parseInt(arr[9].toString()),Integer.parseInt(arr[10].toString())));
     		
-    		List<Integer> gradesOverview = new ArrayList<Integer>(Arrays.asList(Integer.parseInt(arr[5].toString()),Integer.parseInt(arr[6].toString()),Integer.parseInt(arr[7].toString()),Integer.parseInt(arr[8].toString()),Integer.parseInt(arr[9].toString())));
+    		Double averageGrade = Double.parseDouble(arr[11].toString());
     		
-    		Double averageGrade = Double.parseDouble(arr[10].toString());
-    		
-    		Q_GradedExamWithOutcome gradedExamWithOutcome = new Q_GradedExamWithOutcome(examApplication, gradesOverview, averageGrade);
+    		Q_GradedExamWithOutcome gradedExamWithOutcome = new Q_GradedExamWithOutcome(id, courseName, examType, attempt, date, grade, gradesOverview, averageGrade);
     		gradedExamsWithOutcome.add(gradedExamWithOutcome);
     		}
     	

@@ -173,11 +173,11 @@
 	                      <tbody>
 							<c:forEach items="${gradedExamsWithOutcome}" var="exam">
 								<tr>
-									<th>${exam.getExamApplication().getExamDate().getExam().getCourse().getDescription()}</th>
-									<td>${exam.examApplication.examDate.exam.type}</td>
-									<td>${exam.examApplication.attempt}</td>
-									<td scope="row"><fmt:formatDate value="${exam.examApplication.examDate.date}" pattern="dd.MM.yyyy" /></td>
-									<td>${application.grade}<span class="${className}">${exam.examApplication.grade}</span></td>
+									<th>${exam.courseName}</th>
+									<td>${exam.examType}</td>
+									<td>${exam.attempt}</td>
+									<td scope="row"><fmt:formatDate value="${exam.date}" pattern="dd.MM.yyyy" /></td>
+									<td>${application.grade}<span class="${className}">${exam.grade}</span></td>
 									<!--  <td><span class="sparkline_one" style="height: 160px;" values="1,2,3,4,5"><canvas width="196" height="40" style="display: inline-block; width: 196px; height: 40px; vertical-align: top;"></canvas></span> AVG: ${exam.averageGrade}</td>-->
 									<td><span class="sparklines" sparkType="bar" sparkBarColor="green">${exam.gradesOverview[0]},${exam.gradesOverview[1]},${exam.gradesOverview[2]},${exam.gradesOverview[3]},${exam.gradesOverview[4]}</span>AVG: ${exam.averageGrade}</td>
 								</tr>
