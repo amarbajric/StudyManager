@@ -166,7 +166,7 @@
 						<div class="left"></div>
 						<div class="right">
 							<span class="count_top"><i class="fa fa-book"></i> Amount
-								of courses held</span>
+								of courses</span>
 							<div class="count">${professorData.courses.size()}</div>
 						</div>
 					</div>

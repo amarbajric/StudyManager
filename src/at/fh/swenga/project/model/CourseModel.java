@@ -28,7 +28,7 @@ public class CourseModel implements java.io.Serializable {
 	@Column(nullable = false, unique = true, length = 100)
 	private String acronym;
 
-	@Column(nullable = false, length = 100)
+	@Column(nullable = false, unique = true, length = 100)
 	private String description;
 
 	@ManyToMany(mappedBy = "courses") // student collection is mapped wit the course collection

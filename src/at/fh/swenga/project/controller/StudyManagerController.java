@@ -88,11 +88,10 @@ public class StudyManagerController {
 	@Autowired
 	RoomRepository roomRepo;
 
-	/********************************************INDEX VIEW***********************************************************/
-	/**
-	 * The default requestMapper only checks if the logged in user is a student, professor or admin.
-	 * Then it checks the given role of the logged in user and forwards the browser to the specific view
-	 **/
+/********************************************INDEX VIEW************************************************************
+ * The default requestMapper only checks if the logged in user is a student, professor
+ * Then it checks the given role of the logged in user and forwards the browser to the specific view
+ **/
 	@RequestMapping(value = {"/"})
 	public String showIndex(Model model) {
 		
@@ -325,21 +324,15 @@ public class StudyManagerController {
         /*************************ENROLLING AND SIGNING OUT OF EXAMS***************************/
 		if(action.equals("enroll"))
 		{
-			
 		Integer newAttemptOfExam = examApplicationRepo.attemptOfExam(studentData.getId(),id) + 1;
 		ExamDateModel examDate = examDateRepo.findById(id);
 		ExamApplicationModel examToEnroll = new ExamApplicationModel(newAttemptOfExam, studentData, examDate);
 		examApplicationRepo.save(examToEnroll);
-		
-
 		}
 		else if(action.equals("signOut"))
 		{			
-			
-		examApplicationRepo.removeByStudentIdAndExamDateId(studentData.getId(), id);
-				
-		}			
-		
+		examApplicationRepo.removeByStudentIdAndExamDateId(studentData.getId(), id);	
+		}
 		
 		return "forward:/exams";
 	}
@@ -374,8 +367,6 @@ public class StudyManagerController {
         	model.addAttribute("isStudent",isStudent);
         	return UrlAsString;
         }
-        
-        
 		return UrlAsString;
 	}
 	
@@ -424,18 +415,17 @@ public class StudyManagerController {
        		//Get the missing data for the exam
        		Integer id = exam.getId();
        		String courseDescription = exam.getCourse().getDescription();
+       		String courseAcronym = exam.getCourse().getAcronym();
        		String examDescription = exam.getType();
        		
        		//save the exam with its dates into the arraylist
-       		Q_ExamModelWithDates newExam = new Q_ExamModelWithDates(id,courseDescription,examDescription,examDateList);
+       		Q_ExamModelWithDates newExam = new Q_ExamModelWithDates(id,courseDescription,courseAcronym,examDescription,examDateList);
        		examList.add(newExam);
        	}
-
        	
        	/*************************GETTING ALL ROOMS***************************/
        	//Getting all rooms
        	List<RoomModel> rooms = roomRepo.findAll();
-       	
        	
        	/*************************SETTING THE MODELS***************************/
        	model.addAttribute("examList",examList);
@@ -451,13 +441,17 @@ public class StudyManagerController {
 	public String modelAdd(Model model,@RequestParam String courseSelected, @RequestParam String typeSelected, @RequestParam String examDescription, @RequestParam String examDate, @RequestParam String roomSelected)
 	{
 		
-		CourseModel course = courseRepo.findByAcronym(courseSelected);
-		ExamModel existsExam = examRepo.findByDescriptionAndTypeAndCourse(courseSelected,typeSelected, course);		
+		/*************************GETTING THE DATA FOR THE NEW EXAM***************************/
+		//Getting the course of the exam
+		CourseModel course = courseRepo.findByDescription(courseSelected);
+		//Check if the exam already exists
+		ExamModel existsExam = examRepo.findByDescriptionAndTypeAndCourse(course.getAcronym(),typeSelected, course);
+		
 		ExamModel exam;
 		String status;
 		
-				
-		DateFormat date = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+		//Parsing the date for the new examDate
+		DateFormat date = new SimpleDateFormat("dd.MM.yyyy - HH:mm");
 		Date formatDate = new Date();
 		try {
 			formatDate = date.parse(examDate);
@@ -466,52 +460,48 @@ public class StudyManagerController {
 			e.printStackTrace();
 		}
 		
-		
-		if(existsExam == null)//if no Exam of this type exists...
+		/***********************CREATE A NEW EXAM*************************/
+		//Check if the exam already exists
+		if(existsExam == null)
 		{
-			exam = new ExamModel(courseSelected,typeSelected, course);		
+			//if no Exam of this type exists: create a new exam
+			exam = new ExamModel(course.getAcronym(),typeSelected, course);		
 			examRepo.save(exam);
 			status = "newExamModel";
-			
 		}
-		else
+		else	
 		{
+			//if an Exam exists, use the existing one for the new examDate
 			exam = existsExam;
 		}
 			
-		/***********************CHECK, whether for a new Exam or existing Exam, if one of the dates exist, otherwise create a date(attempt) *****/
-		// Check if examDate already exists
-		if(examDateRepo.findByExamAndDate(exam.getId(), formatDate) < 1)//ExamDateModel doesn't exist
+		/***********************CREATE A NEW EXAMDATE FOR AN EXAM*************************/
+		// Check if the examDate already exists
+		if(examDateRepo.findByExamAndDate(exam.getId(), formatDate) < 1)
 		{
-			
+			//Getting the room for the new examDate
 			RoomModel room = roomRepo.findByDescription(roomSelected);
 			
+			//Create the examDate
 			ExamDateModel newExamDate = new ExamDateModel(formatDate, examDescription, room, exam);
 			examDateRepo.save(newExamDate);
 			status = "newExamDateModel";
 		}		
-		
-		
-		else{//ExamModel and ExamDateModel already exists
-			
+		else
+		{
+			//ExamDateModel already exists
 			status = "alreadyExists";
-			
 		}
 		
-		
-		
 		model.addAttribute("status",status);
-		
-		System.out.println(examDate);
-
 		return "forward:/manageExams";
 	}
 	
-	/********************************************UPDATE EXAM***********************************************************/	
+/********************************************UPDATE EXAM***********************************************************/	
 	@RequestMapping(value="/updateExamModel", method=RequestMethod.GET)
 	public String modelUpdate(Model model,@RequestParam String courseSelected, @RequestParam String typeSelected, @RequestParam String examDescription, @RequestParam String examDate, @RequestParam String roomSelected, @RequestParam(required=false) Integer examDateIdSelected)
 	{
-		DateFormat date = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+		DateFormat date = new SimpleDateFormat("dd.MM.yyyy - HH:mm");
 		Date formatDate = new Date();
 		try {
 			formatDate = date.parse(examDate);
@@ -523,12 +513,12 @@ public class StudyManagerController {
 		RoomModel room = roomRepo.findByDescription(roomSelected);
 		
 		examDateRepo.updateExamDate(room.getId(), formatDate, examDescription, examDateIdSelected);
-		
+
 		return "forward:/manageExams";
 	}
 	
-	/******************************************** SHOW EXAMS TO GRADE VIEW ***********************************************************/
 	
+/******************************************** SHOW EXAMS TO GRADE VIEW ***********************************************************/
 	@RequestMapping(value = "/writtenExams", method = RequestMethod.GET)
 	public String writtenExam(Model model) {
 		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -553,8 +543,7 @@ public class StudyManagerController {
 		return "professor/writtenExams";
 	}
 	
-	/******************************************** GRADE EXAM - GET Method ***********************************************************/
-	
+/******************************************** GRADE EXAM - GET Method ***********************************************************/
 	@RequestMapping(value="/gradeExam", method=RequestMethod.GET)
 	public String gradeExam(Model model,@RequestParam int examDateId, @RequestParam String course, @RequestParam String type, @RequestParam String dateNumber,@RequestParam String date)
 	{
@@ -586,7 +575,7 @@ public class StudyManagerController {
 	
 	
 	
-	/******************************************** GRADE EXAM - POST Method ***********************************************************/
+/******************************************** GRADE EXAM - POST Method ***********************************************************/
 	@RequestMapping(value="/gradeExam", method=RequestMethod.POST)
 	public String gradeExam(@Valid @ModelAttribute GradeForm gradeForm, Model model, RedirectAttributes redirectAttributes)
 	{

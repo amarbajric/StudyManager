@@ -62,6 +62,11 @@ function myFunction(elem) {
 	
 	$(document.getElementById("submitExam").style.visibility = 'hidden');
 	$(document.getElementById("updateExam").style.visibility = 'visible');
+	$(document.getElementById("resetExam").style.visibility = 'visible');
+	
+	document.getElementById("courseSelected").disabled=true;
+	document.getElementById("typeSelected").disabled=true;
+
 
 
 }	

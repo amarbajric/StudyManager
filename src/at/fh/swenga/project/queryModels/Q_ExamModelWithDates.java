@@ -7,14 +7,16 @@ public class Q_ExamModelWithDates {
 	
 	 private Integer id;	// ID of the exam
 	 private String courseDescription; //e.g. Software Engineering Basics
+	 private String courseAcronym; //e.g. SWENGB
 	 private String examDescription; //e.g. final/midterm
 	 private List<Q_ExamDateModelWithRoom> examDates; //e.g. [("01.01.2015","1.termin","G.AP147.221"),("03.03.2015","2.termin","G.AP147.221"),...]
 
-	public Q_ExamModelWithDates(Integer id, String courseDescription, String examDescription,
+	public Q_ExamModelWithDates(Integer id, String courseDescription, String courseAcronym, String examDescription,
 			List<Q_ExamDateModelWithRoom> examDates) {
 		super();
 		this.id = id;
 		this.courseDescription = courseDescription;
+		this.courseAcronym = courseAcronym;
 		this.examDescription = examDescription;
 		this.examDates = examDates;
 	}
@@ -33,6 +35,14 @@ public class Q_ExamModelWithDates {
 
 	public void setCourseDescription(String courseDescription) {
 		this.courseDescription = courseDescription;
+	}
+	
+	public String getCourseAcronym() {
+		return courseAcronym;
+	}
+
+	public void setCourseAcronym(String courseAcronym) {
+		this.courseAcronym = courseAcronym;
 	}
 
 	public String getExamDescription() {
