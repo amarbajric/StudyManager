@@ -16,6 +16,8 @@ public interface StudentRepository extends JpaRepository<StudentModel, Integer> 
 	
 	public List<StudentModel> findAll();
 	
+	public StudentModel findById(int student_id);
+	
 	@Query(value = "SELECT COUNT(*) FROM students", nativeQuery=true)
 	public int countAll();
 	

@@ -15,7 +15,7 @@ public class ExamApplicationModel implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 
 	@Column(nullable = false)
 	private Integer attempt; // 1st, 2nd, 3rd 
@@ -37,6 +37,16 @@ public class ExamApplicationModel implements java.io.Serializable {
 	public ExamApplicationModel(Integer attempt, StudentModel student, ExamDateModel examDate) {
 		super();
 		this.attempt = attempt;
+		this.student = student;
+		this.examDate = examDate;
+	}
+
+
+	public ExamApplicationModel(Integer id, Integer attempt, Integer grade, StudentModel student, ExamDateModel examDate) {
+		super();
+		this.id = id;
+		this.attempt = attempt;
+		this.grade = grade;
 		this.student = student;
 		this.examDate = examDate;
 	}
@@ -74,11 +84,11 @@ public class ExamApplicationModel implements java.io.Serializable {
 		this.examDate = examDate;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	

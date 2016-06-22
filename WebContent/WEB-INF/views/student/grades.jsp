@@ -166,19 +166,20 @@
 	                        <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 205px;" aria-label="Attempt number of the exam">Attempt</th>
 	                        <th class="sorting_desc" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 199px;" aria-sort="descending" aria-label="Date of the exam">Date</th>
 	                        <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 157px;" aria-label="Grade of the exam">Grade</th>
-	                        <th style="width: 0px;">  </th>
+	                        <th>Outcome</th>
 	                        </tr>
 	                      </thead>
 	                      
 	                      <tbody>
-							<c:forEach items="${gradedExams}" var="exam">
-								<tr>
-									<th>${exam.examDate.exam.course.description}</th>
-									<td>${exam.examDate.exam.type}</td>
-									<td>${exam.attempt}</td>
-									<td scope="row"><fmt:formatDate value="${exam.examDate.date}" pattern="dd.MM.yyyy" /></td>
-									<td>${application.grade}<span class="${className}">${exam.grade}</span></td>
-									<td></td>
+							<c:forEach items="${gradedExamsWithOutcome}" var="exam">
+								<tr  id="${exam.gradesOverview}">
+									<td style="display:none;"><input style="display:none;" name="gradesOverview" id="gradesOverview" value="${exam.gradesOverview}" /></td>
+									<th>${exam.getExamApplication().getExamDate().getExam().getCourse().getDescription()}</th>
+									<td>${exam.examApplication.examDate.exam.type}</td>
+									<td>${exam.examApplication.attempt}</td>
+									<td scope="row"><fmt:formatDate value="${exam.examApplication.examDate.date}" pattern="dd.MM.yyyy" /></td>
+									<td>${application.grade}<span class="${className}">${exam.examApplication.grade}</span></td>
+									<td><span class="sparkline_one" style="height: 160px;"><canvas width="196" height="40" style="display: inline-block; width: 196px; height: 40px; vertical-align: top;"></canvas></span> AVG: ${exam.averageGrade}</td>
 								</tr>
 							</c:forEach>
 	                      </tbody>
@@ -220,16 +221,20 @@
     <script src="js/nprogress.js"></script>
 	<!-- Datatables -->
     <script src="js/datatables/jquery.dataTables.min.js"></script>
-   <script src="js/datatables/dataTables.buttons.min.js"></script>
- <script src="js/datatables/buttons.bootstrap.min.js"></script>
-   <script src="js/datatables/buttons.html5.min.js"></script>
-   <script src="js/datatables/buttons.print.min.js"></script>
+   	<script src="js/datatables/dataTables.buttons.min.js"></script>
+ 	<script src="js/datatables/buttons.bootstrap.min.js"></script>
+   	<script src="js/datatables/buttons.html5.min.js"></script>
+   	<script src="js/datatables/buttons.print.min.js"></script>
     <script src="js/datatables/dataTables.fixedHeader.min.js"></script>
     <script src="js/datatables/dataTables.keyTable.min.js"></script>
     <script src="js/datatables/dataTables.responsive.min.js"></script>
-   <script src="js/datatables/jszip.min.js"></script>
-   <script src="js/datatables/pdfmake.min.js"></script>
+   	<script src="js/datatables/jszip.min.js"></script>
+   	<script src="js/datatables/pdfmake.min.js"></script>
     <script src="js/datatables/vfs_fonts.js"></script>
+    
+    <!-- jQuery Sparklines -->
+    <script src="js/sparkline/jquery.sparkline.min.js"></script>
+    <script src="js/sparkline/examOutcome_sparkline.js"></script>
 
     <!-- Custom by Amar -->
     <script src="js/datatables/gradesTable.js"></script>
@@ -250,6 +255,7 @@
 	</script>
 	<!-- /datepicker -->
 	<!-- /footer content -->
+	
 		
 	
 

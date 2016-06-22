@@ -119,8 +119,8 @@
               <div class="row">
                 <div class="x_panel">
                   <div class="x_title">
-                     <h1>${course}</h1>
-                    <h2>${type}   -   ${dateNumber}   -   ${date}</h2>
+                     <h1>${course} <small>${type} exam</small></h1>
+                    <h2>${dateNumber}&ensp;-&ensp;<fmt:formatDate value="${date}" pattern="dd.MM.yyyy hh:mm" /></h2>
                      <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
