@@ -448,15 +448,16 @@ public class StudyManagerController {
 	
 /********************************************ADDING EXAM***********************************************************/	
 	@RequestMapping(value="/addExamModel", method=RequestMethod.GET)
-	public String modelAdd(Model model,@RequestParam String courseSelected, @RequestParam String typeSelected, @RequestParam String examDescription, @RequestParam String examDate, @RequestParam String roomSelected, @RequestParam(required=false) Integer examDateIdSelected)
+	public String modelAdd(Model model,@RequestParam String courseSelected, @RequestParam String typeSelected, @RequestParam String examDescription, @RequestParam String examDate, @RequestParam String roomSelected)
 	{
 		
 		CourseModel course = courseRepo.findByAcronym(courseSelected);
 		ExamModel existsExam = examRepo.findByDescriptionAndTypeAndCourse(courseSelected,typeSelected, course);		
 		ExamModel exam;
-		String status;		
+		String status;
+		
 				
-		DateFormat date = new SimpleDateFormat("dd.MM.yyyy hh:mm");
+		DateFormat date = new SimpleDateFormat("dd.MM.yyyy HH:mm");
 		Date formatDate = new Date();
 		try {
 			formatDate = date.parse(examDate);
@@ -473,45 +474,56 @@ public class StudyManagerController {
 			status = "newExamModel";
 			
 		}
-		else{
+		else
+		{
+			exam = existsExam;
+		}
 			
-				exam = existsExam;
-			/***********************CHECK, wheter for a new Exam or existing Exam, if one of the dates exist, otherwise create a date(attempt) *****/
-			// Check if examDate already exists
-			if(examDateRepo.findByExamAndDate(exam.getId(), formatDate) < 1)//ExamDateModel doesn't exist
-			{
-				
-				RoomModel room = roomRepo.findByDescription(roomSelected);
-				
-				ExamDateModel newExamDate = new ExamDateModel(formatDate, examDescription, room, exam);
-				examDateRepo.save(newExamDate);
-				status = "newExamDateModel";
-			}		
+		/***********************CHECK, whether for a new Exam or existing Exam, if one of the dates exist, otherwise create a date(attempt) *****/
+		// Check if examDate already exists
+		if(examDateRepo.findByExamAndDate(exam.getId(), formatDate) < 1)//ExamDateModel doesn't exist
+		{
 			
-			else if(examDateIdSelected != null && examDateRepo.findById(examDateIdSelected) != null){//exists -> Update ExamDateModel
-				
-				RoomModel room = roomRepo.findByDescription(roomSelected);
-				ExamDateModel updatingModel = examDateRepo.findById(examDateIdSelected);
-				updatingModel.setDate(formatDate);
-				updatingModel.setDescription(examDescription);
-				updatingModel.setRoom(room);
-				
-				//update ExamDateModel
-				examDateRepo.save(updatingModel);
-				
-				status = "updatedExamDateModel";
-			}
+			RoomModel room = roomRepo.findByDescription(roomSelected);
 			
-			else{//ExamModel and ExamDateModel already exists
-				
-				status = "alreadyExists";
-				
-			}
+			ExamDateModel newExamDate = new ExamDateModel(formatDate, examDescription, room, exam);
+			examDateRepo.save(newExamDate);
+			status = "newExamDateModel";
+		}		
 		
+		
+		else{//ExamModel and ExamDateModel already exists
+			
+			status = "alreadyExists";
+			
 		}
 		
+		
+		
 		model.addAttribute("status",status);
+		
+		System.out.println(examDate);
 
+		return "forward:/manageExams";
+	}
+	
+	/********************************************UPDATE EXAM***********************************************************/	
+	@RequestMapping(value="/updateExamModel", method=RequestMethod.GET)
+	public String modelUpdate(Model model,@RequestParam String courseSelected, @RequestParam String typeSelected, @RequestParam String examDescription, @RequestParam String examDate, @RequestParam String roomSelected, @RequestParam(required=false) Integer examDateIdSelected)
+	{
+		DateFormat date = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+		Date formatDate = new Date();
+		try {
+			formatDate = date.parse(examDate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		RoomModel room = roomRepo.findByDescription(roomSelected);
+		
+		examDateRepo.updateExamDate(room.getId(), formatDate, examDescription, examDateIdSelected);
+		
 		return "forward:/manageExams";
 	}
 	
