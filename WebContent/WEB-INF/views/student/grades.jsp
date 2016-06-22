@@ -172,14 +172,14 @@
 	                      
 	                      <tbody>
 							<c:forEach items="${gradedExamsWithOutcome}" var="exam">
-								<tr  id="${exam.gradesOverview}">
-									<td style="display:none;"><input style="display:none;" name="gradesOverview" id="gradesOverview" value="${exam.gradesOverview}" /></td>
+								<tr>
 									<th>${exam.getExamApplication().getExamDate().getExam().getCourse().getDescription()}</th>
 									<td>${exam.examApplication.examDate.exam.type}</td>
 									<td>${exam.examApplication.attempt}</td>
 									<td scope="row"><fmt:formatDate value="${exam.examApplication.examDate.date}" pattern="dd.MM.yyyy" /></td>
 									<td>${application.grade}<span class="${className}">${exam.examApplication.grade}</span></td>
-									<td><span class="sparkline_one" style="height: 160px;"><canvas width="196" height="40" style="display: inline-block; width: 196px; height: 40px; vertical-align: top;"></canvas></span> AVG: ${exam.averageGrade}</td>
+									<!--  <td><span class="sparkline_one" style="height: 160px;" values="1,2,3,4,5"><canvas width="196" height="40" style="display: inline-block; width: 196px; height: 40px; vertical-align: top;"></canvas></span> AVG: ${exam.averageGrade}</td>-->
+									<td><span class="sparklines" sparkType="bar" sparkBarColor="green">${exam.gradesOverview[0]},${exam.gradesOverview[1]},${exam.gradesOverview[2]},${exam.gradesOverview[3]},${exam.gradesOverview[4]}</span>AVG: ${exam.averageGrade}</td>
 								</tr>
 							</c:forEach>
 	                      </tbody>
@@ -234,8 +234,14 @@
     
     <!-- jQuery Sparklines -->
     <script src="js/sparkline/jquery.sparkline.min.js"></script>
-    <script src="js/sparkline/examOutcome_sparkline.js"></script>
 
+
+<script type="text/javascript">
+$('.sparklines').sparkline('html', { enableTagOptions: true,type: 'bar',
+    height: '20',
+    barWidth: 20,
+    barColor: 'blue'});
+</script>
     <!-- Custom by Amar -->
     <script src="js/datatables/gradesTable.js"></script>
 
