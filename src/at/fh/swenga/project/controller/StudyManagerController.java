@@ -605,16 +605,29 @@ public class StudyManagerController {
 	{
 		// Set the new grade for every applicant
 		gradeForm.getApplicants().forEach((applicant) -> {
-			
 			if(applicant.getGrade() == 6)
 			{
 				examApplicationRepo.updateGrade(null, applicant.getId());
 				applicant.setGrade(null);
 			}
-			else
+			Object[] arr = examRepo.findByExamApplicationId(applicant.getId());			
+	       	
+	    	Integer examId = Integer.parseInt(arr[0].toString());
+	    	Double ectsValue = Double.parseDouble(arr[1].toString());
+	    	Integer studentId = Integer.parseInt(arr[2].toString());
+	    		
+			System.out.println("STUDENT ID: " + applicant.getStudent().getId());
+			System.out.println("APPLICANT ID" + applicant.getId());
+			
+			if(examDateRepo.checkIfStudentWasAlreadyPositive(examId,studentId) < 1)
 			{
-				examApplicationRepo.updateGrade(applicant.getGrade(), applicant.getId());
+				studentRepo.updateEctsOfStudent(ectsValue, studentId);
+			
 			}
+			
+			
+			examApplicationRepo.updateGrade(applicant.getGrade(), applicant.getId());
+			
 		});
 		
 		boolean examGraded = true;

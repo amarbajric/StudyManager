@@ -19,6 +19,15 @@ public interface ExamDateRepository extends JpaRepository<ExamDateModel, Integer
 	
 	public ExamDateModel findById(Integer id);
 	
+	
+	@Query(value = "SELECT count(*) "
+			+ "FROM exam_dates ed "
+			+ "join exam_applications ea on ed.id = ea.examDate_id "
+			+ "join exams ex on ed.exam_id = ex.id "
+			+ "where ed.exam_id = ?1 and ea.student_id = ?2 and ea.grade < 5 and ex.type = 'final'" , nativeQuery=true)
+	public int checkIfStudentWasAlreadyPositive(int examId,int studentId);
+	
+	
 	@Query(value = "SELECT count(*) "
 			+ "FROM exam_dates ed "
 			+ "join exam_applications ea on ed.id = ea.examDate_id "

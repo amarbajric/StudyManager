@@ -3,6 +3,7 @@ package at.fh.swenga.project.dao;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -17,6 +18,14 @@ public interface StudentRepository extends JpaRepository<StudentModel, Integer> 
 	public List<StudentModel> findAll();
 	
 	public StudentModel findById(int student_id);
+	
+	@Modifying
+	@Query(value= "update students st " 
+			+ "set st.ects = ects + ?1 "
+			+ "where st.id = ?2" ,nativeQuery=true)
+	public void updateEctsOfStudent(double ects,int studentId);
+	
+	
 	
 	@Query(value = "SELECT COUNT(*) FROM students", nativeQuery=true)
 	public int countAll();

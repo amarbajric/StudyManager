@@ -60,6 +60,6 @@ public interface ExamApplicationRepository extends JpaRepository<ExamApplication
 	@Query(value = "UPDATE exam_applications "
 			+ "SET grade = ?1 "
 			+ "WHERE id = ?2", nativeQuery=true)
-	public int updateGrade(@Param("grade") Integer grade, @Param("examApplicationId") int examApplicationId);
+	public int updateGrade(Integer grade, int examApplicationId);
 }
 
