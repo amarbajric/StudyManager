@@ -161,7 +161,7 @@
                       <table id="datatable-buttons" class="table table-striped table-bordered dataTable no-footer dtr-inline" role="grid" aria-describedby="datatable-buttons_info" style="width: 1585px;">
 	                      <thead>
 	                        <tr role="row">
-	                        <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 270px;" aria-label="Name of the Course">Course</th>
+	                        <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 570px;" aria-label="Name of the Course">Course</th>
 	                        <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 208px;" aria-label="Type of the Exam (e.g. final or mid-term)">Exam Type</th>
 	                        <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 205px;" aria-label="Attempt number of the exam">Attempt</th>
 	                        <th class="sorting_desc" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 199px;" aria-sort="descending" aria-label="Date of the exam">Date</th>
@@ -173,13 +173,13 @@
 	                      <tbody>
 							<c:forEach items="${gradedExamsWithOutcome}" var="exam">
 								<tr>
-									<th>${exam.courseName}</th>
+									<th style="width: 150px;">${exam.courseName}</th>
 									<td>${exam.examType}</td>
 									<td>${exam.attempt}</td>
 									<td scope="row"><fmt:formatDate value="${exam.date}" pattern="dd.MM.yyyy" /></td>
 									<td>${application.grade}<span class="${className}">${exam.grade}</span></td>
 									<!--  <td><span class="sparkline_one" style="height: 160px;" values="1,2,3,4,5"><canvas width="196" height="40" style="display: inline-block; width: 196px; height: 40px; vertical-align: top;"></canvas></span> AVG: ${exam.averageGrade}</td>-->
-									<td><span class="sparklines" sparkType="bar" sparkBarColor="green">${exam.gradesOverview[0]},${exam.gradesOverview[1]},${exam.gradesOverview[2]},${exam.gradesOverview[3]},${exam.gradesOverview[4]}</span>AVG: ${exam.averageGrade}</td>
+									<td><span class="sparklines" sparkType="bar" sparkBarColor="green">${exam.gradesOverview[0]},${exam.gradesOverview[1]},${exam.gradesOverview[2]},${exam.gradesOverview[3]},${exam.gradesOverview[4]}</span><span class="pull-right">AVG: ${exam.averageGrade}</span></td>
 								</tr>
 							</c:forEach>
 	                      </tbody>
