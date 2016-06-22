@@ -420,12 +420,14 @@ public class StudyManagerController {
 	
 /********************************************ADDING EXAM***********************************************************/	
 	@RequestMapping(value="/addExamModel", method=RequestMethod.GET)
-	public String modelAdd(Model model,@RequestParam String courseSelected, @RequestParam String typeSelected, @RequestParam String examDescription, @RequestParam String examDate, @RequestParam String roomSelected)
+	public String modelAdd(Model model,@RequestParam String courseSelected, @RequestParam String typeSelected, @RequestParam String examDescription, @RequestParam String examDate, @RequestParam String roomSelected, @RequestParam(required=false) Integer examDateIdSelected)
 	{
+		
 		CourseModel course = courseRepo.findByAcronym(courseSelected);
 		ExamModel existsExam = examRepo.findByDescriptionAndTypeAndCourse(courseSelected,typeSelected, course);		
-		ExamModel exam;		
-
+		ExamModel exam;
+		String status;		
+				
 		DateFormat date = new SimpleDateFormat("dd.MM.yyyy hh:mm");
 		Date formatDate = new Date();
 		try {
@@ -436,37 +438,52 @@ public class StudyManagerController {
 		}
 		
 		
-		if(existsExam == null)
+		if(existsExam == null)//if no Exam of this type exists...
 		{
 			exam = new ExamModel(courseSelected,typeSelected, course);		
 			examRepo.save(exam);
-			model.addAttribute("alreadyExists",false);
+			status = "newExamModel";
 			
-		}
-		else
-		{
-			exam = existsExam;
-		}
-		
-		/***********************CHECK, wheter for a new Exam or existing Exam, if one of the dates exist, otherwise create a date(attempt) *****/
-		// Check if examDate already exists
-		Integer existsExamDate = examDateRepo.findByExamAndDate(exam.getId(), formatDate);
-		
-		
-		if(existsExamDate < 1){//doesn't exist
-			
-			RoomModel room = roomRepo.findByDescription(roomSelected);
-			
-			ExamDateModel newExamDate = new ExamDateModel(formatDate, examDescription, room, exam);
-			examDateRepo.save(newExamDate);
-			model.addAttribute("alreadyExists",false);
-		
 		}
 		else{
-			model.addAttribute("alreadyExists",true);
+			
+				exam = existsExam;
+			/***********************CHECK, wheter for a new Exam or existing Exam, if one of the dates exist, otherwise create a date(attempt) *****/
+			// Check if examDate already exists
+			if(examDateRepo.findByExamAndDate(exam.getId(), formatDate) < 1)//ExamDateModel doesn't exist
+			{
+				
+				RoomModel room = roomRepo.findByDescription(roomSelected);
+				
+				ExamDateModel newExamDate = new ExamDateModel(formatDate, examDescription, room, exam);
+				examDateRepo.save(newExamDate);
+				status = "newExamDateModel";
+			}		
+			
+			else if(examDateIdSelected != null && examDateRepo.findById(examDateIdSelected) != null){//exists -> Update ExamDateModel
+				
+				RoomModel room = roomRepo.findByDescription(roomSelected);
+				ExamDateModel updatingModel = examDateRepo.findById(examDateIdSelected);
+				updatingModel.setDate(formatDate);
+				updatingModel.setDescription(examDescription);
+				updatingModel.setRoom(room);
+				
+				//update ExamDateModel
+				examDateRepo.save(updatingModel);
+				
+				status = "updatedExamDateModel";
+			}
+			
+			else{//ExamModel and ExamDateModel already exists
+				
+				status = "alreadyExists";
+				
+			}
+		
 		}
 		
-		
+		model.addAttribute("status",status);
+
 		return "forward:/manageExams";
 	}
 	

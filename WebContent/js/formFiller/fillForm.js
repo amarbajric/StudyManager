@@ -15,9 +15,14 @@ function myFunction(elem) {
 				$("#courseSelected").val($(this).text());
 			}
 			
+			if($(this).attr("id") == "examDateId"){
+				$("#courseSelected").val($(this).text());
+			}
+			
 			if($(this).attr("id") == "examType"){
 				$("#typeSelected").val($(this).text());
-			}
+			}			
+			
 			
 			});
 	
@@ -45,6 +50,11 @@ function myFunction(elem) {
 						{
 							$("#roomSelected").val($(this).text())
 						}
+						
+						if($(this).attr("id") == "examDateId"){
+							$("#examDateIdSelected").val($(this).text());
+						}
+						
 					  });
 					}
 			  
