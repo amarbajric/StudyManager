@@ -18,9 +18,18 @@ public interface ExamDateRepository extends JpaRepository<ExamDateModel, Integer
 	
 	public ExamDateModel findById(int id);
 	
+	@Query(value = "SELECT count(*) "
+			+ "FROM exam_dates ed "
+			+ "join exams ex on ed.exam_id = ex.id "
+			+ "join courses co on ex.course_id = co.id "
+			+ "join courses_professors cp on co.id = cp.course_id "
+			+ "where cp.professor_id = ?1 and ed.date < now()",nativeQuery=true)
+	public Integer countByProfessorId(int professor_id);
+	
 	@Query(value = "SELECT COUNT(*) FROM exam_dates ed "
 			+ "WHERE ed.exam_id = ?1 AND ed.date = ?2", nativeQuery=true)
 	public Integer findByExamAndDate(int exam_id, Date date);
+	
 	
 	@Query(value = "SELECT exd.id, exd.date, exd.description as datenumber, ex.description as course, ex.type, r.description as room, count(exa.id) as applicants "
 			+ "FROM exam_dates exd "
@@ -30,10 +39,10 @@ public interface ExamDateRepository extends JpaRepository<ExamDateModel, Integer
 			+ "JOIN professors p ON cp.professor_id = p.id "
 			+ "JOIN rooms r ON exd.room_id = r.id "
 			+ "RIGHT JOIN exam_applications exa ON exa.examDate_id = exd.id "
-			+ "where p.id = ?1 "
+			+ "where p.id = ?1 and exd.date > now() "
 			+ "group by exd.id "
 			+ "order by exd.date desc", nativeQuery=true)
-	public List<Object[]> findProfExams(int professor_id);
+	public List<Object[]> findUpcomingProfExams(int professor_id);
 	
 	@Query(value = "SELECT exd.id, exd.date, exd.description as datenumber, ex.description as course, ex.type, r.description as room, count(exa.id) as applicants "
 			+ "FROM exam_dates exd "

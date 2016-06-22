@@ -41,12 +41,12 @@ import at.fh.swenga.project.model.ExamApplicationModel;
 import at.fh.swenga.project.model.ExamDateModel;
 import at.fh.swenga.project.model.ExamModel;
 import at.fh.swenga.project.model.ProfessorModel;
-import at.fh.swenga.project.model.Q_ExamDateModelWithRoom;
-import at.fh.swenga.project.model.Q_ExamModelWithDates;
-import at.fh.swenga.project.model.Q_ProfessorExam;
-import at.fh.swenga.project.model.Q_studentExam;
 import at.fh.swenga.project.model.RoomModel;
 import at.fh.swenga.project.model.StudentModel;
+import at.fh.swenga.project.queryModels.Q_ExamDateModelWithRoom;
+import at.fh.swenga.project.queryModels.Q_ExamModelWithDates;
+import at.fh.swenga.project.queryModels.Q_ProfessorExam;
+import at.fh.swenga.project.queryModels.Q_studentExam;
 import at.fh.swenga.project.util.MapSorter;
 
 
@@ -103,10 +103,27 @@ public class StudyManagerController {
         if(role.toLowerCase().contains("professor")) {
         	ProfessorModel profData = professorRepo.findByMail(mailOfUser);
         	
-        	//getting all the exams of a professor
-        	List<Object[]> professorExamsData = examDateRepo.findProfExams(profData.getId());
+        	//getting the amount of exams held by a professor
+        	int numberOfExamsHeld = examDateRepo.countByProfessorId(profData.getId());
+        	       	
+        	//getting the total amount of professors
+        	int numberOfAllProfessors = professorRepo.countAll();
         	
-        	//Adding the Data of the exams into a List of Q_ProfessorExam
+        	/*************************GET THE AMOUNT OF STUDENTS***************************/
+        	//get the total amount of students
+        	int numberOfAllStudents = studentRepo.countAll();
+        	//get the amount of distinct students who are or were in my courses
+        	int numberOfMyStudents = studentRepo.countByCoursesOfProfessor(profData.getId());
+        	
+        	
+        	//Get the average grade on all exams of a professor
+        	Double professorAverageExamGrade = professorRepo.findAverageGradeOfAllExams(profData.getId());
+        	
+        	/*************************GET UPCOMING EXAMS OF THE PROFESSOR***************************/
+        	//getting the data of all the upcoming exams of a professor
+        	List<Object[]> professorExamsData = examDateRepo.findUpcomingProfExams(profData.getId());
+        	
+        	//Adding the Data of the upcoming exams into a List of Q_ProfessorExam
         	List<Q_ProfessorExam> professorExams = new ArrayList<Q_ProfessorExam>();
            	for (int i = 0; i < professorExamsData.size(); i++) {
         		Object[] arr = professorExamsData.get(i);
@@ -115,7 +132,13 @@ public class StudyManagerController {
         		professorExams.add(exam);
         		}
 
-
+           	
+           	/*************************SETTING THE MODELS***************************/
+           	model.addAttribute("numberOfExamsHeld",numberOfExamsHeld);
+           	model.addAttribute("professorAverageExamGrade",professorAverageExamGrade);
+           	model.addAttribute("numberOfAllProfessors",numberOfAllProfessors);
+           	model.addAttribute("numberOfAllStudents",numberOfAllStudents);
+           	model.addAttribute("numberOfMyStudents",numberOfMyStudents);
         	model.addAttribute("professorExams",professorExams);
         	model.addAttribute("professorData",profData);
             targetUrl = "professor/index";

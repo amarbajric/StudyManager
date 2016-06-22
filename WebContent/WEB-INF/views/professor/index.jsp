@@ -114,6 +114,71 @@
 			
 			<!-- /page content -->
 			<div class="right_col" role="main" style="min-height: 950px;">
+			
+			
+			
+			<!-- TOP TITLES (4) -->
+				<div class="row tile_count">
+					<div
+						class="animated flipInY col-md-3 col-sm-3 col-xs-12 tile_stats_count">
+						<div class="left"></div>
+						<div class="right">
+							<span class="count_top"><i class="fa fa-sitemap"></i>
+								Total Number of Professors</span>
+							<div class="count">${numberOfAllProfessors}</div>
+						</div>
+					</div>
+					<div
+						class="animated flipInY col-md-3 col-sm-3 col-xs-12 tile_stats_count">
+						<div class="left"></div>
+						<div class="right">
+							<span class="count_top"><i class="fa fa-user"></i> Total
+								Number of Students</span>
+							<div class="count">${numberOfAllStudents}</div>
+							<span class="count_bottom"><b><i class="green">${numberOfMyStudents}</i></b>
+								of them are or were in my courses</span>
+						</div>
+					</div>
+					<div
+						class="animated flipInY col-md-3 col-sm-3 col-xs-12 tile_stats_count">
+						<div class="left"></div>
+						<div class="right">
+							<span class="count_top"><i class="fa fa-pencil"></i> Total
+								Exams held</span>
+							<div class="count">${numberOfExamsHeld}</div>
+							<c:set var="percentagePositive" value=""></c:set>
+							<c:choose>
+								<c:when	test="${professorAverageExamGrade>4}">
+									<c:set var="classCol">red</c:set>
+								</c:when>
+								<c:when	test="${professorAverageExamGrade<4 && professorAverageExamGrade>=2}">
+									<c:set var="classCol">orange</c:set>
+								</c:when>
+								<c:when	test="${professorAverageExamGrade<2}">
+									<c:set var="classCol">green</c:set>
+								</c:when>
+							</c:choose>
+							<span class="count_bottom"><b><i class="${classCol}"><fmt:formatNumber value="${professorAverageExamGrade}" maxFractionDigits="2"/></i></b> is the average grade on your exams</span>
+						</div>
+					</div>
+					<div
+						class="animated flipInY col-md-3 col-sm-3 col-xs-12 tile_stats_count">
+						<div class="left"></div>
+						<div class="right">
+							<span class="count_top"><i class="fa fa-book"></i> Amount
+								of courses held</span>
+							<div class="count">${professorData.courses.size()}</div>
+						</div>
+					</div>
+
+				</div>
+				<!-- /TOP TITLES (4) -->
+			
+			
+			
+			
+			
+			
             <div class="clearfix"></div>
 
               <div class="col-md-12 col-sm-12 col-xs-12">
@@ -121,13 +186,13 @@
               
               <div class="x_panel">
                 <div class="x_title">
-                  <h1>Exams</h1>
+                  <h1>Upcoming Exams</h1>
                   <div class="clearfix"></div>
                 </div>
 
                 <div class="x_content">
 
-                  <p>All your exams</p>
+                  <p>All your future exams</p>
 
                   <table class="table table-striped">
                     <thead>
@@ -138,7 +203,6 @@
                         <th class="column-title">Date</th>
                         <th class="column-title">Room</th>
                         <th class="column-title">Applicants</th>
-                        <th class="column-title">Actions</th>
                       </tr>
                     </thead>
 
@@ -151,7 +215,6 @@
                         <td class=" "><fmt:formatDate value="${exam.getDate()}" pattern="dd.MM.yyyy hh:mm" /></td>
                         <td class=" ">${exam.getRoom()}</td>
                         <td class=" ">${exam.getApplicants()}</td>
-                        <td class=" "><button id="enroll" type="button" class="btn btn-success">Success</button></td>
                       </tr>
                       </c:forEach>
                     

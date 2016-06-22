@@ -1,4 +1,4 @@
-package at.fh.swenga.project.model;
+package at.fh.swenga.project.queryModels;
 
 import java.util.Date;
 

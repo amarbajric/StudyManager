@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import at.fh.swenga.project.model.ExamApplicationModel;
-import at.fh.swenga.project.model.Q_studentExam;
 import at.fh.swenga.project.model.StudentModel;
+import at.fh.swenga.project.queryModels.Q_studentExam;
 
 public interface StudentRepository extends JpaRepository<StudentModel, Integer> {
 
@@ -20,6 +20,15 @@ public interface StudentRepository extends JpaRepository<StudentModel, Integer> 
 	public int countAll();
 	
 	public int countByYearYear(String year);
+	
+	@Query(value="SELECT count(distinct st.id) as amount "
+			+ "FROM professors pr "
+			+ "join courses_professors cp on pr.id = cp.professor_id "
+			+ "join courses co on cp.course_id = co.id "
+			+ "join students_courses sc on co.id = sc.course_id "
+			+ "join students st on sc.student_id = st.id "
+			+ "where pr.id = ?1",nativeQuery=true)
+	public int countByCoursesOfProfessor(int professor_id);
 	
 	public StudentModel findByMail(String mail);
 
