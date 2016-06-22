@@ -21,6 +21,7 @@ public interface ExamDateRepository extends JpaRepository<ExamDateModel, Integer
 	
 	@Query(value = "SELECT count(*) "
 			+ "FROM exam_dates ed "
+			+ "join exam_applications ea on ed.id = ea.examDate_id "
 			+ "join exams ex on ed.exam_id = ex.id "
 			+ "join courses co on ex.course_id = co.id "
 			+ "join courses_professors cp on co.id = cp.course_id "

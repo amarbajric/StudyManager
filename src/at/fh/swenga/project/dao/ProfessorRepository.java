@@ -34,7 +34,7 @@ public interface ProfessorRepository extends JpaRepository<ProfessorModel, Integ
 			+ "join exams ex on ed.exam_id = ex.id "
 			+ "join courses co on ex.course_id = co.id "
 			+ "join courses_professors cp on co.id = cp.course_id "
-			+ "where cp.professor_id = ?1 "
+			+ "where cp.professor_id = ?1 and ea.grade is not null "
 			+ "GROUP BY ea.grade;",nativeQuery=true)
 	public List<Object[]> findAmountOfGradesByProfessor(int professor_id);
 

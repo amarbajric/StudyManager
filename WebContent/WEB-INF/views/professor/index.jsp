@@ -136,7 +136,7 @@
 								Number of Students</span>
 							<div class="count">${numberOfAllStudents}</div>
 							<span class="count_bottom"><b><i class="green">${numberOfMyStudents}</i></b>
-								of them are or were in my courses</span>
+								of them are or were in your courses</span>
 						</div>
 					</div>
 					<div
