@@ -144,11 +144,10 @@
                         <td class="mousePointer" ><b>${exam.courseDescription}</b></td>
                         <td class="mousePointer" ><b>${exam.examDescription}</b></td>
                       </tr>
-                      
                       <!-- Collapsed Table -->
                       <tr >
             			<td colspan="6" class="hiddenRow"><div class="accordian-body collapse" id="demo${loop.index}">         			
-            			<table class="table table-striped">
+            			<table id="collapsedTable" class="table table-striped">
 	                      	<thead>
 	                        	<tr>
 	                        		<th><small>#</small></th>
@@ -162,12 +161,12 @@
 	                      	<tr>
 	                      	</tr>
 	                      	<c:forEach items="${exam.getExamDates()}" var="examDate" varStatus="count">
-	                        	<tr>
-	                        		<td><small>${count.count}</small></td>
-	                        		<td><small><fmt:formatDate value="${examDate.getDate()}" pattern="dd.MM.yyyy - hh:mm" /></small></td>
-	                        		<td><small>${examDate.getDescription()}</small></td>
-	                        		<td><small>${examDate.getRoom()}</small></td>
-	                        		<td><small><a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a></small></td>
+	                        	<tr id="${loop.index}-${count.count}">
+	                        		<td id="counterId"><small>${count.count}</small></td>
+	                        		<td id="examDateDate"><small><fmt:formatDate value="${examDate.getDate()}" pattern="dd.MM.yyyy - hh:mm" /></small></td>
+	                        		<td id="examDateDescription"><small>${examDate.getDescription()}</small></td>
+	                        		<td id="examDateRoom"><small>${examDate.getRoom()}</small></td>
+	                        		<td><small><button onclick="myFunction(this)" name="${loop.index}-${count.count}" id="editButton" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </button></small></td>
 	                  			</tr>
 	                  		</c:forEach>
 	                      	</tbody>
@@ -307,11 +306,10 @@
   <script type="text/javascript" src="js/datepicker/datePickerExam.js"></script>
   <!-- pace -->
   <script src="js/pace/pace.min.js"></script>
-  <!-- examNotify -->
-  <script src="js/notify/pnotify.button.js"></script>
-  <script src="js/notify/pnotify.core.js"></script>
-  <script src="js/notify/examNotify.js"></script>
   <script src="js/custom.js"></script>
+  
+  <!-- FORM FILLER -->
+  <script src="js/formFiller/fillForm.js"></script>
   
   <!--Check if exam already exist or not -->
 	<c:choose>
