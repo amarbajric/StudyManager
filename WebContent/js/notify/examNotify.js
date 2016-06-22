@@ -28,6 +28,8 @@ new PNotify({
 
 function newExamSuccess() {
 	
+	$('button[id^="submitExam"]').prop('disabled', false);
+	
 	new PNotify({
         title: 'Exam created',
         text: 'You successfully created a new exam!',
@@ -38,9 +40,19 @@ function newExamSuccess() {
 
 function newExamFailed() {
 	
+	$('button[id^="submitExam"]').prop('disabled', false);
+	
 	new PNotify({
         title: 'Error!',
         text: 'The exam you were trying to create, failed!',
         type: 'error'})	
 	
 };
+
+
+
+$('form#examForm').submit(function(){
+	
+	$('button[id^="submitExam"]').prop('disabled', true);
+	
+});

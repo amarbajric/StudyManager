@@ -215,7 +215,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Description</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input id="examDescription" name="examDescription" type="text" class="form-control" placeholder="Description">
+                          <input id="examDescription" required name="examDescription" type="text" class="form-control" placeholder="Description"/>
                         </div>
                       </div>
 
@@ -225,7 +225,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Date</label>
                           <div class="controls">
                             <div id="datePicker" class="col-md-9 xdisplay_inputx form-group has-feedback">
-                              <input name="examDate" id="examDate" type="text" class="form-control has-feedback-left" placeholder="Date" aria-describedby="inputSuccess2Status4">
+                              <input name="examDate" id="examDate" type="text" class="form-control has-feedback-left" placeholder="Date" aria-describedby="inputSuccess2Status4" required />
                               <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
                               <span id="inputSuccess2Status4" class="sr-only">(success)</span>                                                      
                             </div>                            
@@ -252,7 +252,7 @@
                       
                       <div class="form-group">
                         <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">               
-                          	<button id="submitExam" type="submit" class="btn btn-success">Submit</button>
+                          	<button id="submitExam" type="submit" class="btn btn-success" onClick="disableButton()">Submit</button>
                         </div>
                       </div>
 
