@@ -128,7 +128,7 @@
 
                   <p>A List of all your Exams</p>
 
-                  <table class="table table-hover">
+                  <table id="mainTable" class="table table-hover">
                     <thead>
                       <tr class="headings">
                         <th class="column-title"><h4>#</h4></th>
@@ -139,10 +139,10 @@
 
                     <tbody>
                       <c:forEach items="${examList}" var="exam" varStatus="loop">
-                      <tr class="even pointer" data-toggle="collapse" data-target="#demo${loop.index}">
+                      <tr id="${loop.index}" class="even pointer" data-toggle="collapse" data-target="#demo${loop.index}">
                         <td class="mousePointer" ><b>${loop.count}</b></td>
-                        <td class="mousePointer" ><b>${exam.courseDescription}</b></td>
-                        <td class="mousePointer" ><b>${exam.examDescription}</b></td>
+                        <td id="examCourseDescription" class="mousePointer" ><b>${exam.courseDescription}</b></td>
+                        <td id="examType" class="mousePointer" ><b>${exam.examDescription}</b></td>
                       </tr>
                       <!-- Collapsed Table -->
                       <tr >
@@ -198,7 +198,7 @@
                         <div class="col-md-9 col-sm-9 col-xs-12">
                           <select class="form-control" id = "courseSelected" name="courseSelected">
                            <c:forEach items="${professorData.courses}" var="course">
-                           		<option>${course.acronym}</option>
+                           		<option>${course.description}</option>
                            </c:forEach>
                           </select>
                         </div>
