@@ -190,5 +190,17 @@
   <!-- pace -->
   <script src="js/pace/pace.min.js"></script>
   
+      <!-- NOTIFICATIONS -->
+  <script src="js/notify/pnotify.button.js"></script>
+  <script src="js/notify/pnotify.core.js"></script>
+  <script src="js/notify/gradeNotify.js"></script>
+   <!-- /NOTIFICATIONS -->
+  <c:if test="${examGraded eq true}">
+	  <script type="text/javascript">
+	  	gradeNotification();
+	  </script>
+  </c:if>
+  
+  
 </body>
 </html>

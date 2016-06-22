@@ -149,7 +149,7 @@
 								<c:when	test="${percentagePositive < 75}">
 									<c:set var="classCol">red</c:set>
 								</c:when>
-								<c:when	test="${percentagePositive > 75 && percentagePositive =< 90}">
+								<c:when	test="${percentagePositive > 75 && percentagePositive <= 90}">
 									<c:set var="classCol">orange</c:set>
 								</c:when>
 								<c:when	test="${percentagePositive > 90}">

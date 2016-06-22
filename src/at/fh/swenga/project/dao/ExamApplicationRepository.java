@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,5 +45,12 @@ public interface ExamApplicationRepository extends JpaRepository<ExamApplication
 	public int removeByStudentIdAndExamDateId(int studentId,int examDateId);
 	
 	public List<ExamApplicationModel> findByExamDate_id(int examDate_id);
+	
+	
+	@Modifying
+	@Query(value = "UPDATE exam_applications "
+			+ "SET grade = ?1 "
+			+ "WHERE id = ?2", nativeQuery=true)
+	public int updateGrade(@Param("grade") Integer grade, @Param("examApplicationId") int examApplicationId);
 }
 

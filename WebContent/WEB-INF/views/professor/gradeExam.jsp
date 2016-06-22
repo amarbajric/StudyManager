@@ -119,15 +119,17 @@
               <div class="row">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Grade all applicants for exam date: <b>${course}</b> - ${type} - ${dateNumber} - ${date}</h2>
-                    <div class="clearfix"></div>
+                     <h1>${course}</h1>
+                    <h2>${type}   -   ${dateNumber}   -   ${date}</h2>
+                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
                     <br>
-                    <form method="post" action="gradeExam?${_csrf.parameterName}=${_csrf.token}" method="post">
+                    <form id="saveGradesForm" method="post" action="gradeExam?${_csrf.parameterName}=${_csrf.token}" method="post" modelAttribute="gradeForm">
                     <table class="table table-striped">
                     <thead>
                       <tr class="headings">
+                      	<th class="column-title" style="display:none;">ID</th>
                         <th class="column-title">Student ID</th>
                         <th class="column-title">Firstname</th>
                         <th class="column-title">Lastname</th>
@@ -138,20 +140,22 @@
 					
 
                     <tbody>
-                      <c:forEach items="${applicantsList}" var="applicant">
-                   
-                        <tr class="even pointer">
-                        <th class=" " >${applicant.student.id}</th>
-                        <td class=" ">${applicant.student.firstname}</td>
-                        <td class=" ">${applicant.student.lastname}</td>
-                        <td class=" ">${applicant.attempt}</td>
-                        <td style="max-width: 50px;"><select class="form-control">
+                      <c:forEach items="${gradeForm.applicants}" var="applicant" varStatus="status">
+                       <tr class="even pointer">
+                       <td style="display:none;"> <input type="text" class="form-control" readonly="readonly" name="applicants[${status.index}].id" value="${applicant.id}"/></td>
+                       <td> <input type="text" class="form-control" readonly="readonly" name="applicants[${status.index}].student.id" value="${applicant.student.id}"/></td>
+                       <td> <input type="text" class="form-control" readonly="readonly" name="applicants[${status.index}].student.firstname" value="${applicant.student.firstname}"/></td>
+                       <td> <input type="text" class="form-control" readonly="readonly" name="applicants[${status.index}].student.lastname" value="${applicant.student.lastname}"/></td>
+                       <td> <input type="text" class="form-control" readonly="readonly" name="applicants[${status.index}].attempt" value="${applicant.attempt}"/></td>
+                        <td style="max-width: 85px;"><select class="form-control" name="applicants[${status.index}].grade">
 							  <option value="1" <c:if test="${applicant.grade eq 1}">selected</c:if>>1</option>
 							  <option value="2" <c:if test="${applicant.grade eq 2}">selected</c:if>>2</option>
 							  <option value="3" <c:if test="${applicant.grade eq 3}">selected</c:if>>3</option>
 							  <option value="4" <c:if test="${applicant.grade eq 4}">selected</c:if>>4</option>
 							  <option value="5" <c:if test="${applicant.grade eq 5}">selected</c:if>>5</option>
-							  <option value="null" <c:if test="${applicant.grade eq null}">selected</c:if>>not graded</option>
+							  <c:if test="${applicant.grade eq null}">
+							  	<option value="6" <c:if test="${applicant.grade eq null}">selected</c:if>>not graded</option>
+							  </c:if>
 							</select>
 						</td>
                       </tr>
@@ -160,7 +164,7 @@
                     </tbody>
 
                   </table>
-                  <input type="submit" value="Save grades" />
+                  <input id="saveGrades" type="submit" value="Save grades" class="btn btn-success" style="float:right;"/>
                   </form>
                     
                     
@@ -253,6 +257,8 @@
 	</c:when>
 	</c:choose>
   <!--Check if exam already exist or not -->
+  
+
   
 </body>
 </html>

@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import at.fh.swenga.project.dao.CourseRepository;
 import at.fh.swenga.project.dao.DegreeProgramRepository;
@@ -47,6 +48,7 @@ import at.fh.swenga.project.queryModels.Q_ExamDateModelWithRoom;
 import at.fh.swenga.project.queryModels.Q_ExamModelWithDates;
 import at.fh.swenga.project.queryModels.Q_ProfessorExam;
 import at.fh.swenga.project.queryModels.Q_studentExam;
+import at.fh.swenga.project.util.GradeForm;
 import at.fh.swenga.project.util.MapSorter;
 
 
@@ -498,11 +500,16 @@ public class StudyManagerController {
 	{
 		List<ExamApplicationModel> applicantsList = examApplicationRepo.findByExamDate_id(examDateId);
 		
+		GradeForm gradeForm = new GradeForm();
+		
+		gradeForm.setApplicants(applicantsList);
+		
+		
 		model.addAttribute("course", course);
 		model.addAttribute("type", type);
 		model.addAttribute("dateNumber", dateNumber);
 		model.addAttribute("date", date);
-		model.addAttribute("applicantsList", applicantsList);
+		model.addAttribute("gradeForm", gradeForm);
 		
 		return "professor/gradeExam";
 	}
@@ -511,13 +518,25 @@ public class StudyManagerController {
 	
 	/******************************************** GRADE EXAM - POST Method ***********************************************************/
 	@RequestMapping(value="/gradeExam", method=RequestMethod.POST)
-	public String gradeExam(@Valid @ModelAttribute ArrayList<ExamApplicationModel> applicantsList, Model model)
+	public String gradeExam(@Valid @ModelAttribute GradeForm gradeForm, Model model, RedirectAttributes redirectAttributes)
 	{
-		System.out.println("success");
-		System.out.println(applicantsList.get(0).getGrade());
+		// Set the new grade for every applicant
+		gradeForm.getApplicants().forEach((applicant) -> {
+			
+			if(applicant.getGrade() == 6)
+			{
+				examApplicationRepo.updateGrade(null, applicant.getId());
+				applicant.setGrade(null);
+			}
+			else
+			{
+				examApplicationRepo.updateGrade(applicant.getGrade(), applicant.getId());
+			}
+		});
 		
+		boolean examGraded = true;
 		
-		
-		return "professor/gradeExam";
+		redirectAttributes.addFlashAttribute("examGraded", examGraded);
+		return "redirect:/writtenExams";
 	}
 }
