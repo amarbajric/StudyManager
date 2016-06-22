@@ -134,9 +134,30 @@ public class StudyManagerController {
         		Q_ProfessorExam exam = new Q_ProfessorExam(Integer.parseInt(arr[0].toString()) ,date,arr[2].toString(),arr[3].toString(),arr[4].toString(), arr[5].toString(), Integer.parseInt(arr[6].toString()));
         		professorExams.add(exam);
         		}
+           	
+           	
+        	/*************************GET THE AMOUNT OF EACH GRADE GIVEN***************************/
+        	//getting the data of the amount of all grades given by the professor
+        	List<Object[]> professorGradesData = professorRepo.findAmountOfGradesByProfessor(profData.getId());
+        	
+        	//get the data into a Map with the grade as the key and the amount as the value
+        	Map<Integer,Integer> professorGradesMap = new HashMap<Integer,Integer>();
+        	for (int i = 0; i < professorGradesData.size(); i++) {
+        		Object[] arr = professorGradesData.get(i);
+        		professorGradesMap.put(Integer.parseInt(arr[0].toString()), Integer.parseInt(arr[1].toString()));
+        		}
+        	//set the amount of grades which don't exist to zero
+        	for (int i = 1; i < 6; i++) {
+        		if (!professorGradesMap.containsKey(i)){
+        			professorGradesMap.put(i,0);
+        		}
+        	}
+        	//setting the amount of every grade to a list
+        	List<Integer> professorGrades = new ArrayList<Integer>(professorGradesMap.values());
 
            	
            	/*************************SETTING THE MODELS***************************/
+        	model.addAttribute("professorGrades",professorGrades);
            	model.addAttribute("numberOfExamsHeld",numberOfExamsHeld);
            	model.addAttribute("professorAverageExamGrade",professorAverageExamGrade);
            	model.addAttribute("numberOfAllProfessors",numberOfAllProfessors);
@@ -171,11 +192,11 @@ public class StudyManagerController {
         	
         	/*************************GET THE AMOUNT OF EVERY GRADE FOR THE STUDENT***************************/
         	//get the amount for every grade data
-        	List<Object[]> numberOfGradesByGrade = examApplicationRepo.findNumberOfGradesByGrade(studentData.getId());
+        	List<Object[]> numberOfGradesByGradeData = examApplicationRepo.findNumberOfGradesByGrade(studentData.getId());
         	//get the data into a Map with the grade as the key and the amount as the value
         	Map<Integer,Integer> gradesMap = new HashMap<Integer,Integer>();
-        	for (int i = 0; i < numberOfGradesByGrade.size(); i++) {
-        		Object[] arr = numberOfGradesByGrade.get(i);
+        	for (int i = 0; i < numberOfGradesByGradeData.size(); i++) {
+        		Object[] arr = numberOfGradesByGradeData.get(i);
         		gradesMap.put(Integer.parseInt(arr[0].toString()), Integer.parseInt(arr[1].toString()));
         		}
         	//set the amount of grades which don't exist to zero
