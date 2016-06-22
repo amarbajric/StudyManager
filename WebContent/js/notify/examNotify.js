@@ -50,6 +50,18 @@ function newExamFailed() {
 };
 
 
+function newExamUpdate() {
+	
+	$('button[id^="submitExam"]').prop('disabled', false);
+	
+	new PNotify({
+        title: 'Exam updated!',
+        text: 'The exam was successfully updated!',
+        type: 'info'})	
+	
+};
+
+
 
 $('form#examForm').submit(function(){
 	
