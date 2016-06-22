@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -46,6 +47,7 @@ import at.fh.swenga.project.model.RoomModel;
 import at.fh.swenga.project.model.StudentModel;
 import at.fh.swenga.project.queryModels.Q_ExamDateModelWithRoom;
 import at.fh.swenga.project.queryModels.Q_ExamModelWithDates;
+import at.fh.swenga.project.queryModels.Q_GradedExamWithOutcome;
 import at.fh.swenga.project.queryModels.Q_ProfessorExam;
 import at.fh.swenga.project.queryModels.Q_studentExam;
 import at.fh.swenga.project.util.GradeForm;
@@ -245,10 +247,39 @@ public class StudyManagerController {
 	public String showGrades(Model model,@ModelAttribute("studentData") StudentModel studentData) {
     	
     	//get all graded exams
-    	List<ExamApplicationModel> gradedExams = examApplicationRepo.findByStudentAndGradeIsNotNullOrderByExamDateDateDesc(studentData);
+		List<ExamApplicationModel> gradedExams = examApplicationRepo.findByStudentAndGradeIsNotNullOrderByExamDateDateDesc(studentData);
+		
+		
+		/*************************GRADED EXAMS WITH OUTCOME***************************/
+		//Getting the Data
+    	List<Object[]> gradedExamsWithOutcomeData = examApplicationRepo.findByStudentAndGradeIsNotNullWithOutcomeOrderByExamDateDateDesc(studentData);
+    	
+    	//Adding the Data of the graded exams into a List of Q_GradedExamWithOutcome
+    	List<Q_GradedExamWithOutcome> gradedExamsWithOutcome = new ArrayList<Q_GradedExamWithOutcome>();
+       	for (int i = 0; i < gradedExamsWithOutcomeData.size(); i++) {
+    		Object[] arr = gradedExamsWithOutcomeData.get(i);
+    		
+    		Integer id = Integer.parseInt(arr[0].toString());
+    		Integer attempt = Integer.parseInt(arr[1].toString());
+    		Integer grade = Integer.parseInt(arr[2].toString());
+    		Integer examDate_id = Integer.parseInt(arr[3].toString());
+    		Integer student_id = Integer.parseInt(arr[4].toString());
+    		
+    		ExamDateModel examDate = examDateRepo.findById(examDate_id);
+    		StudentModel student = studentRepo.findById(student_id);
+    		ExamApplicationModel examApplication = new ExamApplicationModel(id, attempt, grade, student, examDate);
+    		
+    		List<Integer> gradesOverview = new ArrayList<Integer>(Arrays.asList(Integer.parseInt(arr[5].toString()),Integer.parseInt(arr[6].toString()),Integer.parseInt(arr[7].toString()),Integer.parseInt(arr[8].toString()),Integer.parseInt(arr[9].toString())));
+    		
+    		Double averageGrade = Double.parseDouble(arr[10].toString());
+    		
+    		Q_GradedExamWithOutcome gradedExamWithOutcome = new Q_GradedExamWithOutcome(examApplication, gradesOverview, averageGrade);
+    		gradedExamsWithOutcome.add(gradedExamWithOutcome);
+    		}
     	
     	
     	/*************************SETTING THE MODELS***************************/
+       	model.addAttribute("gradedExamsWithOutcome",gradedExamsWithOutcome);
     	model.addAttribute("studentData",studentData);
     	model.addAttribute("gradedExams",gradedExams);
 		return "student/grades";
@@ -489,6 +520,7 @@ public class StudyManagerController {
     		Q_ProfessorExam exam = new Q_ProfessorExam(Integer.parseInt(arr[0].toString()) ,date,arr[2].toString(),arr[3].toString(),arr[4].toString(), arr[5].toString(), Integer.parseInt(arr[6].toString()));
     		professorExams.add(exam);
     		}
+       	
        	model.addAttribute("professorExams", professorExams);
     	model.addAttribute("professorData",professorData);
 
@@ -502,15 +534,25 @@ public class StudyManagerController {
 	{
 		List<ExamApplicationModel> applicantsList = examApplicationRepo.findByExamDate_id(examDateId);
 		
-		GradeForm gradeForm = new GradeForm();
+		/*************************PARSING THE DATE***************************/
+		date = date.substring(0,date.length()-2);
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		Date formatDate = new Date();
+		try {
+			formatDate = df.parse(date);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
+		GradeForm gradeForm = new GradeForm();
 		gradeForm.setApplicants(applicantsList);
 		
-		
+		/*************************SETTING THE MODELS***************************/
 		model.addAttribute("course", course);
 		model.addAttribute("type", type);
 		model.addAttribute("dateNumber", dateNumber);
-		model.addAttribute("date", date);
+		model.addAttribute("date", formatDate);
 		model.addAttribute("gradeForm", gradeForm);
 		
 		return "professor/gradeExam";

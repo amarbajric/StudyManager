@@ -9,10 +9,6 @@ $(document.getElementById('datatable-buttons')).ready(function() {
                   className: "btn-sm"
                 },
                 {
-                  extend: "csv",
-                  className: "btn-sm"
-                },
-                {
                   extend: "excel",
                   className: "btn-sm"
                 },
@@ -25,7 +21,7 @@ $(document.getElementById('datatable-buttons')).ready(function() {
                   className: "btn-sm"
                 },
               ],
-              responsive: true
+              //responsive: true
             });
           }
         };

@@ -26,6 +26,13 @@ public interface ExamApplicationRepository extends JpaRepository<ExamApplication
 			+ "order by ed.date desc", nativeQuery=true)
 	public List<ExamApplicationModel> findByStudentAndGradeIsNotNullOrderByExamDateDateDesc(StudentModel student);
 	
+	@Query(value = "select ea.*, (SELECT  COUNT(*) FROM exam_applications where examDate_id = ed.id and grade = 1) as amountExcellent, (SELECT  COUNT(*) FROM exam_applications where examDate_id = ed.id and grade = 2) as amountGood, (SELECT  COUNT(*) FROM exam_applications where examDate_id = ed.id and grade = 3) as amountSatisfactory, (SELECT  COUNT(*) FROM exam_applications where examDate_id = ed.id and grade = 4) as amountSufficient, (SELECT  COUNT(*) FROM exam_applications where examDate_id = ed.id and grade = 5) as amountNotSufficient, (SELECT AVG(grade) FROM exam_applications where examDate_id = ed.id) as averageGrade "
+			+ "from exam_applications ea "
+			+ "join exam_dates ed on ea.examDate_id = ed.id "
+			+ "where student_id = ?1 and grade is not null "
+			+ "order by ed.date desc", nativeQuery=true)
+	public List<Object[]> findByStudentAndGradeIsNotNullWithOutcomeOrderByExamDateDateDesc(StudentModel student);
+	
 	@Query(value= "SELECT s.id,AVG(e.grade) as average FROM students s join exam_applications e ON s.id = e.student_id GROUP BY s.id  ORDER BY average ASC ;  ", nativeQuery=true)
 	public List<Object[]> findAverageGrades();
 	
