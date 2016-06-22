@@ -259,9 +259,9 @@
                           	<button id="submitExam" type="submit" class="btn btn-success" onClick="disableButton()" formaction="addExamModel?course=${courseSelected}&type=${typeSelected}&description=examDescription&room=${roomSelected}}">Submit</button>
                           	<button style="visibility: hidden;" id="updateExam" type="submit" class="btn btn-info" formaction="updateExamModel?course=${courseSelected}&type=${typeSelected}&description=examDescription&room=${roomSelected}&${examDateIdSelected }}">Update</button>
                           	
-                          	<form action="manageExams">
-                          		<button style="visibility: hidden;" id="resetExam" type="submit" class="btn btn-danger" href="manageExams">Cancel</button>
-                          	</form>
+                          	<a href="manageExams">
+                          		<button style="visibility: hidden;" id="resetExam" type="button" class="btn btn-danger" href="manageExams">Cancel</button>
+                          	</a>
                         </div>
                       </div>
 
