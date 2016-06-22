@@ -128,7 +128,7 @@
 
                   <p>A List of all your Exams</p>
 
-                  <table class="table table-hover">
+                  <table id="mainTable" class="table table-hover">
                     <thead>
                       <tr class="headings">
                         <th class="column-title"><h4>#</h4></th>
@@ -139,16 +139,15 @@
 
                     <tbody>
                       <c:forEach items="${examList}" var="exam" varStatus="loop">
-                      <tr class="even pointer" data-toggle="collapse" data-target="#demo${loop.index}">
+                      <tr id="${loop.index}" class="even pointer" data-toggle="collapse" data-target="#demo${loop.index}">
                         <td class="mousePointer" ><b>${loop.count}</b></td>
-                        <td class="mousePointer" ><b>${exam.courseDescription}</b></td>
-                        <td class="mousePointer" ><b>${exam.examDescription}</b></td>
+                        <td id="examCourseDescription" class="mousePointer" ><b>${exam.courseDescription}</b></td>
+                        <td id="examType" class="mousePointer" ><b>${exam.examDescription}</b></td>
                       </tr>
-                      
                       <!-- Collapsed Table -->
                       <tr >
             			<td colspan="6" class="hiddenRow"><div class="accordian-body collapse" id="demo${loop.index}">         			
-            			<table class="table table-striped">
+            			<table id="collapsedTable" class="table table-striped">
 	                      	<thead>
 	                        	<tr>
 	                        		<th><small>#</small></th>
@@ -162,12 +161,13 @@
 	                      	<tr>
 	                      	</tr>
 	                      	<c:forEach items="${exam.getExamDates()}" var="examDate" varStatus="count">
-	                        	<tr>
-	                        		<td><small>${count.count}</small></td>
-	                        		<td><small><fmt:formatDate value="${examDate.getDate()}" pattern="dd.MM.yyyy - hh:mm" /></small></td>
-	                        		<td><small>${examDate.getDescription()}</small></td>
-	                        		<td><small>${examDate.getRoom()}</small></td>
-	                        		<td><small><a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a></small></td>
+	                        	<tr id="${loop.index}-${count.count}">
+	                        		<td id="counterId"><small>${count.count}</small></td>
+	                        		<td hidden="true" id="examDateId"><small>${examDate.getId()}</small></td>
+	                        		<td id="examDateDate"><small><fmt:formatDate value="${examDate.getDate()}" pattern="dd.MM.yyyy - hh:mm" /></small></td>
+	                        		<td id="examDateDescription"><small>${examDate.getDescription()}</small></td>
+	                        		<td id="examDateRoom"><small>${examDate.getRoom()}</small></td>
+	                        		<td><small><button onclick="myFunction(this)" name="${loop.index}-${count.count}" id="editButton" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </button></small></td>
 	                  			</tr>
 	                  		</c:forEach>
 	                      	</tbody>
@@ -191,15 +191,15 @@
                   </div>
                   <div class="x_content">
                     <br>
-                    <form id="examForm" class="form-horizontal form-label-left" action="addExamModel?course=${courseSelected}&type=${typeSelected}&description=examDescription&room=${roomSelected}">
+                    <form id="examForm" class="form-horizontal form-label-left" action="addExamModel?course=${courseSelected}&type=${typeSelected}&description=examDescription&room=${roomSelected}&${examDateIdSelected}">
 
-             
+             		  <input hidden="true" style="" id="examDateIdSelected" name="examDateIdSelected" />
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Select</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
                           <select class="form-control" id = "courseSelected" name="courseSelected">
                            <c:forEach items="${professorData.courses}" var="course">
-                           		<option>${course.acronym}</option>
+                           		<option>${course.description}</option>
                            </c:forEach>
                           </select>
                         </div>
@@ -257,10 +257,12 @@
                       <div class="form-group">
                         <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">               
                           	<button id="submitExam" type="submit" class="btn btn-success" onClick="disableButton()">Submit</button>
+                          	<button style="display:none;" id="updateExam" type="submit" class="btn btn-info" onClick="disableButton()">Update</button>
                         </div>
                       </div>
 
                     </form>
+                    <c:out value="${status}"></c:out>
                   </div>
                 </div>
 
@@ -283,13 +285,6 @@
 			<!--Check if exam already exist or not -->
 
 	
-	<div id="custom_notifications" class="custom-notifications dsp_none">
-		<ul class="list-unstyled notifications clearfix"
-			data-tabbed_notifications="notif-group">
-		</ul>
-		<div class="clearfix"></div>
-		<div id="notif-group" class="tabbed_notifications"></div>
-	</div>
 
   <script src="js/bootstrap.min.js"></script>
 
@@ -305,21 +300,28 @@
   <script type="text/javascript" src="js/datepicker/bootstrap-datetimepicker.js"></script>
   <script type="text/javascript" src="js/datepicker/bootstrap-datetimepicker.min.js"></script>    
   <script type="text/javascript" src="js/datepicker/datePickerExam.js"></script>
+  <!-- Notifications -->
+  <script type="text/javascript" src="js/notify/pnotify.buttons.js"></script>
+  <script type="text/javascript" src="js/notify/pnotify.core.js"></script>
+  <script type="text/javascript" src="js/notify/pnotify.nonblock.js"></script>
+  <script type="text/javascript" src="js/notify/examNotify.js"></script>
   <!-- pace -->
   <script src="js/pace/pace.min.js"></script>
-  <!-- examNotify -->
-  <script src="js/notify/pnotify.button.js"></script>
-  <script src="js/notify/pnotify.core.js"></script>
-  <script src="js/notify/examNotify.js"></script>
   <script src="js/custom.js"></script>
+  
+  <!-- FORM FILLER -->
+  <script src="js/formFiller/fillForm.js"></script>
   
   <!--Check if exam already exist or not -->
 	<c:choose>
-	<c:when test="${alreadyExists eq true}">
-	<script type="text/javascript">newExamFailed()</script>
+	<c:when test="${status == 'updatedExamDateModel'}">
+	<script type="text/javascript">newExamUpdate()</script>
 	</c:when>
-	<c:when test="${alreadyExists eq false}">
+	<c:when test="${status == 'newExamModel' || status == 'newExamDateModel'}">
 	<script type="text/javascript">newExamSuccess()</script>
+	</c:when>
+	<c:when test="${status == 'alreadyExists'}">
+	<script type="text/javascript">newExamFailed()</script>
 	</c:when>
 	</c:choose>
   <!--Check if exam already exist or not -->    
