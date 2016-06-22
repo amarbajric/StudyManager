@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -68,5 +69,10 @@ public interface ExamDateRepository extends JpaRepository<ExamDateModel, Integer
 			+ "LIMIT 5", nativeQuery=true)
 	public List<Object[]>findUpcomingExams(int student_id);
 
+	@Modifying
+	@Query(value="UPDATE exam_dates ex "
+			+ "SET ex.room_id = ?1 , ex.date = ?2, ex.description = ?3 "
+			+ "WHERE ex.id = ?4", nativeQuery=true)
+	public void updateExamDate(int roomId, Date date, String description, Integer examDateId);
 	
 }

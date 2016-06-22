@@ -164,10 +164,10 @@
 	                        	<tr id="${loop.index}-${count.count}">
 	                        		<td id="counterId"><small>${count.count}</small></td>
 	                        		<td hidden="true" id="examDateId"><small>${examDate.getId()}</small></td>
-	                        		<td id="examDateDate"><small><fmt:formatDate value="${examDate.getDate()}" pattern="dd.MM.yyyy - hh:mm" /></small></td>
+	                        		<td id="examDateDate"><small><fmt:formatDate value="${examDate.getDate()}" pattern="dd.MM.yyyy - HH:mm" /></small></td>
 	                        		<td id="examDateDescription"><small>${examDate.getDescription()}</small></td>
 	                        		<td id="examDateRoom"><small>${examDate.getRoom()}</small></td>
-	                        		<td><small><button onclick="myFunction(this)" name="${loop.index}-${count.count}" id="editButton" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </button></small></td>
+	                        		<td><small><button onclick="myFunction(this)" name="${loop.index}-${count.count}" id="editButton" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit <f:setPropertyActionListener target="update" value=true /></button></small></td>
 	                  			</tr>
 	                  		</c:forEach>
 	                      	</tbody>
@@ -191,11 +191,11 @@
                   </div>
                   <div class="x_content">
                     <br>
-                    <form id="examForm" class="form-horizontal form-label-left" action="addExamModel?course=${courseSelected}&type=${typeSelected}&description=examDescription&room=${roomSelected}&${examDateIdSelected}">
-
+					
+				<form id="examForm" class="form-horizontal form-label-left" >
              		  <input hidden="true" style="" id="examDateIdSelected" name="examDateIdSelected" />
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Select</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Course</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
                           <select class="form-control" id = "courseSelected" name="courseSelected">
                            <c:forEach items="${professorData.courses}" var="course">
@@ -256,8 +256,8 @@
                       
                       <div class="form-group">
                         <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">               
-                          	<button id="submitExam" type="submit" class="btn btn-success" onClick="disableButton()">Submit</button>
-                          	<button style="display:none;" id="updateExam" type="submit" class="btn btn-info" onClick="disableButton()">Update</button>
+                          	<button id="submitExam" type="submit" class="btn btn-success" onClick="disableButton()" formaction="addExamModel?course=${courseSelected}&type=${typeSelected}&description=examDescription&room=${roomSelected}}">Submit</button>
+                          	<button style="visibility: hidden;" id="updateExam" type="submit" class="btn btn-info" onClick="disableButton()" formaction="updateExamModel?course=${courseSelected}&type=${typeSelected}&description=examDescription&room=${roomSelected}&${examDateIdSelected }}">Update</button>
                         </div>
                       </div>
 
