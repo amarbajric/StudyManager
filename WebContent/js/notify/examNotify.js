@@ -66,5 +66,14 @@ function newExamUpdate() {
 $('form#examForm').submit(function(){
 	
 	$('button[id^="submitExam"]').prop('disabled', true);
+	$('button[id^="updateExam"]').prop('disabled', true);
+	
+	document.getElementById("courseSelected").disabled=false;
+	document.getElementById("typeSelected").disabled=false;
 	
 });
+
+
+
+
+

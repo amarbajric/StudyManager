@@ -501,8 +501,10 @@ public class StudyManagerController {
 	@RequestMapping(value="/updateExamModel", method=RequestMethod.GET)
 	public String modelUpdate(Model model,@RequestParam String courseSelected, @RequestParam String typeSelected, @RequestParam String examDescription, @RequestParam String examDate, @RequestParam String roomSelected, @RequestParam(required=false) Integer examDateIdSelected)
 	{
+		String status = "updatedExamDateModel";
 		DateFormat date = new SimpleDateFormat("dd.MM.yyyy - HH:mm");
 		Date formatDate = new Date();
+		
 		try {
 			formatDate = date.parse(examDate);
 		} catch (ParseException e) {
@@ -513,7 +515,8 @@ public class StudyManagerController {
 		RoomModel room = roomRepo.findByDescription(roomSelected);
 		
 		examDateRepo.updateExamDate(room.getId(), formatDate, examDescription, examDateIdSelected);
-
+		
+		model.addAttribute("status",status);
 		return "forward:/manageExams";
 	}
 	
