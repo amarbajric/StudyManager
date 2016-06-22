@@ -38,7 +38,7 @@ public interface ExamDateRepository extends JpaRepository<ExamDateModel, Integer
 			+ "JOIN courses_professors cp ON c.id = cp.course_id "
 			+ "JOIN professors p ON cp.professor_id = p.id "
 			+ "JOIN rooms r ON exd.room_id = r.id "
-			+ "RIGHT JOIN exam_applications exa ON exa.examDate_id = exd.id "
+			+ "LEFT JOIN exam_applications exa ON exa.examDate_id = exd.id "
 			+ "where p.id = ?1 and exd.date > now() "
 			+ "group by exd.id "
 			+ "order by exd.date desc", nativeQuery=true)

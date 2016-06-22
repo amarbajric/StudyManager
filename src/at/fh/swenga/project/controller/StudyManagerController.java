@@ -392,7 +392,7 @@ public class StudyManagerController {
        		
        		//Get the missing data for the exam
        		String courseDescription = exam.getCourse().getDescription();
-       		String examDescription = exam.getDescription();
+       		String examDescription = exam.getType();
        		
        		//save the exam with its dates into the arraylist
        		Q_ExamModelWithDates newExam = new Q_ExamModelWithDates(courseDescription,examDescription,examDateList);
@@ -422,7 +422,7 @@ public class StudyManagerController {
 		ExamModel existsExam = examRepo.findByDescriptionAndTypeAndCourse(courseSelected,typeSelected, course);		
 		ExamModel exam;		
 
-		DateFormat date = new SimpleDateFormat("dd.mm.yyyy hh:mm");
+		DateFormat date = new SimpleDateFormat("dd.MM.yyyy hh:mm");
 		Date formatDate = new Date();
 		try {
 			formatDate = date.parse(examDate);

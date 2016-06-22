@@ -131,6 +131,7 @@
                   <table class="table table-hover">
                     <thead>
                       <tr class="headings">
+                        <th class="column-title"><h4>#</h4></th>
                         <th class="column-title"><h4>Course</h4></th>
                         <th class="column-title"><h4>Type</h4></th>
                       </tr>
@@ -139,6 +140,7 @@
                     <tbody>
                       <c:forEach items="${examList}" var="exam" varStatus="loop">
                       <tr class="even pointer" data-toggle="collapse" data-target="#demo${loop.index}">
+                        <td class="mousePointer" ><b>${loop.count}</b></td>
                         <td class="mousePointer" ><b>${exam.courseDescription}</b></td>
                         <td class="mousePointer" ><b>${exam.examDescription}</b></td>
                       </tr>
@@ -153,6 +155,7 @@
 	                        		<th><small>Date</small></th>
 	                        		<th><small>Description</small></th>
 	                        		<th><small>Room</small></th>
+	                        		<th><small>Edit</small></th>
 	                        	</tr>
 	                      	</thead>
 	                      	<tbody>
@@ -164,6 +167,7 @@
 	                        		<td><small><fmt:formatDate value="${examDate.getDate()}" pattern="dd.MM.yyyy - hh:mm" /></small></td>
 	                        		<td><small>${examDate.getDescription()}</small></td>
 	                        		<td><small>${examDate.getRoom()}</small></td>
+	                        		<td><small><a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a></small></td>
 	                  			</tr>
 	                  		</c:forEach>
 	                      	</tbody>
