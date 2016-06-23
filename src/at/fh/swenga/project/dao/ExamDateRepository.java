@@ -52,7 +52,7 @@ public interface ExamDateRepository extends JpaRepository<ExamDateModel, Integer
 			+ "LEFT JOIN exam_applications exa ON exa.examDate_id = exd.id "
 			+ "where p.id = ?1 and exd.date > now() "
 			+ "group by exd.id "
-			+ "order by exd.date desc", nativeQuery=true)
+			+ "order by exd.date asc", nativeQuery=true)
 	public List<Object[]> findUpcomingProfExams(int professor_id);
 	
 	@Query(value = "SELECT exd.id, exd.date, exd.description as datenumber, ex.description as course, ex.type, r.description as room, count(exa.id) as applicants "
