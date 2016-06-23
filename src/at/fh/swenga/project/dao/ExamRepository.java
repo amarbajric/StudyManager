@@ -29,7 +29,7 @@ public interface ExamRepository extends JpaRepository<ExamModel, Integer> {
 			+ "join exam_applications ea on ed.id = ea.examDate_id "
 			+ "join courses co on ex.course_id = co.id "
 			+ "where ea.id = ?1" ,nativeQuery=true)
-	public Object[] findByExamApplicationId(int examApplicationId);
+	public List<Object[]> findByExamApplicationId(int examApplicationId);
 
 	
 	@Query(value = "SELECT ex.* "
