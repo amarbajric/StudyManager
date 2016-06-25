@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -600,6 +601,7 @@ public class StudyManagerController {
 	
 	
 /******************************************** GRADE EXAM - POST Method ***********************************************************/
+	@Transactional
 	@RequestMapping(value="/gradeExam", method=RequestMethod.POST)
 	public String gradeExam(@Valid @ModelAttribute GradeForm gradeForm, Model model, RedirectAttributes redirectAttributes)
 	{
@@ -610,24 +612,28 @@ public class StudyManagerController {
 				examApplicationRepo.updateGrade(null, applicant.getId());
 				applicant.setGrade(null);
 			}
-			Object[] arr = examRepo.findByExamApplicationId(applicant.getId());			
-	       	
-	    	Integer examId = Integer.parseInt(arr[0].toString());
-	    	Double ectsValue = Double.parseDouble(arr[1].toString());
-	    	Integer studentId = Integer.parseInt(arr[2].toString());
-	    		
-			System.out.println("STUDENT ID: " + applicant.getStudent().getId());
-			System.out.println("APPLICANT ID" + applicant.getId());
+			List<Object[]> dataList = examRepo.findByExamApplicationId(applicant.getId());		
+			Integer examId = 99;
+			Double ectsValue = 99.0;
+			Integer studentId = 99;
+			Integer grade = applicant.getGrade();
+			Integer applicantId = applicant.getId();
 			
-			if(examDateRepo.checkIfStudentWasAlreadyPositive(examId,studentId) < 1)
+	       	for (int i = 0; i < dataList.size(); i++) {
+	       		Object[] arr = dataList.get(i);
+		    	examId = Integer.parseInt(arr[0].toString());
+		    	ectsValue = Double.parseDouble(arr[1].toString());
+		    	studentId = Integer.parseInt(arr[2].toString());
+	       	}
+			
+			int positive = examDateRepo.checkIfStudentWasAlreadyPositive(examId,studentId);
+			
+			if( positive < 1)
 			{
 				studentRepo.updateEctsOfStudent(ectsValue, studentId);
-			
 			}
 			
-			
-			examApplicationRepo.updateGrade(applicant.getGrade(), applicant.getId());
-			
+			examApplicationRepo.updateGrade(grade, applicantId);
 		});
 		
 		boolean examGraded = true;
