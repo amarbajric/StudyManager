@@ -3,6 +3,15 @@ University Grading System in Form of a Web Application that allows teachers to c
 
 Developed with Java and Spring
 
+## Login screen
+![alt tag](screenshots/login.png)
+
+## Student Dashboard
+![alt tag](screenshots/student-dashboard.png)
+
+## Teacher Dashboard
+![alt tag](screenshots/teacher-dashboard.png)
+
 
 ## Team Members:
 - Amar Bajric
