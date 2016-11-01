@@ -625,24 +625,15 @@ public class StudyManagerController {
 		    	ectsValue = Double.parseDouble(arr[1].toString());
 		    	studentId = Integer.parseInt(arr[2].toString());
 	       	}
-	    		
-	    	System.out.println("applicant: " + applicantId);
-			System.out.println("exam ID: " + examId);
-			System.out.println("ects: " + ectsValue);
-			System.out.println("studentid: " + studentId);
-			System.out.println("grade: " + grade);
 			
 			int positive = examDateRepo.checkIfStudentWasAlreadyPositive(examId,studentId);
-			System.out.println("positiv: " + positive);
 			
 			if( positive < 1)
 			{
 				studentRepo.updateEctsOfStudent(ectsValue, studentId);
-			
 			}
 			
 			examApplicationRepo.updateGrade(grade, applicantId);
-			
 		});
 		
 		boolean examGraded = true;
