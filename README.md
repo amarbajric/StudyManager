@@ -13,7 +13,7 @@ Developed with Java and Spring
 ![alt tag](screenshots/teacher-dashboard.png)
 
 
-## Team Members:
+## Team Members
 - Amar Bajric
 - Christian Lagger
 - Georg Meizenitsch
