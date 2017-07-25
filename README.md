@@ -19,4 +19,3 @@ Developed with Java and Spring
 - Georg Meizenitsch
 
 
-
